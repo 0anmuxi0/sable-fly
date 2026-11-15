@@ -39,7 +39,7 @@ public class BlockEntityRenderDispatcherBerMixin {
       method = {"tryExtractRenderState"},
       at = {@At("RETURN")}
    )
-   private void sable$rememberEntity(BlockEntity var1, float var2, CrumblingOverlay var3, boolean var4, CallbackInfoReturnable<BlockEntityRenderState> var5) {
+   private void sable$rememberEntity(BlockEntity var1, float var2, CrumblingOverlay var3, CallbackInfoReturnable<BlockEntityRenderState> var5) {
       BlockEntityRenderState var6 = (BlockEntityRenderState)var5.getReturnValue();
       if (var6 != null) {
          sable$berEntities.put(var6, var1);

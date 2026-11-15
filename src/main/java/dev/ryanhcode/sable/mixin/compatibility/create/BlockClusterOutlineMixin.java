@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 )
 public class BlockClusterOutlineMixin {
    @WrapOperation(
-      method = {"submitFaces"},
+      method = {"renderFaces"},
       at = {@At(
          value = "INVOKE",
          target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V"
@@ -40,7 +40,7 @@ public class BlockClusterOutlineMixin {
    }
 
    @WrapOperation(
-      method = {"submitEdges"},
+      method = {"renderEdges"},
       at = {@At(
          value = "INVOKE",
          target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V"

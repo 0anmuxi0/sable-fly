@@ -28,6 +28,7 @@ dependencies {
     implementation files("libs/ForgeConfigAPIPort-v26.1.5-mc26.1.x-Fabric.jar")
     runtimeOnly "org.apache.maven:maven-artifact:3.8.5"
     runtimeOnly "at.yawk.lz4:lz4-java:1.11.0"
+    compileOnly files("libs/create-fly-26.1.2-6.0.9-4.jar")
     runtimeOnly files("libs/create-fly-26.1.2-6.0.9-4.jar")
 }
 

@@ -81,7 +81,7 @@ public abstract class LevelRendererMixin {
    private TextureManager textureManager;
 
    @Shadow
-   public SectionRenderDispatcher sectionRenderDispatcher() {
+   public SectionRenderDispatcher getSectionRenderDispatcher() {
       return null;
    }
 

@@ -8,7 +8,7 @@ import dev.ryanhcode.sable.mixinhelpers.compatibility.create.SubLevelOutlinePose
 import dev.ryanhcode.sable.sublevel.ClientSubLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.SubmitNodeCollector;
+import com.zurrtum.create.client.catnip.render.SuperRenderTypeBuffer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,9 +24,9 @@ public class ValueBoxMixin {
    protected BlockPos pos;
 
    @WrapMethod(
-      method = {"submit(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;F)V"}
+      method = {"render(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/zurrtum/create/client/catnip/render/SuperRenderTypeBuffer;Lnet/minecraft/world/phys/Vec3;F)V"}
    )
-   private void sable$submitAtWorldPos(Minecraft var1, PoseStack var2, SubmitNodeCollector var3, Vec3 var4, float var5, Operation<Void> var6) {
+   private void sable$submitAtWorldPos(Minecraft var1, PoseStack var2, SuperRenderTypeBuffer var3, Vec3 var4, float var5, Operation<Void> var6) {
       ClientSubLevel var7 = this.sable$getSubLevel(var1);
       if (var7 == null) {
          var6.call(var1, var2, var3, var4, var5);

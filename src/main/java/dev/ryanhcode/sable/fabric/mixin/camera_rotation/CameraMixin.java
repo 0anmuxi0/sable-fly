@@ -25,13 +25,13 @@ public abstract class CameraMixin {
    private Quaternionf rotation;
    @Shadow
    @Final
-   private static Vector3fc FORWARDS;
+   private static Vector3f FORWARDS;
    @Shadow
    @Final
-   private static Vector3fc UP;
+   private static Vector3f UP;
    @Shadow
    @Final
-   private static Vector3fc LEFT;
+   private static Vector3f LEFT;
    @Shadow
    @Final
    private Vector3f left;
