@@ -26,12 +26,12 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
       method = {"getStart"},
       at = {@At("HEAD")}
    )
-   private void sable$init(CallbackInfoReturnable<Node> var1, @Share("mobPosition") LocalRef<Vec3> var2) {
-      SubLevel var3 = Sable.HELPER.getTrackingSubLevel(this.mob);
-      if (var3 != null) {
-         var2.set(var3.logicalPose().transformPositionInverse(this.mob.position()));
+   private void sable$init(CallbackInfoReturnable<Node> cir, @Share("mobPosition") LocalRef<Vec3> mobPosition) {
+      SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(this.mob);
+      if (trackingSubLevel != null) {
+         mobPosition.set(trackingSubLevel.logicalPose().transformPositionInverse(this.mob.position()));
       } else {
-         var2.set(this.mob.position());
+         mobPosition.set(this.mob.position());
       }
    }
 
@@ -42,8 +42,8 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
          target = "Lnet/minecraft/world/entity/Mob;getBlockY()I"
       )}
    )
-   private int sable$redirectGetBlockY(Mob var1, @Share("mobPosition") LocalRef<Vec3> var2) {
-      return Mth.floor(((Vec3)var2.get()).y);
+   private int sable$redirectGetBlockY(Mob mob, @Share("mobPosition") LocalRef<Vec3> mobPosition) {
+      return Mth.floor(mobPosition.get().y);
    }
 
    @Redirect(
@@ -53,8 +53,8 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
          target = "Lnet/minecraft/world/entity/Mob;getX()D"
       )}
    )
-   private double sable$redirectGetX(Mob var1, @Share("mobPosition") LocalRef<Vec3> var2) {
-      return ((Vec3)var2.get()).x;
+   private double sable$redirectGetX(Mob mob, @Share("mobPosition") LocalRef<Vec3> mobPosition) {
+      return mobPosition.get().x;
    }
 
    @Redirect(
@@ -64,8 +64,8 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
          target = "Lnet/minecraft/world/entity/Mob;getY()D"
       )}
    )
-   private double sable$redirectGetY(Mob var1, @Share("mobPosition") LocalRef<Vec3> var2) {
-      return ((Vec3)var2.get()).y;
+   private double sable$redirectGetY(Mob mob, @Share("mobPosition") LocalRef<Vec3> mobPosition) {
+      return mobPosition.get().y;
    }
 
    @Redirect(
@@ -75,43 +75,43 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
          target = "Lnet/minecraft/world/entity/Mob;getZ()D"
       )}
    )
-   private double sable$redirectGetZ(Mob var1, @Share("mobPosition") LocalRef<Vec3> var2) {
-      return ((Vec3)var2.get()).z;
+   private double sable$redirectGetZ(Mob mob, @Share("mobPosition") LocalRef<Vec3> mobPosition) {
+      return mobPosition.get().z;
    }
 
    @Overwrite
-   private Iterable<BlockPos> iteratePathfindingStartNodeCandidatePositions(Mob var1) {
-      AABB var2 = var1.getBoundingBox();
-      boolean var3 = var2.getSize() < 1.0;
-      SubLevel var4 = Sable.HELPER.getTrackingSubLevel(this.mob);
-      Vec3 var5 = this.mob.position();
-      if (var4 != null) {
-         var5 = var4.logicalPose().transformPositionInverse(var5);
+   private Iterable<BlockPos> iteratePathfindingStartNodeCandidatePositions(Mob mob) {
+      AABB mobBounds = mob.getBoundingBox();
+      boolean small = mobBounds.getSize() < 1.0;
+      SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(this.mob);
+      Vec3 localPosition = this.mob.position();
+      if (trackingSubLevel != null) {
+         localPosition = trackingSubLevel.logicalPose().transformPositionInverse(localPosition);
       }
 
-      AABB var6 = var1.getBoundingBox().move(var5.subtract(this.mob.position()));
-      if (!var3) {
-         int var14 = Mth.floor(var5.y);
+      AABB localMobBounds = mob.getBoundingBox().move(localPosition.subtract(this.mob.position()));
+      if (!small) {
+         int blockY = Mth.floor(localPosition.y);
          return List.of(
-            BlockPos.containing(var6.minX, var14, var6.minZ),
-            BlockPos.containing(var6.minX, var14, var6.maxZ),
-            BlockPos.containing(var6.maxX, var14, var6.minZ),
-            BlockPos.containing(var6.maxX, var14, var6.maxZ)
+            BlockPos.containing(localMobBounds.minX, blockY, localMobBounds.minZ),
+            BlockPos.containing(localMobBounds.minX, blockY, localMobBounds.maxZ),
+            BlockPos.containing(localMobBounds.maxX, blockY, localMobBounds.minZ),
+            BlockPos.containing(localMobBounds.maxX, blockY, localMobBounds.maxZ)
          );
       } else {
-         double var7 = Math.max(0.0, 1.1F - var2.getXsize());
-         double var9 = Math.max(0.0, 1.1F - var2.getYsize());
-         double var11 = Math.max(0.0, 1.1F - var2.getZsize());
-         AABB var13 = var6.inflate(var7, var9, var11);
+         double xSize = Math.max(0.0, 1.1F - mobBounds.getXsize());
+         double ySize = Math.max(0.0, 1.1F - mobBounds.getYsize());
+         double zSize = Math.max(0.0, 1.1F - mobBounds.getZsize());
+         AABB localBounds = localMobBounds.inflate(xSize, ySize, zSize);
          return BlockPos.randomBetweenClosed(
-            var1.getRandom(),
+            mob.getRandom(),
             10,
-            Mth.floor(var13.minX),
-            Mth.floor(var13.minY),
-            Mth.floor(var13.minZ),
-            Mth.floor(var13.maxX),
-            Mth.floor(var13.maxY),
-            Mth.floor(var13.maxZ)
+            Mth.floor(localBounds.minX),
+            Mth.floor(localBounds.minY),
+            Mth.floor(localBounds.minZ),
+            Mth.floor(localBounds.maxX),
+            Mth.floor(localBounds.maxY),
+            Mth.floor(localBounds.maxZ)
          );
       }
    }

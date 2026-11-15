@@ -14,10 +14,11 @@ import dev.ryanhcode.sable.mixinterface.clip_overwrite.ClipContextExtension;
 import dev.ryanhcode.sable.mixinterface.particle.ParticleExtension;
 import dev.ryanhcode.sable.sublevel.ClientSubLevel;
 import dev.ryanhcode.sable.sublevel.SubLevel;
-import dev.ryanhcode.sable.sublevel.plot.ClientLevelPlot;
+import dev.ryanhcode.sable.sublevel.plot.LevelPlot;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import java.util.List;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -118,7 +119,7 @@ public abstract class ParticleMixin implements ParticleExtension {
          doubleValue = 0.1F
       )}
    )
-   private double sable$removeUpwardsVelocity(double var1) {
+   private double sable$removeUpwardsVelocity(double originalBlockDamageDistanceConstant) {
       return 0.0;
    }
 
@@ -126,40 +127,40 @@ public abstract class ParticleMixin implements ParticleExtension {
       method = {"Lnet/minecraft/client/particle/Particle;<init>(Lnet/minecraft/client/multiplayer/ClientLevel;DDDDDD)V"},
       at = {@At("TAIL")}
    )
-   private void sable$addUpwardsVelocity(ClientLevel var1, double var2, double var4, double var6, double var8, double var10, double var12, CallbackInfo var14) {
-      Vec3 var15 = new Vec3(this.x, this.y, this.z);
-      ClientSubLevel var16 = Sable.HELPER.getContainingClient(var15);
-      if (var16 != null) {
-         Vec3 var17 = var16.logicalPose().transformNormalInverse(new Vec3(0.0, 0.1, 0.0));
-         this.xd = this.xd + var17.x;
-         this.yd = this.yd + var17.y;
-         this.zd = this.zd + var17.z;
-         this.sable$setTrackingSubLevel(var16, var15);
+   private void sable$addUpwardsVelocity(ClientLevel clientLevel, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
+      Vec3 particlePosition = new Vec3(this.x, this.y, this.z);
+      ClientSubLevel subLevel = Sable.HELPER.getContainingClient(particlePosition);
+      if (subLevel != null) {
+         Vec3 stupidVanillaVelocity = subLevel.logicalPose().transformNormalInverse(new Vec3(0.0, 0.1, 0.0));
+         this.xd = this.xd + stupidVanillaVelocity.x;
+         this.yd = this.yd + stupidVanillaVelocity.y;
+         this.zd = this.zd + stupidVanillaVelocity.z;
+         this.sable$setTrackingSubLevel(subLevel, particlePosition);
       }
    }
 
    @Override
    public void sable$initialKickOut() {
-      Vec3 var1 = new Vec3(this.x, this.y, this.z);
+      Vec3 particlePosition = new Vec3(this.x, this.y, this.z);
       if (!this.sable$checkedInitialKick) {
-         ClientSubLevel var2 = Sable.HELPER.getContainingClient(var1);
-         if (var2 != null) {
-            Pose3d var3 = var2.logicalPose();
-            Vec3 var4 = new Vec3(this.xo, this.yo, this.zo);
-            Vec3 var5 = var3.transformPosition(var1);
-            Vec3 var6 = var3.transformPosition(var4);
-            Vec3 var7 = var3.transformNormal(new Vec3(this.xd, this.yd, this.zd));
-            this.x = var5.x;
-            this.y = var5.y;
-            this.z = var5.z;
-            this.xo = var6.x;
-            this.yo = var6.y;
-            this.zo = var6.z;
-            this.xd = var7.x;
-            this.yd = var7.y;
-            this.zd = var7.z;
+         ClientSubLevel subLevel = Sable.HELPER.getContainingClient(particlePosition);
+         if (subLevel != null) {
+            Pose3d pose = subLevel.logicalPose();
+            Vec3 particlePositionOld = new Vec3(this.xo, this.yo, this.zo);
+            Vec3 globalPosition = pose.transformPosition(particlePosition);
+            Vec3 globalPositionOld = pose.transformPosition(particlePositionOld);
+            Vec3 globalVelocity = pose.transformNormal(new Vec3(this.xd, this.yd, this.zd));
+            this.x = globalPosition.x;
+            this.y = globalPosition.y;
+            this.z = globalPosition.z;
+            this.xo = globalPositionOld.x;
+            this.yo = globalPositionOld.y;
+            this.zo = globalPositionOld.z;
+            this.xd = globalVelocity.x;
+            this.yd = globalVelocity.y;
+            this.zd = globalVelocity.z;
             this.setPos(this.x, this.y, this.z);
-            this.sable$setTrackingSubLevel(var2, var1);
+            this.sable$setTrackingSubLevel(subLevel, particlePosition);
          }
 
          this.sable$checkedInitialKick = true;
@@ -167,8 +168,8 @@ public abstract class ParticleMixin implements ParticleExtension {
    }
 
    private void sable$kickFromTracking() {
-      Vector3d var1 = this.sable$trackingSubLevel.logicalPose().transformPositionInverse(new Vector3d(this.x, this.y, this.z));
-      Sable.HELPER.getVelocity(this.level, var1, this.sable$inheritedVelocity);
+      Vector3d currentLocalPos = this.sable$trackingSubLevel.logicalPose().transformPositionInverse(new Vector3d(this.x, this.y, this.z));
+      Sable.HELPER.getVelocity(this.level, currentLocalPos, this.sable$inheritedVelocity);
       this.sable$inheritedVelocity.mul(0.05);
       this.sable$localTrackingAnchor = null;
       this.sable$trackingSubLevel = null;
@@ -179,10 +180,10 @@ public abstract class ParticleMixin implements ParticleExtension {
    }
 
    @Override
-   public void sable$setTrackingSubLevel(ClientSubLevel var1, Vec3 var2) {
-      this.sable$trackingSubLevel = var1;
+   public void sable$setTrackingSubLevel(ClientSubLevel subLevel, Vec3 particlePosition) {
+      this.sable$trackingSubLevel = subLevel;
       this.sable$localTrackingAnchor = new Vector3d();
-      this.sable$localTrackingAnchor.set(var2.x, var2.y, var2.z);
+      this.sable$localTrackingAnchor.set(particlePosition.x, particlePosition.y, particlePosition.z);
       this.sable$inheritedVelocity.zero();
    }
 
@@ -194,19 +195,19 @@ public abstract class ParticleMixin implements ParticleExtension {
    @WrapMethod(
       method = {"move"}
    )
-   private void sable$moveWithSubLevels(double var1, double var3, double var5, Operation<Void> var7) {
-      AABB var8 = this.getBoundingBox();
-      BoundingBox3d var9 = new BoundingBox3d(var8).expand(0.5);
-      ObjectOpenHashSet var10 = new ObjectOpenHashSet();
-      boolean var11 = this instanceof ParticleSubLevelKickable var12 && !var12.sable$shouldCareAboutIntersectingSubLevels();
-      if (!var11) {
-         for (SubLevel var13 : Sable.HELPER.getAllIntersecting(this.level, var9)) {
-            var10.add(var13);
+   private void sable$moveWithSubLevels(double motionX, double motionY, double motionZ, Operation<Void> original) {
+      AABB bounds = this.getBoundingBox();
+      BoundingBox3d globalBounds = new BoundingBox3d(bounds).expand(0.5);
+      ObjectSet<SubLevel> intersecting = new ObjectOpenHashSet();
+      boolean ignoreIntersecting = this instanceof ParticleSubLevelKickable kickable && !kickable.sable$shouldCareAboutIntersectingSubLevels();
+      if (!ignoreIntersecting) {
+         for (SubLevel subLevel : Sable.HELPER.getAllIntersecting(this.level, globalBounds)) {
+            intersecting.add(subLevel);
          }
       }
 
       if (this.sable$trackingSubLevel != null) {
-         var10.add(this.sable$trackingSubLevel);
+         intersecting.add(this.sable$trackingSubLevel);
       }
 
       if (this.sable$trackingSubLevel != null && this.sable$trackingSubLevel.isRemoved()) {
@@ -214,149 +215,156 @@ public abstract class ParticleMixin implements ParticleExtension {
          this.sable$localTrackingAnchor = null;
       }
 
-      Vector3d var36 = new Vector3d();
-      Vector3d var37 = new Vector3d();
-      Vector3d var14 = new Vector3d();
-      Vector3d var15 = new Vector3d();
-      Vector3d var16 = new Vector3d();
-      Vector3d var17 = new Vector3d(var1, var3, var5);
-      var17.add(this.sable$inheritedVelocity);
-      boolean var18 = false;
-      ObjectIterator var19 = var10.iterator();
+      Vector3d movementFromPushing = new Vector3d();
+      Vector3d localPosition = new Vector3d();
+      Vector3d globalBoundsCenter = new Vector3d();
+      Vector3d localRayStart = new Vector3d();
+      Vector3d localRayEnd = new Vector3d();
+      Vector3d movement = new Vector3d(motionX, motionY, motionZ);
+      movement.add(this.sable$inheritedVelocity);
+      boolean isGrounded = false;
+      ObjectIterator kickablex = intersecting.iterator();
 
-      while (var19.hasNext()) {
-         SubLevel var20 = (SubLevel)var19.next();
-         Pose3d var21 = var20.logicalPose();
-         Pose3dc var22 = var20.lastPose();
-         var36.zero();
-         if (this.sable$trackingSubLevel == var20) {
-            JOMLConversion.getAABBCenter(var8, var14);
-            var22.transformPositionInverse(var14, var37);
-            Vector3d var23 = var21.transformPosition(var37);
-            var36.add(var23).sub(var14);
+      while (kickablex.hasNext()) {
+         SubLevel subLevel = (SubLevel)kickablex.next();
+         Pose3dc pose = subLevel.logicalPose();
+         Pose3dc last = subLevel.lastPose();
+         movementFromPushing.zero();
+         if (this.sable$trackingSubLevel == subLevel) {
+            JOMLConversion.getAABBCenter(bounds, globalBoundsCenter);
+            last.transformPositionInverse(globalBoundsCenter, localPosition);
+            Vector3d newGlobalPosition = pose.transformPosition(localPosition);
+            movementFromPushing.add(newGlobalPosition).sub(globalBoundsCenter);
          } else {
-            JOMLConversion.getAABBCenter(var8, var14);
-            var22.transformPositionInverse(var14, var15);
-            var21.transformPositionInverse(var14, var16);
-            ClipContext var39 = new ClipContext(
-               JOMLConversion.toMojang(var15), JOMLConversion.toMojang(var16), Block.COLLIDER, Fluid.NONE, CollisionContext.empty()
+            JOMLConversion.getAABBCenter(bounds, globalBoundsCenter);
+            last.transformPositionInverse(globalBoundsCenter, localRayStart);
+            pose.transformPositionInverse(globalBoundsCenter, localRayEnd);
+            ClipContext clipContext = new ClipContext(
+               JOMLConversion.toMojang(localRayStart), JOMLConversion.toMojang(localRayEnd), Block.COLLIDER, Fluid.NONE, CollisionContext.empty()
             );
-            ((ClipContextExtension)var39).sable$setDoNotProject(true);
-            BlockHitResult var24 = this.level.clip(var39);
-            if (var24.getType() == Type.BLOCK) {
-               var21.transformPosition(JOMLConversion.toJOML(var24.getLocation(), var36)).sub(var14);
+            ((ClipContextExtension)clipContext).sable$setDoNotProject(true);
+            BlockHitResult result = this.level.clip(clipContext);
+            if (result.getType() == Type.BLOCK) {
+               pose.transformPosition(JOMLConversion.toJOML(result.getLocation(), movementFromPushing)).sub(globalBoundsCenter);
                if (this.sable$trackingSubLevel == null) {
-                  this.sable$setTrackingSubLevel((ClientSubLevel)var20, var24.getLocation());
+                  this.sable$setTrackingSubLevel((ClientSubLevel)subLevel, result.getLocation());
                }
             }
          }
 
-         boolean var40 = !(this.sable$trackingSubLevel == var20 && this instanceof ParticleSubLevelKickable var41)
-            || var41.sable$shouldCollideWithTrackingSubLevel();
-         if (var40) {
-            Vector3d var42 = JOMLConversion.getAABBCenter(var8, var14).add(var36);
-            var21.transformPositionInverse(var42, var15);
-            var21.transformPositionInverse(var42.add(var17, var16));
-            ClipContext var25 = new ClipContext(
-               JOMLConversion.toMojang(var15), JOMLConversion.toMojang(var16), Block.COLLIDER, Fluid.NONE, CollisionContext.empty()
+         boolean shouldCollide = !(this.sable$trackingSubLevel == subLevel && this instanceof ParticleSubLevelKickable kickablexx)
+            || kickablexx.sable$shouldCollideWithTrackingSubLevel();
+         if (shouldCollide) {
+            Vector3dc pushedPosition = JOMLConversion.getAABBCenter(bounds, globalBoundsCenter).add(movementFromPushing);
+            pose.transformPositionInverse(pushedPosition, localRayStart);
+            pose.transformPositionInverse(pushedPosition.add(movement, localRayEnd));
+            ClipContext clipContextx = new ClipContext(
+               JOMLConversion.toMojang(localRayStart), JOMLConversion.toMojang(localRayEnd), Block.COLLIDER, Fluid.NONE, CollisionContext.empty()
             );
-            ((ClipContextExtension)var25).sable$setDoNotProject(true);
-            BlockHitResult var26 = this.level.clip(var25);
-            if (var26 != null && var26.getType() == Type.BLOCK) {
-               Vec3 var27 = var21.transformPosition(var26.getLocation()).subtract(var42.x(), var42.y(), var42.z());
-               var17.set(var27.x, var27.y, var27.z);
+            ((ClipContextExtension)clipContextx).sable$setDoNotProject(true);
+            BlockHitResult resultx = this.level.clip(clipContextx);
+            if (resultx != null && resultx.getType() == Type.BLOCK) {
+               Vec3 diff = pose.transformPosition(resultx.getLocation()).subtract(pushedPosition.x(), pushedPosition.y(), pushedPosition.z());
+               movement.set(diff.x, diff.y, diff.z);
             }
          }
 
-         var17.add(var36);
-         if (var40) {
-            Vec3 var43 = var21.transformPositionInverse(var8.getCenter().add(var17.x, var17.y, var17.z));
-            double var44 = Math.max(var8.getXsize(), Math.max(var8.getYsize(), var8.getZsize())) / 2.0;
-            BoundingBox3d var45 = new BoundingBox3d();
-            var45.set(var43.x - var44, var43.y - var44, var43.z - var44, var43.x + var44, var43.y + var44, var43.z + var44);
-            Vector3d var28 = this.resolveAABBCollision(var45);
-            if (var28.lengthSquared() > 0.0) {
-               var20.logicalPose().transformNormal(var28);
-               Vector3d var29 = var28.normalize(new Vector3d());
-               Vector3dc var30 = OrientedBoundingBox3d.UP;
-               if (this instanceof ParticleSubLevelKickable var31) {
-                  var30 = var31.sable$getUpDirection();
+         movement.add(movementFromPushing);
+         if (shouldCollide) {
+            Vec3 collisionBoxCenter = pose.transformPositionInverse(bounds.getCenter().add(movement.x, movement.y, movement.z));
+            double radius = Math.max(bounds.getXsize(), Math.max(bounds.getYsize(), bounds.getZsize())) / 2.0;
+            BoundingBox3d collisionBounds = new BoundingBox3d();
+            collisionBounds.set(
+               collisionBoxCenter.x - radius,
+               collisionBoxCenter.y - radius,
+               collisionBoxCenter.z - radius,
+               collisionBoxCenter.x + radius,
+               collisionBoxCenter.y + radius,
+               collisionBoxCenter.z + radius
+            );
+            Vector3d mtv = this.resolveAABBCollision(collisionBounds);
+            if (mtv.lengthSquared() > 0.0) {
+               subLevel.logicalPose().transformNormal(mtv);
+               Vector3d nmtv = mtv.normalize(new Vector3d());
+               Vector3dc upDirection = OrientedBoundingBox3d.UP;
+               if (this instanceof ParticleSubLevelKickable kickablexxx) {
+                  upDirection = kickablexxx.sable$getUpDirection();
                }
 
-               double var46 = var29.dot(var30);
-               if (var46 > 0.6) {
-                  var18 = true;
+               double verticalDot = nmtv.dot(upDirection);
+               if (verticalDot > 0.6) {
+                  isGrounded = true;
                }
 
-               double var33 = var29.dot(this.xd, this.yd, this.zd);
-               this.xd = this.xd - var33 * var29.x;
-               this.yd = this.yd - var33 * var29.y;
-               this.zd = this.zd - var33 * var29.z;
-               if (var46 > 0.6 || var46 < 0.6) {
-                  this.xd = var30.x() * this.xd;
-                  this.yd = var30.y() * this.yd;
-                  this.zd = var30.z() * this.zd;
+               double dot = nmtv.dot(this.xd, this.yd, this.zd);
+               this.xd = this.xd - dot * nmtv.x;
+               this.yd = this.yd - dot * nmtv.y;
+               this.zd = this.zd - dot * nmtv.z;
+               if (verticalDot > 0.6 || verticalDot < 0.6) {
+                  this.xd = upDirection.x() * this.xd;
+                  this.yd = upDirection.y() * this.yd;
+                  this.zd = upDirection.z() * this.zd;
                }
 
-               var17.add(var28);
+               movement.add(mtv);
                if (this.sable$trackingSubLevel == null) {
-                  this.sable$setTrackingSubLevel((ClientSubLevel)var20, var43);
+                  this.sable$setTrackingSubLevel((ClientSubLevel)subLevel, collisionBoxCenter);
                }
             }
          }
       }
 
-      var7.call(var17.x, var17.y, var17.z);
-      this.onGround |= var18;
+      original.call(movement.x, movement.y, movement.z);
+      this.onGround |= isGrounded;
       if (this.sable$trackingSubLevel != null
-         && !(this instanceof ParticleSubLevelKickable var38 && !var38.sable$shouldKickFromTracking())
+         && !(this instanceof ParticleSubLevelKickable kickablexxx && !kickablexxx.sable$shouldKickFromTracking())
          && this.sable$trackingSubLevel.logicalPose().transformPosition(this.sable$localTrackingAnchor, new Vector3d()).distanceSquared(this.x, this.y, this.z)
             > 0.25) {
          this.sable$kickFromTracking();
       }
    }
 
-   private Vector3d resolveAABBCollision(BoundingBox3d var1) {
-      Vector3d var2 = new Vector3d();
-      Vector3d var3 = new Vector3d();
-      double[] var4 = new double[]{0.0};
-      int var5 = (int)Math.floor(var1.minX());
-      int var6 = (int)Math.floor(var1.minY());
-      int var7 = (int)Math.floor(var1.minZ());
-      int var8 = (int)Math.floor(var1.maxX());
-      int var9 = (int)Math.floor(var1.maxY());
-      int var10 = (int)Math.floor(var1.maxZ());
-      MutableBlockPos var11 = new MutableBlockPos();
+   private Vector3d resolveAABBCollision(BoundingBox3d box) {
+      Vector3d totalMTV = new Vector3d();
+      Vector3d mtv = new Vector3d();
+      double[] maxMTVLengthSq = new double[]{0.0};
+      int minX = (int)Math.floor(box.minX());
+      int minY = (int)Math.floor(box.minY());
+      int minZ = (int)Math.floor(box.minZ());
+      int maxX = (int)Math.floor(box.maxX());
+      int maxY = (int)Math.floor(box.maxY());
+      int maxZ = (int)Math.floor(box.maxZ());
+      MutableBlockPos mpos = new MutableBlockPos();
 
-      for (int var12 = var5; var12 <= var8; var12++) {
-         for (int var13 = var6; var13 <= var9; var13++) {
-            for (int var14 = var7; var14 <= var10; var14++) {
-               MutableBlockPos var15 = var11.set(var12, var13, var14);
-               BlockState var16 = this.level.getBlockState(var15);
-               if (!var16.isAir()) {
-                  VoxelShape var17 = var16.getCollisionShape(this.level, var15);
-                  if (!var17.isEmpty()) {
-                     int var18 = var12;
-                     int var19 = var13;
-                     int var20 = var14;
-                     if (var16.isCollisionShapeFullBlock(this.level, var15)) {
-                        TEMP_BOX.setUnchecked(0.0 + var18, 0.0 + var19, 0.0 + var20, 1.0 + var18, 1.0 + var19, 1.0 + var20);
-                        var3.zero();
-                        this.resolveAABBAABBCollision(var1, TEMP_BOX, var3);
-                        double var21 = var3.lengthSquared();
-                        if (var21 > var4[0]) {
-                           var4[0] = var21;
-                           var2.set(var3);
+      for (int x = minX; x <= maxX; x++) {
+         for (int y = minY; y <= maxY; y++) {
+            for (int z = minZ; z <= maxZ; z++) {
+               BlockPos blockPos = mpos.set(x, y, z);
+               BlockState state = this.level.getBlockState(blockPos);
+               if (!state.isAir()) {
+                  VoxelShape shape = state.getCollisionShape(this.level, blockPos);
+                  if (!shape.isEmpty()) {
+                     int finalX = x;
+                     int finalY = y;
+                     int finalZ = z;
+                     if (state.isCollisionShapeFullBlock(this.level, blockPos)) {
+                        TEMP_BOX.setUnchecked(0.0 + finalX, 0.0 + finalY, 0.0 + finalZ, 1.0 + finalX, 1.0 + finalY, 1.0 + finalZ);
+                        mtv.zero();
+                        this.resolveAABBAABBCollision(box, TEMP_BOX, mtv);
+                        double lenSq = mtv.lengthSquared();
+                        if (lenSq > maxMTVLengthSq[0]) {
+                           maxMTVLengthSq[0] = lenSq;
+                           totalMTV.set(mtv);
                         }
                      } else {
-                        var17.forAllBoxes((var8x, var10x, var12x, var14x, var16x, var18x) -> {
-                           TEMP_BOX.setUnchecked(var8x + var18, var10x + var19, var12x + var20, var14x + var18, var16x + var19, var18x + var20);
-                           var3.zero();
-                           this.resolveAABBAABBCollision(var1, TEMP_BOX, var3);
-                           double var20x = var3.lengthSquared();
-                           if (var20x > var4[0]) {
-                              var4[0] = var20x;
-                              var2.set(var3);
+                        shape.forAllBoxes((minXb, minYb, minZb, maxXb, maxYb, maxZb) -> {
+                           TEMP_BOX.setUnchecked(minXb + finalX, minYb + finalY, minZb + finalZ, maxXb + finalX, maxYb + finalY, maxZb + finalZ);
+                           mtv.zero();
+                           this.resolveAABBAABBCollision(box, TEMP_BOX, mtv);
+                           double lenSqx = mtv.lengthSquared();
+                           if (lenSqx > maxMTVLengthSq[0]) {
+                              maxMTVLengthSq[0] = lenSqx;
+                              totalMTV.set(mtv);
                            }
                         });
                      }
@@ -366,43 +374,43 @@ public abstract class ParticleMixin implements ParticleExtension {
          }
       }
 
-      return var2;
+      return totalMTV;
    }
 
-   private void resolveAABBAABBCollision(BoundingBox3d var1, BoundingBox3dc var2, Vector3d var3) {
-      double var4 = var2.maxX() - var1.minX();
-      double var6 = var1.maxX() - var2.minX();
-      if (!(var4 <= 0.0) && !(var6 <= 0.0)) {
-         double var8 = var2.maxY() - var1.minY();
-         double var10 = var1.maxY() - var2.minY();
-         if (!(var8 <= 0.0) && !(var10 <= 0.0)) {
-            double var12 = var2.maxZ() - var1.minZ();
-            double var14 = var1.maxZ() - var2.minZ();
-            if (!(var12 <= 0.0) && !(var14 <= 0.0)) {
-               double var16 = var4;
-               var3.set(var4, 0.0, 0.0);
-               if (var6 < var4) {
-                  var16 = var6;
-                  var3.set(-var6, 0.0, 0.0);
+   private void resolveAABBAABBCollision(BoundingBox3d a, BoundingBox3dc b, Vector3d mtv) {
+      double dx1 = b.maxX() - a.minX();
+      double dx2 = a.maxX() - b.minX();
+      if (!(dx1 <= 0.0) && !(dx2 <= 0.0)) {
+         double dy1 = b.maxY() - a.minY();
+         double dy2 = a.maxY() - b.minY();
+         if (!(dy1 <= 0.0) && !(dy2 <= 0.0)) {
+            double dz1 = b.maxZ() - a.minZ();
+            double dz2 = a.maxZ() - b.minZ();
+            if (!(dz1 <= 0.0) && !(dz2 <= 0.0)) {
+               double minOverlap = dx1;
+               mtv.set(dx1, 0.0, 0.0);
+               if (dx2 < dx1) {
+                  minOverlap = dx2;
+                  mtv.set(-dx2, 0.0, 0.0);
                }
 
-               if (var8 < var16) {
-                  var16 = var8;
-                  var3.set(0.0, var8, 0.0);
+               if (dy1 < minOverlap) {
+                  minOverlap = dy1;
+                  mtv.set(0.0, dy1, 0.0);
                }
 
-               if (var10 < var16) {
-                  var16 = var10;
-                  var3.set(0.0, -var10, 0.0);
+               if (dy2 < minOverlap) {
+                  minOverlap = dy2;
+                  mtv.set(0.0, -dy2, 0.0);
                }
 
-               if (var12 < var16) {
-                  var16 = var12;
-                  var3.set(0.0, 0.0, var12);
+               if (dz1 < minOverlap) {
+                  minOverlap = dz1;
+                  mtv.set(0.0, 0.0, dz1);
                }
 
-               if (var14 < var16) {
-                  var3.set(0.0, 0.0, -var14);
+               if (dz2 < minOverlap) {
+                  mtv.set(0.0, 0.0, -dz2);
                }
             }
          }
@@ -414,102 +422,102 @@ public abstract class ParticleMixin implements ParticleExtension {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void sable$checkSubLevelLightColor(float var1, CallbackInfoReturnable<Integer> var2) {
-      double var3 = this.x;
-      double var5 = this.y;
-      double var7 = this.z;
-      BlockPos var9 = BlockPos.containing(var3, var5, var7);
-      boolean var10 = this.level.hasChunkAt(var9);
-      if (var10) {
-         BlockState var11 = this.level.getBlockState(var9);
-         if (var11.emissiveRendering()) {
-            var2.setReturnValue(15728880);
+   private void sable$checkSubLevelLightColor(float f, CallbackInfoReturnable<Integer> cir) {
+      double particleX = this.x;
+      double particleY = this.y;
+      double particleZ = this.z;
+      BlockPos pos = BlockPos.containing(particleX, particleY, particleZ);
+      boolean hasChunk = this.level.hasChunkAt(pos);
+      if (hasChunk) {
+         BlockState state = this.level.getBlockState(pos);
+         if (state.emissiveRendering()) {
+            cir.setReturnValue(15728880);
          } else {
-            ClientSubLevel var12 = this.sable$trackingSubLevel;
-            int var13;
-            int var14;
-            if (var12 != null) {
-               var14 = this.level.getBrightness(LightLayer.BLOCK, var9);
-               var13 = this.level.getBrightness(LightLayer.SKY, var9);
-               Vector3d var26 = new Vector3d();
-               MutableBlockPos var29 = new MutableBlockPos();
-               MutableBlockPos var31 = new MutableBlockPos();
-               Pose3d var33 = var12.logicalPose();
-               var33.transformPositionInverse(var26.set(var3, var5, var7));
-               var29.set(var26.x, var26.y, var26.z);
-               var14 = Math.max(var14, var12.getLevel().getBrightness(LightLayer.BLOCK, var29));
-               var31.setWithOffset(var29, 0, 1, 0);
-               ClientLevelPlot var34 = var12.getPlot();
-               boolean var35 = false;
+            ClientSubLevel trackingSubLevel = this.sable$trackingSubLevel;
+            int skyLight;
+            int blockLight;
+            if (trackingSubLevel != null) {
+               blockLight = this.level.getBrightness(LightLayer.BLOCK, pos);
+               skyLight = this.level.getBrightness(LightLayer.SKY, pos);
+               Vector3d particlePos = new Vector3d();
+               MutableBlockPos localBlockPos = new MutableBlockPos();
+               MutableBlockPos heightmapPos = new MutableBlockPos();
+               Pose3d pose = trackingSubLevel.logicalPose();
+               pose.transformPositionInverse(particlePos.set(particleX, particleY, particleZ));
+               localBlockPos.set(particlePos.x, particlePos.y, particlePos.z);
+               blockLight = Math.max(blockLight, trackingSubLevel.getLevel().getBrightness(LightLayer.BLOCK, localBlockPos));
+               heightmapPos.setWithOffset(localBlockPos, 0, 1, 0);
+               LevelPlot plot = trackingSubLevel.getPlot();
+               boolean isAboveGround = false;
 
-               while (var31.getY() >= var34.getBoundingBox().minY()) {
-                  if (!this.level.getBlockState(var31).isAir()) {
-                     var35 = true;
+               while (heightmapPos.getY() >= plot.getBoundingBox().minY()) {
+                  if (!this.level.getBlockState(heightmapPos).isAir()) {
+                     isAboveGround = true;
                      break;
                   }
 
-                  var31.move(0, -1, 0);
+                  heightmapPos.move(0, -1, 0);
                }
 
-               if (var35) {
-                  var13 = Math.min(var13, var12.scaleSkyLight(this.level.getBrightness(LightLayer.SKY, var29)));
+               if (isAboveGround) {
+                  skyLight = Math.min(skyLight, trackingSubLevel.scaleSkyLight(this.level.getBrightness(LightLayer.SKY, localBlockPos)));
                }
             } else {
-               List<ClientSubLevel> var15 = this.sable$nearbySubLevels;
-               if (var15 == null) {
-                  List<ClientSubLevel> var16 = new ObjectArrayList<ClientSubLevel>(6);
+               List<ClientSubLevel> nearbySubLevels = this.sable$nearbySubLevels;
+               if (nearbySubLevels == null) {
+                  List<ClientSubLevel> discoveredSubLevels = new ObjectArrayList(6);
 
-                  for (SubLevel var18 : Sable.HELPER.getAllIntersecting(this.level, new BoundingBox3d(var9).expand(8.0))) {
-                     var16.add((ClientSubLevel)var18);
+                  for (SubLevel subLevel : Sable.HELPER.getAllIntersecting(this.level, new BoundingBox3d(pos).expand(8.0))) {
+                     discoveredSubLevels.add((ClientSubLevel)subLevel);
                   }
 
-                  var15 = var16;
-                  this.sable$nearbySubLevels = var16;
+                  nearbySubLevels = discoveredSubLevels;
+                  this.sable$nearbySubLevels = discoveredSubLevels;
                }
 
-               if (var15.isEmpty()) {
+               if (nearbySubLevels.isEmpty()) {
                   return;
                }
 
-               var14 = this.level.getBrightness(LightLayer.BLOCK, var9);
-               var13 = this.level.getBrightness(LightLayer.SKY, var9);
-               Vector3d var28 = new Vector3d();
-               MutableBlockPos var30 = new MutableBlockPos();
-               MutableBlockPos var32 = new MutableBlockPos();
-               BoundingBox3d var19 = new BoundingBox3d(var9).expand(0.5);
+               blockLight = this.level.getBrightness(LightLayer.BLOCK, pos);
+               skyLight = this.level.getBrightness(LightLayer.SKY, pos);
+               Vector3d particlePos = new Vector3d();
+               MutableBlockPos localBlockPos = new MutableBlockPos();
+               MutableBlockPos heightmapPos = new MutableBlockPos();
+               BoundingBox3d box = new BoundingBox3d(pos).expand(0.5);
 
-               for (ClientSubLevel var21 : var15) {
-                  if (var21.boundingBox().intersects(var19)) {
-                     Pose3d var22 = var21.logicalPose();
-                     var22.transformPositionInverse(var28.set(var3, var5, var7));
-                     var30.set(var28.x, var28.y, var28.z);
-                     var14 = Math.max(var14, var21.getLevel().getBrightness(LightLayer.BLOCK, var30));
-                     var32.setWithOffset(var30, 0, 1, 0);
-                     ClientLevelPlot var23 = var21.getPlot();
-                     boolean var24 = false;
+               for (ClientSubLevel subLevel : nearbySubLevels) {
+                  if (subLevel.boundingBox().intersects(box)) {
+                     Pose3d pose = subLevel.logicalPose();
+                     pose.transformPositionInverse(particlePos.set(particleX, particleY, particleZ));
+                     localBlockPos.set(particlePos.x, particlePos.y, particlePos.z);
+                     blockLight = Math.max(blockLight, subLevel.getLevel().getBrightness(LightLayer.BLOCK, localBlockPos));
+                     heightmapPos.setWithOffset(localBlockPos, 0, 1, 0);
+                     LevelPlot plot = subLevel.getPlot();
+                     boolean isAboveGround = false;
 
-                     while (var32.getY() >= var23.getBoundingBox().minY()) {
-                        if (!this.level.getBlockState(var32).isAir()) {
-                           var24 = true;
+                     while (heightmapPos.getY() >= plot.getBoundingBox().minY()) {
+                        if (!this.level.getBlockState(heightmapPos).isAir()) {
+                           isAboveGround = true;
                            break;
                         }
 
-                        var32.move(0, -1, 0);
+                        heightmapPos.move(0, -1, 0);
                      }
 
-                     if (var24) {
-                        var13 = Math.min(var13, var21.scaleSkyLight(this.level.getBrightness(LightLayer.SKY, var30)));
+                     if (isAboveGround) {
+                        skyLight = Math.min(skyLight, subLevel.scaleSkyLight(this.level.getBrightness(LightLayer.SKY, localBlockPos)));
                      }
                   }
                }
             }
 
-            int var27 = var11.getLightEmission();
-            if (var14 < var27) {
-               var14 = var27;
+            int k = state.getLightEmission();
+            if (blockLight < k) {
+               blockLight = k;
             }
 
-            var2.setReturnValue(LightCoordsUtil.pack(var14, var13));
+            cir.setReturnValue(LightCoordsUtil.pack(blockLight, skyLight));
          }
       }
    }

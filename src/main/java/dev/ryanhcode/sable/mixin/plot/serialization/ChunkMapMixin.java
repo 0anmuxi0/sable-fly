@@ -7,7 +7,6 @@ import dev.ryanhcode.sable.sublevel.storage.holding.SubLevelHoldingChunkMap;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Executor;
-import java.util.function.Supplier;
 import net.minecraft.server.level.ChunkMap;
 import net.minecraft.server.level.FullChunkStatus;
 import net.minecraft.server.level.ServerLevel;
@@ -43,20 +42,19 @@ public class ChunkMapMixin {
       at = {@At("TAIL")}
    )
    private void sable$init(
-      ServerLevel var1,
-      LevelStorageAccess var2,
-      DataFixer var3,
-      StructureTemplateManager var4,
-      Executor var5,
-      BlockableEventLoop var6,
-      LightChunkGetter var7,
-      ChunkGenerator var8,
-      ChunkStatusUpdateListener var9,
-      Supplier<?> var10,
-      TicketStorage var11,
-      int var12,
-      boolean var13,
-      CallbackInfo var14
+      ServerLevel level,
+      LevelStorageAccess levelStorage,
+      DataFixer dataFixer,
+      StructureTemplateManager structureManager,
+      Executor executor,
+      BlockableEventLoop mainThreadExecutor,
+      LightChunkGetter chunkGetter,
+      ChunkGenerator generator,
+      ChunkStatusUpdateListener chunkStatusListener,
+      TicketStorage ticketStorage,
+      int serverViewDistance,
+      boolean syncWrites,
+      CallbackInfo ci
    ) {
       this.unloadQueue = new ConcurrentLinkedDeque<>();
    }
@@ -65,14 +63,14 @@ public class ChunkMapMixin {
       method = {"onFullChunkStatusChange"},
       at = {@At("TAIL")}
    )
-   private void sable$onStatusChange(ChunkPos var1, FullChunkStatus var2, CallbackInfo var3) {
-      ServerSubLevelContainer var4 = SubLevelContainer.getContainer(this.level);
+   private void sable$onStatusChange(ChunkPos chunkPos, FullChunkStatus fullChunkStatus, CallbackInfo ci) {
+      ServerSubLevelContainer container = SubLevelContainer.getContainer(this.level);
 
-      assert var4 != null : "Sub-level container is null";
+      assert container != null : "Sub-level container is null";
 
-      if (!var4.inBounds(var1)) {
-         SubLevelHoldingChunkMap var5 = var4.getHoldingChunkMap();
-         var5.updateChunkStatus(var1, Visibility.fromFullChunkStatus(var2) != Visibility.HIDDEN);
+      if (!container.inBounds(chunkPos)) {
+         SubLevelHoldingChunkMap holdingChunkMap = container.getHoldingChunkMap();
+         holdingChunkMap.updateChunkStatus(chunkPos, Visibility.fromFullChunkStatus(fullChunkStatus) != Visibility.HIDDEN);
       }
    }
 }

@@ -21,8 +21,8 @@ public abstract class OptionsScreenMixin extends Screen {
    @Final
    private Options options;
 
-   protected OptionsScreenMixin(Component var1) {
-      super(var1);
+   protected OptionsScreenMixin(Component component) {
+      super(component);
    }
 
    @Inject(
@@ -30,20 +30,20 @@ public abstract class OptionsScreenMixin extends Screen {
       at = {@At("RETURN")},
       cancellable = true
    )
-   public void sable$createSableButton(CallbackInfoReturnable<LayoutElement> var1) {
+   public void sable$createSableButton(CallbackInfoReturnable<LayoutElement> cir) {
       if (this.minecraft.level != null && this.minecraft.hasSingleplayerServer()) {
-         LinearLayout var2 = LinearLayout.vertical();
-         Button var3 = Button.builder(
+         LinearLayout layout = LinearLayout.vertical();
+         Button sableButton = Button.builder(
                SubLevelSettingsScreen.TITLE,
-               var1x -> this.minecraft.gui.setScreen(new SubLevelSettingsScreen(this, this.options, SubLevelSettingsScreen.TITLE))
+               event -> this.minecraft.gui.setScreen(new SubLevelSettingsScreen(this, this.options, SubLevelSettingsScreen.TITLE))
             )
             .pos(0, 30)
             .size(150, 20)
             .build();
-         var2.addChild((LayoutElement)var1.getReturnValue());
-         var2.spacing(5);
-         var2.addChild(var3);
-         var1.setReturnValue(var2);
+         layout.addChild(cir.getReturnValue());
+         layout.spacing(5);
+         layout.addChild(sableButton);
+         cir.setReturnValue(layout);
       }
    }
 }

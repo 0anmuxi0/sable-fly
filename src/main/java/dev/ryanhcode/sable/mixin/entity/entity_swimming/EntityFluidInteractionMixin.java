@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({EntityFluidInteraction.class})
 public class EntityFluidInteractionMixin {
@@ -24,39 +25,47 @@ public class EntityFluidInteractionMixin {
    private final Map<TagKey<Fluid>, SubLevelFluidHelper.Found> sable$subLevelCurrents = new HashMap<>();
 
    @Inject(
-      method = {"update(Lnet/minecraft/world/entity/Entity;Z)V"},
+      method = {"update(Lnet/minecraft/world/entity/Entity;Z)Z"},
       at = {@At("HEAD")}
    )
-   private void sable$gatherSubLevelFluids(Entity var1, boolean var2, CallbackInfo var3) {
-      SubLevelFluidHelper.gather(var1, var2, this.sable$subLevelFluids, this.sable$subLevelCurrents);
+   private void sable$gatherSubLevelFluids(Entity entity, boolean ignoreCurrent, CallbackInfoReturnable<Boolean> cir) {
+      SubLevelFluidHelper.gather(entity, ignoreCurrent, this.sable$subLevelFluids, this.sable$subLevelCurrents);
+   }
+
+   @ModifyReturnValue(
+      method = {"update(Lnet/minecraft/world/entity/Entity;Z)Z"},
+      at = {@At("RETURN")}
+   )
+   private boolean sable$subLevelFluidFound(boolean original) {
+      return original || !this.sable$subLevelFluids.isEmpty();
    }
 
    @ModifyReturnValue(
       method = {"getFluidHeight(Lnet/minecraft/tags/TagKey;)D"},
       at = {@At("RETURN")}
    )
-   private double sable$subLevelFluidHeight(double var1, TagKey<Fluid> var3) {
-      double var4 = var1;
+   private double sable$subLevelFluidHeight(double original, TagKey<Fluid> fluid) {
+      double height = original;
 
-      for (Entry var7 : this.sable$subLevelFluids.entrySet()) {
-         if (((Holder)var7.getKey()).is(var3)) {
-            var4 = Math.max(var4, ((SubLevelFluidHelper.Found)var7.getValue()).height);
+      for (Entry<Holder<Fluid>, SubLevelFluidHelper.Found> entry : this.sable$subLevelFluids.entrySet()) {
+         if (entry.getKey().is(fluid)) {
+            height = Math.max(height, entry.getValue().height);
          }
       }
 
-      return var4;
+      return height;
    }
 
    @ModifyReturnValue(
       method = {"isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z"},
       at = {@At("RETURN")}
    )
-   private boolean sable$subLevelEyeInFluid(boolean var1, TagKey<Fluid> var2) {
-      if (var1) {
+   private boolean sable$subLevelEyeInFluid(boolean original, TagKey<Fluid> fluid) {
+      if (original) {
          return true;
       } else {
-         for (Entry var4 : this.sable$subLevelFluids.entrySet()) {
-            if (((Holder)var4.getKey()).is(var2) && ((SubLevelFluidHelper.Found)var4.getValue()).eyesInside) {
+         for (Entry<Holder<Fluid>, SubLevelFluidHelper.Found> entry : this.sable$subLevelFluids.entrySet()) {
+            if (entry.getKey().is(fluid) && entry.getValue().eyesInside) {
                return true;
             }
          }
@@ -69,10 +78,10 @@ public class EntityFluidInteractionMixin {
       method = {"applyCurrentTo(Lnet/minecraft/tags/TagKey;Lnet/minecraft/world/entity/Entity;D)V"},
       at = {@At("TAIL")}
    )
-   private void sable$applySubLevelCurrent(TagKey<Fluid> var1, Entity var2, double var3, CallbackInfo var5) {
-      SubLevelFluidHelper.Found var6 = this.sable$subLevelCurrents.get(var1);
-      if (var6 != null) {
-         SubLevelFluidHelper.applyCurrent(var2, var6, var3);
+   private void sable$applySubLevelCurrent(TagKey<Fluid> fluid, Entity entity, double scale, CallbackInfo ci) {
+      SubLevelFluidHelper.Found found = this.sable$subLevelCurrents.get(fluid);
+      if (found != null) {
+         SubLevelFluidHelper.applyCurrent(entity, found, scale);
       }
    }
 }

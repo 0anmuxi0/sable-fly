@@ -1,6 +1,9 @@
 classTweaker v2 official
 
 accessible field net/minecraft/client/renderer/chunk/ChunkSectionsToRender maxIndicesRequired I
+accessible field net/minecraft/client/renderer/chunk/ChunkSectionsToRender terrainTransformUBO Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+accessible field net/minecraft/client/renderer/chunk/ChunkSectionsToRender$DrawSeparate drawsPerLayer Ljava/util/Map;
+accessible field net/minecraft/client/renderer/chunk/ChunkSectionsToRender$DrawSeparate chunkSectionInfos [Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
 accessible class net/minecraft/client/multiplayer/ClientChunkCache$Storage
 
 accessible field net/minecraft/server/level/ChunkHolder fullChunkFuture Ljava/util/concurrent/CompletableFuture;

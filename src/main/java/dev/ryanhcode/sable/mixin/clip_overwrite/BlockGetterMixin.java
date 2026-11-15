@@ -51,11 +51,7 @@ public interface BlockGetterMixin {
 
             Vector3dc from = pose.transformPosition(JOMLConversion.toJOML(clipContext.getFrom()));
             clipContext = new ClipContext(
-               JOMLConversion.toMojang(from),
-               clipContext.getTo(),
-               ((ClipContextExtension)clipContext).sable$getBlock(),
-               ((ClipContextExtension)clipContext).sable$getFluid(),
-               ((ClipContextExtension)clipContext).sable$getCollisionContext()
+               JOMLConversion.toMojang(from), clipContext.getTo(), clipContext.block, clipContext.fluid, clipContext.collisionContext
             );
          }
 
@@ -68,11 +64,7 @@ public interface BlockGetterMixin {
 
             Vector3dc to = pose.transformPosition(JOMLConversion.toJOML(clipContext.getTo()));
             clipContext = new ClipContext(
-               clipContext.getFrom(),
-               JOMLConversion.toMojang(to),
-               ((ClipContextExtension)clipContext).sable$getBlock(),
-               ((ClipContextExtension)clipContext).sable$getFluid(),
-               ((ClipContextExtension)clipContext).sable$getCollisionContext()
+               clipContext.getFrom(), JOMLConversion.toMojang(to), clipContext.block, clipContext.fluid, clipContext.collisionContext
             );
          }
 
@@ -101,11 +93,7 @@ public interface BlockGetterMixin {
                Vector3dc to = pose.transformPositionInverse(JOMLConversion.toJOML(clipContext.getTo()));
                if (helper.getContaining(level, from) == subLevel) {
                   ClipContext subClipContext = new ClipContext(
-                     JOMLConversion.toMojang(from),
-                     JOMLConversion.toMojang(to),
-                     ((ClipContextExtension)clipContext).sable$getBlock(),
-                     ((ClipContextExtension)clipContext).sable$getFluid(),
-                     ((ClipContextExtension)clipContext).sable$getCollisionContext()
+                     JOMLConversion.toMojang(from), JOMLConversion.toMojang(to), clipContext.block, clipContext.fluid, clipContext.collisionContext
                   );
                   BlockHitResult subResult = originalClip(subLevel.getLevel(), subClipContext);
                   double distance = subResult.getLocation().distanceTo(subClipContext.getFrom());

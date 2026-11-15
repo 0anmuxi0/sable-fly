@@ -35,8 +35,8 @@ public abstract class BlockPlaceContextMixin extends UseOnContext {
    @Shadow
    protected boolean replaceClicked;
 
-   public BlockPlaceContextMixin(Player var1, InteractionHand var2, BlockHitResult var3) {
-      super(var1, var2, var3);
+   public BlockPlaceContextMixin(Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
+      super(pPlayer, pHand, pHitResult);
    }
 
    @Shadow
@@ -50,15 +50,15 @@ public abstract class BlockPlaceContextMixin extends UseOnContext {
          target = "Lnet/minecraft/core/Direction;getFacingAxis(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/Direction$Axis;)Lnet/minecraft/core/Direction;"
       )}
    )
-   private Direction sable$getFacingAxis(Entity var1, Axis var2) {
-      SubLevel var3 = Sable.HELPER.getContaining(this.getLevel(), this.getClickedPos());
-      if (var3 != null) {
-         SubLevelHelper.pushEntityLocal(var3, var1);
-         Direction var4 = Direction.getFacingAxis(var1, var2);
-         SubLevelHelper.popEntityLocal(var3, var1);
-         return var4;
+   private Direction sable$getFacingAxis(Entity player, Axis axis) {
+      SubLevel subLevel = Sable.HELPER.getContaining(this.getLevel(), this.getClickedPos());
+      if (subLevel != null) {
+         SubLevelHelper.pushEntityLocal(subLevel, player);
+         Direction facingAxis = Direction.getFacingAxis(player, axis);
+         SubLevelHelper.popEntityLocal(subLevel, player);
+         return facingAxis;
       } else {
-         return Direction.getFacingAxis(var1, var2);
+         return Direction.getFacingAxis(player, axis);
       }
    }
 
@@ -69,15 +69,15 @@ public abstract class BlockPlaceContextMixin extends UseOnContext {
          target = "Lnet/minecraft/core/Direction;orderedByNearest(Lnet/minecraft/world/entity/Entity;)[Lnet/minecraft/core/Direction;"
       )}
    )
-   private Direction[] sable$orderedByNearest(Entity var1) {
-      SubLevel var2 = Sable.HELPER.getContaining(this.getLevel(), this.getClickedPos());
-      if (var2 != null) {
-         SubLevelHelper.pushEntityLocal(var2, var1);
-         Direction[] var3 = Direction.orderedByNearest(var1);
-         SubLevelHelper.popEntityLocal(var2, var1);
-         return var3;
+   private Direction[] sable$orderedByNearest(Entity player) {
+      SubLevel subLevel = Sable.HELPER.getContaining(this.getLevel(), this.getClickedPos());
+      if (subLevel != null) {
+         SubLevelHelper.pushEntityLocal(subLevel, player);
+         Direction[] nearest = Direction.orderedByNearest(player);
+         SubLevelHelper.popEntityLocal(subLevel, player);
+         return nearest;
       } else {
-         return Direction.orderedByNearest(var1);
+         return Direction.orderedByNearest(player);
       }
    }
 
@@ -86,54 +86,64 @@ public abstract class BlockPlaceContextMixin extends UseOnContext {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void sable$canPlace(CallbackInfoReturnable<Boolean> var1) {
-      BlockPos var2 = this.getClickedPos();
-      SubLevel var3 = Sable.HELPER.getContaining(this.getLevel(), this.getClickedPos());
-      BoundingBox3d var4 = new BoundingBox3d(var2);
-      Quaterniond var5 = new Quaterniond();
-      Vector3d var6 = new Vector3d(var2.getX() + 0.5, var2.getY() + 0.5, var2.getZ() + 0.5);
-      if (var3 != null) {
-         var3.logicalPose().transformPosition(var6);
-         var5.set(var3.logicalPose().orientation());
-         var4.transform(var3.logicalPose(), var4);
+   private void sable$canPlace(CallbackInfoReturnable<Boolean> cir) {
+      BlockPos clicked = this.getClickedPos();
+      SubLevel subLevel = Sable.HELPER.getContaining(this.getLevel(), this.getClickedPos());
+      BoundingBox3d placedBoxBoundingBox = new BoundingBox3d(clicked);
+      Quaterniond placedBoxOrientation = new Quaterniond();
+      Vector3d placedBoxPosition = new Vector3d(clicked.getX() + 0.5, clicked.getY() + 0.5, clicked.getZ() + 0.5);
+      if (subLevel != null) {
+         subLevel.logicalPose().transformPosition(placedBoxPosition);
+         placedBoxOrientation.set(subLevel.logicalPose().orientation());
+         placedBoxBoundingBox.transform(subLevel.logicalPose(), placedBoxBoundingBox);
       }
 
-      for (SubLevel var8 : Sable.HELPER.getAllIntersecting(this.getLevel(), var4)) {
-         if (var8 != var3) {
-            boolean var9 = this.sable$intersectBlocks(var1, var8, var4, this.sable$sink, var6, var5);
-            if (var9) {
+      for (SubLevel otherSubLevel : Sable.HELPER.getAllIntersecting(this.getLevel(), placedBoxBoundingBox)) {
+         if (otherSubLevel != subLevel) {
+            boolean cancelled = this.sable$intersectBlocks(cir, otherSubLevel, placedBoxBoundingBox, this.sable$sink, placedBoxPosition, placedBoxOrientation);
+            if (cancelled) {
                return;
             }
          }
       }
 
-      this.sable$intersectBlocks(var1, null, var4, this.sable$sink, var6, var5);
+      this.sable$intersectBlocks(cir, null, placedBoxBoundingBox, this.sable$sink, placedBoxPosition, placedBoxOrientation);
    }
 
    @Unique
    private boolean sable$intersectBlocks(
-      CallbackInfoReturnable<Boolean> var1, @Nullable SubLevel var2, BoundingBox3dc var3, LevelReusedVectors var4, Vector3d var5, Quaterniond var6
+      CallbackInfoReturnable<Boolean> cir,
+      @Nullable SubLevel otherSubLevel,
+      BoundingBox3dc placedBoxBoundingBox,
+      LevelReusedVectors sink,
+      Vector3d placedBoxPosition,
+      Quaterniond placedBoxOrientation
    ) {
-      BoundingBox3d var7 = var3.expand(0.36602540380000004, new BoundingBox3d());
-      if (var2 != null) {
-         var7.transformInverse(var2.logicalPose(), var7);
+      BoundingBox3d localBase = placedBoxBoundingBox.expand(0.36602540380000004, new BoundingBox3d());
+      if (otherSubLevel != null) {
+         localBase.transformInverse(otherSubLevel.logicalPose(), localBase);
       }
 
-      for (BlockPos var9 : BlockPos.betweenClosed(
-         Mth.floor(var7.minX()), Mth.floor(var7.minY()), Mth.floor(var7.minZ()), Mth.floor(var7.maxX()), Mth.floor(var7.maxY()), Mth.floor(var7.maxZ())
+      for (BlockPos position : BlockPos.betweenClosed(
+         Mth.floor(localBase.minX()),
+         Mth.floor(localBase.minY()),
+         Mth.floor(localBase.minZ()),
+         Mth.floor(localBase.maxX()),
+         Mth.floor(localBase.maxY()),
+         Mth.floor(localBase.maxZ())
       )) {
-         boolean var10 = this.replaceClicked || this.getLevel().getBlockState(var9).canBeReplaced((BlockPlaceContext)(Object)this);
-         Vector3d var11 = new Vector3d(var9.getX() + 0.5, var9.getY() + 0.5, var9.getZ() + 0.5);
-         Quaterniond var12 = new Quaterniond();
-         if (var2 != null) {
-            var11 = var2.logicalPose().transformPosition(var11);
-            var12.set(var2.logicalPose().orientation());
+         boolean replaced = this.replaceClicked || this.getLevel().getBlockState(position).canBeReplaced((BlockPlaceContext)(Object)this);
+         Vector3d inWorldBoxPosition = new Vector3d(position.getX() + 0.5, position.getY() + 0.5, position.getZ() + 0.5);
+         Quaterniond inWorldBoxOrientation = new Quaterniond();
+         if (otherSubLevel != null) {
+            inWorldBoxPosition = otherSubLevel.logicalPose().transformPosition(inWorldBoxPosition);
+            inWorldBoxOrientation.set(otherSubLevel.logicalPose().orientation());
          }
 
-         OrientedBoundingBox3d var13 = new OrientedBoundingBox3d(var11, new Vector3d(1.0, 1.0, 1.0), var12, var4);
-         OrientedBoundingBox3d var14 = new OrientedBoundingBox3d(var5, new Vector3d(1.0, 1.0, 1.0), var6, var4);
-         if (!var10 && OrientedBoundingBox3d.sat(var13, var14).lengthSquared() > 0.05) {
-            var1.setReturnValue(false);
+         OrientedBoundingBox3d inWorldBox = new OrientedBoundingBox3d(inWorldBoxPosition, new Vector3d(1.0, 1.0, 1.0), inWorldBoxOrientation, sink);
+         OrientedBoundingBox3d justPlacedBox = new OrientedBoundingBox3d(placedBoxPosition, new Vector3d(1.0, 1.0, 1.0), placedBoxOrientation, sink);
+         if (!replaced && OrientedBoundingBox3d.sat(inWorldBox, justPlacedBox).lengthSquared() > 0.05) {
+            cir.setReturnValue(false);
             return true;
          }
       }

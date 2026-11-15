@@ -86,6 +86,18 @@ public abstract class EntityMixin {
    @Shadow
    public abstract Vec3 getDeltaMovement();
 
+   @WrapOperation(
+      method = {"applyMovementEmissionAndPlaySound"},
+      at = {@At(
+         value = "INVOKE",
+         target = "Lnet/minecraft/world/phys/Vec3;horizontalDistance()D"
+      )}
+   )
+   private double sable$fixWalkDistance(Vec3 vec, Operation<Double> original) {
+      Quaterniondc orientation = EntitySubLevelUtil.getCustomEntityOrientation((Entity)(Object)this, 1.0F);
+      return orientation == null ? original.call(vec) : original.call(JOMLConversion.toMojang(orientation.transformInverse(JOMLConversion.toJOML(vec))));
+   }
+
    @Inject(
       method = {"moveRelative"},
       at = {@At("HEAD")},

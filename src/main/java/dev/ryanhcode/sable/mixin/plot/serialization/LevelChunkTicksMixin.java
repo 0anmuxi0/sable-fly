@@ -21,11 +21,11 @@ public class LevelChunkTicksMixin<T> implements LevelChunkTicksExtension<T> {
    private Set<ScheduledTick<?>> ticksPerPosition;
 
    @Override
-   public void sable$copy(LevelChunkTicks<T> var1) {
-      this.pendingTicks = ((LevelChunkTicksMixin)(Object)var1).pendingTicks;
+   public void sable$copy(LevelChunkTicks<T> ticks) {
+      this.pendingTicks = ((LevelChunkTicksMixin)(Object)ticks).pendingTicks;
 
-      for (SavedTick var3 : this.pendingTicks) {
-         this.ticksPerPosition.add(ScheduledTick.probe(var3.type(), var3.pos()));
+      for (SavedTick<T> savedTick : this.pendingTicks) {
+         this.ticksPerPosition.add(ScheduledTick.probe(savedTick.type(), savedTick.pos()));
       }
    }
 }

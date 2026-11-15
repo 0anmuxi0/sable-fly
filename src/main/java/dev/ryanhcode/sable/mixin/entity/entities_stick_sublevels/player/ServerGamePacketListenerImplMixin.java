@@ -27,18 +27,18 @@ public class ServerGamePacketListenerImplMixin {
          shift = Shift.AFTER
       )}
    )
-   public void handleMovePlayer(ServerboundMovePlayerPacket var1, CallbackInfo var2) {
-      ((ServerboundMovePlayerPacketExtension)var1).sable$handle(this.player);
+   public void handleMovePlayer(ServerboundMovePlayerPacket packet, CallbackInfo ci) {
+      ((ServerboundMovePlayerPacketExtension)packet).sable$handle(this.player);
    }
 
    @WrapOperation(
-      method = {"shouldCheckPlayerMovement"},
+      method = {"handlePlayerPositionChange"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerPlayer;isChangingDimension()Z"
       )}
    )
-   private boolean sable$disableMovedTooQuicklyCheck(ServerPlayer var1, Operation<Boolean> var2) {
-      return Sable.HELPER.getTrackingSubLevel(var1) != null ? true : (Boolean)var2.call(var1);
+   private boolean sable$disableMovedTooQuicklyCheck(ServerPlayer instance, Operation<Boolean> original) {
+      return Sable.HELPER.getTrackingSubLevel(instance) != null ? true : original.call(instance);
    }
 }

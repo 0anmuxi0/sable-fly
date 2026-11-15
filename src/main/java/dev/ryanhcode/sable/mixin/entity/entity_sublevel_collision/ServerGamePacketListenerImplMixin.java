@@ -13,13 +13,13 @@ public class ServerGamePacketListenerImplMixin {
    public ServerPlayer player;
 
    @Redirect(
-      method = {"handleMovePlayer"},
+      method = {"handlePlayerPositionChange"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerPlayer;isCreative()Z"
       )}
    )
-   private boolean sable$ignoreCreativeModeForSubLevelCollision(ServerPlayer var1) {
+   private boolean sable$ignoreCreativeModeForSubLevelCollision(ServerPlayer instance) {
       return true;
    }
 }

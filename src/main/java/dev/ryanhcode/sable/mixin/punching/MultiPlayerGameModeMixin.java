@@ -35,11 +35,11 @@ public class MultiPlayerGameModeMixin {
       method = {"startDestroyBlock"},
       at = {@At("HEAD")}
    )
-   private void onBlockBreakStart(BlockPos var1, Direction var2, CallbackInfoReturnable<Boolean> var3) {
+   private void onBlockBreakStart(BlockPos blockPos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
       assert this.minecraft.player != null;
 
-      if (this.minecraft.hitResult instanceof BlockHitResult var5) {
-         ClientSubLevelPunchHelper.clientTryPunch(var5, this.minecraft.level, true);
+      if (this.minecraft.hitResult instanceof BlockHitResult blockHitResult) {
+         ClientSubLevelPunchHelper.clientTryPunch(blockHitResult, this.minecraft.level, true);
       }
    }
 
@@ -47,27 +47,22 @@ public class MultiPlayerGameModeMixin {
       method = {"useItemOn"},
       at = {@At("RETURN")}
    )
-   private void sable$swingOnSubLevelUseOn(LocalPlayer var1, InteractionHand var2, BlockHitResult var3, CallbackInfoReturnable<InteractionResult> var4) {
-      ClientLevel var6 = Minecraft.getInstance().level;
-      if (var6 != null) {
-         if (Sable.HELPER.getContaining(var6, var3.getBlockPos()) != null) {
-            InteractionResult var7 = (InteractionResult)var4.getReturnValue();
-            SwingSource var8;
-            if (var7 instanceof Success var9) {
-               var8 = var9.swingSource();
-            } else {
-               SwingSource var5 = SwingSource.NONE;
-               var8 = SwingSource.NONE;
-            }
-
-            if (var8 == SwingSource.NONE) {
-               ItemStack var14 = var1.getItemInHand(var2);
-               if (var14.getItem() instanceof BlockItem var11) {
-                  if (new BlockPlaceContext(var1, var2, var14, var3).canPlace()) {
-                     BlockPos var12 = var3.getBlockPos().relative(var3.getDirection());
-                     AABB var13 = new AABB(var12.getX(), var12.getY(), var12.getZ(), var12.getX() + 1.0, var12.getY() + 1.0, var12.getZ() + 1.0);
-                     if (var6.getEntities((Entity)null, var13).isEmpty()) {
-                        var1.swing(var2, false);
+   private void sable$swingOnSubLevelUseOn(LocalPlayer player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
+      ClientLevel level = Minecraft.getInstance().level;
+      if (level != null) {
+         if (Sable.HELPER.getContaining(level, hitResult.getBlockPos()) != null) {
+            InteractionResult result = cir.getReturnValue();
+            SwingSource swing = result instanceof Success success ? success.swingSource() : SwingSource.NONE;
+            if (swing == SwingSource.NONE) {
+               ItemStack stack = player.getItemInHand(hand);
+               if (stack.getItem() instanceof BlockItem blockItem) {
+                  if (new BlockPlaceContext(player, hand, stack, hitResult).canPlace()) {
+                     BlockPos placedPos = hitResult.getBlockPos().relative(hitResult.getDirection());
+                     AABB placedBox = new AABB(
+                        placedPos.getX(), placedPos.getY(), placedPos.getZ(), placedPos.getX() + 1.0, placedPos.getY() + 1.0, placedPos.getZ() + 1.0
+                     );
+                     if (level.getEntities((Entity)null, placedBox).isEmpty()) {
+                        player.swing(hand, stack.getInteractAnimation(), false);
                      }
                   }
                }

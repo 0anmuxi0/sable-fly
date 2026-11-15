@@ -26,21 +26,21 @@ public class ClientboundTeleportEntityPacketMixin implements PacketActuallyInSub
       method = {"<clinit>"},
       at = {@At("TAIL")}
    )
-   private static void sable$extendStreamCodec(CallbackInfo var0) {
-      StreamCodec var1 = STREAM_CODEC;
-      STREAM_CODEC = StreamCodec.of((var1x, var2) -> {
-         var1.encode(var1x, var2);
-         var1x.writeBoolean(((PacketActuallyInSubLevelExtension)(Object)var2).sable$isActuallyInSubLevel());
-      }, var1x -> {
-         ClientboundTeleportEntityPacket var2 = (ClientboundTeleportEntityPacket)var1.decode(var1x);
-         ((PacketActuallyInSubLevelExtension)(Object)var2).sable$setActuallyInSubLevel(var1x.readBoolean());
-         return var2;
+   private static void sable$extendStreamCodec(CallbackInfo ci) {
+      StreamCodec<FriendlyByteBuf, ClientboundTeleportEntityPacket> original = STREAM_CODEC;
+      STREAM_CODEC = StreamCodec.of((buffer, packet) -> {
+         original.encode(buffer, packet);
+         buffer.writeBoolean(((PacketActuallyInSubLevelExtension)(Object)packet).sable$isActuallyInSubLevel());
+      }, buffer -> {
+         ClientboundTeleportEntityPacket packet = original.decode(buffer);
+         ((PacketActuallyInSubLevelExtension)(Object)packet).sable$setActuallyInSubLevel(buffer.readBoolean());
+         return packet;
       });
    }
 
    @Override
-   public void sable$setActuallyInSubLevel(boolean var1) {
-      this.sable$actuallyInSubLevel = var1;
+   public void sable$setActuallyInSubLevel(boolean actuallyInSubLevel) {
+      this.sable$actuallyInSubLevel = actuallyInSubLevel;
    }
 
    @Override

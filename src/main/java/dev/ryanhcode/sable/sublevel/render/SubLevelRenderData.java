@@ -7,8 +7,10 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.PrioritizeChunkUpdates;
 import net.minecraft.client.renderer.chunk.RenderRegionCache;
 import org.joml.Matrix4f;
+import org.joml.Quaterniondc;
 import org.joml.Quaternionf;
 import org.joml.Vector3d;
+import org.joml.Vector3dc;
 
 public interface SubLevelRenderData extends Closeable {
    @Override
@@ -28,13 +30,16 @@ public interface SubLevelRenderData extends Closeable {
       return this.getTransformation(camX, camY, camZ, new Matrix4f());
    }
 
-   default Matrix4f getTransformation(double var1, double var3, double var5, Matrix4f var7) {
-      var7.identity();
-      Pose3dc var8 = this.getSubLevel().renderPose();
-      var7.translate((float)(var8.position().x() - var1), (float)(var8.position().y() - var3), (float)(var8.position().z() - var5));
-      var7.rotate(new Quaternionf(var8.orientation()));
-      var7.scale((float)var8.scale().x(), (float)var8.scale().y(), (float)var8.scale().z());
-      return var7;
+   default Matrix4f getTransformation(double camX, double camY, double camZ, Matrix4f store) {
+      store.identity();
+      Pose3dc pose = this.getSubLevel().renderPose();
+      Vector3dc pos = pose.position();
+      Vector3dc scale = pose.scale();
+      Quaterniondc orientation = pose.orientation();
+      store.translate((float)(pos.x() - camX), (float)(pos.y() - camY), (float)(pos.z() - camZ));
+      store.rotate(new Quaternionf(orientation));
+      store.scale((float)scale.x(), (float)scale.y(), (float)scale.z());
+      return store;
    }
 
    ClientSubLevel getSubLevel();

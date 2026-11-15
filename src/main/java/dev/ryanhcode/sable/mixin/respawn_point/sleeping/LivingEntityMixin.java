@@ -15,14 +15,15 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({LivingEntity.class})
 public abstract class LivingEntityMixin extends Entity {
-   public LivingEntityMixin(EntityType<?> var1, Level var2) {
-      super(var1, var2);
+   public LivingEntityMixin(EntityType<?> entityType, Level level) {
+      super(entityType, level);
    }
 
    @Overwrite
-   private void setPosToBed(BlockPos var1) {
-      Vector3d var2 = JOMLConversion.upFromBottomCenterOf(var1, 0.6875);
-      this.setPos(JOMLConversion.toMojang(Sable.HELPER.projectOutOfSubLevel(this.level(), var2)));
+   private boolean setPosToBed(BlockPos blockPos) {
+      Vector3d coords = JOMLConversion.upFromBottomCenterOf(blockPos, 0.6875);
+      this.setPos(JOMLConversion.toMojang(Sable.HELPER.projectOutOfSubLevel(this.level(), coords)));
+      return true;
    }
 
    @Redirect(
@@ -32,10 +33,10 @@ public abstract class LivingEntityMixin extends Entity {
          target = "Lnet/minecraft/world/entity/LivingEntity;setPos(DDD)V"
       )}
    )
-   private void sable$stopSleeping(LivingEntity var1, double var2, double var4, double var6) {
-      double var8 = this.getBoundingBox().getYsize() / 2.0;
-      Vector3d var10 = new Vector3d(var2, var4 + var8, var6);
-      Sable.HELPER.projectOutOfSubLevel(this.level(), var10).sub(0.0, var8, 0.0);
-      var1.setPos(JOMLConversion.toMojang(var10));
+   private void sable$stopSleeping(LivingEntity instance, double x, double y, double z) {
+      double halfHeight = this.getBoundingBox().getYsize() / 2.0;
+      Vector3d coords = new Vector3d(x, y + halfHeight, z);
+      Sable.HELPER.projectOutOfSubLevel(this.level(), coords).sub(0.0, halfHeight, 0.0);
+      instance.setPos(JOMLConversion.toMojang(coords));
    }
 }

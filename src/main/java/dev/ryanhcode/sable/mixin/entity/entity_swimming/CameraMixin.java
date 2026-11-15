@@ -39,20 +39,20 @@ public abstract class CameraMixin {
       at = {@At("RETURN")},
       cancellable = true
    )
-   public void sable$getFluidInCamera(CallbackInfoReturnable<FogType> var1) {
-      if (var1.getReturnValue() == FogType.NONE) {
-         BoundingBox3d var2 = new BoundingBox3d(
+   public void sable$getFluidInCamera(CallbackInfoReturnable<FogType> cir) {
+      if (cir.getReturnValue() == FogType.NONE) {
+         BoundingBox3d bounds = new BoundingBox3d(
             this.position.x - 0.5, this.position.y - 0.5, this.position.z - 0.5, this.position.x + 0.5, this.position.y + 0.5, this.position.z + 0.5
          );
-         Level var3 = this.level;
-         if (var3 == null) {
+         Level intersecting = this.level;
+         if (!(intersecting instanceof Level)) {
             return;
          }
 
-         for (SubLevel var5 : Sable.HELPER.getAllIntersecting(var3, var2)) {
-            FogType var6 = this.sable$getFluidInCameraAt(((ClientSubLevel)var5).renderPose());
-            if (var6 != null) {
-               var1.setReturnValue(var6);
+         for (SubLevel subLevel : Sable.HELPER.getAllIntersecting(intersecting, bounds)) {
+            FogType fogType = this.sable$getFluidInCameraAt(((ClientSubLevel)subLevel).renderPose());
+            if (fogType != null) {
+               cir.setReturnValue(fogType);
                return;
             }
          }
@@ -60,26 +60,28 @@ public abstract class CameraMixin {
    }
 
    @Unique
-   private FogType sable$getFluidInCameraAt(Pose3dc var1) {
-      Vec3 var2 = var1.transformPositionInverse(this.position);
-      BlockPos var3 = BlockPos.containing(var2);
-      FluidState var4 = this.level.getFluidState(var3);
-      if (var4.is(FluidTags.WATER) && var2.y < var3.getY() + var4.getHeight(this.level, var3)) {
+   private FogType sable$getFluidInCameraAt(Pose3dc pose) {
+      Vec3 localPosition = pose.transformPositionInverse(this.position);
+      BlockPos localBlockPosition = BlockPos.containing(localPosition);
+      FluidState fluidState = this.level.getFluidState(localBlockPosition);
+      if (fluidState.is(FluidTags.WATER) && localPosition.y < localBlockPosition.getY() + fluidState.getHeight(this.level, localBlockPosition)) {
          return FogType.WATER;
       } else {
-         NearPlane var5 = this.getNearPlane(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(true));
+         NearPlane nearPlane = this.getNearPlane(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(true));
 
-         for (Vec3 var7 : Arrays.asList(var5.getPointOnPlane(0.0F, 0.0F), var5.getTopLeft(), var5.getTopRight(), var5.getBottomLeft(), var5.getBottomRight())) {
-            Vec3 var8 = var1.transformPositionInverse(this.position.add(var7));
-            BlockPos var9 = BlockPos.containing(var8);
-            FluidState var10 = this.level.getFluidState(var9);
-            if (var10.is(FluidTags.LAVA)) {
-               if (var8.y <= var10.getHeight(this.level, var9) + var9.getY()) {
+         for (Vec3 planeDir : Arrays.asList(
+            nearPlane.getPointOnPlane(0.0F, 0.0F), nearPlane.getTopLeft(), nearPlane.getTopRight(), nearPlane.getBottomLeft(), nearPlane.getBottomRight()
+         )) {
+            Vec3 localPos = pose.transformPositionInverse(this.position.add(planeDir));
+            BlockPos blockPos = BlockPos.containing(localPos);
+            FluidState fluidState2 = this.level.getFluidState(blockPos);
+            if (fluidState2.is(FluidTags.LAVA)) {
+               if (localPos.y <= fluidState2.getHeight(this.level, blockPos) + blockPos.getY()) {
                   return FogType.LAVA;
                }
             } else {
-               BlockState var11 = this.level.getBlockState(var9);
-               if (var11.is(Blocks.POWDER_SNOW)) {
+               BlockState blockState = this.level.getBlockState(blockPos);
+               if (blockState.is(Blocks.POWDER_SNOW)) {
                   return FogType.POWDER_SNOW;
                }
             }

@@ -408,13 +408,15 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
       );
    }
 
-   public Vector3d sable$orig$getLinearVelocity(PhysicsPipelineBody body, Vector3d dest) {
+   @Override
+   public Vector3d getLinearVelocity(PhysicsPipelineBody body, Vector3d dest) {
       this.assertBodyValid(body);
       Rapier3D.getLinearVelocity(this.scene.handle(), Rapier3D.getID(body), this.poseCache);
       return dest.set(this.poseCache);
    }
 
-   public Vector3d sable$orig$getAngularVelocity(PhysicsPipelineBody body, Vector3d dest) {
+   @Override
+   public Vector3d getAngularVelocity(PhysicsPipelineBody body, Vector3d dest) {
       this.assertBodyValid(body);
       Rapier3D.getAngularVelocity(this.scene.handle(), Rapier3D.getID(body), this.poseCache);
       return dest.set(this.poseCache);
@@ -612,16 +614,6 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
                );
          }
       }
-   }
-
-   @Override
-   public Vector3d getLinearVelocity(PhysicsPipelineBody var1, Vector3d var2) {
-      return !var1.isRemoved() ? this.sable$orig$getLinearVelocity(var1, var2) : var2.zero();
-   }
-
-   @Override
-   public Vector3d getAngularVelocity(PhysicsPipelineBody var1, Vector3d var2) {
-      return !var1.isRemoved() ? this.sable$orig$getAngularVelocity(var1, var2) : var2.zero();
    }
 
    private record TrackedKinematicContraption(

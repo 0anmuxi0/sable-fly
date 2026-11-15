@@ -29,8 +29,8 @@ public abstract class AbstractArrowMixin extends Entity {
    @Shadow
    public abstract boolean isInGround();
 
-   public AbstractArrowMixin(EntityType<?> var1, Level var2) {
-      super(var1, var2);
+   public AbstractArrowMixin(EntityType<?> entityType, Level level) {
+      super(entityType, level);
    }
 
    @Redirect(
@@ -40,19 +40,21 @@ public abstract class AbstractArrowMixin extends Entity {
          target = "Lnet/minecraft/world/entity/projectile/arrow/AbstractArrow;setPos(Lnet/minecraft/world/phys/Vec3;)V"
       )}
    )
-   private void sable$setPos(AbstractArrow var1, Vec3 var2, @Local(argsOnly = true) BlockHitResult var3, @Share("difference") LocalRef<Vec3> var4) {
-      SubLevel var5 = Sable.HELPER.getContaining(this.level(), var3.getLocation());
-      if (var5 == null) {
-         var1.setPos(var2);
+   private void sable$setPos(
+      AbstractArrow arrow, Vec3 position, @Local(argsOnly = true) BlockHitResult blockHitResult, @Share("difference") LocalRef<Vec3> differenceRef
+   ) {
+      SubLevel subLevel = Sable.HELPER.getContaining(this.level(), blockHitResult.getLocation());
+      if (subLevel == null) {
+         arrow.setPos(position);
       } else {
-         Vec3 var6 = this.position();
-         Vec3 var7 = var5.logicalPose().transformNormalInverse(this.getDeltaMovement());
+         Vec3 localPosition = this.position();
+         Vec3 diff = subLevel.logicalPose().transformNormalInverse(this.getDeltaMovement());
          if (!this.level().isClientSide() && !this.isInGround()) {
-            RigidBodyHandle.of((ServerSubLevel)var5).applyImpulseAtPoint(var6, var7);
+            RigidBodyHandle.of((ServerSubLevel)subLevel).applyImpulseAtPoint(localPosition, diff);
          }
 
-         var4.set(var7);
-         var1.setPos(var6.subtract(var7.normalize().scale(0.05F)));
+         differenceRef.set(diff);
+         arrow.setPos(localPosition.subtract(diff.normalize().scale(0.05F)));
       }
    }
 
@@ -63,16 +65,16 @@ public abstract class AbstractArrowMixin extends Entity {
          target = "Lnet/minecraft/world/entity/projectile/arrow/AbstractArrow;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V"
       )}
    )
-   private void sable$setDeltaMovement(AbstractArrow var1, Vec3 var2, @Share("difference") LocalRef<Vec3> var3) {
-      Vec3 var4 = (Vec3)var3.get();
-      if (var4 == null) {
-         var1.setDeltaMovement(var2);
+   private void sable$setDeltaMovement(AbstractArrow arrow, Vec3 movement, @Share("difference") LocalRef<Vec3> differenceRef) {
+      Vec3 difference = differenceRef.get();
+      if (difference == null) {
+         arrow.setDeltaMovement(movement);
       } else {
-         var1.setDeltaMovement(var4);
-         Vec3 var5 = this.getDeltaMovement();
-         double var6 = var5.horizontalDistance();
-         this.setXRot((float)(Mth.atan2(var5.y, var6) * 180.0 / (float) Math.PI));
-         this.setYRot((float)(Mth.atan2(var5.x, var5.z) * 180.0 / (float) Math.PI));
+         arrow.setDeltaMovement(difference);
+         Vec3 vec3 = this.getDeltaMovement();
+         double d = vec3.horizontalDistance();
+         this.setXRot((float)(Mth.atan2(vec3.y, d) * 180.0F / (float)Math.PI));
+         this.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
          this.yRotO = this.getYRot();
          this.xRotO = this.getXRot();
       }
@@ -82,10 +84,10 @@ public abstract class AbstractArrowMixin extends Entity {
       method = {"startFalling"},
       at = {@At("TAIL")}
    )
-   private void sable$startFalling(CallbackInfo var1) {
-      SubLevel var2 = Sable.HELPER.getContaining(this);
-      if (var2 != null) {
-         EntitySubLevelUtil.kickEntity(var2, this);
+   private void sable$startFalling(CallbackInfo ci) {
+      SubLevel subLevel = Sable.HELPER.getContaining(this);
+      if (subLevel != null) {
+         EntitySubLevelUtil.kickEntity(subLevel, this);
       }
    }
 
@@ -96,8 +98,8 @@ public abstract class AbstractArrowMixin extends Entity {
          target = "Lnet/minecraft/world/level/Level;noCollision(Lnet/minecraft/world/phys/AABB;)Z"
       )}
    )
-   private boolean sable$noCollision(Level var1, AABB var2) {
-      boolean var3 = var1.noCollision(this, var2);
-      return !var3 ? false : CanFallAtleastHelper.canFallAtleastWithSubLevels(var1, var2) == null;
+   private boolean sable$noCollision(Level level, AABB aabb) {
+      boolean original = level.noCollision(this, aabb);
+      return !original ? false : CanFallAtleastHelper.canFallAtleastWithSubLevels(level, aabb) == null;
    }
 }

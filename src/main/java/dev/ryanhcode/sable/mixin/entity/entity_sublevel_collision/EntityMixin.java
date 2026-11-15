@@ -87,42 +87,40 @@ public abstract class EntityMixin implements EntityMovementExtension {
          target = "Lnet/minecraft/world/entity/Entity;setOnGroundWithMovement(ZZLnet/minecraft/world/phys/Vec3;)V"
       )}
    )
-   public void sable$moveInject(Entity var1, boolean var2, boolean var3, Vec3 var4, Operation<Void> var5) {
+   public void sable$moveInject(Entity instance, boolean bl, boolean horizontalCollision, Vec3 arg, Operation<Void> original) {
       this.horizontalCollision = this.sable$collisionInfo.horizontalCollision;
       this.verticalCollision = this.sable$collisionInfo.verticalCollision;
       this.verticalCollisionBelow = this.sable$collisionInfo.verticalCollisionBelow;
       this.minorHorizontalCollision = this.sable$collisionInfo.minorHorizontalCollision;
-      var5.call(var1, this.verticalCollisionBelow, this.horizontalCollision, var4);
+      original.call(instance, this.verticalCollisionBelow, this.horizontalCollision, arg);
    }
 
    @WrapOperation(
       method = {"restituteMovementAfterCollisions(Lnet/minecraft/world/level/block/state/BlockState;ZZLnet/minecraft/world/phys/Vec3;)V"},
       at = {@At(
          value = "INVOKE",
-         target = "Lnet/minecraft/world/entity/Entity;getBlockBounciness(Lnet/minecraft/world/level/block/Block;)D"
+         target = "Lnet/minecraft/world/level/block/Block;bounceOn(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;D)V"
       )}
    )
-   public double sable$subLevelBounciness(Entity var1, Block var2, Operation<Double> var3) {
+   public void updateEntityAfterFallOn(
+      Block instance, Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance, Operation<Void> original
+   ) {
       if (this.verticalCollision) {
-         SubLevel var4 = this.sable$trackingSubLevel;
-         if (var4 != null) {
-            Entity var5 = (Entity)(Object)this;
-            boolean var6 = SubLevelHelper.pushEntityLocalIfNeeded(var4, var5);
+         SubLevel trackingSubLevel = this.sable$trackingSubLevel;
+         if (trackingSubLevel == null) {
+            original.call(instance, level, state, pos, entity, fallDistance);
+         } else {
+            boolean projected = SubLevelHelper.pushEntityLocalIfNeeded(trackingSubLevel, entity);
 
-            double var9;
             try {
-               BlockPos var7 = BlockPos.containing(var5.getX(), var5.getY() - 0.2, var5.getZ());
-               Block var8 = var4.getLevel().getBlockState(var7).getBlock();
-               var9 = (Double)var3.call(var5, var8);
+               BlockPos localOnPos = BlockPos.containing(entity.getX(), entity.getY() - 0.2, entity.getZ());
+               Block localBlock = trackingSubLevel.getLevel().getBlockState(localOnPos).getBlock();
+               original.call(instance, level, state, pos, entity, fallDistance);
             } finally {
-               SubLevelHelper.popEntityLocalIfNeeded(var4, var5, var6);
+               SubLevelHelper.popEntityLocalIfNeeded(trackingSubLevel, entity, projected);
             }
-
-            return var9;
          }
       }
-
-      return (Double)var3.call(var1, var2);
    }
 
    @WrapOperation(
@@ -132,20 +130,20 @@ public abstract class EntityMixin implements EntityMovementExtension {
          target = "Lnet/minecraft/world/entity/Entity;checkFallDamage(DZLnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)V"
       )}
    )
-   private void sable$checkFallDamage(Entity var1, double var2, boolean var4, BlockState var5, BlockPos var6, Operation<Void> var7) {
-      SubLevel var8 = this.sable$trackingSubLevel;
-      if (var8 != null && var4 && this.verticalCollision) {
-         boolean var9 = SubLevelHelper.pushEntityLocalIfNeeded(var8, var1);
+   private void sable$checkFallDamage(Entity instance, double movementY, boolean onGround, BlockState state, BlockPos pos, Operation<Void> original) {
+      SubLevel trackingSubLevel = this.sable$trackingSubLevel;
+      if (trackingSubLevel != null && onGround && this.verticalCollision) {
+         boolean projected = SubLevelHelper.pushEntityLocalIfNeeded(trackingSubLevel, instance);
 
          try {
-            BlockPos var10 = BlockPos.containing(var1.getX(), var1.getY() - 0.2, var1.getZ());
-            BlockState var11 = var8.getLevel().getBlockState(var10);
-            var7.call(var1, var2, var4, var11, var10);
+            BlockPos localOnPos = BlockPos.containing(instance.getX(), instance.getY() - 0.2, instance.getZ());
+            BlockState localState = trackingSubLevel.getLevel().getBlockState(localOnPos);
+            original.call(instance, movementY, onGround, localState, localOnPos);
          } finally {
-            SubLevelHelper.popEntityLocalIfNeeded(var8, var1, var9);
+            SubLevelHelper.popEntityLocalIfNeeded(trackingSubLevel, instance, projected);
          }
       } else {
-         var7.call(var1, var2, var4, var5, var6);
+         original.call(instance, movementY, onGround, state, pos);
       }
    }
 
@@ -156,19 +154,19 @@ public abstract class EntityMixin implements EntityMovementExtension {
          target = "Lnet/minecraft/world/level/block/Block;stepOn(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/Entity;)V"
       )}
    )
-   private void sable$stepOn(Block var1, Level var2, BlockPos var3, BlockState var4, Entity var5, Operation<Void> var6) {
-      SubLevel var7 = this.sable$trackingSubLevel;
-      if (var7 == null) {
-         var6.call(var1, var2, var3, var4, var5);
+   private void sable$stepOn(Block instance, Level level, BlockPos pos, BlockState state, Entity entity, Operation<Void> original) {
+      SubLevel trackingSubLevel = this.sable$trackingSubLevel;
+      if (trackingSubLevel == null) {
+         original.call(instance, level, pos, state, entity);
       } else {
-         boolean var8 = SubLevelHelper.pushEntityLocalIfNeeded(var7, var5);
+         boolean projected = SubLevelHelper.pushEntityLocalIfNeeded(trackingSubLevel, entity);
 
          try {
-            BlockPos var9 = BlockPos.containing(var5.getX(), var5.getY() - 0.2, var5.getZ());
-            BlockState var10 = var7.getLevel().getBlockState(var9);
-            var6.call(var10.getBlock(), var2, var9, var10, var5);
+            BlockPos localOnPos = BlockPos.containing(entity.getX(), entity.getY() - 0.2, entity.getZ());
+            BlockState localState = trackingSubLevel.getLevel().getBlockState(localOnPos);
+            original.call(localState.getBlock(), level, localOnPos, localState, entity);
          } finally {
-            SubLevelHelper.popEntityLocalIfNeeded(var7, var5, var8);
+            SubLevelHelper.popEntityLocalIfNeeded(trackingSubLevel, entity, projected);
          }
       }
    }
@@ -180,54 +178,54 @@ public abstract class EntityMixin implements EntityMovementExtension {
          target = "Lnet/minecraft/world/entity/Entity;collide(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;"
       )}
    )
-   public Vec3 sable$collideRedirect(Entity var1, Vec3 var2) {
-      Entity var3 = (Entity)(Object)this;
-      Vec3 var4 = Vec3.ZERO;
-      if (var3 instanceof LivingEntity var5) {
-         var4 = JOMLConversion.toMojang(((LivingEntityMovementExtension)var5).sable$getInheritedVelocity());
+   public Vec3 sable$collideRedirect(Entity entity, Vec3 collisionMotion) {
+      Entity self = (Entity)(Object)this;
+      Vec3 velocity = Vec3.ZERO;
+      if (self instanceof LivingEntity livingEntity) {
+         velocity = JOMLConversion.toMojang(((LivingEntityMovementExtension)livingEntity).sable$getInheritedVelocity());
       }
 
-      SubLevel var11 = this.sable$trackingSubLevel;
-      Vec3 var6 = this.getDeltaMovement();
-      this.sable$collisionInfo = SubLevelEntityCollision.collide(var1, var2, var4, ((LevelExtension)this.level).sable$getJOMLSink());
-      this.sable$collisionInfo.preTrackingSubLevel = var11;
-      this.sable$collisionInfo.preDeltaMovement = var6;
+      SubLevel preTrackingSubLevel = this.sable$trackingSubLevel;
+      Vec3 preDeltaMovement = this.getDeltaMovement();
+      this.sable$collisionInfo = SubLevelEntityCollision.collide(entity, collisionMotion, velocity, ((LevelExtension)this.level).sable$getJOMLSink());
+      this.sable$collisionInfo.preTrackingSubLevel = preTrackingSubLevel;
+      this.sable$collisionInfo.preDeltaMovement = preDeltaMovement;
       if (this.sable$collisionInfo.trackingSubLevel != null) {
          if (this.sable$collisionInfo.verticalCollisionBelow) {
             this.sable$trackingSubLevel = this.sable$collisionInfo.trackingSubLevel;
          }
-      } else if (!(var1 instanceof ServerPlayer)) {
+      } else if (!(entity instanceof ServerPlayer)) {
          this.sable$trackingSubLevel = null;
       }
 
-      Vec3 var7 = this.sable$collisionInfo.motion;
-      Vec3 var8 = this.collide(var7);
-      boolean var9 = !Mth.equal(var7.x, var8.x);
-      boolean var10 = !Mth.equal(var7.z, var8.z);
-      this.sable$collisionInfo.horizontalCollision |= var9 || var10;
-      if (var7.y != var8.y) {
+      Vec3 beforeVanillaCollision = this.sable$collisionInfo.motion;
+      Vec3 afterVanillaCollision = this.collide(beforeVanillaCollision);
+      boolean xCollision = !Mth.equal(beforeVanillaCollision.x, afterVanillaCollision.x);
+      boolean zCollision = !Mth.equal(beforeVanillaCollision.z, afterVanillaCollision.z);
+      this.sable$collisionInfo.horizontalCollision |= xCollision || zCollision;
+      if (beforeVanillaCollision.y != afterVanillaCollision.y) {
          this.sable$trackingSubLevel = null;
       }
 
-      this.sable$collisionInfo.verticalCollision = this.sable$collisionInfo.verticalCollision | var7.y != var8.y;
+      this.sable$collisionInfo.verticalCollision = this.sable$collisionInfo.verticalCollision | beforeVanillaCollision.y != afterVanillaCollision.y;
       this.sable$collisionInfo.verticalCollisionBelow = this.sable$collisionInfo.verticalCollisionBelow
-         | (this.sable$collisionInfo.verticalCollision && var2.y < 0.0);
+         | (this.sable$collisionInfo.verticalCollision && collisionMotion.y < 0.0);
       if (this.horizontalCollision) {
-         this.sable$collisionInfo.minorHorizontalCollision = this.isHorizontalCollisionMinor(var8);
+         this.sable$collisionInfo.minorHorizontalCollision = this.isHorizontalCollisionMinor(afterVanillaCollision);
       }
 
       if (this.sable$trackingSubLevel != null && this.sable$trackingSubLevel.isRemoved()) {
          this.sable$trackingSubLevel = null;
       }
 
-      return var8;
+      return afterVanillaCollision;
    }
 
    @Inject(
       method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
       at = {@At("TAIL")}
    )
-   public void sable$moveInject(MoverType var1, Vec3 var2, CallbackInfo var3) {
+   public void sable$moveInject(MoverType moverType, Vec3 vec3, CallbackInfo ci) {
       if (this.sable$collisionInfo != null) {
          this.horizontalCollision = this.horizontalCollision | this.sable$collisionInfo.subLevelHorizontalCollision;
       }
@@ -266,18 +264,18 @@ public abstract class EntityMixin implements EntityMovementExtension {
       method = {"tick"},
       at = {@At("TAIL")}
    )
-   public void sable$tickInject(CallbackInfo var1) {
-      ActiveSableCompanion var2 = Sable.HELPER;
-      Entity var3 = this.getVehicle();
-      SubLevel var4 = var2.getContaining((Entity)(Object)this);
-      if (var4 != null) {
+   public void sable$tickInject(CallbackInfo ci) {
+      ActiveSableCompanion helper = Sable.HELPER;
+      Entity vehicle = this.getVehicle();
+      SubLevel containingSubLevel = helper.getContaining((Entity)(Object)this);
+      if (containingSubLevel != null) {
          this.sable$trackingSubLevel = null;
-      } else if (var3 != null) {
-         SubLevel var5 = var2.getContaining(var3);
-         if (var5 != null) {
-            this.sable$trackingSubLevel = var5;
+      } else if (vehicle != null) {
+         SubLevel vehicleSubLevel = helper.getContaining(vehicle);
+         if (vehicleSubLevel != null) {
+            this.sable$trackingSubLevel = vehicleSubLevel;
          } else {
-            this.sable$trackingSubLevel = Sable.HELPER.getTrackingSubLevel(var3);
+            this.sable$trackingSubLevel = Sable.HELPER.getTrackingSubLevel(vehicle);
          }
       }
 
@@ -285,11 +283,11 @@ public abstract class EntityMixin implements EntityMovementExtension {
          this.sable$trackingSubLevel = null;
       }
 
-      if (var4 != null
-         && !this.getBoundingBox().intersects(var4.getPlot().getBoundingBox().toAABB().inflate(1.0))
+      if (containingSubLevel != null
+         && !this.getBoundingBox().intersects(containingSubLevel.getPlot().getBoundingBox().toAABB().inflate(1.0))
          && ((Entity)(Object)this).is(SableTags.DESTROY_WHEN_LEAVING_PLOT)
-         && this.level() instanceof ServerLevel var7) {
-         this.kill(var7);
+         && this.level() instanceof ServerLevel serverLevel) {
+         this.kill(serverLevel);
       }
    }
 
@@ -300,18 +298,18 @@ public abstract class EntityMixin implements EntityMovementExtension {
 
    @Overwrite
    public BlockState getInBlockState() {
-      Level var1 = this.level();
+      Level level = this.level();
       if (this.inBlockState == null || this.sable$trackingSubLevel != null) {
-         this.inBlockState = var1.getBlockState(this.blockPosition);
+         this.inBlockState = level.getBlockState(this.blockPosition);
          this.sable$inBlockStatePos = this.blockPosition;
-         Iterable var2 = Sable.HELPER.getAllIntersecting(this.level, new BoundingBox3d(this.blockPosition));
-         Iterator var3 = var2.iterator();
+         Iterable<SubLevel> intersecting = Sable.HELPER.getAllIntersecting(this.level, new BoundingBox3d(this.blockPosition));
+         Iterator<SubLevel> iter = intersecting.iterator();
 
-         while (this.inBlockState.isAir() && var3.hasNext()) {
-            SubLevel var4 = (SubLevel)var3.next();
-            BlockPos var5 = BlockPos.containing(var4.logicalPose().transformPositionInverse(this.position.add(0.0, 0.001, 0.0)));
-            this.inBlockState = var1.getBlockState(var5);
-            this.sable$inBlockStatePos = var5;
+         while (this.inBlockState.isAir() && iter.hasNext()) {
+            SubLevel subLevel = iter.next();
+            BlockPos localBlockPos = BlockPos.containing(subLevel.logicalPose().transformPositionInverse(this.position.add(0.0, 0.001, 0.0)));
+            this.inBlockState = level.getBlockState(localBlockPos);
+            this.sable$inBlockStatePos = localBlockPos;
          }
       }
 
@@ -329,16 +327,16 @@ public abstract class EntityMixin implements EntityMovementExtension {
    }
 
    @Override
-   public void sable$setTrackingSubLevel(SubLevel var1) {
-      this.sable$trackingSubLevel = var1;
-      if (var1 != null) {
-         this.sable$setLastTrackingSubLevelID(var1.getUniqueId());
+   public void sable$setTrackingSubLevel(SubLevel subLevel) {
+      this.sable$trackingSubLevel = subLevel;
+      if (subLevel != null) {
+         this.sable$setLastTrackingSubLevelID(subLevel.getUniqueId());
       }
    }
 
    @Override
-   public void sable$setLastTrackingSubLevelID(UUID var1) {
-      this.sable$lastTrackingSubLevelId = var1;
+   public void sable$setLastTrackingSubLevelID(UUID uuid) {
+      this.sable$lastTrackingSubLevelId = uuid;
    }
 
    @Override
@@ -347,7 +345,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
    }
 
    @Override
-   public void sable$setPosField(Vec3 var1) {
-      this.position = var1;
+   public void sable$setPosField(Vec3 newPosition) {
+      this.position = newPosition;
    }
 }

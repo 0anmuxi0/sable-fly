@@ -42,19 +42,19 @@ public class ServerEntityMixin {
          shift = Shift.BEFORE
       )}
    )
-   private void sable$pre(CallbackInfo var1, @Share("actuallyInSubLevel") LocalBooleanRef var2) {
+   private void sable$pre(CallbackInfo ci, @Share("actuallyInSubLevel") LocalBooleanRef actuallyInSubLevel) {
       this.sable$oldPos = null;
-      SubLevel var3 = Sable.HELPER.getContaining(this.entity);
-      if (var3 != null) {
-         var2.set(true);
+      SubLevel containingSubLevel = Sable.HELPER.getContaining(this.entity);
+      if (containingSubLevel != null) {
+         actuallyInSubLevel.set(true);
       }
 
-      SubLevel var4 = Sable.HELPER.getTrackingSubLevel(this.entity);
-      Vec3 var5 = this.entity.position();
-      if (var4 != null) {
-         this.sable$oldPos = new Vec3(var5.x, var5.y, var5.z);
-         var5 = var4.lastPose().transformPositionInverse(var5);
-         ((EntityMovementExtension)this.entity).sable$setPosField(var5);
+      SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(this.entity);
+      Vec3 pos = this.entity.position();
+      if (trackingSubLevel != null) {
+         this.sable$oldPos = new Vec3(pos.x, pos.y, pos.z);
+         pos = trackingSubLevel.lastPose().transformPositionInverse(pos);
+         ((EntityMovementExtension)this.entity).sable$setPosField(pos);
       }
    }
 
@@ -62,7 +62,7 @@ public class ServerEntityMixin {
       method = {"sendChanges"},
       at = {@At("RETURN")}
    )
-   private void sable$postTransform(CallbackInfo var1) {
+   private void sable$postTransform(CallbackInfo ci) {
       if (this.sable$oldPos != null) {
          ((EntityMovementExtension)this.entity).sable$setPosField(this.sable$oldPos);
          this.sable$oldPos = null;
@@ -76,12 +76,14 @@ public class ServerEntityMixin {
          target = "Lnet/minecraft/server/level/ServerEntity$Synchronizer;sendToTrackingPlayers(Lnet/minecraft/network/protocol/Packet;)V"
       )}
    )
-   private void sable$sendToTrackingPlayers(Synchronizer var1, Packet<?> var2, Operation<Void> var3, @Share("actuallyInSubLevel") LocalBooleanRef var4) {
-      if (var4.get() && var2 instanceof PacketActuallyInSubLevelExtension var5) {
-         var5.sable$setActuallyInSubLevel(true);
+   private void sable$sendToTrackingPlayers(
+      Synchronizer instance, Packet<?> packet, Operation<Void> original, @Share("actuallyInSubLevel") LocalBooleanRef actuallyInSubLevel
+   ) {
+      if (actuallyInSubLevel.get() && packet instanceof PacketActuallyInSubLevelExtension extension) {
+         extension.sable$setActuallyInSubLevel(true);
       }
 
-      var3.call(var1, var2);
+      original.call(instance, packet);
    }
 
    @WrapOperation(
@@ -91,11 +93,13 @@ public class ServerEntityMixin {
          target = "Lnet/minecraft/server/level/ServerEntity$Synchronizer;sendToTrackingPlayersAndSelf(Lnet/minecraft/network/protocol/Packet;)V"
       )}
    )
-   private void sable$sendToTrackingPlayersAndSelf(Synchronizer var1, Packet<?> var2, Operation<Void> var3, @Share("actuallyInSubLevel") LocalBooleanRef var4) {
-      if (var4.get() && var2 instanceof PacketActuallyInSubLevelExtension var5) {
-         var5.sable$setActuallyInSubLevel(true);
+   private void sable$sendToTrackingPlayersAndSelf(
+      Synchronizer instance, Packet<?> packet, Operation<Void> original, @Share("actuallyInSubLevel") LocalBooleanRef actuallyInSubLevel
+   ) {
+      if (actuallyInSubLevel.get() && packet instanceof PacketActuallyInSubLevelExtension extension) {
+         extension.sable$setActuallyInSubLevel(true);
       }
 
-      var3.call(var1, var2);
+      original.call(instance, packet);
    }
 }

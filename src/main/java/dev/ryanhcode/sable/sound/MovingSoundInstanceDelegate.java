@@ -73,8 +73,8 @@ public class MovingSoundInstanceDelegate implements SoundInstance, TickableSound
 
    @Nullable
    @Override
-   public WeighedSoundEvents resolve(@NonNull SoundManager soundManager) {
-      return this.instance.resolve(soundManager);
+   public WeighedSoundEvents getOrResolve(@NonNull SoundManager soundManager) {
+      return this.instance.getOrResolve(soundManager);
    }
 
    @Nullable
@@ -83,6 +83,11 @@ public class MovingSoundInstanceDelegate implements SoundInstance, TickableSound
       return this.instance.getSound();
    }
 
+   @Nullable
+   @Override
+   public WeighedSoundEvents getSoundEvent() {
+      return this.instance.getSoundEvent();
+   }
 
    @NotNull
    @Override

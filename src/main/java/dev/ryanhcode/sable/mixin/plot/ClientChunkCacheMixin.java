@@ -5,11 +5,10 @@ import dev.ryanhcode.sable.mixinterface.loaded_chunk_debug.DebugChunkProviderAtt
 import dev.ryanhcode.sable.platform.SableChunkEventPlatform;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
 import net.minecraft.client.multiplayer.ClientChunkCache;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.game.ClientboundLevelChunkPacketData;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
@@ -38,14 +37,15 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
    private LevelChunk emptyChunk;
 
    @Shadow
-   private static boolean isValidChunk(@Nullable LevelChunk var0, int var1, int var2) {
+   private static boolean isValidChunk(@Nullable LevelChunk levelChunk, int i, int j) {
       return false;
    }
 
    @Unique
    @NotNull
    private SubLevelContainer sable$getPlotContainer() {
-      return SubLevelContainer.getContainer(this.level);
+      SubLevelContainer container = SubLevelContainer.getContainer(this.level);
+      return container;
    }
 
    @Inject(
@@ -53,15 +53,15 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void getChunk(int var1, int var2, ChunkStatus var3, boolean var4, CallbackInfoReturnable<LevelChunk> var5) {
-      SubLevelContainer var6 = this.sable$getPlotContainer();
-      if (var6.inBounds(var1, var2)) {
-         ChunkPos var7 = new ChunkPos(var1, var2);
-         LevelChunk var8 = var6.getChunk(var7);
-         if (var8 != null) {
-            var5.setReturnValue(var8);
+   private void getChunk(int x, int z, ChunkStatus status, boolean create, CallbackInfoReturnable<LevelChunk> cir) {
+      SubLevelContainer container = this.sable$getPlotContainer();
+      if (container.inBounds(x, z)) {
+         ChunkPos chunkPos = new ChunkPos(x, z);
+         LevelChunk chunk = container.getChunk(chunkPos);
+         if (chunk != null) {
+            cir.setReturnValue(chunk);
          } else {
-            var5.setReturnValue(this.emptyChunk);
+            cir.setReturnValue(this.emptyChunk);
          }
       }
    }
@@ -71,10 +71,10 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void drop(ChunkPos var1, CallbackInfo var2) {
-      SubLevelContainer var3 = this.sable$getPlotContainer();
-      if (var3.inBounds(var1)) {
-         var2.cancel();
+   private void drop(ChunkPos chunkPos, CallbackInfo ci) {
+      SubLevelContainer container = this.sable$getPlotContainer();
+      if (container.inBounds(chunkPos)) {
+         ci.cancel();
       }
    }
 
@@ -83,15 +83,15 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void replaceBiomes(int var1, int var2, FriendlyByteBuf var3, CallbackInfo var4) {
-      SubLevelContainer var5 = this.sable$getPlotContainer();
-      if (var5.inBounds(var1, var2)) {
-         ChunkPos var6 = new ChunkPos(var1, var2);
-         LevelChunk var7 = var5.getChunk(var6);
-         if (var7 != null && isValidChunk(var7, var1, var2)) {
-            var7.replaceBiomes(var3);
+   private void replaceBiomes(int x, int z, FriendlyByteBuf friendlyByteBuf, CallbackInfo ci) {
+      SubLevelContainer container = this.sable$getPlotContainer();
+      if (container.inBounds(x, z)) {
+         ChunkPos chunkPos = new ChunkPos(x, z);
+         LevelChunk levelChunk = container.getChunk(chunkPos);
+         if (levelChunk != null && isValidChunk(levelChunk, x, z)) {
+            levelChunk.replaceBiomes(friendlyByteBuf);
          } else {
-            LOGGER.warn("Ignoring chunk since it's not present: {}, {}", var1, var2);
+            LOGGER.warn("Ignoring chunk since it's not present: {}, {}", x, z);
          }
       }
    }
@@ -101,28 +101,28 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void replaceWithPacketData(int var1, int var2, FriendlyByteBuf var3, Map var4, Consumer var5, CallbackInfoReturnable<LevelChunk> var6) {
-      SubLevelContainer var7 = this.sable$getPlotContainer();
-      if (var7.inBounds(var1, var2)) {
-         ChunkPos var8 = new ChunkPos(var1, var2);
-         LevelChunk var9 = var7.getChunk(var8);
-         if (!isValidChunk(var9, var1, var2)) {
-            if (var9 != null) {
-               SableChunkEventPlatform.INSTANCE.onOldChunkInvalid(var9);
-               this.level.unload(var9);
+   private void replaceWithPacketData(int chunkX, int chunkZ, ClientboundLevelChunkPacketData chunkData, CallbackInfoReturnable<LevelChunk> cir) {
+      SubLevelContainer container = this.sable$getPlotContainer();
+      if (container.inBounds(chunkX, chunkZ)) {
+         ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
+         LevelChunk levelChunk = container.getChunk(chunkPos);
+         if (!isValidChunk(levelChunk, chunkX, chunkZ)) {
+            if (levelChunk != null) {
+               SableChunkEventPlatform.INSTANCE.onOldChunkInvalid(levelChunk);
+               this.level.unload(levelChunk);
             }
 
-            var9 = new LevelChunk(this.level, var8);
-            var9.replaceWithPacketData(var3, var4, var5);
-            var7.newPopulatedChunk(var8, var9);
+            levelChunk = new LevelChunk(this.level, chunkPos);
+            levelChunk.replaceWithPacketData(chunkX, chunkZ, chunkData);
+            container.newPopulatedChunk(chunkPos, levelChunk);
          } else {
-            var9.replaceWithPacketData(var3, var4, var5);
+            levelChunk.replaceWithPacketData(chunkX, chunkZ, chunkData);
          }
 
-         this.level.onChunkLoaded(var8);
-         this.level.getLightEngine().setLightEnabled(var8, true);
-         SableChunkEventPlatform.INSTANCE.onClientChunkPacketReplaced(var9);
-         var6.setReturnValue(var9);
+         this.level.onChunkLoaded(chunkPos);
+         this.level.getLightEngine().setLightEnabled(chunkPos, true);
+         SableChunkEventPlatform.INSTANCE.onClientChunkPacketReplaced(levelChunk);
+         cir.setReturnValue(levelChunk);
       }
    }
 

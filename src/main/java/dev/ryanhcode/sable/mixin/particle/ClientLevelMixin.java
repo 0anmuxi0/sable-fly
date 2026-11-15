@@ -32,34 +32,41 @@ public abstract class ClientLevelMixin extends Level {
    public abstract void doAnimateTick(int var1, int var2, int var3, int var4, RandomSource var5, @Nullable Block var6, MutableBlockPos var7);
 
    private ClientLevelMixin(
-      WritableLevelData var1, ResourceKey<Level> var2, RegistryAccess var3, Holder<DimensionType> var4, boolean var5, boolean var6, long var7, int var9
+      WritableLevelData writableLevelData,
+      ResourceKey<Level> resourceKey,
+      RegistryAccess registryAccess,
+      Holder<DimensionType> holder,
+      boolean bl,
+      boolean bl2,
+      long l,
+      int i
    ) {
-      super(var1, var2, var3, var4, var5, var6, var7, var9);
+      super(writableLevelData, resourceKey, registryAccess, holder, bl, bl2, l, i);
    }
 
    @Inject(
       method = {"animateTick"},
       at = {@At("TAIL")}
    )
-   public void sable$subLevelAnimateTick(
-      int var1, int var2, int var3, CallbackInfo var4, @Local RandomSource var5, @Local Block var6, @Local MutableBlockPos var7
-   ) {
-      Iterable<SubLevel> var8 = Sable.HELPER.getAllIntersecting(this, new BoundingBox3d(var1 - 32, var2 - 32, var3 - 32, var1 + 32, var2 + 32, var3 + 32));
-      BoundingBox3i var9 = new BoundingBox3i();
-      Vector3d var10 = new Vector3d();
+   public void sable$subLevelAnimateTick(int x, int y, int z, CallbackInfo ci, @Local RandomSource randomSource, @Local Block block, @Local MutableBlockPos pos) {
+      Iterable<SubLevel> intersectingSubLevels = Sable.HELPER.getAllIntersecting(this, new BoundingBox3d(x - 32, y - 32, z - 32, x + 32, y + 32, z + 32));
+      BoundingBox3i tickingBounds = new BoundingBox3i();
+      Vector3d playerPos = new Vector3d();
 
-      for (SubLevel var12 : var8) {
-         Vector3d var13 = var12.logicalPose().transformPositionInverse(var10.set(var1, var2, var3));
-         var9.set(Mth.floor(var13.x), Mth.floor(var13.y), Mth.floor(var13.z), Mth.floor(var13.x), Mth.floor(var13.y), Mth.floor(var13.z));
-         var9.expand(16, 16, 16);
-         var9.intersect(var12.getPlot().getBoundingBox());
-         int var14 = Mth.floor(667.0F * var9.volume() / 32768.0F + var5.nextFloat());
+      for (SubLevel subLevel : intersectingSubLevels) {
+         Vector3d position = subLevel.logicalPose().transformPositionInverse(playerPos.set(x, y, z));
+         tickingBounds.set(
+            Mth.floor(position.x), Mth.floor(position.y), Mth.floor(position.z), Mth.floor(position.x), Mth.floor(position.y), Mth.floor(position.z)
+         );
+         tickingBounds.expand(16, 16, 16);
+         tickingBounds.intersect(subLevel.getPlot().getBoundingBox());
+         int randomCount = Mth.floor(667.0F * tickingBounds.volume() / 32768.0F + randomSource.nextFloat());
 
-         for (int var15 = 0; var15 < var14; var15++) {
-            int var16 = Mth.randomBetweenInclusive(var5, var9.minX, var9.maxX);
-            int var17 = Mth.randomBetweenInclusive(var5, var9.minY, var9.maxY);
-            int var18 = Mth.randomBetweenInclusive(var5, var9.minZ, var9.maxZ);
-            this.doAnimateTick(var16, var17, var18, 1, var5, var6, var7);
+         for (int i = 0; i < randomCount; i++) {
+            int randomX = Mth.randomBetweenInclusive(randomSource, tickingBounds.minX, tickingBounds.maxX);
+            int randomY = Mth.randomBetweenInclusive(randomSource, tickingBounds.minY, tickingBounds.maxY);
+            int randomZ = Mth.randomBetweenInclusive(randomSource, tickingBounds.minZ, tickingBounds.maxZ);
+            this.doAnimateTick(randomX, randomY, randomZ, 1, randomSource, block, pos);
          }
       }
    }
@@ -71,7 +78,7 @@ public abstract class ClientLevelMixin extends Level {
          target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(DDD)D"
       )}
    )
-   private double sable$particleDistance(Vec3 var1, double var2, double var4, double var6) {
-      return Sable.HELPER.distanceSquaredWithSubLevels(this, var1, var2, var4, var6);
+   private double sable$particleDistance(Vec3 cameraPosition, double x, double y, double z) {
+      return Sable.HELPER.distanceSquaredWithSubLevels(this, cameraPosition, x, y, z);
    }
 }

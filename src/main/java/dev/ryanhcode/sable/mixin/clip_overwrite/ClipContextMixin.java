@@ -4,26 +4,12 @@ import dev.ryanhcode.sable.mixinterface.clip_overwrite.ClipContextExtension;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import java.util.function.Predicate;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.ClipContext.Block;
-import net.minecraft.world.level.ClipContext.Fluid;
-import net.minecraft.world.phys.shapes.CollisionContext;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin({ClipContext.class})
 public class ClipContextMixin implements ClipContextExtension {
-   @Shadow
-   @Final
-   private ClipContext.Block block;
-   @Shadow
-   @Final
-   private ClipContext.Fluid fluid;
-   @Shadow
-   @Final
-   private CollisionContext collisionContext;
    @Unique
    @Nullable
    private SubLevel sable$ignoredSubLevel = null;
@@ -75,20 +61,5 @@ public class ClipContextMixin implements ClipContextExtension {
    @Override
    public boolean sable$doNotProject() {
       return this.sable$doNotProject;
-   }
-
-   @Override
-   public Block sable$getBlock() {
-      return this.block;
-   }
-
-   @Override
-   public Fluid sable$getFluid() {
-      return this.fluid;
-   }
-
-   @Override
-   public CollisionContext sable$getCollisionContext() {
-      return this.collisionContext;
    }
 }

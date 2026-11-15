@@ -28,9 +28,6 @@ public abstract class LivingEntityMixin extends Entity {
    @Shadow
    protected abstract float getJumpPower();
 
-   @Shadow
-   private boolean syncVelocity;
-
    public LivingEntityMixin(EntityType<?> entityType, Level level) {
       super(entityType, level);
    }
@@ -91,17 +88,5 @@ public abstract class LivingEntityMixin extends Entity {
       Vec3 vehiclePos = vehicle.position();
       SubLevel subLevel = Sable.HELPER.getContaining(vehicle);
       return subLevel != null ? Math.max(this.getY(), subLevel.logicalPose().transformPosition(vehiclePos).y) : Math.max(a, b);
-   }
-
-   @WrapOperation(
-      method = {"aiStep"},
-      at = {@At(
-         value = "INVOKE",
-         target = "Lnet/minecraft/world/phys/Vec3;horizontalDistanceSqr()D"
-      )}
-   )
-   private double sable$fixWalkDistance(Vec3 vec, Operation<Double> original) {
-      Quaterniondc orientation = EntitySubLevelUtil.getCustomEntityOrientation(this, 1.0F);
-      return orientation == null ? original.call(vec) : original.call(JOMLConversion.toMojang(orientation.transformInverse(JOMLConversion.toJOML(vec))));
    }
 }

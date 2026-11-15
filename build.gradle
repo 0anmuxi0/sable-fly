@@ -20,12 +20,15 @@ dependencies {
     compileOnly "org.apache.maven:maven-artifact:3.8.5"
     include "org.apache.maven:maven-artifact:3.8.5"
     include "at.yawk.lz4:lz4-java:1.11.0"
+    runtimeOnly "org.apache.maven:maven-artifact:3.8.5"
+    runtimeOnly "at.yawk.lz4:lz4-java:1.11.0"
     compileOnly "com.electronwill.night-config:core:3.6.7"
     compileOnly "maven.modrinth:scalablelux:0.1.6+fabric.c25518a"
 
     // 本地预构建依赖（无法从公共仓库获取）
     compileOnly files("libs/sable-fabric-26.3-3.0.0.jar")
     implementation files("libs/forgeconfigapiport-fabric-26.3.1.jar")
+    runtimeOnly files("libs/create-fly-26.3-6.0.9-2.jar")
 }
 
 java {
@@ -40,6 +43,19 @@ loom {
     accessWidenerPath = file("src/main/resources/sable.classtweaker")
     mods {
         "sable" { sourceSet sourceSets.main }
+    }
+    runs {
+        client {
+            client()
+            name = "Sable Fly Client"
+            runDir = "runs/client"
+            vmArg "-Xmx4G"
+        }
+        server {
+            server()
+            name = "Sable Fly Server"
+            runDir = "runs/server"
+        }
     }
 }
 

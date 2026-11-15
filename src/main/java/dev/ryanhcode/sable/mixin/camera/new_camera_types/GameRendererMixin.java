@@ -25,13 +25,13 @@ public class GameRendererMixin {
       method = {"extractCamera"},
       at = {@At("HEAD")}
    )
-   public void sable$setupCamera(DeltaTracker var1, float var2, float var3, CallbackInfo var4) {
-      CameraType var5 = this.minecraft.options.getCameraType();
-      if (var5 == SableCameraTypes.SUB_LEVEL_VIEW || var5 == SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED) {
-         Entity var6 = this.minecraft.getCameraEntity().getVehicle();
-         if (var6 != null) {
-            SubLevel var7 = Sable.HELPER.getContaining(this.minecraft.level, var6.position());
-            if (var7 != null) {
+   public void sable$setupCamera(DeltaTracker deltaTracker, float partialTick, CallbackInfo ci) {
+      CameraType cameraType = this.minecraft.options.getCameraType();
+      if (cameraType == SableCameraTypes.SUB_LEVEL_VIEW || cameraType == SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED) {
+         Entity vehicle = this.minecraft.getCameraEntity().getVehicle();
+         if (vehicle != null) {
+            SubLevel subLevel = Sable.HELPER.getContaining(this.minecraft.level, vehicle.position());
+            if (subLevel != null) {
                return;
             }
          }

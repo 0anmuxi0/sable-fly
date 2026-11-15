@@ -42,47 +42,47 @@ public abstract class EntityMixin {
       method = {"checkInsideBlocks(Ljava/util/List;Lnet/minecraft/world/entity/InsideBlockEffectApplier$StepBasedCollector;)V"},
       at = {@At("TAIL")}
    )
-   protected void checkInsideBlocks(CallbackInfo var1) {
-      AABB var2 = this.getBoundingBox();
-      Entity var3 = (Entity)(Object)this;
-      BoundingBox3d var4 = new BoundingBox3d(var2);
+   protected void checkInsideBlocks(CallbackInfo ci) {
+      AABB bounds = this.getBoundingBox();
+      Entity entity = (Entity)(Object)this;
+      BoundingBox3d localBounds = new BoundingBox3d(bounds);
 
-      for (SubLevel var6 : Sable.HELPER.getAllIntersecting(this.level, new BoundingBox3d(var2))) {
-         var4.set(var2);
-         var4.transformInverse(var6.logicalPose(), var4);
-         BlockPos var7 = BlockPos.containing(var4.minX + 1.0E-7, var4.minY + 1.0E-7, var4.minZ + 1.0E-7);
-         BlockPos var8 = BlockPos.containing(var4.maxX - 1.0E-7, var4.maxY - 1.0E-7, var4.maxZ - 1.0E-7);
-         boolean var9 = SubLevelHelper.pushEntityLocalIfNeeded(var6, var3);
+      for (SubLevel intersecting : Sable.HELPER.getAllIntersecting(this.level, new BoundingBox3d(bounds))) {
+         localBounds.set(bounds);
+         localBounds.transformInverse(intersecting.logicalPose(), localBounds);
+         BlockPos minPos = BlockPos.containing(localBounds.minX + 1.0E-7, localBounds.minY + 1.0E-7, localBounds.minZ + 1.0E-7);
+         BlockPos maxPos = BlockPos.containing(localBounds.maxX - 1.0E-7, localBounds.maxY - 1.0E-7, localBounds.maxZ - 1.0E-7);
+         boolean projected = SubLevelHelper.pushEntityLocalIfNeeded(intersecting, entity);
 
          try {
-            if (this.level.hasChunksAt(var7, var8)) {
-               MutableBlockPos var10 = new MutableBlockPos();
+            if (this.level.hasChunksAt(minPos, maxPos)) {
+               MutableBlockPos mutableBlockPos = new MutableBlockPos();
 
-               for (int var11 = var7.getX(); var11 <= var8.getX(); var11++) {
-                  for (int var12 = var7.getY(); var12 <= var8.getY(); var12++) {
-                     for (int var13 = var7.getZ(); var13 <= var8.getZ(); var13++) {
+               for (int i = minPos.getX(); i <= maxPos.getX(); i++) {
+                  for (int j = minPos.getY(); j <= maxPos.getY(); j++) {
+                     for (int k = minPos.getZ(); k <= maxPos.getZ(); k++) {
                         if (!this.isAlive()) {
                            return;
                         }
 
-                        var10.set(var11, var12, var13);
-                        BlockState var14 = this.level.getBlockState(var10);
+                        mutableBlockPos.set(i, j, k);
+                        BlockState blockState = this.level.getBlockState(mutableBlockPos);
 
                         try {
-                           var14.entityInside(this.level, var10, var3, this.insideEffectCollector, true);
-                           this.onInsideBlock(var14);
+                           blockState.entityInside(this.level, mutableBlockPos, entity, this.insideEffectCollector, true);
+                           this.onInsideBlock(blockState);
                         } catch (Throwable var21) {
-                           CrashReport var16 = CrashReport.forThrowable(var21, "Colliding entity with block");
-                           CrashReportCategory var17 = var16.addCategory("Block being collided with");
-                           CrashReportCategory.populateBlockDetails(var17, this.level, var10, var14);
-                           throw new ReportedException(var16);
+                           CrashReport crashReport = CrashReport.forThrowable(var21, "Colliding entity with block");
+                           CrashReportCategory crashReportCategory = crashReport.addCategory("Block being collided with");
+                           CrashReportCategory.populateBlockDetails(crashReportCategory, this.level, mutableBlockPos, blockState);
+                           throw new ReportedException(crashReport);
                         }
                      }
                   }
                }
             }
          } finally {
-            SubLevelHelper.popEntityLocalIfNeeded(var6, var3, var9);
+            SubLevelHelper.popEntityLocalIfNeeded(intersecting, entity, projected);
          }
       }
    }

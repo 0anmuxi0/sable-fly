@@ -10,15 +10,15 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin({SuspendedParticle.class})
 public abstract class SuspendedParticleMixin extends Particle implements ParticleSubLevelKickable {
-   protected SuspendedParticleMixin(ClientLevel var1, double var2, double var4, double var6) {
-      super(var1, var2, var4, var6);
+   protected SuspendedParticleMixin(ClientLevel clientLevel, double d, double e, double f) {
+      super(clientLevel, d, e, f);
    }
 
    @Override
-   public void move(double var1, double var3, double var5) {
-      super.move(var1, var3, var5);
-      WaterOcclusionContainer var7 = WaterOcclusionContainer.getContainer(this.level);
-      if (var7 != null && var7.isOccluded(new Vec3(this.x, this.y, this.z))) {
+   public void move(double d, double e, double f) {
+      super.move(d, e, f);
+      WaterOcclusionContainer<?> container = WaterOcclusionContainer.getContainer(this.level);
+      if (container != null && container.isOccluded(new Vec3(this.x, this.y, this.z))) {
          this.remove();
       }
    }

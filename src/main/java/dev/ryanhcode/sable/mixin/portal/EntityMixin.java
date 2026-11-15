@@ -29,13 +29,13 @@ public abstract class EntityMixin {
    public abstract Level level();
 
    @Overwrite
-   public Vec3 getRelativePortalPosition(Axis var1, FoundRectangle var2) {
-      SubLevel var3 = Sable.HELPER.getContaining(this.level(), var2.minCorner);
-      Vec3 var4 = this.position();
-      if (var3 != null) {
-         var4 = var3.logicalPose().transformPositionInverse(var4);
+   public Vec3 getRelativePortalPosition(Axis axis, FoundRectangle foundRectangle) {
+      SubLevel subLevel = Sable.HELPER.getContaining(this.level(), foundRectangle.minCorner);
+      Vec3 position = this.position();
+      if (subLevel != null) {
+         position = subLevel.logicalPose().transformPositionInverse(position);
       }
 
-      return PortalShape.getRelativePosition(var2, var1, var4, this.getDimensions(this.getPose()));
+      return PortalShape.getRelativePosition(foundRectangle, axis, position, this.getDimensions(this.getPose()));
    }
 }
