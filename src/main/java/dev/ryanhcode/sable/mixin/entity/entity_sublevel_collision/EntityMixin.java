@@ -40,6 +40,66 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * 实体在 sub-level（物理结构）内的碰撞与移动。
+ *
+ * <p><b>关于 sub-level 上的落地 / 弹跳手感（26.1.2）</b>
+ *
+ * <p>26.1.2 <b>没有</b>任何"按方块 bounciness 弹跳"的机制，javap 逐字节码确认如下：
+ *
+ * <ol>
+ *   <li><b>{@code Entity} 里不存在 bounciness 相关方法</b>。26.2 有
+ *       {@code Entity.getBlockBounciness(Block)}（private）、{@code getEntityBounciness()}、
+ *       以及 {@code restituteMovementAfterCollisions(BlockState, boolean, boolean, Vec3)}，
+ *       26.1.2 全部<b>已删除</b>。26.1.2 的 {@code Entity} 与弹跳相关的成员只剩
+ *       {@code getBlockJumpFactor()}（读 {@code Block.getJumpFactor()}）和
+ *       {@code isSuppressingBounce()}（= {@code isShiftKeyDown()}）。</li>
+ *   <li><b>{@code BlockBehaviour} 里没有任何 bounciness 属性</b>。
+ *       26.1.2 的 {@code Block} 只有 {@code getFriction()}、{@code getSpeedFactor()}、
+ *       {@code getJumpFactor()}，<b>没有</b> {@code getBounceRestitution()}（26.2 才有），
+ *       也没有 {@code BlockTags.SUPPRESSES_BOUNCE} 这类标签。</li>
+ *   <li><b>26.1.2 的落地处理走 {@code Block.updateEntityMovementAfterFallOn}</b>，
+ *       其基类实现只把 Y 方向速度清零。javap 原文：
+ *       <pre>
+ *       public void updateEntityMovementAfterFallOn(BlockGetter, Entity);
+ *         0: aload_2
+ *         1: invokevirtual #  // Method Entity.getDeltaMovement:()Lnet/minecraft/world/phys/Vec3;
+ *         5: dconst_1
+ *         6: dconst_0
+ *         7: dconst_1
+ *         8: invokevirtual #  // Method Vec3.multiply(DDD)Lnet/minecraft/world/phys/Vec3;
+ *        11: invokevirtual #  // Method Entity.setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V
+ *       </pre>
+ *       也就是 {@code entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.0, 1.0))}。</li>
+ *   <li><b>调用点在 {@code Entity.move(MoverType, Vec3)} 内部</b>，位于 {@code checkFallDamage} 之后：
+ *       <pre>
+ *       601: iload  (deltaY != savedY)
+ *       ...
+ *       634: invokevirtual #  // Method canSimulateMovement:()Z
+ *       637: ifeq  ...
+ *       641: invokevirtual #  // Method net/minecraft/world/level/block/Block.getBlockState(...)
+ *       ...
+ *       655: invokevirtual #  // Method net/minecraft/world/level/block/Block.updateEntityMovementAfterFallOn:(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;)V
+ *       </pre>
+ *       覆盖者只有 {@code Entity}、{@code Block}、{@code BedBlock}、{@code SlimeBlock} 四个。
+ *       {@code SlimeBlock} / {@code BedBlock} 用 {@code entity.isSuppressingBounce()}
+ *       （按住 Shift）决定是否 {@code bounceUp}，这属于"潜影盒/史莱姆块"的<b>特例</b>，
+ *       不是通用的 bounciness 系统。</li>
+ * </ol>
+ *
+ * <p><b>结论与做法</b>：26.1.2 没有等价的 bounciness 机制，所以<b>不能</b>再用 sub-level 内的方块
+ * 去覆盖落块处理 —— 那既没有语义等价物，又会引入"临时坐标平移"从而干扰跳跃/移动速度。
+ * 因此本 mixin <b>完全不拦截</b> {@code Block.updateEntityMovementAfterFallOn}，
+ * 让 sub-level 上的落地走<b>原版</b>语义（Y 速度清零），与主世界手感一致。
+ *
+ * <p>说明：{@link #sable$checkFallDamage} 与 {@link #sable$stepOn} 里的
+ * {@code SubLevelHelper.pushEntityLocalIfNeeded} 是 <b>26.2 基线就存在</b>的独立功能
+ * （让坠落伤害 / 踩踏效果按 sub-level <i>内</i>的方块计算，而不是父世界坐标处的空气），
+ * 与弹跳无关；且 {@code pushEntityLocal} / {@code popEntityLocal} 对速度做的是
+ * {@code transformNormalInverse} / {@code transformNormal} 这对<b>互逆</b>变换
+ * （见 {@code Pose3dc#transformNormal} / {@code transformNormalInverse}），
+ * 因此不改变实体的实际移动速度。
+ */
 @Mixin(
    value = {Entity.class},
    priority = 1100
@@ -95,6 +155,33 @@ public abstract class EntityMixin implements EntityMovementExtension {
       var5.call(var1, this.verticalCollisionBelow, this.horizontalCollision, var4);
    }
 
+   /**
+    * 让"坠落伤害 / 落地音效"按 <b>sub-level 内</b>脚下的方块计算，
+    * 而不是父世界坐标处的空气。
+    *
+    * <p>26.1.2 的 {@code Entity.checkFallDamage(double, boolean, BlockState, BlockPos)} 字节码：
+    * <pre>
+    * 38: aload  4        // BlockState
+    * 40: invokevirtual # // Method BlockState.getBlock:()Lnet/minecraft/world/level/block/Block;
+    * 43: aload_0
+    * 44: invokevirtual # // Method Entity.level:()Lnet/minecraft/world/level/Level;
+    * 47: aload  4        // BlockState
+    * 49: aload  5        // BlockPos
+    * 51: aload_0
+    * 53: invokevirtual # // Method Block.fallOn:(Level;BlockState;BlockPos;Entity;D)V
+    * </pre>
+    * 即坠落时用 {@code blockState} 所在位置的方块执行 {@code fallOn}。
+    *
+    * <p>sub-level 内的实体坐标在父世界坐标系里是"plot 局部坐标"，
+    * 直接取父世界的方块状态会取到空气，所以这里把实体临时投影到 sub-level 局部坐标系
+    * 再取方块状态。
+    *
+    * <p>注意：这<b>不是</b>弹跳处理。26.1.2 没有 bounciness 机制（见类注释），
+    * 本 mixin 不拦截 {@code Block.updateEntityMovementAfterFallOn}。
+    * 另外 {@code pushEntityLocal} / {@code popEntityLocal} 对速度做的是
+    * {@code transformNormalInverse} / {@code transformNormal} 这对<b>互逆</b>变换，
+    * 所以不改变实体的实际移动速度。
+    */
    @WrapOperation(
       method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
       at = {@At(
