@@ -17,7 +17,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
@@ -102,8 +101,6 @@ public class LevelExtractorMixin implements SubLevelBlockEntityRenderExtension {
                               if (!blockEntity.isRemoved()) {
                                  BlockPos blockPos = blockEntity.getBlockPos();
                                  CrumblingOverlay crumblingOverlay = this.sable$createCrumblingOverlay(blockPos, transformation, rotationPoint);
-                                 BlockEntityRenderer<?, ?> renderer = dispatcher.getRenderer(blockEntity);
-                                 boolean offScreen = renderer != null && renderer.shouldRenderOffScreen();
                                  BlockEntityRenderState renderState = dispatcher.tryExtractRenderState(blockEntity, partialTick, crumblingOverlay);
                                  if (renderState != null) {
                                     Vector3d physicalCenter = subLevel.renderPose(partialTick)
