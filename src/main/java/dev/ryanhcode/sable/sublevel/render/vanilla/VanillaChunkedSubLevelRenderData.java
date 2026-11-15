@@ -186,7 +186,7 @@ public class VanillaChunkedSubLevelRenderData implements SubLevelRenderData {
                   profiler.pop();
                } else {
                   profiler.push("sublevel_schedule_async_compile");
-                  renderSection.compileSync(renderRegionCache);
+                  renderSection.rebuildSectionAsync(region);
                   profiler.pop();
                }
 

@@ -3,18 +3,10 @@ setlocal enabledelayedexpansion
 cd /d "%~dp0"
 set "GIT=C:\Program Files\Git\cmd\git.exe"
 set "JAVA_HOME=C:\Program Files\Zulu\zulu-25"
-
-echo ============================================
-echo    Sable Fly  -  choose MC version
-echo ============================================
-echo.
 echo    [1]  Minecraft 26.2
 echo    [2]  Minecraft 26.3
 echo    [3]  Minecraft 26.1.2
-echo.
-echo    Press numpad 1 / 2 / 3 ...
-echo.
-choice /c 123 /n /m "Select version: "
+choice /c 123 /n /m "Press numpad 1 / 2 / 3 ..."
 
 if errorlevel 3 (
     set "BRANCH=mc26.1.2"
@@ -34,7 +26,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-echo ==== Building !BRANCH! ====
+echo Building !BRANCH!
 call gradlew.bat build --no-daemon --console=plain
 if errorlevel 1 (
     echo Build failed.
@@ -43,7 +35,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo ==== Launching game (!BRANCH!) ====
+echo Launching game (!BRANCH!)
 call gradlew.bat runClient --no-daemon --console=plain
 if errorlevel 1 (
     echo Game exited with an error.
