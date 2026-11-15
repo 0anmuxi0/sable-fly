@@ -76,6 +76,15 @@ public class LevelExtractorMixin implements SubLevelBlockEntityRenderExtension {
       }
 
       ((BlockEntityTransformsHolder)this).sable$getBlockEntityTransforms().clear();
+      // 移除主世界 extractVisibleBlockEntities 刚加入的、但实际位于 sub-level plot 内的渲染状态，
+      // 然后由下面的 sub-level 提取重新加入（并带上正确的位姿变换）。
+      //
+      // 必须按"位置是否落在 sub-level plot 内"来判断，而不是按对象 identity：
+      // LevelRenderState.reset() 每帧都会 clear() 掉这些 list，跨帧的 identity 根本无法匹配。
+      //
+      // 安全性：getContainingClient 走 getContaining(level, chunkX, chunkZ) ->
+      // container.getPlot(chunkPos)，只有当该 chunk 属于某个 sub-level plot 时才返回非 null，
+      // 因此主世界自身的方块实体不会被误删。
       levelRenderState.blockEntityRenderStates.removeIf(state -> Sable.HELPER.getContainingClient(state.blockPos) != null);
       ClientLevel level = Minecraft.getInstance().level;
       if (level != null) {
