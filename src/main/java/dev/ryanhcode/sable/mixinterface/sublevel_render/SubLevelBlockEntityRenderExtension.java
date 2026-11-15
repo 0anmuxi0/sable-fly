@@ -1,0 +1,8 @@
+package dev.ryanhcode.sable.mixinterface.sublevel_render;
+
+import net.minecraft.client.Camera;
+import net.minecraft.client.renderer.state.level.LevelRenderState;
+
+public interface SubLevelBlockEntityRenderExtension {
+   void sable$extractSubLevelBlockEntities(Camera var1, float var2, LevelRenderState var3);
+}

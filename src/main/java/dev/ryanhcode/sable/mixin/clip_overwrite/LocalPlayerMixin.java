@@ -1,0 +1,47 @@
+package dev.ryanhcode.sable.mixin.clip_overwrite;
+
+import dev.ryanhcode.sable.Sable;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Position;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+@Mixin({LocalPlayer.class})
+public class LocalPlayerMixin {
+   @Redirect(
+      method = {"filterHitResult"},
+      at = {@At(
+         value = "INVOKE",
+         target = "Lnet/minecraft/world/phys/Vec3;closerThan(Lnet/minecraft/core/Position;D)Z"
+      )}
+   )
+   private static boolean sable$closerThan(Vec3 a, Position b, double d) {
+      return Sable.HELPER.distanceSquaredWithSubLevels(Minecraft.getInstance().level, a, new Vec3(b.x(), b.y(), b.z())) < d * d;
+   }
+
+   @Redirect(
+      method = {"pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;"},
+      at = {@At(
+         value = "INVOKE",
+         target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(Lnet/minecraft/world/phys/Vec3;)D"
+      )}
+   )
+   private static double sable$distanceToSqr(Vec3 instance, Vec3 other) {
+      return Sable.HELPER.distanceSquaredWithSubLevels(Minecraft.getInstance().level, instance, other);
+   }
+
+   @Redirect(
+      method = {"pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;"},
+      at = {@At(
+         value = "INVOKE",
+         target = "Lnet/minecraft/world/entity/Entity;getEyePosition(F)Lnet/minecraft/world/phys/Vec3;"
+      )}
+   )
+   private static Vec3 sable$getEyePosition(Entity instance, float partialTicks) {
+      return Sable.HELPER.getEyePositionInterpolated(instance, partialTicks);
+   }
+}

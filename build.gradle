@@ -1,0 +1,59 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version '1.18.4'
+}
+
+group = maven_group
+version = mod_version
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://api.modrinth.com/maven' ; content { includeGroup 'maven.modrinth' } }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    implementation "io.github.llamalad7:mixinextras-fabric:0.5.5"
+    compileOnly "org.apache.maven:maven-artifact:3.8.5"
+    include "org.apache.maven:maven-artifact:3.8.5"
+    include "at.yawk.lz4:lz4-java:1.11.0"
+    compileOnly "com.electronwill.night-config:core:3.6.7"
+    compileOnly "maven.modrinth:scalablelux:0.1.6+fabric.c25518a"
+
+    // 本地预构建依赖（无法从公共仓库获取）
+    compileOnly files("libs/sable-fabric-26.2-3.0.0.jar")
+    implementation files("libs/ForgeConfigAPIPort-v26.2.1-mc26.2.x-Fabric.jar")
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.addAll(['-Xmaxerrs', '10000'])
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/sable.classtweaker")
+    mods {
+        "sable" { sourceSet sourceSets.main }
+    }
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.minecraft_version
+    inputs.property "fabric_version", project.fabric_version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version, "minecraft_version": project.minecraft_version, "fabric_version": project.fabric_version
+    }
+}
+
+tasks.named('jar') {
+    dependsOn 'processResources'
+    archiveFileName = "sable-fly.${project.version}-1-fabric+mc${project.minecraft_version}.jar"
+}

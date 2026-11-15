@@ -1,0 +1,13 @@
+build/
+.gradle/
+*.log
+*.bak
+.dsh-ops/
+dist/*.jar
+src-java-cfr-backup/
+--folder/
+*.classtweaker.bak
+*.iml
+.idea/
+run/
+runs/

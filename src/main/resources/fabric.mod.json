@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "sable",
+  "version": "3.0.0",
+  "name": "Sable Fly",
+  "description": "Interactive moving block structures with physics, ported for Fabric 26.3.",
+  "authors": [ "Orvixes" ],
+  "contact": {
+    "sources": "https://github.com/ryanhcode/sable-companion",
+    "issues": "https://github.com/ryanhcode/sable/issues"
+  },
+  "accessWidener": "sable.classtweaker",
+  "license": "PolyForm Shield License 1.0.0",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.ryanhcode.sable.fabric.SableFabric"
+    ],
+    "client": [
+      "dev.ryanhcode.sable.fabric.client.SableFabricClient"
+    ]
+  },
+  "mixins": [
+    "sable.mixins.json",
+    "sable-fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "26.2",
+    "java": ">=25",
+    "fabric-command-api-v2": ">=0.161.0+26.2",
+    "fabric-lifecycle-events-v1": ">=0.161.0+26.2",
+    "fabric-resource-loader-v0": ">=0.161.0+26.2",
+    "fabric-convention-tags-v2": ">=0.161.0+26.2"
+  },
+  "custom": {
+    "lithium:options": {
+      "mixin.entity.collisions.unpushable_cramming": false,
+      "mixin.world.chunk_access": false,
+      "mixin.world.chunk_ticking": false,
+      "mixin.world.tick_scheduler": false
+    }
+  },
+  "breaks": {
+    "sablecompanion": "<1.6.0"
+  },
+  "jars": [
+    {
+      "file": "META-INF/jars/lz4-java-1.11.0.jar"
+    },
+    {
+      "file": "META-INF/jars/maven-artifact-3.8.5.jar"
+    }
+  ]
+}
