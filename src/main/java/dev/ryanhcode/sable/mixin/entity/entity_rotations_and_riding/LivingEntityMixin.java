@@ -18,6 +18,7 @@ import org.joml.Quaterniondc;
 import org.joml.Vector3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -28,7 +29,7 @@ public abstract class LivingEntityMixin extends Entity {
    @Shadow
    protected abstract float getJumpPower();
 
-   @Shadow
+   @Unique
    private boolean syncVelocity;
 
    public LivingEntityMixin(EntityType<?> entityType, Level level) {
