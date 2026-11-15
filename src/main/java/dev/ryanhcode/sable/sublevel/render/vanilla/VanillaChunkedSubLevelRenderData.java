@@ -171,13 +171,18 @@ public class VanillaChunkedSubLevelRenderData implements SubLevelRenderData {
                RenderSection renderSection = (RenderSection)var7.next();
                ((RenderSectionExtension)renderSection).sable$setListening(false);
                boolean playerChanged = this.playerChangedSections.contains(renderSection.getSectionNode());
-               boolean buildSync = false;
-               if (chunkUpdates == PrioritizeChunkUpdates.NEARBY) {
-                  BlockPos origin = renderSection.getRenderOrigin();
-                  buildSync = cameraPos.distanceSquared(origin.getX(), origin.getY(), origin.getZ()) < 768.0 || playerChanged;
-               } else if (chunkUpdates == PrioritizeChunkUpdates.PLAYER_AFFECTED) {
-                  buildSync = playerChanged;
-               }
+                boolean buildSync = false;
+                if (chunkUpdates == PrioritizeChunkUpdates.NEARBY) {
+                   // 抽搐/一顿一顿的元凶：原来这里用 distanceSquared < 768.0（约 27 格）判定，
+                   // 只要玩家在 27 格内，该 section 就会在【渲染线程同步编译】（compileSync），
+                   // 每帧重复导致明显卡顿 —— 站在结构上和站在旁边地面都会触发。
+                   //
+                   // 现在只在"玩家自己刚改过方块"时同步编译（保证挖掘/放置立刻可见），
+                   // 其余一律异步，避免渲染线程被阻塞。
+                   buildSync = playerChanged;
+                } else if (chunkUpdates == PrioritizeChunkUpdates.PLAYER_AFFECTED) {
+                   buildSync = playerChanged;
+                }
 
                RenderRegionCache region = renderRegionCache;
                if (buildSync) {
