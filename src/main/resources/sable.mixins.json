@@ -67,8 +67,7 @@
                    "sublevel_render.BlockEntityRenderDispatcherMixin",
     "sublevel_render.BlockEntityRenderDispatcherBerMixin",
                    "sublevel_render.impl.vanilla.ResortTransparencyTaskMixin",
-                   "sublevel_render.impl.vanilla.CompileTaskMixin",
-                   "sublevel_render.impl.vanilla.LevelRendererMixin",
+                                      "sublevel_render.impl.vanilla.LevelRendererMixin",
                                       "sublevel_render.LevelRendererMixin",
                                       "sublevel_render.RenderSectionMixin",
                    "sublevel_sounds.AbstractSoundInstanceMixin",
@@ -79,6 +78,11 @@
                    "world_border.ClientLevelMixin"
                ],
     "mixins":  [
+      "block_decal_render.LevelExtractorMixin",
+      "sublevel_render.block_entity_render.LevelExtractorMixin",
+      "sublevel_render.impl.vanilla.ViewAreaMixin",
+      "sublevel_render.MovingBlockFeatureRendererMixin",
+      "sublevel_render.impl.vanilla.CompileTaskMixin",
                    "assembly.AbstractFurnaceBlockEntityMixin",
                    "block_decal_render.ServerLevelMixin",
                    "block_placement.BlockPlaceContextMixin",

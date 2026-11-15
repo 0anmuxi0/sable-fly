@@ -6,7 +6,7 @@ import dev.ryanhcode.sable.mixinterface.sublevel_render.BlockEntityTransformsHol
 import java.util.IdentityHashMap;
 import java.util.Map;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.SubmitNodeStorage;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.core.BlockPos;
@@ -42,7 +42,7 @@ public class LevelRendererMixin implements BlockEntityTransformsHolder {
    public void sable$transformBlockEntity(
       PoseStack poseStack,
       LevelRenderState levelRenderState,
-      SubmitNodeCollector submitNodeCollector,
+      SubmitNodeStorage submitNodeStorage,
       CallbackInfo ci,
       @Local BlockEntityRenderState renderState,
       @Local BlockPos blockPos
@@ -70,7 +70,7 @@ public class LevelRendererMixin implements BlockEntityTransformsHolder {
          shift = Shift.AFTER
       )}
    )
-   private void sable$restoreCameraOrientation(PoseStack poseStack, LevelRenderState levelRenderState, SubmitNodeCollector submitNodeCollector, CallbackInfo ci) {
+   private void sable$restoreCameraOrientation(PoseStack poseStack, LevelRenderState levelRenderState, SubmitNodeStorage submitNodeStorage, CallbackInfo ci) {
       if (this.sable$cameraOrientation != null) {
          levelRenderState.cameraRenderState.orientation = this.sable$cameraOrientation;
          this.sable$cameraOrientation = null;

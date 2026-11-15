@@ -55,10 +55,10 @@ public class LevelRenderMixin {
       method = {"extractRenderState"},
       at = {@At(
          value = "INVOKE",
-         target = "Lnet/minecraft/client/multiplayer/ClientLevel;getHeight(Lnet/minecraft/world/level/levelgen/Heightmap$Types;II)I"
+         target = "Lnet/minecraft/world/level/Level;getHeight(Lnet/minecraft/world/level/levelgen/Heightmap$Types;II)I"
       )}
    )
-   public int sable$preventRainThoughSubLevel(ClientLevel instance, Types types, int i, int j, Operation<Integer> original) {
+   public int sable$preventRainThoughSubLevel(Level instance, Types types, int i, int j, Operation<Integer> original) {
       return Math.max(original.call(instance, types, i, j), sable$getSubLevelHeight(instance, i, 1, j));
    }
 }

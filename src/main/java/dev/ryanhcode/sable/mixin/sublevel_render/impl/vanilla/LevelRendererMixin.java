@@ -1,6 +1,7 @@
 package dev.ryanhcode.sable.mixin.sublevel_render.impl.vanilla;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.ryanhcode.sable.Sable;
 import dev.ryanhcode.sable.SableClientConfig;
 import dev.ryanhcode.sable.api.sublevel.ClientSubLevelContainer;
@@ -23,6 +24,7 @@ import net.minecraft.client.PrioritizeChunkUpdates;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.chunk.ChunkSectionsToRender;
 import net.minecraft.client.renderer.chunk.RenderRegionCache;
@@ -69,16 +71,10 @@ public abstract class LevelRendererMixin {
    private final Quaternionf sable$subLevelRotation = new Quaternionf();
    @Shadow
    @Final
-   private GameRenderer gameRenderer;
-   @Shadow
-   @Final
    private LevelRenderState levelRenderState;
    @Shadow
    @Final
    private OptionsRenderState optionsRenderState;
-   @Shadow
-   @Final
-   private TextureManager textureManager;
 
    @Shadow
    public SectionRenderDispatcher getSectionRenderDispatcher() {
@@ -86,15 +82,15 @@ public abstract class LevelRendererMixin {
    }
 
    @Shadow
-   private void submitHitOutline(PoseStack var1, SubmitNodeCollector var2, RenderType var3, BlockOutlineRenderState var4, int var5, float var6, boolean var7) {
+   private void renderHitOutline(PoseStack var1, VertexConsumer var2, double var3, double var5, double var7, BlockOutlineRenderState var8, int var9, float var10) {
    }
 
    @Inject(
-      method = {"submitBlockOutline"},
+      method = {"renderBlockOutline"},
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void sable$submitSubLevelBlockOutline(PoseStack var1, SubmitNodeCollector var2, LevelRenderState var3, CallbackInfo var4) {
+   private void sable$submitSubLevelBlockOutline(MultiBufferSource.BufferSource var0, PoseStack var1, boolean var2, LevelRenderState var3, CallbackInfo var4) {
       BlockOutlineRenderState var5 = var3.blockOutlineRenderState;
       if (var5 != null) {
          ClientLevel var6 = Minecraft.getInstance().level;
@@ -112,7 +108,7 @@ public abstract class LevelRendererMixin {
                var1.translate(var7.getX() - var11.x(), var7.getY() - var11.y(), var7.getZ() - var11.z());
                boolean var13 = var5.highContrast();
                if (var13) {
-                  this.submitHitOutline(var1, var2, RenderTypes.secondaryBlockOutline(), var5, -16777216, 7.0F, var5.isTranslucent());
+                  this.renderHitOutline(var1, var0.getBuffer(RenderTypes.secondaryBlockOutline()), var7.getX(), var7.getY(), var7.getZ(), var5, -16777216, 7.0F);
                }
 
                int var14 = var13 ? -11010079 : ARGB.black(102);
@@ -123,9 +119,7 @@ public abstract class LevelRendererMixin {
                   var15 = RenderTypes.linesTranslucent();
                }
 
-               this.submitHitOutline(
-                  var1, var2, var15, var5, var14, Minecraft.getInstance().getWindow().getAppropriateLineWidth(), var5.isTranslucent()
-               );
+               this.renderHitOutline(var1, var0.getBuffer(var15), var7.getX(), var7.getY(), var7.getZ(), var5, var14, Minecraft.getInstance().getWindow().getAppropriateLineWidth());
                var1.popPose();
                var4.cancel();
             }
@@ -137,7 +131,7 @@ public abstract class LevelRendererMixin {
       method = {"compileSections"},
       at = {@At("TAIL")}
    )
-   private void sable$compileSections(CameraRenderState var1, CallbackInfo var2) {
+   private void sable$compileSections(Camera var1, CallbackInfo var2) {
       ClientLevel var3 = Minecraft.getInstance().level;
       List<ClientSubLevel> var4 = ((ClientSubLevelContainer)((SubLevelContainerHolder)var3).sable$getPlotContainer()).getAllSubLevels();
       RenderRegionCache var5 = new RenderRegionCache();
@@ -165,10 +159,10 @@ public abstract class LevelRendererMixin {
    }
 
    @Inject(
-      method = {"submitFeatures"},
+      method = {"submitEntities"},
       at = {@At("TAIL")}
    )
-   private void sable$submitSubLevelBlocks(LevelRenderState var1, SubmitNodeCollector var2, boolean var3, CallbackInfo var4) {
+   private void sable$submitSubLevelBlocks(PoseStack var0, LevelRenderState var1, SubmitNodeCollector var2, CallbackInfo var3) {
       PoseStack var5 = new PoseStack();
       ClientLevel var6 = Minecraft.getInstance().level;
       if (var6 != null) {

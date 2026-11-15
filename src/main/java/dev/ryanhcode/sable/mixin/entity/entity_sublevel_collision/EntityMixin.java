@@ -112,9 +112,13 @@ public abstract class EntityMixin implements EntityMovementExtension {
 
             try {
                BlockPos var8 = BlockPos.containing(var6.getX(), var6.getY() - 0.2, var6.getZ());
-               Block var9 = var5.getLevel().getBlockState(var8).getBlock();
-               var9.updateEntityMovementAfterFallOn(var5.getLevel(), var6);
-               return;
+               BlockState var9 = var5.getLevel().getBlockState(var8);
+               // 仅当玩家脚下确实落在 sub-level 内的实体方块上时才替换落块处理；
+               // 若为空气（玩家在 sub-level 旁边），保持原版物理，避免跳跃被误判为落地。
+               if (!var9.isAir() && !var9.getCollisionShape(var5.getLevel(), var8).isEmpty()) {
+                  var9.getBlock().updateEntityMovementAfterFallOn(var5.getLevel(), var6);
+                  return;
+               }
             } finally {
                SubLevelHelper.popEntityLocalIfNeeded(var5, var6, var7);
             }

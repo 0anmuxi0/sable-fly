@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin({LevelRenderer.class})
 public class LevelRendererMixin {
    @Inject(
-      method = {"invalidateCompiledGeometry"},
+      method = {"allChanged"},
       at = {@At("TAIL")}
    )
    private void sable$allChanged(CallbackInfo ci) {

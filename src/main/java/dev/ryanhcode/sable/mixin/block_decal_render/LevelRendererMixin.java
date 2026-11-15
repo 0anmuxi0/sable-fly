@@ -51,18 +51,6 @@ public abstract class LevelRendererMixin {
       }
    }
 
-   @WrapOperation(
-      method = {"submitBlockDestroyAnimation"},
-      at = {@At(
-         value = "INVOKE",
-         target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitBreakingBlockModel(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;I)V"
-      )}
-   )
-   private void sable$submitBlockDamageOverBlocks(
-      SubmitNodeCollector var1, PoseStack var2, List<BlockStateModelPart> var3, int var4, Operation<Void> var5, @Local BlockBreakingRenderState var6
-   ) {
-      var5.call(var1, var2, var3, var4);
-   }
 
    @Unique
    private static ClientSubLevel sable$getSubLevel(BlockPos var0) {

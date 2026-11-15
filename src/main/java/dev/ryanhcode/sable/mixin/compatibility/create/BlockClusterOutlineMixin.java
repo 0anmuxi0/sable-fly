@@ -26,16 +26,17 @@ public class BlockClusterOutlineMixin {
       )}
    )
    private void sable$projectFacesOntoSubLevel(
-      PoseStack ms, double x, double y, double z, Operation<Void> original, @Local(argsOnly = true) Vec3 camera, @Local BlockPos anchor
+      PoseStack ms, double x, double y, double z, Operation<Void> original, @Local(argsOnly = true) Vec3 camera
    ) {
-      ClientSubLevel subLevel = SubLevelOutlinePose.find(Vec3.atLowerCornerOf(anchor));
+      Vec3 anchor = camera.add(x, y, z);
+      ClientSubLevel subLevel = SubLevelOutlinePose.find(anchor);
       if (subLevel == null) {
          original.call(ms, x, y, z);
       } else {
          Pose3dc pose = subLevel.renderPose();
          SubLevelOutlinePose.apply(pose, ms);
          Vec3 plotCamera = SubLevelOutlinePose.plotCamera(pose, camera);
-         original.call(ms, anchor.getX() - plotCamera.x, anchor.getY() - plotCamera.y, anchor.getZ() - plotCamera.z);
+         original.call(ms, anchor.x - plotCamera.x, anchor.y - plotCamera.y, anchor.z - plotCamera.z);
       }
    }
 
@@ -47,16 +48,17 @@ public class BlockClusterOutlineMixin {
       )}
    )
    private void sable$projectEdgesOntoSubLevel(
-      PoseStack ms, double x, double y, double z, Operation<Void> original, @Local(argsOnly = true) Vec3 camera, @Local BlockPos anchor
+      PoseStack ms, double x, double y, double z, Operation<Void> original, @Local(argsOnly = true) Vec3 camera
    ) {
-      ClientSubLevel subLevel = SubLevelOutlinePose.find(Vec3.atLowerCornerOf(anchor));
+      Vec3 anchor = camera.add(x, y, z);
+      ClientSubLevel subLevel = SubLevelOutlinePose.find(anchor);
       if (subLevel == null) {
          original.call(ms, x, y, z);
       } else {
          Pose3dc pose = subLevel.renderPose();
          SubLevelOutlinePose.apply(pose, ms);
          Vec3 plotCamera = SubLevelOutlinePose.plotCamera(pose, camera);
-         original.call(ms, anchor.getX() - plotCamera.x, anchor.getY() - plotCamera.y, anchor.getZ() - plotCamera.z);
+         original.call(ms, anchor.x - plotCamera.x, anchor.y - plotCamera.y, anchor.z - plotCamera.z);
       }
    }
 }
