@@ -422,7 +422,7 @@ public abstract class ParticleMixin implements ParticleExtension {
       boolean var10 = this.level.hasChunkAt(var9);
       if (var10) {
          BlockState var11 = this.level.getBlockState(var9);
-         if (var11.emissiveRendering()) {
+         if (var11.emissiveRendering(this.level, var9)) {
             var2.setReturnValue(15728880);
          } else {
             ClientSubLevel var12 = this.sable$trackingSubLevel;

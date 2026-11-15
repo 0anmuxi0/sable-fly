@@ -63,7 +63,7 @@ public abstract class EntityRendererMixin {
       )}
    )
    private double sable$distanceToCamera(EntityRenderDispatcher var1, Entity var2) {
-      return Sable.HELPER.distanceSquaredWithSubLevels(var2.level(), Minecraft.getInstance().gameRenderer.mainCamera().position(), var2.position());
+      return Sable.HELPER.distanceSquaredWithSubLevels(var2.level(), Minecraft.getInstance().gameRenderer.getMainCamera().position(), var2.position());
    }
 
    @Redirect(

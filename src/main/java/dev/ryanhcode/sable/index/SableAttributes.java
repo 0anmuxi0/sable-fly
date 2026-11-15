@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -24,7 +24,7 @@ public class SableAttributes {
    public static Holder<Attribute> PUNCH_COOLDOWN;
 
    public static void register() {
-      AttributeSupplier supplier = DefaultAttributes.getSupplier(EntityTypes.PLAYER);
+      AttributeSupplier supplier = DefaultAttributes.getSupplier(EntityType.PLAYER);
       Map<Holder<Attribute>, AttributeInstance> additionalInstances = AttributeSupplier.builder().add(PUNCH_STRENGTH).add(PUNCH_COOLDOWN).build().instances;
       supplier.instances = ImmutableMap.<Holder<Attribute>, AttributeInstance>builder().putAll(supplier.instances).putAll(additionalInstances).buildKeepingLast();
    }

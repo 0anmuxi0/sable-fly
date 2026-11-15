@@ -25,7 +25,7 @@ public class IntegratedServerMixin implements SableToastableServer {
       this.minecraft
          .execute(
             () -> SystemToast.addOrUpdate(
-               this.minecraft.gui.toastManager(),
+               this.minecraft.getToastManager(),
                SableToasts.SUB_LEVEL_LOAD_FAILURE,
                Component.translatable("sub_level.toast.loadFailure", Component.literal(var1.toString())).withStyle(ChatFormatting.RED),
                Component.translatable("sub_level.toast.checkLog")
@@ -38,7 +38,7 @@ public class IntegratedServerMixin implements SableToastableServer {
       this.minecraft
          .execute(
             () -> SystemToast.addOrUpdate(
-               this.minecraft.gui.toastManager(),
+               this.minecraft.getToastManager(),
                SableToasts.SUB_LEVEL_SAVE_FAILURE,
                Component.translatable("sub_level.toast.saveFailure", Component.literal(var1.toString())).withStyle(ChatFormatting.RED),
                Component.translatable("sub_level.toast.checkLog")
@@ -51,7 +51,7 @@ public class IntegratedServerMixin implements SableToastableServer {
       this.minecraft
          .execute(
             () -> SystemToast.addOrUpdate(
-               this.minecraft.gui.toastManager(),
+               this.minecraft.getToastManager(),
                SableToasts.SUB_LEVEL_PHYSICS_FAILURE,
                Component.translatable("sub_level.toast.physicsFailure", Component.literal(var1.toString())).withStyle(ChatFormatting.RED),
                Component.translatable("sub_level.toast.attemptingRecovery")

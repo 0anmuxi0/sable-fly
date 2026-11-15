@@ -35,7 +35,7 @@ public abstract class OptionsScreenMixin extends Screen {
          LinearLayout var2 = LinearLayout.vertical();
          Button var3 = Button.builder(
                SubLevelSettingsScreen.TITLE,
-               var1x -> this.minecraft.gui.setScreen(new SubLevelSettingsScreen(this, this.options, SubLevelSettingsScreen.TITLE))
+               var1x -> this.minecraft.setScreen(new SubLevelSettingsScreen(this, this.options, SubLevelSettingsScreen.TITLE))
             )
             .pos(0, 30)
             .size(150, 20)

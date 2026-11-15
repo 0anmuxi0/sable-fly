@@ -25,6 +25,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.Entity.RemovalReason;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -96,33 +97,31 @@ public abstract class EntityMixin implements EntityMovementExtension {
    }
 
    @WrapOperation(
-      method = {"restituteMovementAfterCollisions(Lnet/minecraft/world/level/block/state/BlockState;ZZLnet/minecraft/world/phys/Vec3;)V"},
+      method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
       at = {@At(
          value = "INVOKE",
-         target = "Lnet/minecraft/world/entity/Entity;getBlockBounciness(Lnet/minecraft/world/level/block/Block;)D"
+         target = "Lnet/minecraft/world/level/block/Block;updateEntityMovementAfterFallOn(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;)V"
       )}
    )
-   public double sable$subLevelBounciness(Entity var1, Block var2, Operation<Double> var3) {
+   public void sable$subLevelBounciness(Block var1, BlockGetter var2, Entity var3, Operation<Void> var4) {
       if (this.verticalCollision) {
-         SubLevel var4 = this.sable$trackingSubLevel;
-         if (var4 != null) {
-            Entity var5 = (Entity)(Object)this;
-            boolean var6 = SubLevelHelper.pushEntityLocalIfNeeded(var4, var5);
+         SubLevel var5 = this.sable$trackingSubLevel;
+         if (var5 != null) {
+            Entity var6 = (Entity)(Object)this;
+            boolean var7 = SubLevelHelper.pushEntityLocalIfNeeded(var5, var6);
 
-            double var9;
             try {
-               BlockPos var7 = BlockPos.containing(var5.getX(), var5.getY() - 0.2, var5.getZ());
-               Block var8 = var4.getLevel().getBlockState(var7).getBlock();
-               var9 = (Double)var3.call(var5, var8);
+               BlockPos var8 = BlockPos.containing(var6.getX(), var6.getY() - 0.2, var6.getZ());
+               Block var9 = var5.getLevel().getBlockState(var8).getBlock();
+               var9.updateEntityMovementAfterFallOn(var5.getLevel(), var6);
+               return;
             } finally {
-               SubLevelHelper.popEntityLocalIfNeeded(var4, var5, var6);
+               SubLevelHelper.popEntityLocalIfNeeded(var5, var6, var7);
             }
-
-            return var9;
          }
       }
 
-      return (Double)var3.call(var1, var2);
+      var4.call(var1, var2, var3);
    }
 
    @WrapOperation(

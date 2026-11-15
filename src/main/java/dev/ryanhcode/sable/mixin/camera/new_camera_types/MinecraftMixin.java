@@ -53,7 +53,7 @@ public abstract class MinecraftMixin {
    )
    private void sable$preCycleCameraType(CallbackInfo ci) {
       if (this.options.getCameraType() == SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED) {
-         Camera camera = this.gameRenderer.mainCamera();
+         Camera camera = this.gameRenderer.getMainCamera();
          ((CameraZoomExtension)camera).sable$setZoomAmount(0.0F);
          SubLevel subLevel = Sable.HELPER.getVehicleSubLevel(this.getCameraEntity());
          if (subLevel != null) {

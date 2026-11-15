@@ -179,14 +179,14 @@ public class VanillaChunkedSubLevelRenderData implements SubLevelRenderData {
                   buildSync = playerChanged;
                }
 
-               RenderSectionRegion region = renderRegionCache.createRegion(level, renderSection.getSectionNode());
+               RenderRegionCache region = renderRegionCache;
                if (buildSync) {
                   profiler.push("sublevel_build_near_sync");
-                  renderSection.compileSync(region);
+                  renderSection.compileSync(renderRegionCache);
                   profiler.pop();
                } else {
                   profiler.push("sublevel_schedule_async_compile");
-                  renderSection.compileAsync(region);
+                  renderSection.compileSync(renderRegionCache);
                   profiler.pop();
                }
 

@@ -45,7 +45,7 @@ public abstract class PhysicsBlockOutlineMixin {
       if (var6 != null) {
          SubLevelContainer var7 = ((SubLevelContainerHolder)var6).sable$getPlotContainer();
          if (var7 != null) {
-            Vec3 var8 = var5.gameRenderer.mainCamera().position();
+            Vec3 var8 = var5.gameRenderer.getMainCamera().position();
             int var9 = 4096;
             ArrayList<SubLevel> var10 = new ArrayList<>();
             var7.getAllSubLevels().forEach(var10::add);

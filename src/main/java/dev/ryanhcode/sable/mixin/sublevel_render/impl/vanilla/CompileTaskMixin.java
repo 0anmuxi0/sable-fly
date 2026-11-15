@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import net.minecraft.client.renderer.SectionBufferBuilderPack;
 import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;
 import net.minecraft.client.renderer.chunk.TranslucencyPointOfView;
-import net.minecraft.client.renderer.chunk.SectionRenderDispatcher.RenderSection.SectionTask.SectionTaskResult;
+import net.minecraft.client.renderer.chunk.SectionRenderDispatcher.RenderSection.CompileTask.SectionTaskResult;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;

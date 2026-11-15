@@ -9,7 +9,7 @@ import dev.ryanhcode.sable.command.argument.modifier_type.SubLevelDoubleRangeFil
 import dev.ryanhcode.sable.command.argument.modifier_type.SubLevelLimitFilter;
 import dev.ryanhcode.sable.command.argument.modifier_type.SubLevelNameFilter;
 import dev.ryanhcode.sable.command.argument.modifier_type.SubLevelSortModifier;
-import net.minecraft.advancements.predicates.MinMaxBounds.Doubles;
+import net.minecraft.advancements.criterion.MinMaxBounds.Doubles;
 import net.minecraft.network.chat.Component;
 
 public class SubLevelSelectorModifiers {

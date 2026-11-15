@@ -124,7 +124,7 @@ public abstract class LevelRendererMixin {
                }
 
                this.submitHitOutline(
-                  var1, var2, var15, var5, var14, this.gameRenderer.gameRenderState().windowRenderState.appropriateLineWidth, var5.isTranslucent()
+                  var1, var2, var15, var5, var14, Minecraft.getInstance().getWindow().getAppropriateLineWidth(), var5.isTranslucent()
                );
                var1.popPose();
                var4.cancel();
@@ -142,7 +142,7 @@ public abstract class LevelRendererMixin {
       List<ClientSubLevel> var4 = ((ClientSubLevelContainer)((SubLevelContainerHolder)var3).sable$getPlotContainer()).getAllSubLevels();
       RenderRegionCache var5 = new RenderRegionCache();
       PrioritizeChunkUpdates var6 = Minecraft.getInstance().options.prioritizeChunkUpdates().get();
-      Camera var7 = Minecraft.getInstance().gameRenderer.mainCamera();
+      Camera var7 = Minecraft.getInstance().gameRenderer.getMainCamera();
 
       for (ClientSubLevel var9 : var4) {
          SubLevelRenderData var10 = var9.getRenderData();
@@ -178,7 +178,7 @@ public abstract class LevelRendererMixin {
             double var9 = var8.x;
             double var11 = var8.y;
             double var13 = var8.z;
-            Frustum var15 = Minecraft.getInstance().gameRenderer.mainCamera().getCullFrustum();
+            Frustum var15 = Minecraft.getInstance().gameRenderer.getMainCamera().getCullFrustum();
             boolean var16 = SableClientConfig.SUB_LEVEL_OCCLUSION_CULLING.get();
             boolean var17 = SableClientConfig.SUB_LEVEL_CULL_ENCLOSED_BLOCKS.get();
             double var18 = SableClientConfig.SUB_LEVEL_RENDER_DISTANCE.get();
@@ -245,7 +245,7 @@ public abstract class LevelRendererMixin {
                                                 var61.biome = var52[var53];
                                                 var61.cardinalLighting = var62;
                                                 var61.lightEngine = var35;
-                                                var2.submitMovingBlock(var5, var61, 0);
+                                                var2.submitMovingBlock(var5, var61);
                                                 var5.translate(-var55, -var57, -var59);
                                              }
 

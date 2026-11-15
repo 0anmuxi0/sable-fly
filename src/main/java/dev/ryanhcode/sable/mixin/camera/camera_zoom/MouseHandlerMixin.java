@@ -33,7 +33,7 @@ public class MouseHandlerMixin {
       if (cameraType != SableCameraTypes.SUB_LEVEL_VIEW && cameraType != SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED) {
          original.call(instance, selectedSlot);
       } else {
-         CameraZoomExtension extension = (CameraZoomExtension)this.minecraft.gameRenderer.mainCamera();
+         CameraZoomExtension extension = (CameraZoomExtension)this.minecraft.gameRenderer.getMainCamera();
          extension.sable$setZoomAmount((float)(extension.sable$getZoomAmount() - scrollAmount * SableClientConfig.ZOOM_SENSITIVITY.get()));
       }
    }

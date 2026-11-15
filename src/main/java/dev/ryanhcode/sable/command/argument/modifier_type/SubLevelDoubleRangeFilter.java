@@ -4,7 +4,7 @@ import dev.ryanhcode.sable.command.argument.SubLevelSelectorModifierType;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.List;
-import net.minecraft.advancements.predicates.MinMaxBounds.Doubles;
+import net.minecraft.advancements.criterion.MinMaxBounds.Doubles;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3d;
 import org.joml.Vector3dc;

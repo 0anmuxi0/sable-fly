@@ -16,7 +16,7 @@ import org.joml.Vector3dc;
 public class SublevelRenderOffsetHelper {
    public static void posePlotToProjected(SubLevel subLevel, PoseStack ps) {
       if (subLevel != null) {
-         Vec3 camera = Minecraft.getInstance().gameRenderer.mainCamera().position();
+         Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().position();
          Pose3dc pose = ((ClientSubLevel)subLevel).renderPose();
          Vector3dc pos = pose.position();
          Vector3dc scale = pose.scale();

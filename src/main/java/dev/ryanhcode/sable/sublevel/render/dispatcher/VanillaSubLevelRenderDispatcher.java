@@ -28,14 +28,14 @@ public class VanillaSubLevelRenderDispatcher implements SubLevelRenderDispatcher
          renderData.close();
          SubLevelRenderData data = this.createRenderData(subLevel);
          if (data instanceof VanillaChunkedSubLevelRenderData) {
-            data.compileSections(PrioritizeChunkUpdates.NEARBY, new RenderRegionCache(), Minecraft.getInstance().gameRenderer.mainCamera());
+            data.compileSections(PrioritizeChunkUpdates.NEARBY, new RenderRegionCache(), Minecraft.getInstance().gameRenderer.getMainCamera());
          }
 
          return data;
       } else {
          if (renderData instanceof VanillaChunkedSubLevelRenderData chunkedRenderData) {
             chunkedRenderData.resize();
-            chunkedRenderData.compileSections(PrioritizeChunkUpdates.NEARBY, new RenderRegionCache(), Minecraft.getInstance().gameRenderer.mainCamera());
+            chunkedRenderData.compileSections(PrioritizeChunkUpdates.NEARBY, new RenderRegionCache(), Minecraft.getInstance().gameRenderer.getMainCamera());
          }
 
          return renderData;
@@ -47,7 +47,7 @@ public class VanillaSubLevelRenderDispatcher implements SubLevelRenderDispatcher
       if (isSingleBlock(subLevel)) {
          return new VanillaSingleSubLevelRenderData(subLevel);
       } else {
-         SectionRenderDispatcher sectionRenderDispatcher = Minecraft.getInstance().levelRenderer.sectionRenderDispatcher();
+         SectionRenderDispatcher sectionRenderDispatcher = Minecraft.getInstance().levelRenderer.getSectionRenderDispatcher();
          return sectionRenderDispatcher == null ? null : new VanillaChunkedSubLevelRenderData(subLevel, sectionRenderDispatcher);
       }
    }

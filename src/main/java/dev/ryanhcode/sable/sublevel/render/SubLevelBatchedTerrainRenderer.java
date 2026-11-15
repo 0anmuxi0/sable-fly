@@ -1,7 +1,6 @@
 package dev.ryanhcode.sable.sublevel.render;
 
-import com.mojang.blaze3d.IndexType;
-import com.mojang.blaze3d.PrimitiveTopology;
+import com.mojang.blaze3d.vertex.VertexFormat.IndexType;
 import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -117,7 +116,7 @@ public final class SubLevelBatchedTerrainRenderer {
                boolean var9 = SableClientConfig.SUB_LEVEL_OCCLUSION_CULLING.get();
                double var10 = SableClientConfig.SUB_LEVEL_RENDER_DISTANCE.get();
                double var12 = var10 <= 0.0 ? Double.POSITIVE_INFINITY : var10 * var10;
-               Frustum var14 = Minecraft.getInstance().gameRenderer.mainCamera().getCullFrustum();
+               Frustum var14 = Minecraft.getInstance().gameRenderer.getMainCamera().getCullFrustum();
                long var15 = Util.getMillis();
                boolean var17 = var15 - lastResortMillis >= 500L;
                if (var17) {
@@ -201,7 +200,7 @@ public final class SubLevelBatchedTerrainRenderer {
                      BlockPos var42 = var40.getRenderOrigin();
                      int var43 = -1;
                      if (var13 && var40.hasTranslucentGeometry()) {
-                        var40.resortTransparency();
+                        var40.resortTransparency(var3);
                      }
 
                      for (ChunkSectionLayer var47 : ChunkSectionLayer.values()) {
@@ -225,7 +224,7 @@ public final class SubLevelBatchedTerrainRenderer {
                               );
                            }
 
-                           VertexFormat var53 = var47.pipeline().getVertexFormatBinding(0);
+                           VertexFormat var53 = var47.pipeline().getVertexFormat();
                            GpuBuffer var54 = var51.vertexBuffer();
                            int var48;
                            IndexType var49;
@@ -258,7 +257,7 @@ public final class SubLevelBatchedTerrainRenderer {
                   return null;
                } else {
                   if (var58 > 0) {
-                     RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS).getBuffer(var58);
+                     RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS).getBuffer(var58);
                   }
 
                   GpuBufferSlice[] var61 = var14.writeChunkSections(var33.toArray(new ChunkSectionInfo[0]));
