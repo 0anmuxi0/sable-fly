@@ -5,7 +5,7 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $root
 
-$branches = @("master", "mc26.3", "mc26.1.2")   # master = 26.2
+$branches = @("mc26.2", "mc26.3", "mc26.1.2")   # mc26.2 = 26.2
 $original = (git branch --show-current).Trim()
 
 # 检查工作区干净（避免切换分支丢失改动）
