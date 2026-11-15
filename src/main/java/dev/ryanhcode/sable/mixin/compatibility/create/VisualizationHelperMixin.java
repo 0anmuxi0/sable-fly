@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.ryanhcode.sable.Sable;
+import com.zurrtum.create.client.flywheel.api.visualization.BlockEntityVisualizer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.spongepowered.asm.mixin.Mixin;
@@ -60,8 +61,8 @@ public class VisualizationHelperMixin {
          target = "Lcom/zurrtum/create/client/flywheel/lib/visualization/VisualizationHelper;getVisualizer(Lnet/minecraft/world/level/block/entity/BlockEntity;)Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;"
       )}
    )
-   private Object sable$skipSubLevelVisuals(
-      BlockEntity blockEntity, Operation<Object> original
+   private static BlockEntityVisualizer<?> sable$skipSubLevelVisuals(
+      BlockEntity blockEntity, Operation<BlockEntityVisualizer<?>> original
    ) {
       if (Sable.HELPER.getContaining(blockEntity) != null) {
          return null;
