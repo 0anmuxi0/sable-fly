@@ -25,7 +25,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.Entity.RemovalReason;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -94,31 +93,6 @@ public abstract class EntityMixin implements EntityMovementExtension {
       this.verticalCollisionBelow = this.sable$collisionInfo.verticalCollisionBelow;
       this.minorHorizontalCollision = this.sable$collisionInfo.minorHorizontalCollision;
       var5.call(var1, this.verticalCollisionBelow, this.horizontalCollision, var4);
-   }
-
-   @WrapOperation(
-      method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
-      at = {@At(
-         value = "INVOKE",
-         target = "Lnet/minecraft/world/level/block/Block;updateEntityMovementAfterFallOn(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;)V"
-      )}
-   )
-   public void sable$subLevelBounciness(Block var1, BlockGetter var2, Entity var3, Operation<Void> var4) {
-      if (this.verticalCollision) {
-         SubLevel var5 = this.sable$trackingSubLevel;
-         if (var5 != null) {
-            // 26.1.2 没有 getBlockBounciness，等价语义：用 sub-level 内玩家脚下的方块执行落块处理；
-            // 注意：不要临时移动实体坐标（pushEntityLocalIfNeeded），否则会干扰跳跃/移动速度。
-            BlockPos var8 = BlockPos.containing(var3.getX(), var3.getY() - 0.2, var3.getZ());
-            BlockState var9 = var5.getLevel().getBlockState(var8);
-            if (!var9.isAir() && !var9.getCollisionShape(var5.getLevel(), var8).isEmpty()) {
-               var9.getBlock().updateEntityMovementAfterFallOn(var5.getLevel(), var3);
-               return;
-            }
-         }
-      }
-
-      var4.call(var1, var2, var3);
    }
 
    @WrapOperation(
