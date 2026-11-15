@@ -25,6 +25,8 @@
                    "compatibility.create.GhostBlockRendererMixin",
                    "compatibility.create.ItemOutlineMixin",
                    "compatibility.create.LineOutlineMixin",
+                   "compatibility.create.PlacementClientMixin",
+                   "compatibility.create.BucketItemMixin",
                    "compatibility.create.SuperGlueSelectionHandlerMixin",
                    "dynamic_directional_shading.SectionCompilerMixin",
                    "dynamic_directional_shading.ModelBlockRendererCacheMixin",
