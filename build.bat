@@ -29,5 +29,6 @@ for %%b in (mc26.2 mc26.3 mc26.1.2) do (
 echo.
 echo Done. Artifacts copied to:
 echo   %OUT%
-dir /b "%OUT%\sable-fly*.jar"
+dir /b "%OUT%"
+sable-fly*.jar 2>nul
 endlocal
