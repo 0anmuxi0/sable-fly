@@ -13,9 +13,6 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 public final class SableClientConfig {
    public static final ModConfigSpec SPEC;
    public static final BooleanValue ATTEMPT_UDP_NETWORKING;
-   public static final BooleanValue SUB_LEVEL_DYNAMIC_SHADING;
-   public static final BooleanValue SUB_LEVEL_WATER_OCCLUSION;
-   public static final BooleanValue SUB_LEVEL_SKYLIGHT_SHADOWS;
    public static final BooleanValue DEBUG_DRAW_LOADED_CHUNKS;
    public static final BooleanValue SUB_LEVEL_OCCLUSION_CULLING;
    public static final BooleanValue SUB_LEVEL_CULL_ENCLOSED_BLOCKS;
@@ -35,9 +32,6 @@ public final class SableClientConfig {
 
    static {
       Builder builder = new Builder();
-      SUB_LEVEL_DYNAMIC_SHADING = builder.comment("Whether sub-levels should apply block shading dynamically").define("sub_level_dynamic_shading", true);
-      SUB_LEVEL_WATER_OCCLUSION = builder.comment("Whether sub-levels can occlude the water surface").define("sub_level_water_occlusion", true);
-      SUB_LEVEL_SKYLIGHT_SHADOWS = builder.comment("Whether sub-levels should cast a shadow on the world").define("sub_level_skylight_shadows", false);
       DEBUG_DRAW_LOADED_CHUNKS = builder.comment("Whether to draw loaded chunks on the client in the chunk debug renderer")
          .define("debug_draw_loaded_chunks", false);
       SUB_LEVEL_OCCLUSION_CULLING = builder.comment(

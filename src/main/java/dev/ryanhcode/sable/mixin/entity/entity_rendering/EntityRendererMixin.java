@@ -52,7 +52,7 @@ public abstract class EntityRendererMixin {
       Vec3 lightProbeOffset = entity.getLightProbePosition(partialTicks).subtract(entity.getEyePosition(partialTicks));
       Vector3d lightProbePosition = JOMLConversion.toJOML(Sable.HELPER.getEyePositionInterpolated(entity, partialTicks)).add(lightProbeOffset.x, lightProbeOffset.y, lightProbeOffset.z);
       BlockPos blockPos = BlockPos.containing(lightProbePosition.x, lightProbePosition.y, lightProbePosition.z);
-      return LightCoordsUtil.pack(LightCoordsUtil.block(original), sable$getSubLevelAccountedSkyLight(original, entity.level(), LightLayer.SKY, blockPos, lightProbePosition));
+      return LightCoordsUtil.pack(sable$getSubLevelAccountedBlockLight(original, entity.level(), LightLayer.BLOCK, blockPos, lightProbePosition), sable$getSubLevelAccountedSkyLight(original, entity.level(), LightLayer.SKY, blockPos, lightProbePosition));
    }
 
    @Redirect(
@@ -114,6 +114,33 @@ public abstract class EntityRendererMixin {
       }
 
       return baseBrightness;
+   }
+
+   @Redirect(
+      method = {"getBlockLightLevel"},
+      at = {@At(
+         value = "INVOKE",
+         target = "Lnet/minecraft/world/level/Level;getBrightness(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I"
+      )}
+   )
+   private int sable$getBlockLightLevel(Level instance, LightLayer lightLayer, BlockPos blockPos) {
+      return sable$getSubLevelAccountedBlockLight(-1, instance, lightLayer, blockPos, JOMLConversion.atCenterOf(blockPos));
+   }
+
+   @Unique
+   private static int sable$getSubLevelAccountedBlockLight(int original, Level instance, LightLayer lightLayer, BlockPos blockPos, Vector3dc lightProbePosition) {
+      Iterable<SubLevel> all = Sable.HELPER.getAllIntersecting(instance, new BoundingBox3d(blockPos).expand(2.0));
+      int l = original == -1 ? instance.getBrightness(lightLayer, blockPos) : LightCoordsUtil.block(original);
+      MutableBlockPos probeBlockPos = new MutableBlockPos();
+      Vector3d tempProbePosition = new Vector3d();
+
+      for (SubLevel subLevel : all) {
+         ClientSubLevel clientSubLevel = (ClientSubLevel)subLevel;
+         clientSubLevel.renderPose().transformPositionInverse(lightProbePosition, tempProbePosition);
+         l = Math.max(l, subLevel.getLevel().getBrightness(lightLayer, probeBlockPos.set(tempProbePosition.x, tempProbePosition.y, tempProbePosition.z)));
+      }
+
+      return l;
    }
 
    @Inject(

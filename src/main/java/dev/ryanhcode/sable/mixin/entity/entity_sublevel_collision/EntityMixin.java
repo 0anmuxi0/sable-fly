@@ -92,6 +92,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * 因此本 mixin <b>完全不拦截</b> {@code Block.updateEntityMovementAfterFallOn}，
  * 让 sub-level 上的落地走<b>原版</b>语义（Y 速度清零），与主世界手感一致。
  *
+ * <p><b>例外</b>：{@code entity_rotations_and_riding.BlockMixin} 的 @Redirect 会对同一方法做
+ * <b>旋转校正</b>（仅当实体处于带旋转的 sub-level 时，把 Y 速度清零的方向改为 sub-level 局部 up；
+ * {@code getCustomEntityOrientation} 为 null 时原样回落原版语义）。这不属于上述被否定的
+ * "sub-level 内方块覆盖落块 / 临时坐标平移"方案，与 1.21.1 时代两 mixin 共存的行为一致。
+ *
  * <p>说明：{@link #sable$checkFallDamage} 与 {@link #sable$stepOn} 里的
  * {@code SubLevelHelper.pushEntityLocalIfNeeded} 是 <b>26.2 基线就存在</b>的独立功能
  * （让坠落伤害 / 踩踏效果按 sub-level <i>内</i>的方块计算，而不是父世界坐标处的空气），
