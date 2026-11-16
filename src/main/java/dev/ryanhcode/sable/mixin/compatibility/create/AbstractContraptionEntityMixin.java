@@ -131,14 +131,14 @@ public abstract class AbstractContraptionEntityMixin
             // whose centerOfMass is null.
             if (this.sable$massTracker == null || this.sable$massTracker.getCenterOfMass() == null) {
                 this.sable$initialized = true;
-                Sable.LOGGER.debug("[ctrp-diag] init FAILED (massTracker invalid) - contraption NOT registered");
+                Sable.LOGGER.info("[ctrp-diag] init FAILED (massTracker invalid) pos={} - contraption NOT registered", this.position());
                 return;
             }
             this.sable$addToPlot();
             this.sable$addToPipeline(serverLevel);
             this.sable$initialized = true;
-            Sable.LOGGER.debug("[ctrp-diag] registered mass={} plotHit={}",
-                    this.sable$massTracker.getMass(), Sable.HELPER.getContaining(this) != null);
+            Sable.LOGGER.info("[ctrp-diag] registered mass={} plotHit={} pos={}",
+                    this.sable$massTracker.getMass(), Sable.HELPER.getContaining(this) != null, this.position());
         }
     }
 

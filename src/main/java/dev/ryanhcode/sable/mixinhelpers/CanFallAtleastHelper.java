@@ -56,9 +56,10 @@ public class CanFallAtleastHelper {
          sink.entityBoxOrientation.identity().rotateY(SubLevelEntityCollision.getHitBoxYaw(pose));
          entityBoundsOBB.setOrientation(sink.entityBoxOrientation);
 
+         Level subLevelLevel = subLevel.getLevel();
          for (BlockPos block : blocks) {
-            BlockState state = level.getBlockState(block);
-            VoxelShape voxelShape = state.getCollisionShape(level, block);
+            BlockState state = subLevelLevel.getBlockState(block);
+            VoxelShape voxelShape = state.getCollisionShape(subLevelLevel, block);
             if (!state.isAir()) {
                Iterator<BoundingBox3dc> iterator = ((FastVoxelShapeIterable)voxelShape).sable$allBoxes();
 

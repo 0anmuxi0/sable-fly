@@ -94,6 +94,17 @@ public final class FlywheelCompat {
     }
 
     /**
+     * Returns the ClientSubLevel whose plot chunks contain the given <b>entity</b>
+     * (e.g. a Create Contraption entity at the plot-virtual coordinate, ~+/-20.48M).
+     */
+    public static ClientSubLevel getContainingSubLevel(net.minecraft.world.entity.Entity entity) {
+        if (!(entity.level() instanceof ClientLevel clientLevel)) {
+            return null;
+        }
+        return getContainingSubLevel(clientLevel, entity.blockPosition());
+    }
+
+    /**
      * Best-effort helper to create a Flywheel visual for a BE outside the mixin paths.
      */
     public static boolean tryAddFlywheelVisual(BlockEntity blockEntity) {
@@ -130,6 +141,19 @@ public final class FlywheelCompat {
         }
         EMBEDDINGS.clear();
         PENDING_BEFORE_EMBEDDING.clear();
+    }
+
+    /**
+     * Returns (or lazily creates) the embedding state used for a sublevel's <b>entity</b>
+     * visuals (e.g. Create's {@code ContraptionVisual}).
+     *
+     * <p>Entity visuals go through {@code EntityStorage.createRaw -> EntityVisualizer.createVisual}
+     * exactly like block-entity visuals go through {@code BlockEntityStorage}; the same
+     * per-sublevel embedding is reused, so entity instances land in the sublevel's local
+     * space and receive the sublevel render pose every frame.</p>
+     */
+    public static FlywheelEmbeddingState getOrCreateEntityEmbedding(VisualizationContext ctx, ClientSubLevel subLevel) {
+        return getOrCreateState(ctx, subLevel);
     }
 
     /** True when any active sublevel exists; render-frame work can short-circuit otherwise. */

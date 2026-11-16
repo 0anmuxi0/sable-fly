@@ -43,6 +43,8 @@ import org.joml.Vector3d;
 import org.joml.Vector3dc;
 
 public class SubLevelEntityCollision {
+   // 玩家碰撞诊断（临时）
+   private static int SABLE$PLAYER_DIAG = 0;
    public static SubLevelEntityCollision.CollisionInfo collide(Entity entity, Vec3 collisionMotionMoj, Vec3 velocityMotionMoj, LevelReusedVectors sink) {
       if (entity instanceof ServerPlayer) {
          SubLevelEntityCollision.CollisionInfo collisionInfo = new SubLevelEntityCollision.CollisionInfo();
@@ -160,10 +162,10 @@ public class SubLevelEntityCollision {
 
                entityBoundsOBB.setOrientation(sink.entityBoxOrientation);
                entityBoundsCenter.add(collisionMotion, entityBoundsOBB.getPosition());
-               ObjectIterator var45 = intersecting.iterator();
+               ObjectIterator intersectingIterator = intersecting.iterator();
 
-               while (var45.hasNext()) {
-                  SubLevel subLevel = (SubLevel)var45.next();
+               while (intersectingIterator.hasNext()) {
+                  SubLevel subLevel = (SubLevel)intersectingIterator.next();
                   if (Sable.HELPER.getVehicleSubLevel(entity) != subLevel) {
                      Pose3d logicalPose = subLevel.logicalPose();
                      lastPose.set(subLevel.lastPose());
@@ -399,6 +401,14 @@ public class SubLevelEntityCollision {
             ((EntityExtension)entity).sable$setPosSuperRaw(originalEntityPosition);
             collisionInfo.motion = JOMLConversion.toMojang(collisionMotion);
             collisionInfo.firstCollisions = firstCollisions;
+            if (entity instanceof net.minecraft.world.entity.player.Player p && p.isLocalPlayer()
+                  && (SABLE$PLAYER_DIAG++ < 3 || SABLE$PLAYER_DIAG % 240 == 0)) {
+               Sable.LOGGER.info("[p-coli] subHcol={} tracking={} motion={},{},{} inherited={}",
+                  collisionInfo.subLevelHorizontalCollision,
+                  collisionInfo.trackingSubLevel != null,
+                  collisionMotion.x, collisionMotion.y, collisionMotion.z,
+                  collisionInfo.inheritedMotion);
+            }
             return collisionInfo;
          }
       }
