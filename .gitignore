@@ -12,3 +12,4 @@ src-java-cfr-backup/
 run/
 runs/
 run-game.bat
+libs/*.jar
