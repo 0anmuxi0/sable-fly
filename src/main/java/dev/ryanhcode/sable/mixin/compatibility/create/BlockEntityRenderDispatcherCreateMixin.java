@@ -30,9 +30,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * {@code extractRenderState} 的整个执行过程。
  *
  * <p>注意这里用的是<b>裸方法名</b>（不带描述符）：该方法是泛型方法
- * {@code <E extends BlockEntity, S extends BlockEntityRenderState> S tryExtractRenderState(E, float, CrumblingOverlay)}，
+ * {@code <E extends BlockEntity, S extends BlockEntityRenderState> S tryExtractRenderState(E, float, CrumblingOverlay, boolean)}，
  * 带描述符时泛型参数无法解析（实测会报 {@code Scanned 0 target(s)}）。
  * Sable 已有的 {@code sublevel_render/BlockEntityRenderDispatcherMixin} 也用同样的裸方法名注入。
+ *
+ * <p><b>26.2/26.3 签名说明</b>：相比 26.1.2，{@code tryExtractRenderState} 末尾多了一个
+ * {@code boolean} 参数（26.1.2 为 {@code (E, float, CrumblingOverlay)}）。注入回调的参数列表
+ * 必须与目标方法完全一致，否则 Mixin 会抛出
+ * {@code InvalidInjectionException: Invalid descriptor ... Expected (...Z...)但 found (...)}.
  */
 @Mixin({BlockEntityRenderDispatcher.class})
 public class BlockEntityRenderDispatcherCreateMixin {
@@ -41,7 +46,7 @@ public class BlockEntityRenderDispatcherCreateMixin {
       at = {@At("HEAD")}
    )
    private void sable$setCreateContext(
-      BlockEntity blockEntity, float partialTick, CrumblingOverlay crumblingOverlay,
+      BlockEntity blockEntity, float partialTick, CrumblingOverlay crumblingOverlay, boolean bl,
       CallbackInfoReturnable<BlockEntityRenderState> cir
    ) {
       CreateSupportsVisualizationContext.setCurrentBlockEntity(blockEntity);
@@ -52,7 +57,7 @@ public class BlockEntityRenderDispatcherCreateMixin {
       at = {@At("RETURN")}
    )
    private void sable$clearCreateContext(
-      BlockEntity blockEntity, float partialTick, CrumblingOverlay crumblingOverlay,
+      BlockEntity blockEntity, float partialTick, CrumblingOverlay crumblingOverlay, boolean bl,
       CallbackInfoReturnable<BlockEntityRenderState> cir
    ) {
       CreateSupportsVisualizationContext.clearCurrentBlockEntity();
