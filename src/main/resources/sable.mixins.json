@@ -5,6 +5,7 @@
     "minVersion": "0.8",
     "plugin": "dev.ryanhcode.sable.plugin.SableMixinPlugin",
     "client": [
+        "compatibility.create.ContraptionVisualLightMixin",
         "compatibility.create.BlockEntityRenderDispatcherCreateMixin",
         "compatibility.create.FlwApiLinkImplMixin",
         "compatibility.create.VisualizationHelperMixin",
