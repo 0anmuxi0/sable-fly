@@ -3,6 +3,8 @@ package dev.ryanhcode.sable.mixin.compatibility.create;
 import com.zurrtum.create.client.content.contraptions.render.ContraptionVisual;
 import com.zurrtum.create.client.flywheel.api.visual.SectionTrackedVisual.SectionCollector;
 import dev.ryanhcode.sable.Sable;
+import dev.ryanhcode.sable.companion.math.Pose3dc;
+import dev.ryanhcode.sable.sublevel.ClientSubLevel;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
@@ -75,7 +77,13 @@ public abstract class ContraptionVisualLightMixin {
 
     /**
      * 把 plot 虚拟坐标的 section 集合投影到真实世界坐标。
-     * 不在子关卡内时原样返回（主世界 contraption 不受影响）。
+     *
+     * <p>先找出集合中<b>任意一个</b>能定位到子关卡的 section，确定该结构所属的
+     * ClientSubLevel，再用它的 <b>renderPose</b> 统一变换所有 section。
+     * 这样避免"逐点 projectOutOfSubLevel 在某些 section 上判定失败"导致的
+     * 部分 section 未被投影（表现为结构跨区块后部分区域变黑）。
+     *
+     * <p>不在子关卡内时原样返回（主世界 contraption 不受影响）。
      */
     private static LongSet sable$projectSections(LongSet plotSections) {
         if (plotSections == null || plotSections.isEmpty()) {
@@ -85,15 +93,24 @@ public abstract class ContraptionVisualLightMixin {
         if (level == null) {
             return plotSections;
         }
-        long first = plotSections.iterator().nextLong();
-        Vector3d sample = new Vector3d(
-                SectionPos.x(first) * 16 + 8,
-                SectionPos.y(first) * 16 + 8,
-                SectionPos.z(first) * 16 + 8);
-        SubLevel subLevel = Sable.HELPER.getContaining(level, sample);
+        // 1. 用集合中任意一个 section 定位所属子关卡
+        ClientSubLevel subLevel = null;
+        Vector3d sample = new Vector3d();
+        for (long packed : plotSections) {
+            sample.set(
+                    SectionPos.x(packed) * 16 + 8,
+                    SectionPos.y(packed) * 16 + 8,
+                    SectionPos.z(packed) * 16 + 8);
+            if (Sable.HELPER.getContaining(level, sample) instanceof ClientSubLevel found) {
+                subLevel = found;
+                break;
+            }
+        }
         if (subLevel == null) {
             return plotSections;
         }
+        // 2. 用该子关卡的渲染位姿统一变换所有 section
+        Pose3dc pose = subLevel.renderPose();
         LongSet mapped = new LongOpenHashSet(plotSections.size());
         Vector3d projected = new Vector3d();
         for (long packed : plotSections) {
@@ -101,7 +118,7 @@ public abstract class ContraptionVisualLightMixin {
                     SectionPos.x(packed) * 16 + 8,
                     SectionPos.y(packed) * 16 + 8,
                     SectionPos.z(packed) * 16 + 8);
-            Sable.HELPER.projectOutOfSubLevel(level, sample, projected);
+            pose.transformPosition(sample, projected);
             mapped.add(SectionPos.asLong(
                     SectionPos.blockToSectionCoord((int) Math.floor(projected.x)),
                     SectionPos.blockToSectionCoord((int) Math.floor(projected.y)),
