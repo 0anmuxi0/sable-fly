@@ -11,3 +11,5 @@ src-java-cfr-backup/
 .idea/
 run/
 runs/
+bin/
+*.class
