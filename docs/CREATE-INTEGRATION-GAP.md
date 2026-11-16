@@ -506,3 +506,51 @@ C:\Users\_anmuxi_\Desktop\Sable-Fly\libs\README.md
 `compatibility.create` mixin：15 条（原）− 1（BucketItemMixin 删）+ 4（阶段一新增）= **18 条**。
 
 （26.2 / 26.3 分支待 26.1.2 实测通过后按第 5 节跨版本流程推进。）
+
+
+---
+
+## 10. 首次实测回归修复（2026-11-16，mc26.1.2）
+
+实测反馈：Contraption 有碰撞但不渲染；子关卡内动力件能渲染，**主世界动力件反而消失**。
+
+### 10.1 主世界动力件消失 —— getSubLevel 语义误用（已修）
+
+`FlywheelCompat.getContainingSubLevel` 用了 `container.getSubLevel(chunkX, chunkZ)`，
+但 26.1.2 的 `SubLevelContainer.getSubLevel(x, z)` 接收的是**本地 plot 网格索引**
+（`0..(1<<logSideLength)`，`getIndex(x,z) = x + (z << logSideLength)`），不是世界 chunk 坐标。
+主世界 chunk 0..1023 落在本地索引范围内 → 主世界 BE 被误判为子关卡 BE →
+`skipVanillaRender` 放行取消 vanilla 渲染 + 以错误位姿创建 embedding 视觉 → 消失。
+
+修复：改用 `getPlot(chunkX, chunkZ)`（世界 chunk 坐标，内部减 origin 并做边界检查）。
+（Aeronautics 参考实现同样存在该误用，其注释"getSubLevel bounds-checks world coordinates"与
+26.1.2 实现不符。）
+
+### 10.2 Contraption 不渲染 —— 两个根因（已修）
+
+`ContraptionEntityRenderer.extractRenderState` 字节码确认：
+
+1. `supportsVisualization(entity.level())==true` 时**方块层（state.layers）不构建**，交给
+   Flywheel 的 `ContraptionVisual`（entity visual，父世界坐标系）——子关卡 Contraption 的
+   实体位置在 plot 虚拟坐标（±20.48M）→ 结构被画在 20M 外。
+2. vanilla 路径下该方法用实体自身位置重算 `state.x/y/z`（plot 坐标），
+   **覆盖了** `EntityRenderDispatcherMixin.sable$captureEntity` 在主世界做的投影。
+
+修复（`ContraptionEntityRendererMixin` + `FlwApiLinkImplMixin` 扩展）：
+- HEAD 把当前渲染的 Contraption 实体写入 `CreateSupportsVisualizationContext`，
+  `supportsVisualization` 对子关卡 Contraption 返回 false → 方块层走 vanilla
+  SuperByteBuffer 路径（与 Sable 1.21.1 官方行为一致）；
+- RETURN 用子关卡 renderPose 把 `state.x/y/z` 投影到主世界坐标。
+
+### 10.3 已知遗留（未修）
+
+- Contraption 方块层的 `useLevelLight(level, transl)` 仍用父世界光照引擎 + plot 坐标矩阵，
+  子关卡内的光照采样可能偏暗/失真（结构性渲染已恢复，光照后续迭代）。
+- **玩家物理不正确**（用户反馈，具体表现待确认）。
+
+### 10.4 待复测清单
+
+- [ ] 子关卡轴承组装：Contraption 渲染可见、跟随结构位姿旋转、拆解位置正确
+- [ ] 主世界动力件（齿轮/轴/泵等）恢复正常渲染
+- [ ] 子关卡动力件（白名单内外）正常
+- [ ] 玩家物理：请描述具体现象（穿模/滑步/掉落/无推动等）
