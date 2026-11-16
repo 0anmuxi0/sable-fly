@@ -66,9 +66,26 @@ public final class CreateSupportsVisualizationContext {
    }
 
    /** 当前正在提取渲染状态的 Contraption 实体是否位于某个 sub-level 内。 */
+   /**
+    * 当前正在提取渲染状态的 Contraption 实体是否位于某个 sub-level 内。
+    *
+    * <p>注意：客户端的 {@code ClientPacketListenerMixin.sable$lerp} 会把子关卡内实体的
+    * 位置同步变换到<b>主世界坐标</b>（非 LivingEntity 分支：{@code transformPosition}），
+    * 因此 {@code getContaining(entity)} 可能返回 null。这里依次检查：
+    * 当前位置所属子关卡 → tracking 子关卡 → 上次 tracking 子关卡。</p>
+    */
    public static boolean isCurrentContraptionInSubLevel() {
       AbstractContraptionEntity contraption = CURRENT_CONTRAPTION.get();
-      return contraption != null && Sable.HELPER.getContaining(contraption) != null;
+      if (contraption == null) {
+         return false;
+      }
+      if (Sable.HELPER.getContaining(contraption) != null) {
+         return true;
+      }
+      if (Sable.HELPER.getTrackingSubLevel(contraption) != null) {
+         return true;
+      }
+      return Sable.HELPER.getLastTrackingSubLevel(contraption) != null;
    }
 
    /**

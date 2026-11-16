@@ -53,6 +53,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = ContraptionEntityRenderer.class, remap = false)
 public abstract class ContraptionEntityRendererMixin {
 
+    private static int sable$diagCounter = 0;
+
     @Inject(
             method = "extractRenderState(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/entity/state/EntityRenderState;F)V",
             at = @At("HEAD"),
@@ -61,6 +63,13 @@ public abstract class ContraptionEntityRendererMixin {
                                                CallbackInfo ci) {
         if (entity instanceof AbstractContraptionEntity contraption) {
             CreateSupportsVisualizationContext.setCurrentContraption(contraption);
+            if (sable$diagCounter++ < 3 || sable$diagCounter % 200 == 0) {
+                Sable.LOGGER.info("[c-render] pos={} anchor={} containing={} tracking={} lastTracking={}",
+                        contraption.position(), contraption.getAnchorVec(),
+                        Sable.HELPER.getContainingClient(contraption),
+                        Sable.HELPER.getTrackingSubLevel(contraption) != null,
+                        Sable.HELPER.getLastTrackingSubLevel(contraption) != null);
+            }
         }
     }
 
