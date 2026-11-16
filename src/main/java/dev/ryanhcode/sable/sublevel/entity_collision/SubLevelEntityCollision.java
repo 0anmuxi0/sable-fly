@@ -51,12 +51,18 @@ public class SubLevelEntityCollision {
          collisionInfo.motion = collisionMotionMoj;
          SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(entity);
          if (trackingSubLevel != null) {
-            entity.setOnGround(true);
-            collisionInfo.verticalCollisionBelow = true;
-            collisionInfo.verticalCollision = true;
+            // 26.1.2 移植修复：只有玩家"确实站在结构上"（原 onGround）时才强制落地并
+            // 清除下落速度。跟踪状态在玩家跳下/离开结构边缘的瞬间仍会保留，如果无条件
+            // 清除下落速度，玩家会像中了"缓降"一样缓慢飘落。
+            boolean wasOnGround = entity.onGround();
             collisionInfo.trackingSubLevel = trackingSubLevel;
-            if (entity.getDeltaMovement().y < 0.0) {
-               entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.0, 1.0));
+            if (wasOnGround) {
+               entity.setOnGround(true);
+               collisionInfo.verticalCollisionBelow = true;
+               collisionInfo.verticalCollision = true;
+               if (entity.getDeltaMovement().y < 0.0) {
+                  entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.0, 1.0));
+               }
             }
          }
 
