@@ -4,9 +4,9 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public interface EntityStickExtension {
-   void sable$plotLerpTo(Vec3 var1, int var2);
+   void sable$plotLerpTo(Vec3 pos, int lerpSteps);
 
-   void sable$setPlotPosition(@Nullable Vec3 var1);
+   void sable$setPlotPosition(@Nullable Vec3 position);
 
    @Nullable
    Vec3 sable$getPlotPosition();

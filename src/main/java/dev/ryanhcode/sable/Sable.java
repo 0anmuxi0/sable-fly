@@ -84,7 +84,7 @@ public final class Sable {
          return LocalDate.now().getDayOfWeek() == DayOfWeek.SUNDAY && Util.getMillis() % 2L == 0L
             ? "It's sable sunday"
             : WITTIER_COMMENTS.get((int)(Util.getMillis() % WITTIER_COMMENTS.size()));
-      } catch (Throwable var1) {
+      } catch (Throwable e) {
          return "Wittier comment unavailable :(";
       }
    }

@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin({ServerChunkCache.class})
 public interface ServerChunkCacheAccessor {
    @Invoker
-   ChunkHolder invokeGetVisibleChunkIfPresent(long var1);
+   ChunkHolder invokeGetVisibleChunkIfPresent(long chunkPos);
 }

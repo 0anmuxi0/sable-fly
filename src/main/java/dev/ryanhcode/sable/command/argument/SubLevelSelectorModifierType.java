@@ -78,10 +78,10 @@ public class SubLevelSelectorModifierType {
       int getMaxResults();
 
       @Nullable
-      List<ServerSubLevel> apply(List<ServerSubLevel> var1, Vector3d var2);
+      List<ServerSubLevel> apply(List<ServerSubLevel> selected, Vector3d sourcePos);
    }
 
    public interface Parser {
-      SubLevelSelectorModifierType.Modifier parse(StringReader var1) throws CommandSyntaxException;
+      SubLevelSelectorModifierType.Modifier parse(StringReader reader) throws CommandSyntaxException;
    }
 }

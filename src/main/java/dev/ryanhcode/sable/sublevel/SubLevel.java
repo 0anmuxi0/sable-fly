@@ -40,7 +40,7 @@ public abstract class SubLevel implements SubLevelAccess {
       }
    }
 
-   protected abstract LevelPlot createPlot(SubLevelContainer var1, int var2, int var3, int var4);
+   protected abstract LevelPlot createPlot(SubLevelContainer plotContainer, int plotX, int plotY, int logPlotSize);
 
    public void onPlotBoundsChanged() {
    }

@@ -80,8 +80,8 @@ public class SubLevelStorage implements AutoCloseable {
       try {
          SubLevelRegionFile regionFile = this.getRegionFile(chunkPos);
          return regionFile.read(chunkPos);
-      } catch (IOException var3) {
-         Sable.LOGGER.error("Failed to load holding chunk for {}", chunkPos, var3);
+      } catch (IOException e) {
+         Sable.LOGGER.error("Failed to load holding chunk for {}", chunkPos, e);
          return null;
       }
    }
@@ -90,8 +90,8 @@ public class SubLevelStorage implements AutoCloseable {
       try {
          SubLevelRegionFile regionFile = this.getRegionFile(chunkPos);
          regionFile.trySave(chunkPos.getRegionLocalX(), chunkPos.getRegionLocalZ(), holdingChunk);
-      } catch (IOException var4) {
-         Sable.LOGGER.error("Failed to save holding chunk for {}", chunkPos, var4);
+      } catch (IOException e) {
+         Sable.LOGGER.error("Failed to save holding chunk for {}", chunkPos, e);
       }
    }
 
@@ -112,8 +112,8 @@ public class SubLevelStorage implements AutoCloseable {
 
             return subLevel;
          }
-      } catch (IOException var6) {
-         Sable.LOGGER.error("Failed to load sub-level for {}", chunkPos, var6);
+      } catch (IOException e) {
+         Sable.LOGGER.error("Failed to load sub-level for {}", chunkPos, e);
          return null;
       }
    }
@@ -132,8 +132,8 @@ public class SubLevelStorage implements AutoCloseable {
 
             storageIndex++;
          }
-      } catch (IOException var6) {
-         Sable.LOGGER.error("Failed to save sub-level for {}", chunkPos, var6);
+      } catch (IOException e) {
+         Sable.LOGGER.error("Failed to save sub-level for {}", chunkPos, e);
          return null;
       }
    }
@@ -142,8 +142,8 @@ public class SubLevelStorage implements AutoCloseable {
       try {
          SubLevelStorageFile storageFile = this.getRegionStorageFile(pointer.chunkPos(), pointer.storageIndex());
          storageFile.write(pointer.subLevelIndex(), subLevel != null ? subLevel.fullTag() : null);
-      } catch (IOException var4) {
-         Sable.LOGGER.error("Failed to save sub-level for {}", pointer.chunkPos(), var4);
+      } catch (IOException e) {
+         Sable.LOGGER.error("Failed to save sub-level for {}", pointer.chunkPos(), e);
       }
    }
 
@@ -170,27 +170,27 @@ public class SubLevelStorage implements AutoCloseable {
    @Override
    public void close() throws IOException {
       ExceptionCollector<IOException> exceptionCollector = new ExceptionCollector<>();
-      ObjectIterator var2 = this.storageCache.values().iterator();
+      ObjectIterator iterator = this.storageCache.values().iterator();
 
-      while (var2.hasNext()) {
-         SubLevelStorageFile storageFile = (SubLevelStorageFile)var2.next();
+      while (iterator.hasNext()) {
+         SubLevelStorageFile storageFile = (SubLevelStorageFile)iterator.next();
 
          try {
             storageFile.close();
-         } catch (IOException var6) {
-            exceptionCollector.add(var6);
+         } catch (IOException e) {
+            exceptionCollector.add(e);
          }
       }
 
-      var2 = this.regionCache.values().iterator();
+      iterator = this.regionCache.values().iterator();
 
-      while (var2.hasNext()) {
-         SubLevelRegionFile regionFile = (SubLevelRegionFile)var2.next();
+      while (iterator.hasNext()) {
+         SubLevelRegionFile regionFile = (SubLevelRegionFile)iterator.next();
 
          try {
             regionFile.close();
-         } catch (IOException var5) {
-            exceptionCollector.add(var5);
+         } catch (IOException e) {
+            exceptionCollector.add(e);
          }
       }
 
@@ -204,17 +204,17 @@ public class SubLevelStorage implements AutoCloseable {
    }
 
    public void flush() throws IOException {
-      ObjectIterator var1 = this.regionCache.values().iterator();
+      ObjectIterator iterator = this.regionCache.values().iterator();
 
-      while (var1.hasNext()) {
-         SubLevelRegionFile regionFile = (SubLevelRegionFile)var1.next();
+      while (iterator.hasNext()) {
+         SubLevelRegionFile regionFile = (SubLevelRegionFile)iterator.next();
          regionFile.flush();
       }
 
-      var1 = this.storageCache.values().iterator();
+      iterator = this.storageCache.values().iterator();
 
-      while (var1.hasNext()) {
-         SubLevelStorageFile regionFile = (SubLevelStorageFile)var1.next();
+      while (iterator.hasNext()) {
+         SubLevelStorageFile regionFile = (SubLevelStorageFile)iterator.next();
          regionFile.flush();
       }
    }

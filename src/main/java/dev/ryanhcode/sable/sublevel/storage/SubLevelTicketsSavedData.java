@@ -141,10 +141,10 @@ public class SubLevelTicketsSavedData extends SavedData {
          CompoundTag infoTag = new CompoundTag();
          infoTag.store("uuid", UUIDUtil.CODEC, uuid);
          ListTag entriesTag = new ListTag();
-         ObjectIterator var13 = info.tickets().iterator();
+         ObjectIterator ticketIterator = info.tickets().iterator();
 
-         while (var13.hasNext()) {
-            SubLevelLoadingTicket<?> ticket = (SubLevelLoadingTicket<?>)var13.next();
+         while (ticketIterator.hasNext()) {
+            SubLevelLoadingTicket<?> ticket = (SubLevelLoadingTicket<?>)ticketIterator.next();
             CompoundTag entryTag = serializeTicket(ticket);
             if (entryTag != null) {
                entriesTag.add(entryTag);

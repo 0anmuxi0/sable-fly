@@ -100,8 +100,7 @@ public class FlwApiLinkImplMixin {
       )}
    )
    private boolean sable$disableForSubLevel(LevelAccessor level, Operation<Boolean> original) {
-      if (CreateSupportsVisualizationContext.isCurrentBlockEntityInSubLevel()
-         || CreateSupportsVisualizationContext.isCurrentContraptionInSubLevel()) {
+      if (CreateSupportsVisualizationContext.isCurrentBlockEntityInSubLevel()) {
          return false;
       }
 

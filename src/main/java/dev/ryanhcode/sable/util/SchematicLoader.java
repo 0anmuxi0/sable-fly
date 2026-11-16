@@ -30,16 +30,16 @@ public class SchematicLoader {
          Resource resource = option.get();
 
          try {
-            StructureTemplate var10;
+            StructureTemplate result;
             try (InputStream stream = resource.open()) {
                StructureTemplate template = new StructureTemplate();
                CompoundTag nbt = NbtIo.readCompressed(stream, NbtAccounter.create(536870912L));
                template.load(level.holderLookup(Registries.BLOCK), nbt);
-               var10 = template;
+               result = template;
             }
 
-            return var10;
-         } catch (IOException var13) {
+            return result;
+         } catch (IOException e) {
             return null;
          }
       }

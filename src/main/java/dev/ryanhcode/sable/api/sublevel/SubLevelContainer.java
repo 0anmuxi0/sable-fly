@@ -172,7 +172,7 @@ public abstract class SubLevelContainer {
       }
    }
 
-   protected abstract SubLevel createSubLevel(int var1, int var2, Pose3d var3, UUID var4);
+   protected abstract SubLevel createSubLevel(int globalPlotX, int globalPlotZ, Pose3d pose, UUID uuid);
 
    @Nullable
    public LevelChunk getChunk(ChunkPos pos) {
@@ -261,8 +261,8 @@ public abstract class SubLevelContainer {
       if (plot == null) {
          return List.of();
       } else if (plot.getSubLevel() instanceof ServerSubLevel serverSubLevel) {
-         Collection var10 = serverSubLevel.getTrackingPlayers();
-         ObjectArrayList players = new ObjectArrayList(var10.size());
+         Collection trackingPlayers = serverSubLevel.getTrackingPlayers();
+         ObjectArrayList players = new ObjectArrayList(trackingPlayers.size());
          PlayerList playerList = this.level.getServer().getPlayerList();
 
          for (UUID uuid : serverSubLevel.getTrackingPlayers()) {

@@ -20,7 +20,7 @@ public abstract class ResortTransparencyTaskMixin {
          target = "Lnet/minecraft/client/renderer/chunk/TranslucencyPointOfView;of(Lnet/minecraft/world/phys/Vec3;J)Lnet/minecraft/client/renderer/chunk/TranslucencyPointOfView;"
       )}
    )
-   private TranslucencyPointOfView sable$plotSpacePointOfView(Vec3 var1, long var2, Operation<TranslucencyPointOfView> var4) {
-      return (TranslucencyPointOfView)var4.call(SubLevelSectionSortHelper.plotCamera(SectionPos.of(var2), var1), var2);
+   private TranslucencyPointOfView sable$plotSpacePointOfView(Vec3 cameraPos, long sectionPos, Operation<TranslucencyPointOfView> operation) {
+      return (TranslucencyPointOfView)operation.call(SubLevelSectionSortHelper.plotCamera(SectionPos.of(sectionPos), cameraPos), sectionPos);
    }
 }

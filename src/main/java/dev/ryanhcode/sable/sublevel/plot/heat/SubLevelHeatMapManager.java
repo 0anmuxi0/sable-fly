@@ -144,10 +144,10 @@ public class SubLevelHeatMapManager {
                this.heatMapRemove(p);
             }
          } else if (!this.removed.isEmpty()) {
-            ObjectListIterator var17 = this.removed.iterator();
+            ObjectListIterator removedIterator = this.removed.iterator();
 
-            while (var17.hasNext()) {
-               BlockPos index = (BlockPos)var17.next();
+            while (removedIterator.hasNext()) {
+               BlockPos index = (BlockPos)removedIterator.next();
                BlockPos p = index;
                if (this.heatMapContains(index)) {
                   int currentHeat = this.heatMapGet(index);
@@ -246,10 +246,10 @@ public class SubLevelHeatMapManager {
             this.splitIndexMap.clear();
             this.splitIndexMap.add(0);
             Level levelx = this.subLevel.getLevel();
-            ObjectIterator var16 = newSubLevelBlocks.values().iterator();
+            ObjectIterator blockGroupIterator = newSubLevelBlocks.values().iterator();
 
-            while (var16.hasNext()) {
-               List<BlockPos> blocks = (List<BlockPos>)var16.next();
+            while (blockGroupIterator.hasNext()) {
+               List<BlockPos> blocks = (List<BlockPos>)blockGroupIterator.next();
                if (this.subLevel.isRemoved()) {
                   return false;
                }
@@ -391,6 +391,6 @@ public class SubLevelHeatMapManager {
 
    @FunctionalInterface
    public interface SplitListener {
-      void addBlocks(Level var1, BoundingBox3ic var2, Collection<BlockPos> var3);
+      void addBlocks(Level level, BoundingBox3ic bounds, Collection<BlockPos> blocks);
    }
 }

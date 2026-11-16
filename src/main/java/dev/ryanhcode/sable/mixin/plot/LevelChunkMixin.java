@@ -46,19 +46,19 @@ public class LevelChunkMixin {
       method = {"setBlockState"},
       at = {@At("HEAD")}
    )
-   private void sable$preSetBlockState(BlockPos var1, BlockState var2, int var3, CallbackInfoReturnable<BlockState> var4) {
-      this.sable$blockSet = var1;
+   private void sable$preSetBlockState(BlockPos pos, BlockState state, int flags, CallbackInfoReturnable<BlockState> cir) {
+      this.sable$blockSet = pos;
    }
 
    @Inject(
       method = {"setBlockState"},
       at = {@At("RETURN")}
    )
-   private void sable$postSetBlockState(BlockPos var1, BlockState var2, int var3, CallbackInfoReturnable<BlockState> var4) {
+   private void sable$postSetBlockState(BlockPos pos, BlockState state, int flags, CallbackInfoReturnable<BlockState> cir) {
       if (this.sable$blockSet != null) {
-         SubLevel var5 = Sable.HELPER.getContaining(this.level, this.sable$blockSet);
-         if (var5 != null) {
-            var5.getPlot().onBlockChange(this.sable$blockSet, var2);
+         SubLevel subLevel = Sable.HELPER.getContaining(this.level, this.sable$blockSet);
+         if (subLevel != null) {
+            subLevel.getPlot().onBlockChange(this.sable$blockSet, state);
          }
       }
 
@@ -72,22 +72,22 @@ public class LevelChunkMixin {
          target = "Lnet/minecraft/world/level/chunk/LevelChunkSection;setBlockState(IIILnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/block/state/BlockState;"
       )}
    )
-   private BlockState sable$setBlockState(LevelChunkSection var1, int var2, int var3, int var4, BlockState var5, Operation<BlockState> var6) {
-      BlockState var7 = (BlockState)var6.call(var1, var2, var3, var4, var5);
-      if (this.level instanceof ServerLevel var8 && var7 != var5 && this.sable$blockSet != null) {
-         var2 = this.sable$blockSet.getX();
-         var3 = this.sable$blockSet.getY();
-         var4 = this.sable$blockSet.getZ();
-         SableCommonEvents.handleBlockChange(var8, (LevelChunk)(Object)this, var2, var3, var4, var7, var5);
+   private BlockState sable$setBlockState(LevelChunkSection instance, int x, int y, int z, BlockState newState, Operation<BlockState> original) {
+      BlockState oldState = (BlockState)original.call(instance, x, y, z, newState);
+      if (this.level instanceof ServerLevel serverLevel && oldState != newState && this.sable$blockSet != null) {
+         x = this.sable$blockSet.getX();
+         y = this.sable$blockSet.getY();
+         z = this.sable$blockSet.getZ();
+         SableCommonEvents.handleBlockChange(serverLevel, (LevelChunk)(Object)this, x, y, z, oldState, newState);
       }
 
-      return var7;
+      return oldState;
    }
 
    @Unique
    private boolean sable$isPlotChunk() {
-      SubLevelContainer var1 = SubLevelContainer.getContainer(this.level);
-      return var1 != null && var1.inBounds(((LevelChunk)(Object)this).getPos());
+      SubLevelContainer container = SubLevelContainer.getContainer(this.level);
+      return container != null && container.inBounds(((LevelChunk)(Object)this).getPos());
    }
 
    @WrapOperation(
@@ -97,9 +97,9 @@ public class LevelChunkMixin {
          target = "Lnet/minecraft/world/level/chunk/LevelChunk;clearAllBlockEntities()V"
       )}
    )
-   private void sable$keepPlotBlockEntities(LevelChunk var1, Operation<Void> var2) {
+   private void sable$keepPlotBlockEntities(LevelChunk instance, Operation<Void> original) {
       if (!this.sable$isPlotChunk()) {
-         var2.call(var1);
+         original.call(instance);
       }
    }
 
@@ -110,24 +110,24 @@ public class LevelChunkMixin {
          target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V"
       )}
    )
-   private void sable$captureWantedBlockEntities(Consumer var1, final Object var2, Operation<Void> var3) {
+   private void sable$captureWantedBlockEntities(Consumer instance, final Object tagOutput, Operation<Void> original) {
       if (!this.sable$isPlotChunk()) {
-         var3.call(var1, var2);
+         original.call(instance, tagOutput);
       } else {
-         final HashMap var4 = new HashMap();
-         this.sable$wantedBlockEntities = var4;
-         BlockEntityTagOutput var5 = new BlockEntityTagOutput() {
+         final HashMap capturedBlockEntities = new HashMap();
+         this.sable$wantedBlockEntities = capturedBlockEntities;
+         BlockEntityTagOutput wrappedTagOutput = new BlockEntityTagOutput() {
             {
                Objects.requireNonNull(LevelChunkMixin.this);
             }
 
             @Override
-            public void accept(BlockPos var1, BlockEntityType<?> var2x, CompoundTag var3x) {
-               var4.put(var1.immutable(), var2x);
-               ((BlockEntityTagOutput)var2).accept(var1, var2x, var3x);
+            public void accept(BlockPos pos, BlockEntityType<?> type, CompoundTag tag) {
+               capturedBlockEntities.put(pos.immutable(), type);
+               ((BlockEntityTagOutput)tagOutput).accept(pos, type, tag);
             }
          };
-         var3.call(var1, var5);
+         original.call(instance, wrappedTagOutput);
       }
    }
 
@@ -135,25 +135,25 @@ public class LevelChunkMixin {
       method = {"replaceWithPacketData"},
       at = {@At("RETURN")}
    )
-   private void sable$resyncBlockStates(FriendlyByteBuf var1, Map<?, ?> var2, Consumer<?> var3, CallbackInfo var4) {
+   private void sable$resyncBlockStates(FriendlyByteBuf buf, Map<?, ?> heightmaps, Consumer<?> consumer, CallbackInfo ci) {
       if (this.sable$isPlotChunk()) {
-         LevelChunk var5 = (LevelChunk)(Object)this;
-         Map var6 = this.sable$wantedBlockEntities;
+         LevelChunk chunk = (LevelChunk)(Object)this;
+         Map wantedBlockEntities = this.sable$wantedBlockEntities;
          this.sable$wantedBlockEntities = null;
-         if (var6 != null) {
-            for (BlockPos var8 : new ArrayList<>(var5.getBlockEntities().keySet())) {
-               BlockEntity var9 = var5.getBlockEntity(var8);
-               if (var9 != null && var6.get(var8) != var9.getType()) {
-                  var5.removeBlockEntity(var8);
+         if (wantedBlockEntities != null) {
+            for (BlockPos pos : new ArrayList<>(chunk.getBlockEntities().keySet())) {
+               BlockEntity blockEntity = chunk.getBlockEntity(pos);
+               if (blockEntity != null && wantedBlockEntities.get(pos) != blockEntity.getType()) {
+                  chunk.removeBlockEntity(pos);
                }
             }
          }
 
-         for (Entry var12 : var5.getBlockEntities().entrySet()) {
-            BlockEntity var13 = (BlockEntity)var12.getValue();
-            BlockState var10 = var5.getBlockState((BlockPos)var12.getKey());
-            if (var13.getBlockState() != var10 && var13.isValidBlockState(var10)) {
-               var13.setBlockState(var10);
+         for (Entry entry : chunk.getBlockEntities().entrySet()) {
+            BlockEntity blockEntity = (BlockEntity)entry.getValue();
+            BlockState state = chunk.getBlockState((BlockPos)entry.getKey());
+            if (blockEntity.getBlockState() != state && blockEntity.isValidBlockState(state)) {
+               blockEntity.setBlockState(state);
             }
          }
       }

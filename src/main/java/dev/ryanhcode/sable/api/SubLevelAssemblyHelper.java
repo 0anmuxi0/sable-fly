@@ -354,8 +354,8 @@ public class SubLevelAssemblyHelper {
             }
 
             level.updatePOIOnBlockStateChange(newPos, airState, state);
-         } catch (Exception var25) {
-            Sable.LOGGER.error("Failed to move block {} at {} to {}", new Object[]{state, block, newPos, var25});
+         } catch (Exception e) {
+            Sable.LOGGER.error("Failed to move block {} at {} to {}", new Object[]{state, block, newPos, e});
          }
       }
 
@@ -369,8 +369,8 @@ public class SubLevelAssemblyHelper {
             LevelChunk levelchunk = resultingAccelerator.getChunk(SectionPos.blockToSectionCoord(pos.getX()), SectionPos.blockToSectionCoord(pos.getZ()));
             BlockState subLevelStatex = states.get(i);
             markAndNotifyBlock(resultingLevel, pos, levelchunk, airState, subLevelStatex, 19, 512);
-         } catch (Exception var24) {
-            Sable.LOGGER.error("Failed to mark & notify block {} (untransformed = {})", new Object[]{pos, untransformed, var24});
+         } catch (Exception e) {
+            Sable.LOGGER.error("Failed to mark & notify block {} (untransformed = {})", new Object[]{pos, untransformed, e});
          }
 
          i++;
@@ -384,8 +384,8 @@ public class SubLevelAssemblyHelper {
             movePendingTicks(chunkx, level, resultingLevel, block, transform.apply(block));
             level.updatePOIOnBlockStateChange(block, chunkx.getBlockState(block), airState);
             chunkx.setBlockState(block, airState, 64);
-         } catch (Exception var23) {
-            Sable.LOGGER.error("Failed to destroy old block during assembly {}", block, var23);
+         } catch (Exception e) {
+            Sable.LOGGER.error("Failed to destroy old block during assembly {}", block, e);
          }
       }
 
@@ -509,7 +509,7 @@ public class SubLevelAssemblyHelper {
 
    @FunctionalInterface
    public interface FrontierPredicate {
-      boolean isValidConnection(BlockPos var1, BlockState var2, BlockPos var3, BlockState var4, @Nullable Direction var5);
+      boolean isValidConnection(BlockPos pos, BlockState state, BlockPos candidate, BlockState candidateState, @Nullable Direction direction);
    }
 
    public record GatherResult(

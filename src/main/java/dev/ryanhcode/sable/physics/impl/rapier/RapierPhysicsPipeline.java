@@ -111,13 +111,13 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
    public void init(@Nullable Vector3dc gravity, double universalDrag) {
       try {
          this.scene = new RapierPhysicsScene(Rapier3D.initialize(gravity.x(), gravity.y(), gravity.z(), universalDrag));
-      } catch (UnsatisfiedLinkError var7) {
+      } catch (UnsatisfiedLinkError e) {
          Sable.LOGGER
             .error(
                "Sable has failed to link with the natives for its Rapier pipeline. Please report with system details to https://github.com/ryanhcode/sable/issues",
-               var7
+               e
             );
-         CrashReport crashReport = CrashReport.forThrowable(var7.getCause(), "Sable linking with Rapier natives");
+         CrashReport crashReport = CrashReport.forThrowable(e.getCause(), "Sable linking with Rapier natives");
          CrashReportCategory category = crashReport.addCategory("Natives");
          category.setDetail("Name", Rapier3D.NATIVE_NAME);
          throw new ReportedException(crashReport);
@@ -142,10 +142,10 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
    public void physicsTick(double timeStep) {
       this.updateContraptionPoses();
       Rapier3D.step(this.scene.handle(), timeStep);
-      ObjectListIterator var3 = this.queuedWakeUps.iterator();
+      ObjectListIterator iterator = this.queuedWakeUps.iterator();
 
-      while (var3.hasNext()) {
-         PhysicsPipelineBody queuedWakeUp = (PhysicsPipelineBody)var3.next();
+      while (iterator.hasNext()) {
+         PhysicsPipelineBody queuedWakeUp = (PhysicsPipelineBody)iterator.next();
          if (!queuedWakeUp.isRemoved()) {
             Rapier3D.wakeUpObject(this.scene.handle(), queuedWakeUp.getRuntimeId());
          }
@@ -230,10 +230,10 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
          }
 
          if (contraption.sable$shouldCollide()) {
-            ObjectIterator var21 = chunks.long2ObjectEntrySet().iterator();
+            ObjectIterator iterator = chunks.long2ObjectEntrySet().iterator();
 
-            while (var21.hasNext()) {
-               Entry<UploadingContraptionChunk> entry = (Entry<UploadingContraptionChunk>)var21.next();
+            while (iterator.hasNext()) {
+               Entry<UploadingContraptionChunk> entry = (Entry<UploadingContraptionChunk>)iterator.next();
                SectionPos sectionPos = SectionPos.of(entry.getLongKey());
                UploadingContraptionChunk chunk = (UploadingContraptionChunk)entry.getValue();
                Rapier3D.addKinematicContraptionChunkSection(this.scene.handle(), id, sectionPos.x(), sectionPos.y(), sectionPos.z(), chunk.data());
@@ -442,8 +442,8 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
       } else {
          try {
             configuration.validate(ServerSubLevelContainer.getContainer(this.level), bodyA, bodyB);
-         } catch (Exception var11) {
-            throw new IllegalArgumentException("Constraint validation failed", var11);
+         } catch (Exception e) {
+            throw new IllegalArgumentException("Constraint validation failed", e);
          }
          T constraint = (T)(switch (configuration) {
             case RotaryConstraintConfiguration config -> RapierRotaryConstraintHandle.create(this.level, bodyA, bodyB, config);
@@ -477,10 +477,10 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
    private void updateContraptionPoses() {
       SubLevelPhysicsSystem system = SubLevelPhysicsSystem.require(this.level);
       double partialPhysicsTick = system.getPartialPhysicsTick();
-      ObjectIterator var4 = this.activeContraptions.keySet().iterator();
+      ObjectIterator iterator = this.activeContraptions.keySet().iterator();
 
-      while (var4.hasNext()) {
-         KinematicContraption contraption = (KinematicContraption)var4.next();
+      while (iterator.hasNext()) {
+         KinematicContraption contraption = (KinematicContraption)iterator.next();
          this.updateContraptionPose(contraption, partialPhysicsTick);
       }
    }
@@ -615,13 +615,13 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
    }
 
    @Override
-   public Vector3d getLinearVelocity(PhysicsPipelineBody var1, Vector3d var2) {
-      return !var1.isRemoved() ? this.sable$orig$getLinearVelocity(var1, var2) : var2.zero();
+   public Vector3d getLinearVelocity(PhysicsPipelineBody body, Vector3d dest) {
+      return !body.isRemoved() ? this.sable$orig$getLinearVelocity(body, dest) : dest.zero();
    }
 
    @Override
-   public Vector3d getAngularVelocity(PhysicsPipelineBody var1, Vector3d var2) {
-      return !var1.isRemoved() ? this.sable$orig$getAngularVelocity(var1, var2) : var2.zero();
+   public Vector3d getAngularVelocity(PhysicsPipelineBody body, Vector3d dest) {
+      return !body.isRemoved() ? this.sable$orig$getAngularVelocity(body, dest) : dest.zero();
    }
 
    private record TrackedKinematicContraption(

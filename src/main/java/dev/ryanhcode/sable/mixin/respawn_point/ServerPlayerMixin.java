@@ -61,7 +61,7 @@ public abstract class ServerPlayerMixin implements ServerPlayerRespawnExtension 
    public abstract ServerLevel level();
 
    @Shadow
-   public abstract void sendSystemMessage(Component var1);
+   public abstract void sendSystemMessage(Component component);
 
    @Nullable
    @Override

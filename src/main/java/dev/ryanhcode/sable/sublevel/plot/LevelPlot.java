@@ -237,7 +237,7 @@ public abstract class LevelPlot {
       this.localBounds = null;
    }
 
-   protected abstract void onRemoveChunkHolder(LevelChunk var1);
+   protected abstract void onRemoveChunkHolder(LevelChunk levelChunk);
 
    public void expandIfNecessary(BlockPos blockPos) {
       if (this.expandPlotIfNecessary) {

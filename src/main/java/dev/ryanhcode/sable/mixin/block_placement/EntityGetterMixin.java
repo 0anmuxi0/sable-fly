@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin({EntityGetter.class})
 public interface EntityGetterMixin {
    @Shadow
-   List<Entity> getEntities(@Nullable Entity var1, AABB var2);
+   List<Entity> getEntities(@Nullable Entity pEntity, AABB pArea);
 
    @Shadow
    List<? extends Player> players();

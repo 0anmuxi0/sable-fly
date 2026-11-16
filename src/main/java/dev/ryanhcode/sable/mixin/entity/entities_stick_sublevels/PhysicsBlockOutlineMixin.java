@@ -39,65 +39,65 @@ public abstract class PhysicsBlockOutlineMixin {
       method = {"showHitboxes"},
       at = {@At("TAIL")}
    )
-   private void sable$drawPhysicsBlockOutlines(Entity var1, float var2, boolean var3, CallbackInfo var4) {
-      Minecraft var5 = Minecraft.getInstance();
-      ClientLevel var6 = var5.level;
-      if (var6 != null) {
-         SubLevelContainer var7 = ((SubLevelContainerHolder)var6).sable$getPlotContainer();
-         if (var7 != null) {
-            Vec3 var8 = var5.gameRenderer.getMainCamera().position();
-            int var9 = 4096;
-            ArrayList<SubLevel> var10 = new ArrayList<>();
-            var7.getAllSubLevels().forEach(var10::add);
+   private void sable$drawPhysicsBlockOutlines(Entity entity, float partialTicks, boolean showAll, CallbackInfo ci) {
+      Minecraft minecraft = Minecraft.getInstance();
+      ClientLevel level = minecraft.level;
+      if (level != null) {
+         SubLevelContainer container = ((SubLevelContainerHolder)level).sable$getPlotContainer();
+         if (container != null) {
+            Vec3 cameraPos = minecraft.gameRenderer.getMainCamera().position();
+            int boxesLeft = 4096;
+            ArrayList<SubLevel> subLevels = new ArrayList<>();
+            container.getAllSubLevels().forEach(subLevels::add);
 
-            for (SubLevel var12 : var10) {
-               if (var9 <= 0) {
+            for (SubLevel subLevel : subLevels) {
+               if (boxesLeft <= 0) {
                   break;
                }
 
-               if (var12 instanceof ClientSubLevel var13) {
-                  ClientLevelPlot var14 = var13.getPlot();
-                  if (var14 != null) {
-                     Pose3dc var15 = var13.renderPose(var2);
+               if (subLevel instanceof ClientSubLevel clientSubLevel) {
+                  ClientLevelPlot plot = clientSubLevel.getPlot();
+                  if (plot != null) {
+                     Pose3dc renderPose = clientSubLevel.renderPose(partialTicks);
 
-                     for (PlotChunkHolder var17 : var14.getLoadedChunks()) {
-                        if (var9 <= 0) {
+                     for (PlotChunkHolder chunkHolder : plot.getLoadedChunks()) {
+                        if (boxesLeft <= 0) {
                            break;
                         }
 
-                        LevelChunk var18 = var17.getChunk();
-                        if (var18 != null) {
-                           ChunkPos var19 = var18.getPos();
-                           LevelChunkSection[] var20 = var18.getSections();
+                        LevelChunk chunk = chunkHolder.getChunk();
+                        if (chunk != null) {
+                           ChunkPos chunkPos = chunk.getPos();
+                           LevelChunkSection[] sections = chunk.getSections();
 
-                           for (int var21 = 0; var21 < var20.length && var9 > 0; var21++) {
-                              LevelChunkSection var22 = var20[var21];
-                              if (var22 != null && !var22.hasOnlyAir()) {
-                                 int var23 = var18.getSectionYFromSectionIndex(var21) << 4;
-                                 AABB var24 = sable$transformedSectionBounds(var15, var19, var23);
-                                 if (!(var24.distanceToSqr(var8) > 16384.0)) {
-                                    for (int var25 = 0; var25 < 16 && var9 > 0; var25++) {
-                                       for (int var26 = 0; var26 < 16 && var9 > 0; var26++) {
-                                          for (int var27 = 0; var27 < 16 && var9 > 0; var27++) {
-                                             if (!var22.getBlockState(var27, var25, var26).isAir()) {
-                                                int var28 = (var19.x() << 4) + var27;
-                                                int var29 = var23 + var25;
-                                                int var30 = (var19.z() << 4) + var26;
-                                                Vec3[] var31 = new Vec3[8];
-                                                int var32 = 0;
+                           for (int sectionIndex = 0; sectionIndex < sections.length && boxesLeft > 0; sectionIndex++) {
+                              LevelChunkSection section = sections[sectionIndex];
+                              if (section != null && !section.hasOnlyAir()) {
+                                 int sectionBaseY = chunk.getSectionYFromSectionIndex(sectionIndex) << 4;
+                                 AABB sectionBounds = sable$transformedSectionBounds(renderPose, chunkPos, sectionBaseY);
+                                 if (!(sectionBounds.distanceToSqr(cameraPos) > 16384.0)) {
+                                    for (int y = 0; y < 16 && boxesLeft > 0; y++) {
+                                       for (int z = 0; z < 16 && boxesLeft > 0; z++) {
+                                          for (int x = 0; x < 16 && boxesLeft > 0; x++) {
+                                             if (!section.getBlockState(x, y, z).isAir()) {
+                                                int worldX = (chunkPos.x() << 4) + x;
+                                                int worldY = sectionBaseY + y;
+                                                int worldZ = (chunkPos.z() << 4) + z;
+                                                Vec3[] corners = new Vec3[8];
+                                                int cornerIndex = 0;
 
-                                                for (int var33 = 0; var33 <= 1; var33++) {
-                                                   for (int var34 = 0; var34 <= 1; var34++) {
-                                                      for (int var35 = 0; var35 <= 1; var35++) {
-                                                         Vector3d var36 = new Vector3d(var28 + var33, var29 + var34, var30 + var35);
-                                                         var15.transformPosition(var36);
-                                                         var31[var32++] = new Vec3(var36.x, var36.y, var36.z);
+                                                for (int cornerOffsetX = 0; cornerOffsetX <= 1; cornerOffsetX++) {
+                                                   for (int cornerOffsetY = 0; cornerOffsetY <= 1; cornerOffsetY++) {
+                                                      for (int cornerOffsetZ = 0; cornerOffsetZ <= 1; cornerOffsetZ++) {
+                                                         Vector3d transformedPos = new Vector3d(worldX + cornerOffsetX, worldY + cornerOffsetY, worldZ + cornerOffsetZ);
+                                                         renderPose.transformPosition(transformedPos);
+                                                         corners[cornerIndex++] = new Vec3(transformedPos.x, transformedPos.y, transformedPos.z);
                                                       }
                                                    }
                                                 }
 
-                                                Gizmos.addGizmo(new PhysicsBlockOutlineMixin.Sable$PhysicsBox(var31, GizmoStyle.stroke(-16711936)));
-                                                var9--;
+                                                Gizmos.addGizmo(new PhysicsBlockOutlineMixin.Sable$PhysicsBox(corners, GizmoStyle.stroke(-16711936)));
+                                                boxesLeft--;
                                              }
                                           }
                                        }
@@ -115,62 +115,62 @@ public abstract class PhysicsBlockOutlineMixin {
    }
 
    @Unique
-   private static AABB sable$transformedSectionBounds(Pose3dc var0, ChunkPos var1, int var2) {
-      int var3 = var1.x() << 4;
-      int var4 = var1.z() << 4;
-      double var5 = Double.POSITIVE_INFINITY;
-      double var7 = Double.POSITIVE_INFINITY;
-      double var9 = Double.POSITIVE_INFINITY;
-      double var11 = Double.NEGATIVE_INFINITY;
-      double var13 = Double.NEGATIVE_INFINITY;
-      double var15 = Double.NEGATIVE_INFINITY;
+   private static AABB sable$transformedSectionBounds(Pose3dc pose, ChunkPos chunkPos, int sectionBaseY) {
+      int minBlockX = chunkPos.x() << 4;
+      int minBlockZ = chunkPos.z() << 4;
+      double minX = Double.POSITIVE_INFINITY;
+      double minY = Double.POSITIVE_INFINITY;
+      double minZ = Double.POSITIVE_INFINITY;
+      double maxX = Double.NEGATIVE_INFINITY;
+      double maxY = Double.NEGATIVE_INFINITY;
+      double maxZ = Double.NEGATIVE_INFINITY;
 
-      for (byte var17 = 0; var17 <= 16; var17 += 16) {
-         for (byte var18 = 0; var18 <= 16; var18 += 16) {
-            for (byte var19 = 0; var19 <= 16; var19 += 16) {
-               Vector3d var20 = var0.transformPosition(new Vector3d(var3 + var17, var2 + var18, var4 + var19));
-               var5 = Math.min(var5, var20.x);
-               var7 = Math.min(var7, var20.y);
-               var9 = Math.min(var9, var20.z);
-               var11 = Math.max(var11, var20.x);
-               var13 = Math.max(var13, var20.y);
-               var15 = Math.max(var15, var20.z);
+      for (byte offsetX = 0; offsetX <= 16; offsetX += 16) {
+         for (byte offsetY = 0; offsetY <= 16; offsetY += 16) {
+            for (byte offsetZ = 0; offsetZ <= 16; offsetZ += 16) {
+               Vector3d transformedPos = pose.transformPosition(new Vector3d(minBlockX + offsetX, sectionBaseY + offsetY, minBlockZ + offsetZ));
+               minX = Math.min(minX, transformedPos.x);
+               minY = Math.min(minY, transformedPos.y);
+               minZ = Math.min(minZ, transformedPos.z);
+               maxX = Math.max(maxX, transformedPos.x);
+               maxY = Math.max(maxY, transformedPos.y);
+               maxZ = Math.max(maxZ, transformedPos.z);
             }
          }
       }
 
-      return new AABB(var5, var7, var9, var11, var13, var15);
+      return new AABB(minX, minY, minZ, maxX, maxY, maxZ);
    }
 
    @Unique
    private record Sable$PhysicsBox(Vec3[] corners, GizmoStyle style) implements Gizmo {
       @Override
-      public void emit(GizmoPrimitives var1, float var2) {
+      public void emit(GizmoPrimitives primitives, float alpha) {
          if (this.style.hasFill()) {
-            int var3 = this.style.multipliedFill(var2);
-            var1.addQuad(this.corners[4], this.corners[6], this.corners[7], this.corners[5], var3);
-            var1.addQuad(this.corners[0], this.corners[1], this.corners[3], this.corners[2], var3);
-            var1.addQuad(this.corners[0], this.corners[2], this.corners[6], this.corners[4], var3);
-            var1.addQuad(this.corners[1], this.corners[5], this.corners[7], this.corners[3], var3);
-            var1.addQuad(this.corners[0], this.corners[4], this.corners[5], this.corners[1], var3);
-            var1.addQuad(this.corners[2], this.corners[3], this.corners[7], this.corners[6], var3);
+            int fillColor = this.style.multipliedFill(alpha);
+            primitives.addQuad(this.corners[4], this.corners[6], this.corners[7], this.corners[5], fillColor);
+            primitives.addQuad(this.corners[0], this.corners[1], this.corners[3], this.corners[2], fillColor);
+            primitives.addQuad(this.corners[0], this.corners[2], this.corners[6], this.corners[4], fillColor);
+            primitives.addQuad(this.corners[1], this.corners[5], this.corners[7], this.corners[3], fillColor);
+            primitives.addQuad(this.corners[0], this.corners[4], this.corners[5], this.corners[1], fillColor);
+            primitives.addQuad(this.corners[2], this.corners[3], this.corners[7], this.corners[6], fillColor);
          }
 
          if (this.style.hasStroke()) {
-            int var5 = this.style.multipliedStroke(var2);
-            float var4 = this.style.strokeWidth();
-            var1.addLine(this.corners[0], this.corners[4], var5, var4);
-            var1.addLine(this.corners[0], this.corners[2], var5, var4);
-            var1.addLine(this.corners[0], this.corners[1], var5, var4);
-            var1.addLine(this.corners[4], this.corners[6], var5, var4);
-            var1.addLine(this.corners[6], this.corners[2], var5, var4);
-            var1.addLine(this.corners[2], this.corners[3], var5, var4);
-            var1.addLine(this.corners[3], this.corners[1], var5, var4);
-            var1.addLine(this.corners[1], this.corners[5], var5, var4);
-            var1.addLine(this.corners[5], this.corners[4], var5, var4);
-            var1.addLine(this.corners[3], this.corners[7], var5, var4);
-            var1.addLine(this.corners[5], this.corners[7], var5, var4);
-            var1.addLine(this.corners[6], this.corners[7], var5, var4);
+            int strokeColor = this.style.multipliedStroke(alpha);
+            float strokeWidth = this.style.strokeWidth();
+            primitives.addLine(this.corners[0], this.corners[4], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[0], this.corners[2], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[0], this.corners[1], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[4], this.corners[6], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[6], this.corners[2], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[2], this.corners[3], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[3], this.corners[1], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[1], this.corners[5], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[5], this.corners[4], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[3], this.corners[7], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[5], this.corners[7], strokeColor, strokeWidth);
+            primitives.addLine(this.corners[6], this.corners[7], strokeColor, strokeWidth);
          }
       }
    }

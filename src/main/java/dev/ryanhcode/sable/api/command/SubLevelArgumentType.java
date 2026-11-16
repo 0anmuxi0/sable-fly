@@ -234,7 +234,7 @@ public class SubLevelArgumentType implements ArgumentType<SubLevelSelector> {
 
       try {
          this.parse(stringreader);
-      } catch (CommandSyntaxException var5) {
+      } catch (CommandSyntaxException e) {
       }
 
       return suggestions.apply(builder);

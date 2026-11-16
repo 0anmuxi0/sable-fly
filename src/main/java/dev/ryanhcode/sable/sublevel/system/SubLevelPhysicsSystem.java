@@ -160,8 +160,8 @@ public class SubLevelPhysicsSystem implements SubLevelObserver {
 
          try {
             this.tickPipelinePhysics(container);
-         } catch (Exception var7) {
-            CrashReport crashReport = CrashReport.forThrowable(var7, "Sable ticking physics");
+         } catch (Exception e) {
+            CrashReport crashReport = CrashReport.forThrowable(e, "Sable ticking physics");
             CrashReportCategory crashReportCategory = crashReport.addCategory("Current physics state");
             crashReportCategory.setDetail("Dimension", this.level.dimension());
             throw new ReportedException(crashReport);
@@ -184,10 +184,10 @@ public class SubLevelPhysicsSystem implements SubLevelObserver {
                }
 
                List<Vec3> points = new ArrayList<>(rope.getPoints().size());
-               ObjectListIterator var6 = rope.getPoints().iterator();
+               ObjectListIterator pointIterator = rope.getPoints().iterator();
 
-               while (var6.hasNext()) {
-                  Vector3d point = (Vector3d)var6.next();
+               while (pointIterator.hasNext()) {
+                  Vector3d point = (Vector3d)pointIterator.next();
                   points.add(new Vec3(point.x, point.y, point.z));
                }
 

@@ -42,7 +42,7 @@ public record DimensionPhysics(
       double resolvedSeaLevel;
       try {
          resolvedSeaLevel = level.getSeaLevel();
-      } catch (NullPointerException var23) {
+      } catch (NullPointerException e) {
          resolvedSeaLevel = 63.0;
       }
 

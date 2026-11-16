@@ -25,12 +25,12 @@ public abstract class TerrainParticleMixin {
       at = {@At("RETURN")},
       cancellable = true
    )
-   private void sable$scaleLightCoords(float var1, CallbackInfoReturnable<Integer> var2) {
+   private void sable$scaleLightCoords(float partialTick, CallbackInfoReturnable<Integer> cir) {
       if ((Object)this instanceof TerrainParticle) {
-         BlockPos var3 = BlockPos.containing(this.x, this.y, this.z);
-         ClientSubLevel var4 = Sable.HELPER.getContainingClient(var3);
-         if (var4 != null) {
-            var2.setReturnValue(var4.scaleLightColor((Integer)var2.getReturnValue()));
+         BlockPos blockPos = BlockPos.containing(this.x, this.y, this.z);
+         ClientSubLevel clientSubLevel = Sable.HELPER.getContainingClient(blockPos);
+         if (clientSubLevel != null) {
+            cir.setReturnValue(clientSubLevel.scaleLightColor((Integer)cir.getReturnValue()));
          }
       }
    }

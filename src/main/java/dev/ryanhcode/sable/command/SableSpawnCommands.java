@@ -471,6 +471,6 @@ public class SableSpawnCommands {
 
    @FunctionalInterface
    private interface NamedSpawnInvoker<S> {
-      int run(CommandContext<S> var1, @Nullable String var2) throws CommandSyntaxException;
+      int run(CommandContext<S> context, @Nullable String name) throws CommandSyntaxException;
    }
 }

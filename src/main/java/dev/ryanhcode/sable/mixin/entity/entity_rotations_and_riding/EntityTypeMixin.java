@@ -27,18 +27,18 @@ public class EntityTypeMixin {
       )}
    )
    private static void sable$startRidingEntity(
-      Entity var0,
-      ValueInput var1,
-      Level var2,
-      EntitySpawnReason var3,
-      EntityProcessor var4,
-      CallbackInfoReturnable<Entity> var5,
-      @Local(ordinal = 1) Entity var6
+      Entity entity,
+      ValueInput valueInput,
+      Level level,
+      EntitySpawnReason spawnReason,
+      EntityProcessor processor,
+      CallbackInfoReturnable<Entity> cir,
+      @Local(ordinal = 1) Entity newEntity
    ) {
-      SubLevel var7 = Sable.HELPER.getContaining(var0);
-      if (var7 != null && EntitySubLevelUtil.shouldKick(var6)) {
-         Vec3 var8 = EntityRidingSubLevelVehicleHelper.kickRidingEntity(var6, var7);
-         var6.setPos(var8);
+      SubLevel vehicleSubLevel = Sable.HELPER.getContaining(entity);
+      if (vehicleSubLevel != null && EntitySubLevelUtil.shouldKick(newEntity)) {
+         Vec3 pos = EntityRidingSubLevelVehicleHelper.kickRidingEntity(newEntity, vehicleSubLevel);
+         newEntity.setPos(pos);
       }
    }
 }

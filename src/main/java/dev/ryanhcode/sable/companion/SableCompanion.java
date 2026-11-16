@@ -36,13 +36,13 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   Iterable<? extends SubLevelAccess> getAllIntersecting(Level var1, BoundingBox3dc var2);
+   Iterable<? extends SubLevelAccess> getAllIntersecting(Level level, BoundingBox3dc box);
 
    @Contract(
       pure = true
    )
    @Nullable
-   SubLevelAccess getContaining(Level var1, int var2, int var3);
+   SubLevelAccess getContaining(Level level, int chunkX, int chunkZ);
 
    @Contract(
       pure = true
@@ -192,7 +192,7 @@ public interface SableCompanion {
       value = "_,_,_->param3",
       mutates = "param3"
    )
-   Vector3d projectOutOfSubLevel(Level var1, Vector3dc var2, Vector3d var3);
+   Vector3d projectOutOfSubLevel(Level level, Vector3dc pos, Vector3d result);
 
    @Deprecated
    @ScheduledForRemoval(
@@ -202,7 +202,7 @@ public interface SableCompanion {
       value = "_,_->new",
       pure = true
    )
-   Vec3 projectOutOfSubLevel(Level var1, Vec3 var2);
+   Vec3 projectOutOfSubLevel(Level level, Vec3 pos);
 
    @Contract(
       value = "_,_->new",
@@ -220,7 +220,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   <T, S extends SubLevelAccess> T runIncludingSubLevels(Level var1, Vec3 var2, boolean var3, @Nullable S var4, BiFunction<S, BlockPos, T> var5);
+   <T, S extends SubLevelAccess> T runIncludingSubLevels(Level level, Vec3 origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, T> converter);
 
    @Nullable
    @Contract(
@@ -239,7 +239,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   <S extends SubLevelAccess> boolean findIncludingSubLevels(Level var1, Vec3 var2, boolean var3, @Nullable S var4, BiFunction<S, BlockPos, Boolean> var5);
+   <S extends SubLevelAccess> boolean findIncludingSubLevels(Level level, Vec3 origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter);
 
    @Contract(
       pure = true
@@ -253,58 +253,58 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   double distanceSquaredWithSubLevels(Level var1, Vector3dc var2, Vector3dc var3);
+   double distanceSquaredWithSubLevels(Level level, Vector3dc pos1, Vector3dc pos2);
 
    @Contract(
       pure = true
    )
-   double distanceSquaredWithSubLevels(Level var1, Position var2, Position var3);
+   double distanceSquaredWithSubLevels(Level level, Position pos1, Position pos2);
 
    @Contract(
       pure = true
    )
-   double distanceSquaredWithSubLevels(Level var1, Vector3dc var2, double var3, double var5, double var7);
+   double distanceSquaredWithSubLevels(Level level, Vector3dc pos, double x, double y, double z);
 
    @Contract(
       pure = true
    )
-   double distanceSquaredWithSubLevels(Level var1, Position var2, double var3, double var5, double var7);
+   double distanceSquaredWithSubLevels(Level level, Position pos, double x, double y, double z);
 
    @Contract(
       pure = true
    )
-   double distanceSquaredWithSubLevels(Level var1, double var2, double var4, double var6, double var8, double var10, double var12);
+   double distanceSquaredWithSubLevels(Level level, double x1, double y1, double z1, double x2, double y2, double z2);
 
    @Contract(
       pure = true
    )
-   double rectilinearDistanceWithSubLevels(Level var1, Vector3dc var2, Vector3dc var3);
+   double rectilinearDistanceWithSubLevels(Level level, Vector3dc pos1, Vector3dc pos2);
 
    @Contract(
       pure = true
    )
-   double rectilinearDistanceWithSubLevels(Level var1, Position var2, Position var3);
+   double rectilinearDistanceWithSubLevels(Level level, Position pos1, Position pos2);
 
    @Contract(
       pure = true
    )
-   double rectilinearDistanceWithSubLevels(Level var1, Vector3dc var2, double var3, double var5, double var7);
+   double rectilinearDistanceWithSubLevels(Level level, Vector3dc pos, double x, double y, double z);
 
    @Contract(
       pure = true
    )
-   double rectilinearDistanceWithSubLevels(Level var1, Position var2, double var3, double var5, double var7);
+   double rectilinearDistanceWithSubLevels(Level level, Position pos, double x, double y, double z);
 
    @Contract(
       pure = true
    )
-   double rectilinearDistanceWithSubLevels(Level var1, double var2, double var4, double var6, double var8, double var10, double var12);
+   double rectilinearDistanceWithSubLevels(Level level, double x1, double y1, double z1, double x2, double y2, double z2);
 
    @Contract(
       value = "_,_,_->param3",
       mutates = "param3"
    )
-   Vector3d getVelocity(Level var1, Vector3dc var2, Vector3d var3);
+   Vector3d getVelocity(Level level, Vector3dc pos, Vector3d result);
 
    @Contract(
       value = "_,_->param2",
@@ -322,7 +322,7 @@ public interface SableCompanion {
       value = "_,_->new",
       pure = true
    )
-   Vec3 getVelocity(Level var1, Vec3 var2);
+   Vec3 getVelocity(Level level, Vec3 pos);
 
    @Contract(
       value = "_,_->new",
@@ -336,7 +336,7 @@ public interface SableCompanion {
       value = "_,_,_,_->param4",
       mutates = "param4"
    )
-   Vector3d getVelocity(Level var1, SubLevelAccess var2, Vector3dc var3, Vector3d var4);
+   Vector3d getVelocity(Level level, SubLevelAccess subLevel, Vector3dc pos, Vector3d result);
 
    @Contract(
       value = "_,_,_->param3",
@@ -354,7 +354,7 @@ public interface SableCompanion {
       value = "_,_,_->new",
       pure = true
    )
-   Vec3 getVelocity(Level var1, SubLevelAccess var2, Vec3 var3);
+   Vec3 getVelocity(Level level, SubLevelAccess subLevel, Vec3 pos);
 
    @Contract(
       value = "_,_,_->new",
@@ -372,7 +372,7 @@ public interface SableCompanion {
       value = "_,_,_->param3",
       mutates = "param3"
    )
-   Vector3d getVelocityRelativeToAir(Level var1, Vector3dc var2, Vector3d var3);
+   Vector3d getVelocityRelativeToAir(Level level, Vector3dc pos, Vector3d result);
 
    @Deprecated
    @ScheduledForRemoval(
@@ -393,7 +393,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   Vec3 getVelocityRelativeToAir(Level var1, Vec3 var2);
+   Vec3 getVelocityRelativeToAir(Level level, Vec3 pos);
 
    @Deprecated
    @ScheduledForRemoval(
@@ -409,7 +409,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   boolean isInPlotGrid(Level var1, int var2, int var3);
+   boolean isInPlotGrid(Level level, int chunkX, int chunkZ);
 
    @Contract(
       pure = true
@@ -464,35 +464,35 @@ public interface SableCompanion {
       pure = true
    )
    @Nullable
-   SubLevelAccess getTrackingSubLevel(Entity var1);
+   SubLevelAccess getTrackingSubLevel(Entity entity);
 
    @Contract(
       pure = true
    )
    @Nullable
-   SubLevelAccess getLastTrackingSubLevel(Entity var1);
+   SubLevelAccess getLastTrackingSubLevel(Entity entity);
 
    @Contract(
       pure = true
    )
    @Nullable
-   SubLevelAccess getTrackingOrVehicleSubLevel(Entity var1);
+   SubLevelAccess getTrackingOrVehicleSubLevel(Entity entity);
 
    @Contract(
       pure = true
    )
    @Nullable
-   SubLevelAccess getVehicleSubLevel(Entity var1);
+   SubLevelAccess getVehicleSubLevel(Entity entity);
 
    @Contract(
       pure = true
    )
-   Vec3 getEyePositionInterpolated(Entity var1, float var2);
+   Vec3 getEyePositionInterpolated(Entity entity, float partialTicks);
 
    @Contract(
       pure = true
    )
-   Vector3d getFeetPos(Entity var1, float var2);
+   Vector3d getFeetPos(Entity entity, float distanceDown);
 
    @Contract(
       pure = true

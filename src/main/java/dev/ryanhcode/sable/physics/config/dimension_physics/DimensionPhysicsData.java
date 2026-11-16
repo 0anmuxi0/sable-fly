@@ -100,8 +100,8 @@ public class DimensionPhysicsData {
                DimensionPhysics dimensionPhysics = entry.getValue();
                ResourceKey<Level> dimension = ResourceKey.create(Registries.DIMENSION, dimensionPhysics.dimension());
                addKeyWithPriority(DimensionPhysicsData.DIMENSION_PHYSICS_DATA, dimension, dimensionPhysics);
-            } catch (Exception var8) {
-               Sable.LOGGER.error("Error while loading dimension data \"{}\" : {} ", entry.getKey(), var8.getMessage());
+            } catch (Exception e) {
+               Sable.LOGGER.error("Error while loading dimension data \"{}\" : {} ", entry.getKey(), e.getMessage());
             }
          }
       }

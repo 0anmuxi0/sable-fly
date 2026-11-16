@@ -30,8 +30,8 @@ public final class EntityCullingCompat {
                   return NO_OP;
                }
             }
-         } catch (RuntimeException | ReflectiveOperationException var2) {
-            logAccessWarning(var2);
+         } catch (RuntimeException | ReflectiveOperationException e) {
+            logAccessWarning(e);
             return NO_OP;
          }
       }
@@ -46,8 +46,8 @@ public final class EntityCullingCompat {
             Class<?> modClass = Class.forName("dev.tr7zw.entityculling.EntityCullingModBase", false, classLoader);
             Class<?> configClass = Class.forName("dev.tr7zw.entityculling.versionless.Config", false, classLoader);
             return new EntityCullingCompat.Access(modClass.getField("instance"), modClass.getField("config"), configClass.getField("skipBlockEntityCulling"));
-         } catch (RuntimeException | ReflectiveOperationException var3) {
-            logAccessWarning(var3);
+         } catch (RuntimeException | ReflectiveOperationException e) {
+            logAccessWarning(e);
             return null;
          }
       }
@@ -76,8 +76,8 @@ public final class EntityCullingCompat {
          if (this.config != null) {
             try {
                this.skipBlockEntityCullingField.setBoolean(this.config, false);
-            } catch (RuntimeException | IllegalAccessException var2) {
-               EntityCullingCompat.logAccessWarning(var2);
+            } catch (RuntimeException | IllegalAccessException e) {
+               EntityCullingCompat.logAccessWarning(e);
             }
          }
       }

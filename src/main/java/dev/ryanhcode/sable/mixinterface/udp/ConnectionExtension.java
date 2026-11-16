@@ -3,7 +3,7 @@ package dev.ryanhcode.sable.mixinterface.udp;
 import io.netty.channel.Channel;
 
 public interface ConnectionExtension {
-   void sable$setUDPChannel(Channel var1);
+   void sable$setUDPChannel(Channel channel);
 
    Channel sable$getUDPChannel();
 }

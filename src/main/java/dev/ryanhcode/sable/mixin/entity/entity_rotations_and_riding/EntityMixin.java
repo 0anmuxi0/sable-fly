@@ -39,10 +39,10 @@ public abstract class EntityMixin {
    private Vec3 position;
 
    @Shadow
-   public abstract void setPos(Vec3 var1);
+   public abstract void setPos(Vec3 pos);
 
    @Shadow
-   public abstract boolean hasPassenger(Entity var1);
+   public abstract boolean hasPassenger(Entity entity);
 
    @Shadow
    public abstract Vec3 position();
@@ -67,7 +67,7 @@ public abstract class EntityMixin {
    public abstract Vec3 getLookAngle();
 
    @Shadow
-   public abstract void lookAt(Anchor var1, Vec3 var2);
+   public abstract void lookAt(Anchor anchor, Vec3 target);
 
    @Shadow
    public abstract float getXRot();
@@ -81,7 +81,7 @@ public abstract class EntityMixin {
    }
 
    @Shadow
-   public abstract void setDeltaMovement(Vec3 var1);
+   public abstract void setDeltaMovement(Vec3 deltaMovement);
 
    @Shadow
    public abstract Vec3 getDeltaMovement();

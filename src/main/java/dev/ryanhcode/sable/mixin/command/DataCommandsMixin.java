@@ -22,11 +22,11 @@ public class DataCommandsMixin {
       )}
    )
    private static ImmutableList<Function<String, DataProvider>> sable$allProviders(
-      Object var0, Object var1, Object var2, Operation<ImmutableList<Function<String, DataProvider>>> var3
+      Object e1, Object e2, Object e3, Operation<ImmutableList<Function<String, DataProvider>>> original
    ) {
-      List var4 = (List)var3.call(var0, var1, var2);
-      ObjectArrayList var5 = new ObjectArrayList(var4);
-      var5.add(SubLevelDataAccessor.PROVIDER);
-      return ImmutableList.copyOf(var5);
+      List providers = (List)original.call(e1, e2, e3);
+      ObjectArrayList mutableList = new ObjectArrayList(providers);
+      mutableList.add(SubLevelDataAccessor.PROVIDER);
+      return ImmutableList.copyOf(mutableList);
    }
 }

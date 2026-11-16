@@ -13,15 +13,15 @@ public final class SubLevelBlockEntityRenderRegistry {
    private SubLevelBlockEntityRenderRegistry() {
    }
 
-   public static void register(BlockEntityType<?> var0, SubLevelBlockEntityRenderRegistry.Renderer var1) {
-      RENDERERS.put(var0, var1);
+   public static void register(BlockEntityType<?> type, SubLevelBlockEntityRenderRegistry.Renderer renderer) {
+      RENDERERS.put(type, renderer);
    }
 
-   public static SubLevelBlockEntityRenderRegistry.Renderer getRenderer(BlockEntityType<?> var0) {
-      return var0 == null ? null : RENDERERS.get(var0);
+   public static SubLevelBlockEntityRenderRegistry.Renderer getRenderer(BlockEntityType<?> type) {
+      return type == null ? null : RENDERERS.get(type);
    }
 
    public interface Renderer {
-      void render(BlockEntity var1, float var2, PoseStack var3, SubmitNodeCollector var4, int var5, int var6);
+      void render(BlockEntity blockEntity, float partialTicks, PoseStack poseStack, SubmitNodeCollector collector, int packedLight, int packedOverlay);
    }
 }

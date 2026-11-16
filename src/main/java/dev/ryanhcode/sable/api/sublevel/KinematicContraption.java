@@ -13,15 +13,15 @@ import org.joml.Quaterniond;
 import org.joml.Vector3dc;
 
 public interface KinematicContraption {
-   void sable$getLocalBounds(BoundingBox3i var1);
+   void sable$getLocalBounds(BoundingBox3i dest);
 
    BlockGetter sable$blockGetter();
 
    MassTracker sable$getMassTracker();
 
-   Vector3dc sable$getPosition(double var1);
+   Vector3dc sable$getPosition(double partialTick);
 
-   Quaterniond sable$getOrientation(double var1);
+   Quaterniond sable$getOrientation(double partialTick);
 
    Map<BlockPos, BlockSubLevelLiftProvider.LiftProviderContext> sable$liftProviders();
 

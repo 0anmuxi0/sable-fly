@@ -5,5 +5,5 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public interface BlockSubLevelCollisionShape {
-   VoxelShape getSubLevelCollisionShape(BlockGetter var1, BlockState var2);
+   VoxelShape getSubLevelCollisionShape(BlockGetter level, BlockState state);
 }

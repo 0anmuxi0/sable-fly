@@ -14,15 +14,15 @@ public interface ClipContextExtension {
    @Nullable
    Predicate<SubLevel> sable$getSubLevelIgnoring();
 
-   void sable$setIgnoredSubLevel(@Nullable SubLevel var1);
+   void sable$setIgnoredSubLevel(@Nullable SubLevel subLevel);
 
-   void sable$setSubLevelIgnoring(@Nullable Predicate<SubLevel> var1);
+   void sable$setSubLevelIgnoring(@Nullable Predicate<SubLevel> predicate);
 
-   void sable$setIgnoreMainLevel(boolean var1);
+   void sable$setIgnoreMainLevel(boolean ignore);
 
    boolean sable$isIgnoreMainLevel();
 
-   void sable$setDoNotProject(boolean var1);
+   void sable$setDoNotProject(boolean doNotProject);
 
    boolean sable$doNotProject();
 

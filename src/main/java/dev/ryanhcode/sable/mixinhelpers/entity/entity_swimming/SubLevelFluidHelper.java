@@ -33,77 +33,77 @@ public final class SubLevelFluidHelper {
    private SubLevelFluidHelper() {
    }
 
-   public static void gather(Entity var0, boolean var1, Map<Holder<Fluid>, SubLevelFluidHelper.Found> var2, Map<TagKey<Fluid>, SubLevelFluidHelper.Found> var3) {
-      var2.clear();
-      var3.clear();
-      AABB var4 = var0.getFluidInteractionBox();
-      if (var4 != null) {
-         Level var5 = var0.level();
-         LevelReusedVectors var6 = ((LevelExtension)var5).sable$getJOMLSink();
-         BoundingBox3d var7 = new BoundingBox3d(var4);
-         BoundingBox3d var8 = new BoundingBox3d();
-         MutableBlockPos var9 = new MutableBlockPos();
-         Vector3d var10 = new Vector3d();
-         Vector3d var11 = new Vector3d();
-         Quaterniond var12 = new Quaterniond();
-         Vec3 var13 = var0.getEyePosition();
+   public static void gather(Entity entity, boolean ignoreCurrent, Map<Holder<Fluid>, SubLevelFluidHelper.Found> fluidsByType, Map<TagKey<Fluid>, SubLevelFluidHelper.Found> currentsByTag) {
+      fluidsByType.clear();
+      currentsByTag.clear();
+      AABB interactionBox = entity.getFluidInteractionBox();
+      if (interactionBox != null) {
+         Level level = entity.level();
+         LevelReusedVectors reusedVectors = ((LevelExtension)level).sable$getJOMLSink();
+         BoundingBox3d box = new BoundingBox3d(interactionBox);
+         BoundingBox3d localBox = new BoundingBox3d();
+         MutableBlockPos blockPos = new MutableBlockPos();
+         Vector3d tmpCenter = new Vector3d();
+         Vector3d tmpSize = new Vector3d();
+         Quaterniond tmpQuat = new Quaterniond();
+         Vec3 eyePos = entity.getEyePosition();
 
-         for (SubLevel var15 : Sable.HELPER.getAllIntersecting(var5, var7)) {
-            Pose3dc var16 = var15.lastPose();
-            var7.transformInverse(var16, var8);
-            Quaterniond var17 = var16.orientation().conjugate(var12);
-            var17.rotateY(SubLevelEntityCollision.getHitBoxYaw(var16));
-            OrientedBoundingBox3d var18 = new OrientedBoundingBox3d(var16.transformPositionInverse(var7.center(var10)), var7.size(var11), var17, var6);
-            OrientedBoundingBox3d var19 = new OrientedBoundingBox3d(new Vector3d(), new Vector3d(1.0, 1.0, 1.0), JOMLConversion.QUAT_IDENTITY, var6);
-            Vec3 var20 = var16.transformPositionInverse(var13);
-            int var21 = Mth.floor(var20.x);
-            int var22 = Mth.floor(var20.z);
-            int var23 = Mth.floor(var8.minX);
-            int var24 = Mth.ceil(var8.maxX);
-            int var25 = Mth.floor(var8.minY);
-            int var26 = Mth.ceil(var8.maxY);
-            int var27 = Mth.floor(var8.minZ);
-            int var28 = Mth.ceil(var8.maxZ);
-            double var29 = Double.MAX_VALUE;
-            boolean var31 = false;
+         for (SubLevel subLevel : Sable.HELPER.getAllIntersecting(level, box)) {
+            Pose3dc pose = subLevel.lastPose();
+            box.transformInverse(pose, localBox);
+            Quaterniond hitBoxOrientation = pose.orientation().conjugate(tmpQuat);
+            hitBoxOrientation.rotateY(SubLevelEntityCollision.getHitBoxYaw(pose));
+            OrientedBoundingBox3d entityObb = new OrientedBoundingBox3d(pose.transformPositionInverse(box.center(tmpCenter)), box.size(tmpSize), hitBoxOrientation, reusedVectors);
+            OrientedBoundingBox3d blockObb = new OrientedBoundingBox3d(new Vector3d(), new Vector3d(1.0, 1.0, 1.0), JOMLConversion.QUAT_IDENTITY, reusedVectors);
+            Vec3 localEyePos = pose.transformPositionInverse(eyePos);
+            int eyeBlockX = Mth.floor(localEyePos.x);
+            int eyeBlockZ = Mth.floor(localEyePos.z);
+            int minX = Mth.floor(localBox.minX);
+            int maxX = Mth.ceil(localBox.maxX);
+            int minY = Mth.floor(localBox.minY);
+            int maxY = Mth.ceil(localBox.maxY);
+            int minZ = Mth.floor(localBox.minZ);
+            int maxZ = Mth.ceil(localBox.maxZ);
+            double lowestVertexY = Double.MAX_VALUE;
+            boolean lowestVertexYSet = false;
 
-            for (int var32 = var23; var32 < var24; var32++) {
-               for (int var33 = var25; var33 < var26; var33++) {
-                  for (int var34 = var27; var34 < var28; var34++) {
-                     var9.set(var32, var33, var34);
-                     FluidState var37 = var5.getFluidState(var9);
-                     if (!var37.isEmpty()) {
-                        double var38 = (double)var33 + var37.getHeight(var5, var9);
-                        if (!var31) {
-                           for (Vector3d var43 : var18.vertices(var6.a)) {
-                              var29 = Math.min(var29, var43.y);
+            for (int x = minX; x < maxX; x++) {
+               for (int y = minY; y < maxY; y++) {
+                  for (int z = minZ; z < maxZ; z++) {
+                     blockPos.set(x, y, z);
+                     FluidState fluidState = level.getFluidState(blockPos);
+                     if (!fluidState.isEmpty()) {
+                        double fluidTopY = (double)y + fluidState.getHeight(level, blockPos);
+                        if (!lowestVertexYSet) {
+                           for (Vector3d vertex : entityObb.vertices(reusedVectors.a)) {
+                              lowestVertexY = Math.min(lowestVertexY, vertex.y);
                            }
 
-                           var31 = true;
+                           lowestVertexYSet = true;
                         }
 
-                        if (!(var38 < var29)) {
-                           var19.getPosition().set(var32 + 0.5, var33 + 0.5, var34 + 0.5);
-                           if (!(OrientedBoundingBox3d.sat(var18, var19, var6.mtv).lengthSquared() <= 0.0)) {
-                              Holder var46 = var37.typeHolder();
-                              SubLevelFluidHelper.Found var47 = var2.computeIfAbsent(var46, var0x -> new SubLevelFluidHelper.Found());
-                              var47.height = Math.max(var38 - var29, var47.height);
-                              if (var32 == var21 && var34 == var22 && var20.y >= var33 && var20.y <= (double)var33 + var37.getHeight(var5, var9)) {
-                                 var47.eyesInside = true;
+                        if (!(fluidTopY < lowestVertexY)) {
+                           blockObb.getPosition().set(x + 0.5, y + 0.5, z + 0.5);
+                           if (!(OrientedBoundingBox3d.sat(entityObb, blockObb, reusedVectors.mtv).lengthSquared() <= 0.0)) {
+                              Holder fluidType = fluidState.typeHolder();
+                              SubLevelFluidHelper.Found found = fluidsByType.computeIfAbsent(fluidType, type -> new SubLevelFluidHelper.Found());
+                              found.height = Math.max(fluidTopY - lowestVertexY, found.height);
+                              if (x == eyeBlockX && z == eyeBlockZ && localEyePos.y >= y && localEyePos.y <= (double)y + fluidState.getHeight(level, blockPos)) {
+                                 found.eyesInside = true;
                               }
 
-                              if (!var1) {
-                                 for (TagKey var49 : FLUIDS_WITH_CURRENT) {
-                                    if (var46.is(var49)) {
-                                       SubLevelFluidHelper.Found var44 = var3.computeIfAbsent(var49, var0x -> new SubLevelFluidHelper.Found());
-                                       var44.height = Math.max(var47.height, var44.height);
-                                       Vec3 var45 = var37.getFlow(var5, var9);
-                                       if (var44.height < 0.4) {
-                                          var45 = var45.scale(var44.height);
+                              if (!ignoreCurrent) {
+                                 for (TagKey tag : FLUIDS_WITH_CURRENT) {
+                                    if (fluidType.is(tag)) {
+                                       SubLevelFluidHelper.Found tagFound = currentsByTag.computeIfAbsent(tag, tagKey -> new SubLevelFluidHelper.Found());
+                                       tagFound.height = Math.max(found.height, tagFound.height);
+                                       Vec3 flow = fluidState.getFlow(level, blockPos);
+                                       if (tagFound.height < 0.4) {
+                                          flow = flow.scale(tagFound.height);
                                        }
 
-                                       var44.current = var44.current.add(var16.transformNormal(var45));
-                                       var44.currentBlocks++;
+                                       tagFound.current = tagFound.current.add(pose.transformNormal(flow));
+                                       tagFound.currentBlocks++;
                                     }
                                  }
                               }
@@ -117,37 +117,37 @@ public final class SubLevelFluidHelper {
       }
    }
 
-   public static FluidState getFluidStateAt(Entity var0, BlockPos var1) {
-      Level var2 = var0.level();
-      FluidState var3 = var2.getFluidState(var1);
-      if (!var3.isEmpty()) {
-         return var3;
+   public static FluidState getFluidStateAt(Entity entity, BlockPos pos) {
+      Level level = entity.level();
+      FluidState fluidState = level.getFluidState(pos);
+      if (!fluidState.isEmpty()) {
+         return fluidState;
       } else {
-         Vec3 var4 = Vec3.atCenterOf(var1);
-         BoundingBox3d var5 = new BoundingBox3d(var1).expand(0.5);
+         Vec3 centerPos = Vec3.atCenterOf(pos);
+         BoundingBox3d searchBox = new BoundingBox3d(pos).expand(0.5);
 
-         for (SubLevel var7 : Sable.HELPER.getAllIntersecting(var2, var5)) {
-            BlockPos var8 = BlockPos.containing(var7.lastPose().transformPositionInverse(var4));
-            FluidState var9 = var2.getFluidState(var8);
-            if (!var9.isEmpty()) {
-               return var9;
+         for (SubLevel subLevel : Sable.HELPER.getAllIntersecting(level, searchBox)) {
+            BlockPos blockPos = BlockPos.containing(subLevel.lastPose().transformPositionInverse(centerPos));
+            FluidState subLevelFluidState = level.getFluidState(blockPos);
+            if (!subLevelFluidState.isEmpty()) {
+               return subLevelFluidState;
             }
          }
 
-         return var3;
+         return fluidState;
       }
    }
 
-   public static void applyCurrent(Entity var0, SubLevelFluidHelper.Found var1, double var2) {
-      if (var1.currentBlocks != 0 && !(var1.current.lengthSqr() < 1.0E-5F)) {
-         Vec3 var4 = var0 instanceof Player ? var1.current.scale(1.0 / var1.currentBlocks) : var1.current.normalize();
-         Vec3 var5 = var0.getDeltaMovement();
-         var4 = var4.scale(var2);
-         if (Math.abs(var5.x) < 0.003 && Math.abs(var5.z) < 0.003 && var4.length() < 0.0045000000000000005) {
-            var4 = var4.normalize().scale(0.0045000000000000005);
+   public static void applyCurrent(Entity entity, SubLevelFluidHelper.Found found, double strength) {
+      if (found.currentBlocks != 0 && !(found.current.lengthSqr() < 1.0E-5F)) {
+         Vec3 push = entity instanceof Player ? found.current.scale(1.0 / found.currentBlocks) : found.current.normalize();
+         Vec3 deltaMovement = entity.getDeltaMovement();
+         push = push.scale(strength);
+         if (Math.abs(deltaMovement.x) < 0.003 && Math.abs(deltaMovement.z) < 0.003 && push.length() < 0.0045000000000000005) {
+            push = push.normalize().scale(0.0045000000000000005);
          }
 
-         var0.addDeltaMovement(var4);
+         entity.addDeltaMovement(push);
       }
    }
 

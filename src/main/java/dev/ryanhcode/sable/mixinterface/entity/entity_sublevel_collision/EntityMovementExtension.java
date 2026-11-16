@@ -15,11 +15,11 @@ public interface EntityMovementExtension {
 
    UUID sable$getLastTrackingSubLevelID();
 
-   void sable$setPosField(Vec3 var1);
+   void sable$setPosField(Vec3 posField);
 
-   void sable$setTrackingSubLevel(SubLevel var1);
+   void sable$setTrackingSubLevel(SubLevel subLevel);
 
-   void sable$setLastTrackingSubLevelID(UUID var1);
+   void sable$setLastTrackingSubLevelID(UUID subLevelId);
 
    BlockPos sable$getInBlockStatePos();
 }

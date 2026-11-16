@@ -39,20 +39,20 @@ public abstract class EntityRendererMixin {
    protected EntityRenderDispatcher entityRenderDispatcher;
 
    @Shadow
-   protected abstract AABB getBoundingBoxForCulling(Entity var1);
+   protected abstract AABB getBoundingBoxForCulling(Entity entity);
 
    @Shadow
-   protected abstract boolean affectedByCulling(Entity var1);
+   protected abstract boolean affectedByCulling(Entity entity);
 
    @ModifyReturnValue(
       method = {"getPackedLightCoords"},
       at = {@At("RETURN")}
    )
-   public int sable$getPackedLightCoords(int var1, Entity var2, float var3) {
-      Vec3 var4 = var2.getLightProbePosition(var3).subtract(var2.getEyePosition(var3));
-      Vector3d var5 = JOMLConversion.toJOML(Sable.HELPER.getEyePositionInterpolated(var2, var3)).add(var4.x, var4.y, var4.z);
-      BlockPos var6 = BlockPos.containing(var5.x, var5.y, var5.z);
-      return LightCoordsUtil.pack(LightCoordsUtil.block(var1), sable$getSubLevelAccountedSkyLight(var1, var2.level(), LightLayer.SKY, var6, var5));
+   public int sable$getPackedLightCoords(int original, Entity entity, float partialTicks) {
+      Vec3 lightProbeOffset = entity.getLightProbePosition(partialTicks).subtract(entity.getEyePosition(partialTicks));
+      Vector3d lightProbePosition = JOMLConversion.toJOML(Sable.HELPER.getEyePositionInterpolated(entity, partialTicks)).add(lightProbeOffset.x, lightProbeOffset.y, lightProbeOffset.z);
+      BlockPos blockPos = BlockPos.containing(lightProbePosition.x, lightProbePosition.y, lightProbePosition.z);
+      return LightCoordsUtil.pack(LightCoordsUtil.block(original), sable$getSubLevelAccountedSkyLight(original, entity.level(), LightLayer.SKY, blockPos, lightProbePosition));
    }
 
    @Redirect(
@@ -62,8 +62,8 @@ public abstract class EntityRendererMixin {
          target = "Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;distanceToSqr(Lnet/minecraft/world/entity/Entity;)D"
       )}
    )
-   private double sable$distanceToCamera(EntityRenderDispatcher var1, Entity var2) {
-      return Sable.HELPER.distanceSquaredWithSubLevels(var2.level(), Minecraft.getInstance().gameRenderer.getMainCamera().position(), var2.position());
+   private double sable$distanceToCamera(EntityRenderDispatcher dispatcher, Entity entity) {
+      return Sable.HELPER.distanceSquaredWithSubLevels(entity.level(), Minecraft.getInstance().gameRenderer.getMainCamera().position(), entity.position());
    }
 
    @Redirect(
@@ -73,47 +73,47 @@ public abstract class EntityRendererMixin {
          target = "Lnet/minecraft/world/level/Level;getBrightness(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I"
       )}
    )
-   private int sable$getSkyLightLevel(Level var1, LightLayer var2, BlockPos var3) {
-      return sable$getSubLevelAccountedSkyLight(-1, var1, var2, var3, JOMLConversion.atCenterOf(var3));
+   private int sable$getSkyLightLevel(Level instance, LightLayer lightLayer, BlockPos blockPos) {
+      return sable$getSubLevelAccountedSkyLight(-1, instance, lightLayer, blockPos, JOMLConversion.atCenterOf(blockPos));
    }
 
    @Unique
-   private static int sable$getSubLevelAccountedSkyLight(int var0, Level var1, LightLayer var2, BlockPos var3, Vector3dc var4) {
-      Iterable<SubLevel> var5 = Sable.HELPER.getAllIntersecting(var1, new BoundingBox3d(var3));
-      int var6 = var0 == -1 ? var1.getBrightness(var2, var3) : LightCoordsUtil.sky(var0);
-      MutableBlockPos var7 = new MutableBlockPos();
-      MutableBlockPos var8 = new MutableBlockPos();
-      Vector3d var9 = new Vector3d();
+   private static int sable$getSubLevelAccountedSkyLight(int original, Level instance, LightLayer lightLayer, BlockPos blockPos, Vector3dc probePosition) {
+      Iterable<SubLevel> all = Sable.HELPER.getAllIntersecting(instance, new BoundingBox3d(blockPos));
+      int baseBrightness = original == -1 ? instance.getBrightness(lightLayer, blockPos) : LightCoordsUtil.sky(original);
+      MutableBlockPos localPosition = new MutableBlockPos();
+      MutableBlockPos heightmapPos = new MutableBlockPos();
+      Vector3d tempProbePosition = new Vector3d();
 
-      for (SubLevel var11 : var5) {
-         ClientSubLevel var12 = (ClientSubLevel)var11;
-         var12.renderPose().transformPositionInverse(var4, var9);
-         var7.set(var9.x, var9.y, var9.z);
-         Level var13 = var11.getLevel();
-         var8.setWithOffset(var7, Direction.UP);
-         LevelPlot var14 = var11.getPlot();
-         boolean var15 = false;
+      for (SubLevel subLevel : all) {
+         ClientSubLevel clientSubLevel = (ClientSubLevel)subLevel;
+         clientSubLevel.renderPose().transformPositionInverse(probePosition, tempProbePosition);
+         localPosition.set(tempProbePosition.x, tempProbePosition.y, tempProbePosition.z);
+         Level level = subLevel.getLevel();
+         heightmapPos.setWithOffset(localPosition, Direction.UP);
+         LevelPlot plot = subLevel.getPlot();
+         boolean isAboveGround = false;
 
-         while (var8.getY() >= var14.getBoundingBox().minY()) {
-            if (!var13.getBlockState(var8).isAir()) {
-               var15 = true;
+         while (heightmapPos.getY() >= plot.getBoundingBox().minY()) {
+            if (!level.getBlockState(heightmapPos).isAir()) {
+               isAboveGround = true;
                break;
             }
 
-            var8.move(Direction.DOWN);
+            heightmapPos.move(Direction.DOWN);
          }
 
-         if (var15) {
-            if (var2 == LightLayer.BLOCK) {
-               var6 = Math.max(var6, var13.getBrightness(var2, var7));
-            } else if (var2 == LightLayer.SKY) {
-               int var16 = var12.scaleSkyLight(var13.getBrightness(var2, var7));
-               var6 = Math.min(var6, var16);
+         if (isAboveGround) {
+            if (lightLayer == LightLayer.BLOCK) {
+               baseBrightness = Math.max(baseBrightness, level.getBrightness(lightLayer, localPosition));
+            } else if (lightLayer == LightLayer.SKY) {
+               int brightness = clientSubLevel.scaleSkyLight(level.getBrightness(lightLayer, localPosition));
+               baseBrightness = Math.min(baseBrightness, brightness);
             }
          }
       }
 
-      return var6;
+      return baseBrightness;
    }
 
    @Inject(
@@ -121,38 +121,38 @@ public abstract class EntityRendererMixin {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private <E extends Entity> void sable$shouldRender(E var1, Frustum var2, double var3, double var5, double var7, CallbackInfoReturnable<Boolean> var9) {
-      if (!this.affectedByCulling(var1)) {
-         var9.setReturnValue(true);
+   private <E extends Entity> void sable$shouldRender(E entity, Frustum frustum, double pCamX, double pCamY, double pCamZ, CallbackInfoReturnable<Boolean> cir) {
+      if (!this.affectedByCulling(entity)) {
+         cir.setReturnValue(true);
       } else {
-         ClientSubLevel var10 = Sable.HELPER.getContainingClient(var1);
-         if (var10 != null) {
-            Vec3 var11 = var10.renderPose().transformPosition(var1.position());
-            AABB var12 = new AABB(var11.x - 2.0, var11.y - 2.0, var11.z - 2.0, var11.x + 2.0, var11.y + 2.0, var11.z + 2.0);
-            var9.setReturnValue(var2.isVisible(var12));
+         ClientSubLevel subLevel = Sable.HELPER.getContainingClient(entity);
+         if (subLevel != null) {
+            Vec3 globalPos = subLevel.renderPose().transformPosition(entity.position());
+            AABB aabb = new AABB(globalPos.x - 2.0, globalPos.y - 2.0, globalPos.z - 2.0, globalPos.x + 2.0, globalPos.y + 2.0, globalPos.z + 2.0);
+            cir.setReturnValue(frustum.isVisible(aabb));
          } else {
-            SubLevel var17 = Sable.HELPER.getTrackingSubLevel(var1);
-            if (var17 != null) {
-               float var18 = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(true);
-               Vec3 var13 = Sable.HELPER.getEyePositionInterpolated(var1, var18).subtract(0.0, var1.getEyeHeight(), 0.0);
-               AABB var14 = this.getBoundingBoxForCulling(var1).inflate(0.5);
-               if (var14.hasNaN() || var14.getSize() == 0.0) {
-                  var14 = new AABB(var1.getX() - 2.0, var1.getY() - 2.0, var1.getZ() - 2.0, var1.getX() + 2.0, var1.getY() + 2.0, var1.getZ() + 2.0);
+            SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(entity);
+            if (trackingSubLevel != null) {
+               float pt = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(true);
+               Vec3 positionInterpolated = Sable.HELPER.getEyePositionInterpolated(entity, pt).subtract(0.0, entity.getEyeHeight(), 0.0);
+               AABB aabb = this.getBoundingBoxForCulling(entity).inflate(0.5);
+               if (aabb.hasNaN() || aabb.getSize() == 0.0) {
+                  aabb = new AABB(entity.getX() - 2.0, entity.getY() - 2.0, entity.getZ() - 2.0, entity.getX() + 2.0, entity.getY() + 2.0, entity.getZ() + 2.0);
                }
 
-               var14 = var14.move(var13.subtract(var1.position()));
-               if (var2.isVisible(var14)) {
-                  var9.setReturnValue(true);
+               aabb = aabb.move(positionInterpolated.subtract(entity.position()));
+               if (frustum.isVisible(aabb)) {
+                  cir.setReturnValue(true);
                } else {
-                  if (var1 instanceof Leashable var15) {
-                     Entity var16 = var15.getLeashHolder();
-                     if (var16 != null) {
-                        var9.setReturnValue(var2.isVisible(this.getBoundingBoxForCulling(var16)));
+                  if (entity instanceof Leashable leashable) {
+                     Entity entity2 = leashable.getLeashHolder();
+                     if (entity2 != null) {
+                        cir.setReturnValue(frustum.isVisible(this.getBoundingBoxForCulling(entity2)));
                         return;
                      }
                   }
 
-                  var9.setReturnValue(false);
+                  cir.setReturnValue(false);
                }
             }
          }

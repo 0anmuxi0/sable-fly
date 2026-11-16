@@ -7,5 +7,5 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 public interface SableSubLevelRenderPlatform {
    SableSubLevelRenderPlatform INSTANCE = SablePlatformUtil.load(SableSubLevelRenderPlatform.class);
 
-   void tryAddFlywheelVisual(BlockEntity var1);
+   void tryAddFlywheelVisual(BlockEntity blockEntity);
 }

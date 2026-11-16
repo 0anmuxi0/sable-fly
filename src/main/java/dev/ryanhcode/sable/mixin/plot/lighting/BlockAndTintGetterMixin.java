@@ -19,34 +19,34 @@ public interface BlockAndTintGetterMixin {
    LevelLightEngine getLightEngine();
 
    @Overwrite
-   default int getBrightness(LightLayer var1, BlockPos var2) {
-      LevelLightEngine var3 = this.getLightEngine();
-      if (this instanceof SubLevelContainerHolder var4) {
-         SubLevelContainer var5 = var4.sable$getPlotContainer();
-         if (var5.getLevel() instanceof ServerLevel) {
-            LevelPlot var7 = var5.getPlot(new ChunkPos(var2.getX() >> 4, var2.getZ() >> 4));
-            if (var7 instanceof LevelPlot) {
-               var3 = var7.getLightEngine();
+   default int getBrightness(LightLayer lightLayer, BlockPos blockPos) {
+      LevelLightEngine engine = this.getLightEngine();
+      if (this instanceof SubLevelContainerHolder holder) {
+         SubLevelContainer plotContainer = holder.sable$getPlotContainer();
+         if (plotContainer.getLevel() instanceof ServerLevel) {
+            LevelPlot plot = plotContainer.getPlot(new ChunkPos(blockPos.getX() >> 4, blockPos.getZ() >> 4));
+            if (plot instanceof LevelPlot) {
+               engine = plot.getLightEngine();
             }
          }
       }
 
-      return var3.getLayerListener(var1).getLightValue(var2);
+      return engine.getLayerListener(lightLayer).getLightValue(blockPos);
    }
 
    @Overwrite
-   default int getRawBrightness(BlockPos var1, int var2) {
-      LevelLightEngine var3 = this.getLightEngine();
-      if (this instanceof SubLevelContainerHolder var4) {
-         SubLevelContainer var5 = var4.sable$getPlotContainer();
-         if (var5.getLevel() instanceof ServerLevel) {
-            LevelPlot var7 = var5.getPlot(new ChunkPos(var1.getX() >> 4, var1.getZ() >> 4));
-            if (var7 instanceof LevelPlot) {
-               var3 = var7.getLightEngine();
+   default int getRawBrightness(BlockPos blockPos, int amount) {
+      LevelLightEngine engine = this.getLightEngine();
+      if (this instanceof SubLevelContainerHolder holder) {
+         SubLevelContainer plotContainer = holder.sable$getPlotContainer();
+         if (plotContainer.getLevel() instanceof ServerLevel) {
+            LevelPlot plot = plotContainer.getPlot(new ChunkPos(blockPos.getX() >> 4, blockPos.getZ() >> 4));
+            if (plot instanceof LevelPlot) {
+               engine = plot.getLightEngine();
             }
          }
       }
 
-      return var3.getRawBrightness(var1, var2);
+      return engine.getRawBrightness(blockPos, amount);
    }
 }

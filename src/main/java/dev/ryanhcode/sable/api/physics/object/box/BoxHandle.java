@@ -5,7 +5,7 @@ import org.jetbrains.annotations.ApiStatus.OverrideOnly;
 
 public interface BoxHandle {
    @OverrideOnly
-   void readPose(Pose3d var1);
+   void readPose(Pose3d dest);
 
    void remove();
 

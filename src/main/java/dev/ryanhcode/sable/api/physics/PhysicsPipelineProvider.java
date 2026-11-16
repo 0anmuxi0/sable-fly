@@ -21,7 +21,7 @@ public interface PhysicsPipelineProvider {
       value = "_ -> new",
       pure = true
    )
-   PhysicsPipeline createPipeline(@NotNull ServerLevel var1);
+   PhysicsPipeline createPipeline(@NotNull ServerLevel level);
 
    @Retention(RetentionPolicy.RUNTIME)
    public @interface LoadPriority {

@@ -4,11 +4,11 @@ import org.joml.Quaterniondc;
 import org.joml.Vector3dc;
 
 public non-sealed interface GenericConstraintHandle extends PhysicsConstraintHandle {
-   void setFrame1(Vector3dc var1, Quaterniondc var2);
+   void setFrame1(Vector3dc localPosition, Quaterniondc localOrientation);
 
-   void setFrame2(Vector3dc var1, Quaterniondc var2);
+   void setFrame2(Vector3dc localPosition, Quaterniondc localOrientation);
 
-   void setLimit(ConstraintJointAxis var1, double var2, double var4);
+   void setLimit(ConstraintJointAxis axis, double min, double max);
 
-   void lockAxes(ConstraintJointAxis... var1);
+   void lockAxes(ConstraintJointAxis... axes);
 }

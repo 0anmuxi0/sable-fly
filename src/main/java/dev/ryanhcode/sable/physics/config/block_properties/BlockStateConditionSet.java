@@ -22,8 +22,8 @@ public record BlockStateConditionSet(List<BlockStateConditionSet.BlockStateCondi
          for (String part : parts) {
             conditions.add(BlockStateConditionSet.BlockStateCondition.parse(part));
          }
-      } catch (IllegalArgumentException var7) {
-         return DataResult.error(var7::getMessage);
+      } catch (IllegalArgumentException exception) {
+         return DataResult.error(exception::getMessage);
       }
 
       return DataResult.success(new BlockStateConditionSet(conditions));

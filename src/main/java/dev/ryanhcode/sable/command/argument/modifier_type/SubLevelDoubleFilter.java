@@ -42,7 +42,7 @@ public class SubLevelDoubleFilter implements SubLevelSelectorModifierType.Modifi
 
    @FunctionalInterface
    public interface DoublePredicate {
-      boolean fromSublevel(ServerSubLevel var1, Vector3dc var2, double var3);
+      boolean fromSublevel(ServerSubLevel subLevel, Vector3dc sourcePos, double value);
    }
 
    public static class Factory {

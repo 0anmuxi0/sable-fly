@@ -11,8 +11,8 @@ public class ModelBlockRendererCacheMixin implements ModelBlockRendererCacheExte
    private boolean sable$onSubLevel;
 
    @Override
-   public void sable$setOnSubLevel(boolean var1) {
-      this.sable$onSubLevel = var1;
+   public void sable$setOnSubLevel(boolean onSubLevel) {
+      this.sable$onSubLevel = onSubLevel;
    }
 
    @Override

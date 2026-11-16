@@ -24,8 +24,8 @@ public class SubLevelRegionFile extends SubLevelStorageFile {
       try {
          chunk.writeTo(tag);
          this.write(this.getIndex(localX, localZ), tag);
-      } catch (IOException var6) {
-         Sable.LOGGER.error("Failed to write sub-level holding chunk at ({}, {})", new Object[]{localX, localZ, var6});
+      } catch (IOException e) {
+         Sable.LOGGER.error("Failed to write sub-level holding chunk at ({}, {})", new Object[]{localX, localZ, e});
       }
    }
 
@@ -37,8 +37,8 @@ public class SubLevelRegionFile extends SubLevelStorageFile {
       try {
          CompoundTag tag = this.read(this.getIndex(localX, localZ));
          return tag == null ? null : SubLevelHoldingChunk.from(chunkPos, tag);
-      } catch (IOException var5) {
-         Sable.LOGGER.error("Failed to read sub-level holding chunk at ({}, {})", new Object[]{localX, localZ, var5});
+      } catch (IOException e) {
+         Sable.LOGGER.error("Failed to read sub-level holding chunk at ({}, {})", new Object[]{localX, localZ, e});
          return null;
       }
    }

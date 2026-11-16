@@ -56,8 +56,8 @@ public class ExplosionMixin {
       method = {"calculateExplodedPositions"},
       at = {@At("HEAD")}
    )
-   private void sable$preExplode(CallbackInfoReturnable<List<BlockPos>> var1, @Share("explodedSet") LocalRef<Set<BlockPos>> var2) {
-      var2.set(new ObjectOpenHashSet());
+   private void sable$preExplode(CallbackInfoReturnable<List<BlockPos>> cir, @Share("explodedSet") LocalRef<Set<BlockPos>> explodedSet) {
+      explodedSet.set(new ObjectOpenHashSet());
    }
 
    @Inject(
@@ -69,65 +69,65 @@ public class ExplosionMixin {
       locals = LocalCapture.CAPTURE_FAILHARD
    )
    private void sable$redirectBlockExplosionResistance(
-      CallbackInfoReturnable<List<BlockPos>> var1,
-      Set<BlockPos> var2,
-      int var3,
-      int var4,
-      int var5,
-      int var6,
-      double var7,
-      double var9,
-      double var11,
-      double var13,
-      float var15,
-      double var16,
-      double var18,
-      double var20,
-      float var22,
-      BlockPos var23,
-      BlockState var24,
-      FluidState var25,
-      @Local(ordinal = 0) LocalFloatRef var26,
-      @Share("explodedSet") LocalRef<Set<BlockPos>> var27
+      CallbackInfoReturnable<List<BlockPos>> cir,
+      Set<BlockPos> set,
+      int i,
+      int j,
+      int k,
+      int l,
+      double d0,
+      double d1,
+      double d2,
+      double d3,
+      float f,
+      double d4,
+      double d6,
+      double d8,
+      float f1,
+      BlockPos blockpos,
+      BlockState blockstate,
+      FluidState fluidstate,
+      @Local(ordinal = 0) LocalFloatRef fReference,
+      @Share("explodedSet") LocalRef<Set<BlockPos>> explodedSet
    ) {
-      Explosion var28 = (Explosion)this;
-      if (var24.isAir()) {
-         BoundingBox3d var29 = new BoundingBox3d(var23);
-         Iterable<SubLevel> var30 = Sable.HELPER.getAllIntersecting(this.level, var29);
-         ServerSubLevelContainer var31 = SubLevelContainer.getContainer(this.level);
+      Explosion self = (Explosion)this;
+      if (blockstate.isAir()) {
+         BoundingBox3d globalBounds = new BoundingBox3d(blockpos);
+         Iterable<SubLevel> subLevels = Sable.HELPER.getAllIntersecting(this.level, globalBounds);
+         ServerSubLevelContainer container = SubLevelContainer.getContainer(this.level);
 
-         for (SubLevel var33 : var30) {
-            Pose3d var34 = var33.logicalPose();
-            Vec3 var35 = var34.transformPositionInverse(new Vec3(var16, var18, var20));
-            Vec3 var36 = var34.transformPositionInverse(this.center);
-            var23 = BlockPos.containing(var35);
-            var24 = this.level.getBlockState(var23);
-            var25 = this.level.getFluidState(var23);
-            boolean var37 = var15 > 0.0;
-            Optional<Float> var38 = this.damageCalculator.getBlockExplosionResistance(var28, this.level, var23, var24, var25);
-            if (var38.isPresent()) {
-               var15 -= (var38.get() + 0.3F) * 0.3F;
+         for (SubLevel subLevel : subLevels) {
+            Pose3d pose = subLevel.logicalPose();
+            Vec3 localRayPosition = pose.transformPositionInverse(new Vec3(d4, d6, d8));
+            Vec3 localExplosionPosition = pose.transformPositionInverse(this.center);
+            blockpos = BlockPos.containing(localRayPosition);
+            blockstate = this.level.getBlockState(blockpos);
+            fluidstate = this.level.getFluidState(blockpos);
+            boolean canExplodeBefore = f > 0.0;
+            Optional<Float> optional = this.damageCalculator.getBlockExplosionResistance(self, this.level, blockpos, blockstate, fluidstate);
+            if (optional.isPresent()) {
+               f -= (optional.get() + 0.3F) * 0.3F;
             }
 
-            if (var15 > 0.0F && this.damageCalculator.shouldBlockExplode(var28, this.level, var23, var24, var15)) {
-               var2.add(var23);
+            if (f > 0.0F && this.damageCalculator.shouldBlockExplode(self, this.level, blockpos, blockstate, f)) {
+               set.add(blockpos);
             }
 
-            boolean var39 = (this.source instanceof AbstractWindCharge || this.damageCalculator == AbstractWindCharge.EXPLOSION_DAMAGE_CALCULATOR)
-               && !var24.isAir();
-            if (var37 && (var15 < 0.0F || var39) && ((Set)var27.get()).add(var23)) {
-               ((Set)var27.get()).add(var23);
-               if (var33 instanceof ServerSubLevel var40) {
-                  SubLevelPhysicsSystem var41 = var31.physicsSystem();
-                  RigidBodyHandle var42 = var41.getPhysicsHandle(var40);
-                  Vec3 var43 = Vec3.atCenterOf(var23);
-                  Vec3 var44 = var43.subtract(var36).normalize().scale(5.0);
-                  var42.applyImpulseAtPoint(var43, var44);
+            boolean wind = (this.source instanceof AbstractWindCharge || this.damageCalculator == AbstractWindCharge.EXPLOSION_DAMAGE_CALCULATOR)
+               && !blockstate.isAir();
+            if (canExplodeBefore && (f < 0.0F || wind) && ((Set)explodedSet.get()).add(blockpos)) {
+               ((Set)explodedSet.get()).add(blockpos);
+               if (subLevel instanceof ServerSubLevel serverSubLevel) {
+                  SubLevelPhysicsSystem physicsSystem = container.physicsSystem();
+                  RigidBodyHandle handle = physicsSystem.getPhysicsHandle(serverSubLevel);
+                  Vec3 pos = Vec3.atCenterOf(blockpos);
+                  Vec3 force = pos.subtract(localExplosionPosition).normalize().scale(5.0);
+                  handle.applyImpulseAtPoint(pos, force);
                }
             }
          }
 
-         var26.set(var15);
+         fReference.set(f);
       }
    }
 }

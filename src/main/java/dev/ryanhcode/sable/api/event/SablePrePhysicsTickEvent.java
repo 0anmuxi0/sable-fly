@@ -4,5 +4,5 @@ import dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem;
 
 @FunctionalInterface
 public interface SablePrePhysicsTickEvent {
-   void prePhysicsTick(SubLevelPhysicsSystem var1, double var2);
+   void prePhysicsTick(SubLevelPhysicsSystem physicsSystem, double timeStep);
 }

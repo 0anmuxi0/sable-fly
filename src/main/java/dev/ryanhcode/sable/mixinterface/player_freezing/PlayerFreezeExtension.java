@@ -13,7 +13,7 @@ public interface PlayerFreezeExtension {
 
    void sable$tickStopFreezing();
 
-   void sable$freezeTo(UUID var1, Vector3dc var2);
+   void sable$freezeTo(UUID subLevelID, Vector3dc localPosition);
 
    void sable$teleport();
 }

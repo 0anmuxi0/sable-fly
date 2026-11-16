@@ -43,16 +43,16 @@ public abstract class ClientPacketListenerMixin {
       )}
    )
    private boolean sable$handleTeleportEntity(
-      PositionMoveRotation var1,
-      Set<Relative> var2,
-      Entity var3,
-      boolean var4,
-      Operation<Boolean> var5,
-      @Local(argsOnly = true) ClientboundTeleportEntityPacket var6
+      PositionMoveRotation values,
+      Set<Relative> relatives,
+      Entity entity,
+      boolean teleport,
+      Operation<Boolean> operation,
+      @Local(argsOnly = true) ClientboundTeleportEntityPacket packet
    ) {
-      PositionMoveRotation var7 = PositionMoveRotation.calculateAbsolute(PositionMoveRotation.of(var3), var1, var2);
-      boolean var8 = sable$isActuallyInSubLevel(var6);
-      return this.sable$lerp(var3, var7.position(), var7.yRot(), var7.xRot(), 3, true, var8, () -> (Boolean)var5.call(var1, var2, var3, var4));
+      PositionMoveRotation absoluteValues = PositionMoveRotation.calculateAbsolute(PositionMoveRotation.of(entity), values, relatives);
+      boolean actuallyInSubLevel = sable$isActuallyInSubLevel(packet);
+      return this.sable$lerp(entity, absoluteValues.position(), absoluteValues.yRot(), absoluteValues.xRot(), 3, true, actuallyInSubLevel, () -> (Boolean)operation.call(values, relatives, entity, teleport));
    }
 
    @WrapOperation(
@@ -63,11 +63,11 @@ public abstract class ClientPacketListenerMixin {
       )}
    )
    private void sable$handleMoveEntity(
-      Entity var1, Vec3 var2, float var3, float var4, Operation<Void> var5, @Local(argsOnly = true) ClientboundMoveEntityPacket var6
+      Entity instance, Vec3 pos, float yRot, float xRot, Operation<Void> operation, @Local(argsOnly = true) ClientboundMoveEntityPacket packet
    ) {
-      boolean var7 = sable$isActuallyInSubLevel(var6);
-      this.sable$lerp(var1, var2, var3, var4, 3, false, var7, () -> {
-         var5.call(var1, var2, var3, var4);
+      boolean actuallyInSubLevel = sable$isActuallyInSubLevel(packet);
+      this.sable$lerp(instance, pos, yRot, xRot, 3, false, actuallyInSubLevel, () -> {
+         operation.call(instance, pos, yRot, xRot);
          return false;
       });
    }
@@ -79,10 +79,10 @@ public abstract class ClientPacketListenerMixin {
          target = "Lnet/minecraft/world/entity/Entity;moveOrInterpolateTo(Lnet/minecraft/world/phys/Vec3;)V"
       )}
    )
-   private void sable$handleMoveEntityPosOnly(Entity var1, Vec3 var2, Operation<Void> var3, @Local(argsOnly = true) ClientboundMoveEntityPacket var4) {
-      boolean var5 = sable$isActuallyInSubLevel(var4);
-      this.sable$lerp(var1, var2, 0.0F, 0.0F, 3, false, var5, true, () -> {
-         var3.call(var1, var2);
+   private void sable$handleMoveEntityPosOnly(Entity instance, Vec3 pos, Operation<Void> operation, @Local(argsOnly = true) ClientboundMoveEntityPacket packet) {
+      boolean actuallyInSubLevel = sable$isActuallyInSubLevel(packet);
+      this.sable$lerp(instance, pos, 0.0F, 0.0F, 3, false, actuallyInSubLevel, true, () -> {
+         operation.call(instance, pos);
          return false;
       });
    }
@@ -95,12 +95,12 @@ public abstract class ClientPacketListenerMixin {
       )}
    )
    private void sable$handleEntityPositionSyncInterpolation(
-      Entity var1, Vec3 var2, float var3, float var4, Operation<Void> var5, @Local(argsOnly = true) ClientboundEntityPositionSyncPacket var6
+      Entity instance, Vec3 pos, float yRot, float xRot, Operation<Void> operation, @Local(argsOnly = true) ClientboundEntityPositionSyncPacket packet
    ) {
-      this.sable$handleEntityPositionSync(var1, var2, var3, var4, () -> {
-         var5.call(var1, var2, var3, var4);
+      this.sable$handleEntityPositionSync(instance, pos, yRot, xRot, () -> {
+         operation.call(instance, pos, yRot, xRot);
          return false;
-      }, var6);
+      }, packet);
    }
 
    @WrapOperation(
@@ -111,72 +111,72 @@ public abstract class ClientPacketListenerMixin {
       )}
    )
    private void sable$handleEntityPositionSyncSnap(
-      Entity var1, Vec3 var2, float var3, float var4, Operation<Void> var5, @Local(argsOnly = true) ClientboundEntityPositionSyncPacket var6
+      Entity instance, Vec3 pos, float yRot, float xRot, Operation<Void> operation, @Local(argsOnly = true) ClientboundEntityPositionSyncPacket packet
    ) {
-      this.sable$handleEntityPositionSync(var1, var2, var3, var4, () -> {
-         var5.call(var1, var2, var3, var4);
+      this.sable$handleEntityPositionSync(instance, pos, yRot, xRot, () -> {
+         operation.call(instance, pos, yRot, xRot);
          return false;
-      }, var6);
+      }, packet);
    }
 
    @Unique
-   private static boolean sable$isActuallyInSubLevel(Object var0) {
-      PacketActuallyInSubLevelExtension var1;
-      return var0 instanceof PacketActuallyInSubLevelExtension && (var1 = (PacketActuallyInSubLevelExtension)var0).sable$isActuallyInSubLevel();
+   private static boolean sable$isActuallyInSubLevel(Object packet) {
+      PacketActuallyInSubLevelExtension extension;
+      return packet instanceof PacketActuallyInSubLevelExtension && (extension = (PacketActuallyInSubLevelExtension)packet).sable$isActuallyInSubLevel();
    }
 
    @Unique
-   private void sable$handleEntityPositionSync(Entity var1, Vec3 var2, float var3, float var4, BooleanSupplier var5, ClientboundEntityPositionSyncPacket var6) {
-      boolean var7 = sable$isActuallyInSubLevel(var6);
-      this.sable$lerp(var1, var2, var3, var4, 3, true, var7, var5);
+   private void sable$handleEntityPositionSync(Entity instance, Vec3 pos, float yRot, float xRot, BooleanSupplier originalCall, ClientboundEntityPositionSyncPacket packet) {
+      boolean actuallyInSubLevel = sable$isActuallyInSubLevel(packet);
+      this.sable$lerp(instance, pos, yRot, xRot, 3, true, actuallyInSubLevel, originalCall);
    }
 
    @Unique
-   private boolean sable$lerp(Entity var1, Vec3 var2, float var3, float var4, int var5, boolean var6, boolean var7, BooleanSupplier var8) {
-      return this.sable$lerp(var1, var2, var3, var4, var5, var6, var7, false, var8);
+   private boolean sable$lerp(Entity entity, Vec3 pos, float yRot, float xRot, int lerpSteps, boolean teleport, boolean actuallyInSubLevel, BooleanSupplier originalCall) {
+      return this.sable$lerp(entity, pos, yRot, xRot, lerpSteps, teleport, actuallyInSubLevel, false, originalCall);
    }
 
    @Unique
-   private boolean sable$lerp(Entity var1, Vec3 var2, float var3, float var4, int var5, boolean var6, boolean var7, boolean var8, BooleanSupplier var9) {
-      EntityStickExtension var10 = (EntityStickExtension)var1;
-      ClientSubLevelContainer var11 = SubLevelContainer.getContainer(this.level);
-      SubLevel var12 = Sable.HELPER.getContaining(this.level, var2);
-      Vec3 var13 = var10.sable$getPlotPosition();
-      if (!var7 && var12 == null && var11.inBounds(BlockPos.containing(var2))) {
+   private boolean sable$lerp(Entity entity, Vec3 pos, float yRot, float xRot, int lerpSteps, boolean teleport, boolean actuallyInSubLevel, boolean posOnly, BooleanSupplier originalCall) {
+      EntityStickExtension extension = (EntityStickExtension)entity;
+      ClientSubLevelContainer container = SubLevelContainer.getContainer(this.level);
+      SubLevel subLevel = Sable.HELPER.getContaining(this.level, pos);
+      Vec3 plotPosition = extension.sable$getPlotPosition();
+      if (!actuallyInSubLevel && subLevel == null && container.inBounds(BlockPos.containing(pos))) {
          return true;
-      } else if (var12 == null || var7) {
-         SubLevel var17 = Sable.HELPER.getContaining(this.level, var1.position());
-         if (var12 != null && var7 && var17 != var12) {
-            var1.setPos(var12.logicalPose().transformPositionInverse(var1.position()));
-         } else if (var17 != null && var12 == null) {
-            var1.setPos(var17.logicalPose().transformPosition(var1.position()));
+      } else if (subLevel == null || actuallyInSubLevel) {
+         SubLevel currentSubLevel = Sable.HELPER.getContaining(this.level, entity.position());
+         if (subLevel != null && actuallyInSubLevel && currentSubLevel != subLevel) {
+            entity.setPos(subLevel.logicalPose().transformPositionInverse(entity.position()));
+         } else if (currentSubLevel != null && subLevel == null) {
+            entity.setPos(currentSubLevel.logicalPose().transformPosition(entity.position()));
          }
 
-         boolean var18 = var9.getAsBoolean();
-         var10.sable$setPlotPosition(null);
-         return var18;
-      } else if (!(var1 instanceof LivingEntity)) {
-         Vec3 var16 = var12.logicalPose().transformPosition(var2);
-         if (var8) {
-            var1.moveOrInterpolateTo(var16);
+         boolean originalResult = originalCall.getAsBoolean();
+         extension.sable$setPlotPosition(null);
+         return originalResult;
+      } else if (!(entity instanceof LivingEntity)) {
+         Vec3 transformedPos = subLevel.logicalPose().transformPosition(pos);
+         if (posOnly) {
+            entity.moveOrInterpolateTo(transformedPos);
          } else {
-            var1.moveOrInterpolateTo(var16, var3, var4);
+            entity.moveOrInterpolateTo(transformedPos, yRot, xRot);
          }
 
          return true;
       } else {
-         if (var13 == null) {
-            var10.sable$setPlotPosition(var12.logicalPose().transformPositionInverse(var1.position()));
+         if (plotPosition == null) {
+            extension.sable$setPlotPosition(subLevel.logicalPose().transformPositionInverse(entity.position()));
          } else {
-            SubLevel var14 = Sable.HELPER.getContaining(this.level, var13);
-            if (var14 != null && var12 != var14) {
-               Vec3 var15 = var14.logicalPose().transformPosition(var13);
-               var10.sable$setPlotPosition(var12.logicalPose().transformPositionInverse(var15));
+            SubLevel plotSubLevel = Sable.HELPER.getContaining(this.level, plotPosition);
+            if (plotSubLevel != null && subLevel != plotSubLevel) {
+               Vec3 globalPlotPos = plotSubLevel.logicalPose().transformPosition(plotPosition);
+               extension.sable$setPlotPosition(subLevel.logicalPose().transformPositionInverse(globalPlotPos));
             }
          }
 
-         var1.moveOrInterpolateTo(var3, var4);
-         var10.sable$plotLerpTo(var2, var5);
+         entity.moveOrInterpolateTo(yRot, xRot);
+         extension.sable$plotLerpTo(pos, lerpSteps);
          return true;
       }
    }

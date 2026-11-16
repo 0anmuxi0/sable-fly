@@ -72,9 +72,9 @@ public abstract class WaterOcclusionContainer<T extends WaterOcclusionRegion> {
       }
    }
 
-   public abstract void removeRegion(WaterOcclusionRegion var1);
+   public abstract void removeRegion(WaterOcclusionRegion region);
 
-   public abstract WaterOcclusionRegion addRegion(BoundedBitVolume3i var1);
+   public abstract WaterOcclusionRegion addRegion(BoundedBitVolume3i volume);
 
    public Set<T> getRegions() {
       return this.regions;

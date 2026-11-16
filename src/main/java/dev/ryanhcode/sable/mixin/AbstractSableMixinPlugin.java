@@ -95,8 +95,8 @@ public abstract class AbstractSableMixinPlugin implements IMixinConfigPlugin {
          try {
             List<AnnotationNode> nodes = MixinService.getService().getBytecodeProvider().getClassNode(mixinClassName).visibleAnnotations;
             return nodes == null ? true : shouldApply(nodes, modId);
-         } catch (Throwable var3) {
-            throw new RuntimeException(var3);
+         } catch (Throwable t) {
+            throw new RuntimeException(t);
          }
       }
 

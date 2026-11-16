@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin({GroundPathNavigation.class})
 public abstract class GroundPathNavigationMixin {
    @Shadow
-   public abstract Path createPath(BlockPos var1, int var2);
+   public abstract Path createPath(BlockPos blockPos, int i);
 
    @Inject(
       method = {"createPath(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;"},

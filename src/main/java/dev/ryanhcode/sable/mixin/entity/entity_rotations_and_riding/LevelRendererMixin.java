@@ -24,32 +24,32 @@ public class LevelRendererMixin {
       )}
    )
    private void sable$rotateEntity(
-      EntityRenderDispatcher var1,
-      EntityRenderState var2,
-      CameraRenderState var3,
-      double var4,
-      double var6,
-      double var8,
-      PoseStack var10,
-      SubmitNodeCollector var11,
-      Operation<Void> var12
+      EntityRenderDispatcher dispatcher,
+      EntityRenderState renderState,
+      CameraRenderState cameraState,
+      double x,
+      double y,
+      double z,
+      PoseStack poseStack,
+      SubmitNodeCollector submitNodeCollector,
+      Operation<Void> operation
    ) {
-      EntityTransformationExtension var13 = (EntityTransformationExtension)var2;
-      Quaternionf var14 = var13.sable$getSubLevelOrientation();
-      Vector3f var15 = var13.sable$getSubLevelScale();
-      Vector3f var16 = var13.sable$getSubLevelPivot();
-      if (var14 != null && var15 != null && var16 != null) {
-         var10.pushPose();
-         var10.translate(var4, var6, var8);
-         var10.translate(var16.x, var16.y, var16.z);
-         var10.scale(var15.x, var15.y, var15.z);
-         var10.rotateAround(var14, 0.0F, 0.0F, 0.0F);
-         var10.translate(-var16.x, -var16.y, -var16.z);
-         var10.translate(-var4, -var6, -var8);
-         var12.call(var1, var2, var3, var4, var6, var8, var10, var11);
-         var10.popPose();
+      EntityTransformationExtension transformation = (EntityTransformationExtension)renderState;
+      Quaternionf orientation = transformation.sable$getSubLevelOrientation();
+      Vector3f scale = transformation.sable$getSubLevelScale();
+      Vector3f pivot = transformation.sable$getSubLevelPivot();
+      if (orientation != null && scale != null && pivot != null) {
+         poseStack.pushPose();
+         poseStack.translate(x, y, z);
+         poseStack.translate(pivot.x, pivot.y, pivot.z);
+         poseStack.scale(scale.x, scale.y, scale.z);
+         poseStack.rotateAround(orientation, 0.0F, 0.0F, 0.0F);
+         poseStack.translate(-pivot.x, -pivot.y, -pivot.z);
+         poseStack.translate(-x, -y, -z);
+         operation.call(dispatcher, renderState, cameraState, x, y, z, poseStack, submitNodeCollector);
+         poseStack.popPose();
       } else {
-         var12.call(var1, var2, var3, var4, var6, var8, var10, var11);
+         operation.call(dispatcher, renderState, cameraState, x, y, z, poseStack, submitNodeCollector);
       }
    }
 }

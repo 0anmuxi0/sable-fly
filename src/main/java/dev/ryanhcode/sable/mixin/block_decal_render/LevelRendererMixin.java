@@ -33,23 +33,23 @@ public abstract class LevelRendererMixin {
       )}
    )
    private void sable$transformBlockDamage(
-      PoseStack var1, SubmitNodeCollector var2, LevelRenderState var3, CallbackInfo var4, @Local BlockBreakingRenderState var5, @Local BlockPos var6
+      PoseStack poseStack, SubmitNodeCollector submitNodeCollector, LevelRenderState levelRenderState, CallbackInfo ci, @Local BlockBreakingRenderState blockBreakingState, @Local BlockPos pos
    ) {
-      Vec3 var7 = Vec3.atLowerCornerOf(var6);
-      ClientSubLevel var8 = sable$getSubLevel(var6);
-      if (var8 != null) {
-         Pose3dc var9 = var8.renderPose();
-         Vec3 var10 = var3.cameraRenderState.pos;
-         Vec3 var11 = var9.transformPosition(var7);
-         var1.translate(-(var7.x - var10.x), -(var7.y - var10.y), -(var7.z - var10.z));
-         var1.translate(var11.x - var10.x, var11.y - var10.y, var11.z - var10.z);
-         var1.mulPose(new Matrix4f().rotate(new Quaternionf(var9.orientation())));
+      Vec3 breakPos = Vec3.atLowerCornerOf(pos);
+      ClientSubLevel subLevel = sable$getSubLevel(pos);
+      if (subLevel != null) {
+         Pose3dc renderPose = subLevel.renderPose();
+         Vec3 cameraPos = levelRenderState.cameraRenderState.pos;
+         Vec3 projectedPos = renderPose.transformPosition(breakPos);
+         poseStack.translate(-(breakPos.x - cameraPos.x), -(breakPos.y - cameraPos.y), -(breakPos.z - cameraPos.z));
+         poseStack.translate(projectedPos.x - cameraPos.x, projectedPos.y - cameraPos.y, projectedPos.z - cameraPos.z);
+         poseStack.mulPose(new Matrix4f().rotate(new Quaternionf(renderPose.orientation())));
       }
    }
 
    @Unique
-   private static ClientSubLevel sable$getSubLevel(BlockPos var0) {
-      ClientLevel var1 = Minecraft.getInstance().level;
-      return var1 == null ? null : (ClientSubLevel)Sable.HELPER.getContaining(var1, Vec3.atLowerCornerOf(var0));
+   private static ClientSubLevel sable$getSubLevel(BlockPos pos) {
+      ClientLevel level = Minecraft.getInstance().level;
+      return level == null ? null : (ClientSubLevel)Sable.HELPER.getContaining(level, Vec3.atLowerCornerOf(pos));
    }
 }

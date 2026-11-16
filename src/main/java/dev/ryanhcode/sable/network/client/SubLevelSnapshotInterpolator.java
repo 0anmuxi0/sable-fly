@@ -79,10 +79,10 @@ public class SubLevelSnapshotInterpolator {
    }
 
    public void splitFrom(SubLevelSnapshotInterpolator other, @NotNull Pose3dc pose) {
-      ObjectListIterator var3 = other.buffer.iterator();
+      ObjectListIterator snapshotIterator = other.buffer.iterator();
 
-      while (var3.hasNext()) {
-         SubLevelSnapshotInterpolator.Snapshot otherSnapshot = (SubLevelSnapshotInterpolator.Snapshot)var3.next();
+      while (snapshotIterator.hasNext()) {
+         SubLevelSnapshotInterpolator.Snapshot otherSnapshot = (SubLevelSnapshotInterpolator.Snapshot)snapshotIterator.next();
          if (otherSnapshot.gameTick < ((SubLevelSnapshotInterpolator.Snapshot)this.buffer.getFirst()).gameTick) {
             Pose3dc containingPose = otherSnapshot.pose;
             Pose3d madeUpPastPose = new Pose3d(pose);

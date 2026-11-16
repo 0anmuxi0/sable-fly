@@ -20,22 +20,22 @@ public interface LevelReaderMixin {
       at = {@At("HEAD")},
       cancellable = true
    )
-   default void sable$containsAnyLiquidInSubLevels(AABB var1, CallbackInfoReturnable<Boolean> var2) {
-      if (this instanceof Level var3) {
-         BoundingBox3d var4 = new BoundingBox3d(var1);
-         BoundingBox3d var5 = new BoundingBox3d();
+   default void sable$containsAnyLiquidInSubLevels(AABB box, CallbackInfoReturnable<Boolean> cir) {
+      if (this instanceof Level level) {
+         BoundingBox3d worldBox = new BoundingBox3d(box);
+         BoundingBox3d localBox = new BoundingBox3d();
 
-         for (SubLevel var7 : Sable.HELPER.getAllIntersecting(var3, var4)) {
-            var4.transformInverse(var7.lastPose(), var5);
-            AABB var8 = var5.toMojang();
-            if (var3.hasChunksAt(BlockPos.containing(var8.minX, var8.minY, var8.minZ), BlockPos.containing(var8.maxX, var8.maxY, var8.maxZ))) {
-               BlockPos var9 = BlockPos.containing(var8.minX, var8.minY, var8.minZ);
-               BlockPos var10 = BlockPos.containing(var8.maxX, var8.maxY, var8.maxZ);
+         for (SubLevel subLevel : Sable.HELPER.getAllIntersecting(level, worldBox)) {
+            worldBox.transformInverse(subLevel.lastPose(), localBox);
+            AABB localAabb = localBox.toMojang();
+            if (level.hasChunksAt(BlockPos.containing(localAabb.minX, localAabb.minY, localAabb.minZ), BlockPos.containing(localAabb.maxX, localAabb.maxY, localAabb.maxZ))) {
+               BlockPos minPos = BlockPos.containing(localAabb.minX, localAabb.minY, localAabb.minZ);
+               BlockPos maxPos = BlockPos.containing(localAabb.maxX, localAabb.maxY, localAabb.maxZ);
 
-               for (BlockPos var12 : BlockPos.betweenClosed(var9, var10)) {
-                  BlockState var13 = var3.getBlockState(var12);
-                  if (!var13.getFluidState().isEmpty()) {
-                     var2.setReturnValue(true);
+               for (BlockPos pos : BlockPos.betweenClosed(minPos, maxPos)) {
+                  BlockState state = level.getBlockState(pos);
+                  if (!state.getFluidState().isEmpty()) {
+                     cir.setReturnValue(true);
                      return;
                   }
                }

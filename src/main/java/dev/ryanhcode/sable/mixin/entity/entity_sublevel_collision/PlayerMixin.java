@@ -36,10 +36,10 @@ public abstract class PlayerMixin extends LivingEntity {
    protected abstract boolean isStayingOnGroundSurface();
 
    @Shadow
-   protected abstract boolean isAboveGround(float var1);
+   protected abstract boolean isAboveGround(float maxUpStep);
 
    @Shadow
-   protected abstract boolean canFallAtLeast(double var1, double var3, double var5);
+   protected abstract boolean canFallAtLeast(double x, double z, double fallDistance);
 
    protected PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
       super(entityType, level);

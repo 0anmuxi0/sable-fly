@@ -55,7 +55,7 @@ public abstract class CameraMixin implements CameraZoomExtension {
    private float sable$lastInterpolatedZoom;
 
    @Shadow
-   protected abstract void setPosition(double var1, double var3, double var5);
+   protected abstract void setPosition(double x, double y, double z);
 
    @Inject(
       method = {"tick"},

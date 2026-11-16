@@ -21,7 +21,7 @@ public abstract class EntityMixin implements EntityExtension {
    protected abstract AABB makeBoundingBox();
 
    @Shadow
-   protected abstract Vec3 collide(Vec3 var1);
+   protected abstract Vec3 collide(Vec3 vec3);
 
    @Override
    public void sable$setPosSuperRaw(Vec3 pos) {

@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 @FunctionalInterface
 public interface SablePacketSink {
-   void sendPacket(CustomPacketPayload... var1);
+   void sendPacket(CustomPacketPayload... packets);
 
    static SablePacketSink player(ServerPlayer player) {
       return payloads -> {

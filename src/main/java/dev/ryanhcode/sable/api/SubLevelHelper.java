@@ -107,10 +107,10 @@ public final class SubLevelHelper {
    public static Vector3d getVelocityRelativeToAir(Level level, Vector3dc pos, Vector3d dest) {
       Vector3d probePos = new Vector3d(pos);
       Vector3d velocity = Sable.HELPER.getVelocity(level, pos, dest);
-      ObjectListIterator var5 = windProviders.iterator();
+      ObjectListIterator windProviderIterator = windProviders.iterator();
 
-      while (var5.hasNext()) {
-         BiFunction<Vector3dc, Level, Vector3dc> windProvider = (BiFunction<Vector3dc, Level, Vector3dc>)var5.next();
+      while (windProviderIterator.hasNext()) {
+         BiFunction<Vector3dc, Level, Vector3dc> windProvider = (BiFunction<Vector3dc, Level, Vector3dc>)windProviderIterator.next();
          Vector3dc airVelocity = windProvider.apply(probePos, level);
          if (airVelocity != null) {
             velocity.sub(airVelocity);

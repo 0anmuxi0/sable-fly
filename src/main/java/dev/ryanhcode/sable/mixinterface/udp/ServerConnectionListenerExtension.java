@@ -5,7 +5,7 @@ import io.netty.channel.Channel;
 import org.jetbrains.annotations.Nullable;
 
 public interface ServerConnectionListenerExtension {
-   void sable$setupUDPServer(Channel var1);
+   void sable$setupUDPServer(Channel channel);
 
    @Nullable
    SableUDPServer sable$getServer();

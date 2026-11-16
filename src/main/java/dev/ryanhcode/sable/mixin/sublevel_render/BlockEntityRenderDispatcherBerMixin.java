@@ -37,10 +37,10 @@ public class BlockEntityRenderDispatcherBerMixin {
       method = {"tryExtractRenderState"},
       at = {@At("RETURN")}
    )
-   private void sable$rememberEntity(BlockEntity var1, float var2, CrumblingOverlay var3, CallbackInfoReturnable<BlockEntityRenderState> var5) {
-      BlockEntityRenderState var6 = (BlockEntityRenderState)var5.getReturnValue();
-      if (var6 != null) {
-         sable$berEntities.put(var6, var1);
+   private void sable$rememberEntity(BlockEntity blockEntity, float partialTicks, CrumblingOverlay crumblingOverlay, CallbackInfoReturnable<BlockEntityRenderState> cir) {
+      BlockEntityRenderState renderState = (BlockEntityRenderState)cir.getReturnValue();
+      if (renderState != null) {
+         sable$berEntities.put(renderState, blockEntity);
       }
    }
 
@@ -49,25 +49,25 @@ public class BlockEntityRenderDispatcherBerMixin {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void sable$submitCustomRenderer(BlockEntityRenderState var1, PoseStack var2, SubmitNodeCollector var3, CameraRenderState var4, CallbackInfo var5) {
-      BlockEntity var6 = sable$berEntities.remove(var1);
-      if (var6 == null) {
+   private void sable$submitCustomRenderer(BlockEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraRenderState, CallbackInfo ci) {
+      BlockEntity blockEntity = sable$berEntities.remove(renderState);
+      if (blockEntity == null) {
          return;
       }
 
-      if (Sable.HELPER.getContaining(var6) instanceof ClientSubLevel) {
-         SubLevelBlockEntityRenderRegistry.Renderer var7 = SubLevelBlockEntityRenderRegistry.getRenderer(var1.blockEntityType);
-         if (var7 != null) {
-            float var8 = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(true);
-            var2.pushPose();
+      if (Sable.HELPER.getContaining(blockEntity) instanceof ClientSubLevel) {
+         SubLevelBlockEntityRenderRegistry.Renderer renderer = SubLevelBlockEntityRenderRegistry.getRenderer(renderState.blockEntityType);
+         if (renderer != null) {
+            float partialTicks = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(true);
+            poseStack.pushPose();
 
             try {
-               var7.render(var6, var8, var2, var3, var1.lightCoords, 0);
+               renderer.render(blockEntity, partialTicks, poseStack, collector, renderState.lightCoords, 0);
             } finally {
-               var2.popPose();
+               poseStack.popPose();
             }
 
-            var5.cancel();
+            ci.cancel();
          }
       }
    }

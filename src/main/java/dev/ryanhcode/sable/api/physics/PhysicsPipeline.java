@@ -23,48 +23,48 @@ import org.joml.Vector3d;
 import org.joml.Vector3dc;
 
 public interface PhysicsPipeline {
-   void init(Vector3dc var1, double var2);
+   void init(Vector3dc gravity, double universalDrag);
 
    void dispose();
 
    void prePhysicsTicks();
 
-   void physicsTick(double var1);
+   void physicsTick(double timeStep);
 
    void postPhysicsTicks();
 
    void tick();
 
-   void add(ServerSubLevel var1, Pose3dc var2);
+   void add(ServerSubLevel subLevel, Pose3dc pose);
 
-   void remove(ServerSubLevel var1);
+   void remove(ServerSubLevel subLevel);
 
-   void add(KinematicContraption var1);
+   void add(KinematicContraption contraption);
 
-   void remove(KinematicContraption var1);
-
-   @OverrideOnly
-   Pose3d readPose(ServerSubLevel var1, Pose3d var2);
+   void remove(KinematicContraption contraption);
 
    @OverrideOnly
-   RopeHandle addRope(RopePhysicsObject var1);
+   Pose3d readPose(ServerSubLevel subLevel, Pose3d dest);
 
-   BoxHandle addBox(BoxPhysicsObject var1);
+   @OverrideOnly
+   RopeHandle addRope(RopePhysicsObject rope);
 
-   void handleChunkSectionAddition(LevelChunkSection var1, int var2, int var3, int var4, boolean var5);
+   BoxHandle addBox(BoxPhysicsObject boxPhysicsObject);
 
-   void handleChunkSectionRemoval(int var1, int var2, int var3);
+   void handleChunkSectionAddition(LevelChunkSection chunk, int x, int y, int z, boolean uploadDataIfGlobal);
 
-   void handleBlockChange(SectionPos var1, LevelChunkSection var2, int var3, int var4, int var5, BlockState var6, BlockState var7);
+   void handleChunkSectionRemoval(int x, int y, int z);
+
+   void handleBlockChange(SectionPos sectionPos, LevelChunkSection chunk, int x, int y, int z, BlockState oldState, BlockState newState);
 
    default void onStatsChanged(@NotNull ServerSubLevel serverSubLevel) {
    }
 
-   void teleport(PhysicsPipelineBody var1, Vector3dc var2, Quaterniondc var3);
+   void teleport(PhysicsPipelineBody body, Vector3dc position, Quaterniondc orientation);
 
-   void applyImpulse(PhysicsPipelineBody var1, Vector3dc var2, Vector3dc var3);
+   void applyImpulse(PhysicsPipelineBody body, Vector3dc position, Vector3dc force);
 
-   void applyLinearAndAngularImpulse(PhysicsPipelineBody var1, Vector3dc var2, Vector3dc var3, boolean var4);
+   void applyLinearAndAngularImpulse(PhysicsPipelineBody body, Vector3dc force, Vector3dc torque, boolean wakeUp);
 
    default void addLinearAndAngularVelocity(PhysicsPipelineBody body, Vector3dc linearVelocity, Vector3dc angularVelocity) {
    }
@@ -81,7 +81,7 @@ public interface PhysicsPipeline {
       return dest.zero();
    }
 
-   void wakeUp(PhysicsPipelineBody var1);
+   void wakeUp(PhysicsPipelineBody body);
 
    @Nullable
    @Contract("null, null, _ -> fail")

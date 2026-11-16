@@ -35,8 +35,8 @@ public class ProjectileUtilMixin {
          target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(Lnet/minecraft/world/phys/Vec3;)D"
       )}
    )
-   private static double sable$fixDistance(Vec3 var0, Vec3 var1, @Local(argsOnly = true) Entity var2) {
-      return Sable.HELPER.distanceSquaredWithSubLevels(var2.level(), var0, var1);
+   private static double sable$fixDistance(Vec3 start, Vec3 hitPos, @Local(argsOnly = true) Entity source) {
+      return Sable.HELPER.distanceSquaredWithSubLevels(source.level(), start, hitPos);
    }
 
    @Redirect(
@@ -46,8 +46,8 @@ public class ProjectileUtilMixin {
          target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(Lnet/minecraft/world/phys/Vec3;)D"
       )}
    )
-   private static double sable$fixDistance2(Vec3 var0, Vec3 var1, @Local(argsOnly = true) Level var2) {
-      return Sable.HELPER.distanceSquaredWithSubLevels(var2, var0, var1);
+   private static double sable$fixDistance2(Vec3 start, Vec3 hitPos, @Local(argsOnly = true) Level level) {
+      return Sable.HELPER.distanceSquaredWithSubLevels(level, start, hitPos);
    }
 
    @Redirect(
@@ -57,13 +57,13 @@ public class ProjectileUtilMixin {
          target = "Lnet/minecraft/world/phys/AABB;clip(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Ljava/util/Optional;"
       )}
    )
-   private static Optional<Vec3> sable$getBoundingBox(AABB var0, Vec3 var1, Vec3 var2, @Local(argsOnly = true) Entity var3, @Local(ordinal = 2) Entity var4) {
-      Vec3 var5 = sable$toLocal(var4, var1);
-      Vec3 var6 = sable$toLocal(var4, var2);
-      Optional<Vec3> var7 = sable$getHitPosWithSublevels(
-         var3.level(), var0, var5, var6, Sable.HELPER.getContaining(var3.level(), var1), Sable.HELPER.getContaining(var4.level(), var4.position())
+   private static Optional<Vec3> sable$getBoundingBox(AABB toClip, Vec3 start, Vec3 end, @Local(argsOnly = true) Entity source, @Local(ordinal = 2) Entity clipping) {
+      Vec3 localStart = sable$toLocal(clipping, start);
+      Vec3 localEnd = sable$toLocal(clipping, end);
+      Optional<Vec3> hitPos = sable$getHitPosWithSublevels(
+         source.level(), toClip, localStart, localEnd, Sable.HELPER.getContaining(source.level(), start), Sable.HELPER.getContaining(clipping.level(), clipping.position())
       );
-      return var7.map(var1x -> sable$toGlobal(var4, var1x));
+      return hitPos.map(localHitPos -> sable$toGlobal(clipping, localHitPos));
    }
 
    @Redirect(
@@ -73,13 +73,13 @@ public class ProjectileUtilMixin {
          target = "Lnet/minecraft/world/phys/AABB;clip(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Ljava/util/Optional;"
       )}
    )
-   private static Optional<Vec3> sable$getBoundingBox2(AABB var0, Vec3 var1, Vec3 var2, @Local(argsOnly = true) Level var3, @Local(ordinal = 2) Entity var4) {
-      Vec3 var5 = sable$toLocal(var4, var1);
-      Vec3 var6 = sable$toLocal(var4, var2);
-      Optional<Vec3> var7 = sable$getHitPosWithSublevels(
-         var3, var0, var5, var6, Sable.HELPER.getContaining(var3, var1), Sable.HELPER.getContaining(var4.level(), var4.position())
+   private static Optional<Vec3> sable$getBoundingBox2(AABB toClip, Vec3 start, Vec3 end, @Local(argsOnly = true) Level level, @Local(ordinal = 2) Entity clipping) {
+      Vec3 localStart = sable$toLocal(clipping, start);
+      Vec3 localEnd = sable$toLocal(clipping, end);
+      Optional<Vec3> hitPos = sable$getHitPosWithSublevels(
+         level, toClip, localStart, localEnd, Sable.HELPER.getContaining(level, start), Sable.HELPER.getContaining(clipping.level(), clipping.position())
       );
-      return var7.map(var1x -> sable$toGlobal(var4, var1x));
+      return hitPos.map(localHitPos -> sable$toGlobal(clipping, localHitPos));
    }
 
    @Redirect(
@@ -89,13 +89,13 @@ public class ProjectileUtilMixin {
          target = "Lnet/minecraft/world/phys/AABB;clip(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Ljava/util/Optional;"
       )}
    )
-   private static Optional<Vec3> sable$getBoundingBox3(AABB var0, Vec3 var1, Vec3 var2, @Local(argsOnly = true) Level var3, @Local(ordinal = 1) Entity var4) {
-      Vec3 var5 = sable$toLocal(var4, var1);
-      Vec3 var6 = sable$toLocal(var4, var2);
-      Optional<Vec3> var7 = sable$getHitPosWithSublevels(
-         var3, var0, var5, var6, Sable.HELPER.getContaining(var3, var1), Sable.HELPER.getContaining(var4.level(), var4.position())
+   private static Optional<Vec3> sable$getBoundingBox3(AABB toClip, Vec3 start, Vec3 end, @Local(argsOnly = true) Level level, @Local(ordinal = 1) Entity clipping) {
+      Vec3 localStart = sable$toLocal(clipping, start);
+      Vec3 localEnd = sable$toLocal(clipping, end);
+      Optional<Vec3> hitPos = sable$getHitPosWithSublevels(
+         level, toClip, localStart, localEnd, Sable.HELPER.getContaining(level, start), Sable.HELPER.getContaining(clipping.level(), clipping.position())
       );
-      return var7.map(var1x -> sable$toGlobal(var4, var1x));
+      return hitPos.map(localHitPos -> sable$toGlobal(clipping, localHitPos));
    }
 
    @WrapOperation(
@@ -105,89 +105,89 @@ public class ProjectileUtilMixin {
          target = "Lnet/minecraft/world/level/Level;clipIncludingBorder(Lnet/minecraft/world/level/ClipContext;)Lnet/minecraft/world/phys/BlockHitResult;"
       )}
    )
-   private static BlockHitResult sable$fixBlockHit(Level var0, ClipContext var1, Operation<BlockHitResult> var2) {
-      BlockHitResult var3 = (BlockHitResult)var2.call(var0, var1);
-      if (var3.getType() == Type.MISS) {
-         return var3;
+   private static BlockHitResult sable$fixBlockHit(Level level, ClipContext context, Operation<BlockHitResult> operation) {
+      BlockHitResult original = (BlockHitResult)operation.call(level, context);
+      if (original.getType() == Type.MISS) {
+         return original;
       } else {
-         SubLevel var4 = Sable.HELPER.getContaining(var0, var3.getLocation());
-         SubLevel var5 = Sable.HELPER.getContaining(var0, var1.getFrom());
-         if (var4 == var5) {
-            return var3;
+         SubLevel hitSubLevel = Sable.HELPER.getContaining(level, original.getLocation());
+         SubLevel fromSubLevel = Sable.HELPER.getContaining(level, context.getFrom());
+         if (hitSubLevel == fromSubLevel) {
+            return original;
          } else {
-            Vec3 var6 = null;
-            if (var4 != null) {
-               var6 = var4.logicalPose().transformPosition(var3.getLocation());
+            Vec3 transformedHitPos = null;
+            if (hitSubLevel != null) {
+               transformedHitPos = hitSubLevel.logicalPose().transformPosition(original.getLocation());
             }
 
-            if (var5 != null) {
-               var6 = var5.logicalPose().transformPositionInverse(var6);
+            if (fromSubLevel != null) {
+               transformedHitPos = fromSubLevel.logicalPose().transformPositionInverse(transformedHitPos);
             }
 
-            return new BlockHitResult(var6, var3.getDirection(), var3.getBlockPos(), var3.isInside());
+            return new BlockHitResult(transformedHitPos, original.getDirection(), original.getBlockPos(), original.isInside());
          }
       }
    }
 
    @Unique
    @NotNull
-   private static Optional<Vec3> sable$getHitPosWithSublevels(Level var0, AABB var1, Vec3 var2, Vec3 var3, SubLevel var4, SubLevel var5) {
-      if (var4 == var5) {
-         return var1.clip(var2, var3);
+   private static Optional<Vec3> sable$getHitPosWithSublevels(Level level, AABB toClip, Vec3 start, Vec3 end, SubLevel sourceSubLevel, SubLevel clippingSubLevel) {
+      if (sourceSubLevel == clippingSubLevel) {
+         return toClip.clip(start, end);
       } else {
-         if (var0 instanceof LevelPoseProviderExtension var6) {
-            if (var4 != null) {
-               var2 = var6.sable$getPose(var4).transformPosition(var2);
-               var3 = var6.sable$getPose(var4).transformPosition(var3);
+         if (level instanceof LevelPoseProviderExtension poseProvider) {
+            if (sourceSubLevel != null) {
+               start = poseProvider.sable$getPose(sourceSubLevel).transformPosition(start);
+               end = poseProvider.sable$getPose(sourceSubLevel).transformPosition(end);
             }
 
-            if (var5 != null) {
-               var2 = var6.sable$getPose(var5).transformPositionInverse(var2);
-               var3 = var6.sable$getPose(var5).transformPositionInverse(var3);
+            if (clippingSubLevel != null) {
+               start = poseProvider.sable$getPose(clippingSubLevel).transformPositionInverse(start);
+               end = poseProvider.sable$getPose(clippingSubLevel).transformPositionInverse(end);
             }
          } else {
-            if (var4 != null) {
-               var2 = var4.logicalPose().transformPosition(var2);
-               var3 = var4.logicalPose().transformPosition(var3);
+            if (sourceSubLevel != null) {
+               start = sourceSubLevel.logicalPose().transformPosition(start);
+               end = sourceSubLevel.logicalPose().transformPosition(end);
             }
 
-            if (var5 != null) {
-               var2 = var5.logicalPose().transformPositionInverse(var2);
-               var3 = var5.logicalPose().transformPositionInverse(var3);
+            if (clippingSubLevel != null) {
+               start = clippingSubLevel.logicalPose().transformPositionInverse(start);
+               end = clippingSubLevel.logicalPose().transformPositionInverse(end);
             }
          }
 
-         return var1.clip(var2, var3);
+         return toClip.clip(start, end);
       }
    }
 
    @Unique
-   private static Vec3 sable$toLocal(Entity var0, Vec3 var1) {
-      Quaterniond var2 = EntitySubLevelRotationHelper.getEntityOrientation(
-         var0, var0x -> var0x instanceof ClientSubLevel var1x ? var1x.renderPose() : var0x.lastPose(), 1.0F, EntitySubLevelRotationHelper.Type.ENTITY
+   private static Vec3 sable$toLocal(Entity entity, Vec3 pos) {
+      Quaterniond orientation = EntitySubLevelRotationHelper.getEntityOrientation(
+         entity, subLevel -> subLevel instanceof ClientSubLevel clientSubLevel ? clientSubLevel.renderPose() : subLevel.lastPose(), 1.0F, EntitySubLevelRotationHelper.Type.ENTITY
       );
-      if (var2 != null && EntitySubLevelUtil.shouldKick(var0)) {
-         Vec3 var3 = var0.getEyePosition();
-         Vector3d var4 = new Vector3d(var1.x - var3.x, var1.y - var3.y, var1.z - var3.z);
-         var2.conjugate().transform(var4);
-         return new Vec3(var4.x + var3.x, var4.y + var3.y, var4.z + var3.z);
+      if (orientation != null && EntitySubLevelUtil.shouldKick(entity)) {
+         Vec3 eyePos = entity.getEyePosition();
+         Vector3d offset = new Vector3d(pos.x - eyePos.x, pos.y - eyePos.y, pos.z - eyePos.z);
+         orientation.conjugate().transform(offset);
+         return new Vec3(offset.x + eyePos.x, offset.y + eyePos.y, offset.z + eyePos.z);
       } else {
-         return var1;
+         return pos;
       }
    }
 
    @Unique
-   private static Vec3 sable$toGlobal(Entity var0, Vec3 var1) {
-      Quaterniond var2 = EntitySubLevelRotationHelper.getEntityOrientation(
-         var0, var0x -> var0x instanceof ClientSubLevel var1x ? var1x.renderPose() : var0x.lastPose(), 1.0F, EntitySubLevelRotationHelper.Type.ENTITY
+   private static Vec3 sable$toGlobal(Entity entity, Vec3 pos) {
+      Quaterniond orientation = EntitySubLevelRotationHelper.getEntityOrientation(
+         entity, subLevel -> subLevel instanceof ClientSubLevel clientSubLevel ? clientSubLevel.renderPose() : subLevel.lastPose(), 1.0F, EntitySubLevelRotationHelper.Type.ENTITY
       );
-      if (var2 != null && EntitySubLevelUtil.shouldKick(var0)) {
-         Vec3 var3 = var0.getEyePosition();
-         Vector3d var4 = new Vector3d(var1.x - var3.x, var1.y - var3.y, var1.z - var3.z);
-         var2.transform(var4);
-         return new Vec3(var4.x + var3.x, var4.y + var3.y, var4.z + var3.z);
+      if (orientation != null && EntitySubLevelUtil.shouldKick(entity)) {
+         Vec3 eyePos = entity.getEyePosition();
+         Vector3d offset = new Vector3d(pos.x - eyePos.x, pos.y - eyePos.y, pos.z - eyePos.z);
+         orientation.transform(offset);
+         return new Vec3(offset.x + eyePos.x, offset.y + eyePos.y, offset.z + eyePos.z);
       } else {
-         return var1;
+         return pos;
       }
    }
 }

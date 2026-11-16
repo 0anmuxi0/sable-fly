@@ -21,39 +21,39 @@ public class IntegratedServerMixin implements SableToastableServer {
    private Minecraft minecraft;
 
    @Override
-   public void sable$reportSubLevelLoadFailure(GlobalSavedSubLevelPointer var1) {
+   public void sable$reportSubLevelLoadFailure(GlobalSavedSubLevelPointer pointer) {
       this.minecraft
          .execute(
             () -> SystemToast.addOrUpdate(
                this.minecraft.getToastManager(),
                SableToasts.SUB_LEVEL_LOAD_FAILURE,
-               Component.translatable("sub_level.toast.loadFailure", Component.literal(var1.toString())).withStyle(ChatFormatting.RED),
+               Component.translatable("sub_level.toast.loadFailure", Component.literal(pointer.toString())).withStyle(ChatFormatting.RED),
                Component.translatable("sub_level.toast.checkLog")
             )
          );
    }
 
    @Override
-   public void sable$reportSubLevelSaveFailure(SubLevelData var1) {
+   public void sable$reportSubLevelSaveFailure(SubLevelData data) {
       this.minecraft
          .execute(
             () -> SystemToast.addOrUpdate(
                this.minecraft.getToastManager(),
                SableToasts.SUB_LEVEL_SAVE_FAILURE,
-               Component.translatable("sub_level.toast.saveFailure", Component.literal(var1.toString())).withStyle(ChatFormatting.RED),
+               Component.translatable("sub_level.toast.saveFailure", Component.literal(data.toString())).withStyle(ChatFormatting.RED),
                Component.translatable("sub_level.toast.checkLog")
             )
          );
    }
 
    @Override
-   public void sable$reportSubLevelPhysicsFailure(ServerSubLevel var1) {
+   public void sable$reportSubLevelPhysicsFailure(ServerSubLevel subLevel) {
       this.minecraft
          .execute(
             () -> SystemToast.addOrUpdate(
                this.minecraft.getToastManager(),
                SableToasts.SUB_LEVEL_PHYSICS_FAILURE,
-               Component.translatable("sub_level.toast.physicsFailure", Component.literal(var1.toString())).withStyle(ChatFormatting.RED),
+               Component.translatable("sub_level.toast.physicsFailure", Component.literal(subLevel.toString())).withStyle(ChatFormatting.RED),
                Component.translatable("sub_level.toast.attemptingRecovery")
             )
          );

@@ -82,25 +82,25 @@ public class PhysicsBlockPropertiesDefinitionLoader extends SimpleJsonResourceRe
          Sable.LOGGER.debug("Skipping physics properties for {}: namespace {} is not installed", selector.id(), selector.id().getNamespace());
       }
 
-      ObjectListIterator var11 = blocks.iterator();
+      ObjectListIterator iterator = blocks.iterator();
 
-      while (var11.hasNext()) {
-         Block block = (Block)var11.next();
+      while (iterator.hasNext()) {
+         Block block = (Block)iterator.next();
          StateDefinition<Block, BlockState> stateDefinition = block.getStateDefinition();
-         UnmodifiableIterator var14 = stateDefinition.getPossibleStates().iterator();
+         UnmodifiableIterator stateIterator = stateDefinition.getPossibleStates().iterator();
 
-         while (var14.hasNext()) {
-            BlockState state = (BlockState)var14.next();
+         while (stateIterator.hasNext()) {
+            BlockState state = (BlockState)stateIterator.next();
             ((BlockStateExtension)state).sable$loadProperties(stateDefinition, definition);
          }
       }
    }
 
    public void applyAll() {
-      ObjectListIterator var1 = this.definitions.iterator();
+      ObjectListIterator iterator = this.definitions.iterator();
 
-      while (var1.hasNext()) {
-         PhysicsBlockPropertiesDefinition definition = (PhysicsBlockPropertiesDefinition)var1.next();
+      while (iterator.hasNext()) {
+         PhysicsBlockPropertiesDefinition definition = (PhysicsBlockPropertiesDefinition)iterator.next();
          applyToBlocks(definition);
       }
    }

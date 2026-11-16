@@ -30,8 +30,8 @@ public class SableUDPPacketDecoder extends MessageToMessageDecoder<DatagramPacke
          SableUDPPacket packet;
          try {
             packet = packetType.create(new RegistryFriendlyByteBuf(byteBuf, null));
-         } catch (Exception var10) {
-            Sable.LOGGER.error("Failed to decode UDP packet of type {} from {}", new Object[]{packetType, msg.sender(), var10});
+         } catch (Exception e) {
+            Sable.LOGGER.error("Failed to decode UDP packet of type {} from {}", new Object[]{packetType, msg.sender(), e});
             return;
          }
 

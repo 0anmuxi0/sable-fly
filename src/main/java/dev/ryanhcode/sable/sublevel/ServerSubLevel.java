@@ -176,10 +176,10 @@ public class ServerSubLevel extends SubLevel implements PhysicsPipelineBody {
 
    public void applyQueuedForces(SubLevelPhysicsSystem physicsSystem, RigidBodyHandle handle, double timeStep) {
       if (this.queuedForceGroups != null) {
-         ObjectIterator var5 = this.queuedForceGroups.entrySet().iterator();
+         ObjectIterator forceGroupIterator = this.queuedForceGroups.entrySet().iterator();
 
-         while (var5.hasNext()) {
-            Entry<ForceGroup, QueuedForceGroup> entry = (Entry<ForceGroup, QueuedForceGroup>)var5.next();
+         while (forceGroupIterator.hasNext()) {
+            Entry<ForceGroup, QueuedForceGroup> entry = (Entry<ForceGroup, QueuedForceGroup>)forceGroupIterator.next();
             QueuedForceGroup group = entry.getValue();
             handle.applyForcesAndReset(group.getForceTotal());
          }

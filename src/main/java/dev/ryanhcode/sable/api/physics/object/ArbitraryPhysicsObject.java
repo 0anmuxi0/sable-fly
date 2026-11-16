@@ -6,13 +6,13 @@ import dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem;
 import net.minecraft.world.level.ChunkPos;
 
 public interface ArbitraryPhysicsObject {
-   void getBoundingBox(BoundingBox3d var1);
+   void getBoundingBox(BoundingBox3d dest);
 
-   void onUnloaded(SubLevelHoldingChunkMap var1, ChunkPos var2);
+   void onUnloaded(SubLevelHoldingChunkMap holdingChunkMap, ChunkPos chunkPos);
 
    void onRemoved();
 
-   void onAddition(SubLevelPhysicsSystem var1);
+   void onAddition(SubLevelPhysicsSystem physicsSystem);
 
    void wakeUp();
 }

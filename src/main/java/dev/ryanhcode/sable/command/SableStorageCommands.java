@@ -49,7 +49,7 @@ public class SableStorageCommands {
                   try {
                      regionX = Integer.parseInt(parts[1]);
                      regionZ = Integer.parseInt(parts[2]);
-                  } catch (NumberFormatException var23) {
+                  } catch (NumberFormatException e) {
                      continue;
                   }
 
@@ -89,7 +89,7 @@ public class SableStorageCommands {
                   try {
                      regionX = Integer.parseInt(parts[1]);
                      regionZ = Integer.parseInt(parts[2]);
-                  } catch (NumberFormatException var25) {
+                  } catch (NumberFormatException e) {
                      continue;
                   }
 

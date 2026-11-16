@@ -3,11 +3,11 @@ package dev.ryanhcode.sable.api.physics.constraint;
 import org.joml.Vector3d;
 
 public sealed interface PhysicsConstraintHandle permits FreeConstraintHandle, FixedConstraintHandle, RotaryConstraintHandle, GenericConstraintHandle {
-   void getJointImpulses(Vector3d var1, Vector3d var2);
+   void getJointImpulses(Vector3d linearImpulseDest, Vector3d angularImpulseDest);
 
-   void setContactsEnabled(boolean var1);
+   void setContactsEnabled(boolean enabled);
 
-   void setMotor(ConstraintJointAxis var1, double var2, double var4, double var6, boolean var8, double var9);
+   void setMotor(ConstraintJointAxis axis, double target, double stiffness, double damping, boolean hasMaxForce, double maxForce);
 
    void remove();
 

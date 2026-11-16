@@ -150,7 +150,7 @@ public class PhysicsChunkTicketManager {
                         SectionPos sectionPos = SectionPos.of(x, yx, zxx);
                         int index = level.getSectionIndexFromSectionY(yx);
                         if (index >= 0 && index < level.getSectionsCount()) {
-                           PhysicsChunkTicket var28 = this.addTicket(level, pipeline, sectionPos, x, yx, zxx, index, gameTime);
+                           PhysicsChunkTicket ticket = this.addTicket(level, pipeline, sectionPos, x, yx, zxx, index, gameTime);
                         }
                      }
                   }
@@ -177,10 +177,10 @@ public class PhysicsChunkTicketManager {
          level.getChunk(x, z, ChunkStatus.FULL, true);
       } else {
          boolean any = false;
-         ObjectIterator var12 = set.iterator();
+         ObjectIterator ticketIterator = set.iterator();
 
-         while (var12.hasNext()) {
-            InhabitedChunkTicket ticket = (InhabitedChunkTicket)var12.next();
+         while (ticketIterator.hasNext()) {
+            InhabitedChunkTicket ticket = (InhabitedChunkTicket)ticketIterator.next();
             if (ticket.equals(newSableTicket)) {
                ticket.setLastInhabitedTick(gameTime);
                any = true;

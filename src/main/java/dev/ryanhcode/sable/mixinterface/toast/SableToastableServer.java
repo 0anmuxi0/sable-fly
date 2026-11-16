@@ -5,9 +5,9 @@ import dev.ryanhcode.sable.sublevel.storage.holding.GlobalSavedSubLevelPointer;
 import dev.ryanhcode.sable.sublevel.storage.serialization.SubLevelData;
 
 public interface SableToastableServer {
-   void sable$reportSubLevelLoadFailure(GlobalSavedSubLevelPointer var1);
+   void sable$reportSubLevelLoadFailure(GlobalSavedSubLevelPointer pointer);
 
-   void sable$reportSubLevelSaveFailure(SubLevelData var1);
+   void sable$reportSubLevelSaveFailure(SubLevelData data);
 
-   void sable$reportSubLevelPhysicsFailure(ServerSubLevel var1);
+   void sable$reportSubLevelPhysicsFailure(ServerSubLevel subLevel);
 }

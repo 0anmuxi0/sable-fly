@@ -7,13 +7,13 @@ import net.minecraft.world.level.chunk.LevelChunk;
 public interface SablePlotPlatform {
    SablePlotPlatform INSTANCE = SablePlatformUtil.load(SablePlotPlatform.class);
 
-   void readLightData(CompoundTag var1, RegistryAccess var2, LevelChunk var3);
+   void readLightData(CompoundTag tag, RegistryAccess registryAccess, LevelChunk chunk);
 
-   void readChunkAttachments(CompoundTag var1, RegistryAccess var2, LevelChunk var3);
+   void readChunkAttachments(CompoundTag tag, RegistryAccess registryAccess, LevelChunk chunk);
 
-   void postLoad(CompoundTag var1, LevelChunk var2);
+   void postLoad(CompoundTag tag, LevelChunk chunk);
 
-   void writeLightData(CompoundTag var1, RegistryAccess var2, LevelChunk var3);
+   void writeLightData(CompoundTag tag, RegistryAccess registryAccess, LevelChunk chunk);
 
-   void writeChunkAttachments(CompoundTag var1, RegistryAccess var2, LevelChunk var3);
+   void writeChunkAttachments(CompoundTag tag, RegistryAccess registryAccess, LevelChunk chunk);
 }

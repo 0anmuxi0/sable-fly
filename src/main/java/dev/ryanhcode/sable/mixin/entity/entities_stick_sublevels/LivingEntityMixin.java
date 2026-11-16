@@ -41,12 +41,12 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
    @Unique
    private int sable$sableRotLerpSteps;
 
-   public LivingEntityMixin(EntityType<?> var1, Level var2) {
-      super(var1, var2);
+   public LivingEntityMixin(EntityType<?> entityType, Level level) {
+      super(entityType, level);
    }
 
    @Shadow
-   protected abstract void updateWalkAnimation(float var1);
+   protected abstract void updateWalkAnimation(float distance);
 
    @Unique
    private InterpolationHandler sable$interpolationHandler() {
@@ -55,32 +55,32 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
 
    @Override
    public void sable$setupLerp() {
-      InterpolationHandler var1 = this.sable$interpolationHandler();
-      if (var1 != null) {
-         if (this.sable$getPlotPosition() != null && var1.hasActiveInterpolation()) {
-            this.sable$lerpYRot = var1.yRot();
-            this.sable$lerpXRot = var1.xRot();
+      InterpolationHandler interpolationHandler = this.sable$interpolationHandler();
+      if (interpolationHandler != null) {
+         if (this.sable$getPlotPosition() != null && interpolationHandler.hasActiveInterpolation()) {
+            this.sable$lerpYRot = interpolationHandler.yRot();
+            this.sable$lerpXRot = interpolationHandler.xRot();
             this.sable$sableRotLerpSteps = 3;
-            var1.cancel();
+            interpolationHandler.cancel();
          }
       }
    }
 
    @Override
    public void sable$applyLerp() {
-      Vec3 var1 = this.sable$getPlotPosition();
-      if (var1 == null) {
+      Vec3 plotPos = this.sable$getPlotPosition();
+      if (plotPos == null) {
          this.sable$sableLerpSteps = 0;
          this.sable$sableRotLerpSteps = 0;
       } else {
          if (this.sable$sableLerpSteps > 0) {
-            this.sable$setPlotPosition(var1.lerp(this.sable$lerpTarget, 1.0 / this.sable$sableLerpSteps));
+            this.sable$setPlotPosition(plotPos.lerp(this.sable$lerpTarget, 1.0 / this.sable$sableLerpSteps));
             this.sable$sableLerpSteps--;
          }
 
          if (this.sable$sableRotLerpSteps > 0) {
-            double var2 = Mth.wrapDegrees(this.sable$lerpYRot - this.getYRot());
-            this.setYRot(this.getYRot() + (float)var2 / this.sable$sableRotLerpSteps);
+            double difference = Mth.wrapDegrees(this.sable$lerpYRot - this.getYRot());
+            this.setYRot(this.getYRot() + (float)difference / this.sable$sableRotLerpSteps);
             this.setXRot(this.getXRot() + (float)(this.sable$lerpXRot - this.getXRot()) / this.sable$sableRotLerpSteps);
             this.sable$sableRotLerpSteps--;
             this.setRot(this.getYRot(), this.getXRot());
@@ -97,7 +97,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       method = {"aiStep"},
       at = {@At("HEAD")}
    )
-   private void sable$updateRotLerp(CallbackInfo var1) {
+   private void sable$updateRotLerp(CallbackInfo ci) {
       this.sable$setupLerp();
    }
 
@@ -109,14 +109,14 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
          shift = Shift.BEFORE
       )}
    )
-   private void sable$updatePlotPosition(CallbackInfo var1) {
+   private void sable$updatePlotPosition(CallbackInfo ci) {
       this.sable$applyLerp();
    }
 
    @Override
-   public void sable$plotLerpTo(Vec3 var1, int var2) {
-      this.sable$lerpTarget = var1;
-      this.sable$sableLerpSteps = var2;
+   public void sable$plotLerpTo(Vec3 pos, int lerpSteps) {
+      this.sable$lerpTarget = pos;
+      this.sable$sableLerpSteps = lerpSteps;
    }
 
    @ModifyVariable(
@@ -124,7 +124,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       at = {@At("STORE")},
       ordinal = 0
    )
-   private double sable$modifyXDifference(double var1) {
+   private double sable$modifyXDifference(double x) {
       return this.sable$getDifference(true).x;
    }
 
@@ -133,7 +133,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       at = {@At("STORE")},
       ordinal = 1
    )
-   private double sable$modifyZDifference(double var1) {
+   private double sable$modifyZDifference(double x) {
       return this.sable$getDifference(true).z;
    }
 
@@ -144,49 +144,49 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
          target = "Lnet/minecraft/world/entity/LivingEntity;updateWalkAnimation(F)V"
       )}
    )
-   private void sable$walkAnimation(LivingEntity var1, float var2, boolean var3) {
-      Vec3 var4 = this.sable$getDifference(false);
-      float var5 = (float)Mth.length(var4.x, var3 ? var4.y : 0.0, var4.z);
-      this.updateWalkAnimation(var5);
+   private void sable$walkAnimation(LivingEntity instance, float distance, boolean includeHeight) {
+      Vec3 delta = this.sable$getDifference(false);
+      float walkDistance = (float)Mth.length(delta.x, includeHeight ? delta.y : 0.0, delta.z);
+      this.updateWalkAnimation(walkDistance);
    }
 
    @Unique
-   private Vec3 sable$getDifference(boolean var1) {
-      Vec3 var2 = this.position();
-      Vec3 var3 = new Vec3(this.xo, this.yo, this.zo);
-      Vec3 var4 = var2.subtract(var3);
-      SubLevel var5 = Sable.HELPER.getTrackingSubLevel(this);
-      Entity var6 = this;
-      if (var5 != null && (!(!var1 && var6 instanceof Player var7) || !var7.isLocalPlayer())) {
-         Pose3d var8 = var5.logicalPose();
-         Pose3dc var9 = var5.lastPose();
-         var2 = var8.transformPositionInverse(var2);
-         var3 = var9.transformPositionInverse(var3);
-         var4 = var2.subtract(var3);
-         var4 = var8.transformNormal(var4);
+   private Vec3 sable$getDifference(boolean countLocalPlayer) {
+      Vec3 currentPos = this.position();
+      Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
+      Vec3 delta = currentPos.subtract(oldPos);
+      SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(this);
+      Entity self = this;
+      if (trackingSubLevel != null && (!(!countLocalPlayer && self instanceof Player player) || !player.isLocalPlayer())) {
+         Pose3d pose = trackingSubLevel.logicalPose();
+         Pose3dc lastPose = trackingSubLevel.lastPose();
+         currentPos = pose.transformPositionInverse(currentPos);
+         oldPos = lastPose.transformPositionInverse(oldPos);
+         delta = currentPos.subtract(oldPos);
+         delta = pose.transformNormal(delta);
       }
 
-      Quaterniondc var13 = EntitySubLevelUtil.getCustomEntityOrientation(this, 1.0F);
-      if (var13 != null) {
-         var4 = JOMLConversion.toMojang(var13.transformInverse(JOMLConversion.toJOML(var4)));
+      Quaterniondc orientation = EntitySubLevelUtil.getCustomEntityOrientation(this, 1.0F);
+      if (orientation != null) {
+         delta = JOMLConversion.toMojang(orientation.transformInverse(JOMLConversion.toJOML(delta)));
       }
 
-      return var4;
+      return delta;
    }
 
    @Inject(
       method = {"recreateFromPacket"},
       at = {@At("TAIL")}
    )
-   public void sable$recreateFromPacket(ClientboundAddEntityPacket var1, CallbackInfo var2) {
+   public void sable$recreateFromPacket(ClientboundAddEntityPacket packet, CallbackInfo ci) {
       if (EntitySubLevelUtil.shouldKick(this)) {
-         double var3 = var1.getX();
-         double var5 = var1.getY();
-         double var7 = var1.getZ();
-         SubLevel var9 = Sable.HELPER.getContaining(this.level(), var3, var7);
-         if (var9 != null) {
-            Vector3d var10 = var9.logicalPose().transformPosition(new Vector3d(var3, var5, var7));
-            this.setPos(var10.x, var10.y, var10.z);
+         double packetX = packet.getX();
+         double packetY = packet.getY();
+         double packetZ = packet.getZ();
+         SubLevel packetSubLevel = Sable.HELPER.getContaining(this.level(), packetX, packetZ);
+         if (packetSubLevel != null) {
+            Vector3d globalPacketPos = packetSubLevel.logicalPose().transformPosition(new Vector3d(packetX, packetY, packetZ));
+            this.setPos(globalPacketPos.x, globalPacketPos.y, globalPacketPos.z);
          }
       }
    }

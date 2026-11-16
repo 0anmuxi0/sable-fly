@@ -102,27 +102,27 @@ public final class Rapier3D {
                      break;
                   }
                }
-            } catch (Throwable var9) {
+            } catch (Throwable e) {
                try {
                   is2.close();
-               } catch (Throwable var6) {
-                  var9.addSuppressed(var6);
+               } catch (Throwable closeException) {
+                  e.addSuppressed(closeException);
                }
 
-               throw var9;
+               throw e;
             }
 
             is2.close();
          }
-      } catch (Throwable var11) {
+      } catch (Throwable t) {
          Sable.LOGGER
             .error(
                "Sable has failed to load the natives needed for its Rapier pipeline. Please report with system details and logs to {}",
                "https://github.com/ryanhcode/sable/issues",
-               var11
+               t
             );
          CrashReport crashReport = CrashReport.forThrowable(
-            var11 instanceof UnsatisfiedLinkError && var11.getCause() != null ? var11.getCause() : var11, "Sable linking with Rapier natives"
+            t instanceof UnsatisfiedLinkError && t.getCause() != null ? t.getCause() : t, "Sable linking with Rapier natives"
          );
          CrashReportCategory category = crashReport.addCategory("Natives");
          category.setDetail("Name", NATIVE_NAME);
@@ -151,55 +151,55 @@ public final class Rapier3D {
    }
 
    @Internal
-   static native long initialize(double var0, double var2, double var4, double var6);
+   static native long initialize(double gravityX, double gravityY, double gravityZ, double universalDrag);
 
    @Internal
-   static native void tick(long var0, double var2);
+   static native void tick(long sceneHandle, double timeStep);
 
    @Internal
-   static native void step(long var0, double var2);
+   static native void step(long sceneHandle, double timeStep);
 
    @Internal
-   static native void createSubLevel(long var0, int var2, double[] var3);
+   static native void createSubLevel(long sceneHandle, int id, double[] pose);
 
    @Internal
-   static native void removeSubLevel(long var0, int var2);
+   static native void removeSubLevel(long sceneHandle, int id);
 
    @Internal
-   public static native void createBox(long var0, int var2, double var3, double var5, double var7, double var9, double[] var11);
+   public static native void createBox(long sceneHandle, int id, double mass, double halfExtentsX, double halfExtentsY, double halfExtentsZ, double[] pose);
 
    @Internal
-   public static native void removeBox(long var0, int var2);
+   public static native void removeBox(long sceneHandle, int id);
 
    @Internal
-   public static native void getPose(long var0, int var2, double[] var3);
+   public static native void getPose(long sceneHandle, int id, double[] store);
 
    @Internal
-   static native void setCenterOfMass(long var0, int var2, double var3, double var5, double var7);
+   static native void setCenterOfMass(long sceneHandle, int id, double x, double y, double z);
 
    @Internal
-   static native void setLocalBounds(long var0, int var2, int var3, int var4, int var5, int var6, int var7, int var8);
+   static native void setLocalBounds(long sceneHandle, int id, int minX, int minY, int minZ, int maxX, int maxY, int maxZ);
 
    @Internal
-   static native void addChunk(long var0, int var2, int var3, int var4, int[] var5, boolean var6, int var7);
+   static native void addChunk(long sceneHandle, int x, int y, int z, int[] chunk, boolean global, int id);
 
    @Internal
-   static native void removeChunk(long var0, int var2, int var3, int var4, boolean var5);
+   static native void removeChunk(long sceneHandle, int x, int y, int z, boolean global);
 
    @Internal
-   public static native void changeBlock(long var0, int var2, int var3, int var4, int var5);
+   public static native void changeBlock(long sceneHandle, int x, int y, int z, int newState);
 
    @Internal
-   private static native int newVoxelCollider(double var0, double var2, double var4, boolean var6, BlockSubLevelCollisionCallback var7);
+   private static native int newVoxelCollider(double frictionMultiplier, double volume, double restitution, boolean isFluid, BlockSubLevelCollisionCallback contactEvents);
 
    @Internal
-   public static native void addVoxelColliderBox(int var0, double[] var1);
+   public static native void addVoxelColliderBox(int index, double[] bounds);
 
    @Internal
-   public static native void clearVoxelColliderBoxes(int var0);
+   public static native void clearVoxelColliderBoxes(int index);
 
    @Internal
-   private static native void setMassProperties(long var0, int var2, double var3, double[] var5, double[] var6);
+   private static native void setMassProperties(long sceneHandle, int index, double mass, double[] centerOfMass, double[] inertiaTensor);
 
    @Internal
    public static RapierVoxelColliderData createVoxelColliderEntry(
@@ -209,179 +209,179 @@ public final class Rapier3D {
    }
 
    @Internal
-   static native void teleportObject(long var0, int var2, double var3, double var5, double var7, double var9, double var11, double var13, double var15);
+   static native void teleportObject(long sceneHandle, int id, double x, double y, double z, double orientationX, double orientationY, double orientationZ, double orientationW);
 
    @Internal
-   public static native void wakeUpObject(long var0, int var2);
+   public static native void wakeUpObject(long sceneHandle, int id);
 
    @Internal
    public static native long addRotaryConstraint(
-      long var0,
-      int var2,
-      int var3,
-      double var4,
-      double var6,
-      double var8,
-      double var10,
-      double var12,
-      double var14,
-      double var16,
-      double var18,
-      double var20,
-      double var22,
-      double var24,
-      double var26
+      long sceneHandle,
+      int id,
+      int otherId,
+      double localAnchorXA,
+      double localAnchorYA,
+      double localAnchorZA,
+      double localAnchorXB,
+      double localAnchorYB,
+      double localAnchorZB,
+      double localAxisXA,
+      double localAxisYA,
+      double localAxisZA,
+      double localAxisXB,
+      double localAxisYB,
+      double localAxisZB
    );
 
    @Internal
    public static native long addFixedConstraint(
-      long var0,
-      int var2,
-      int var3,
-      double var4,
-      double var6,
-      double var8,
-      double var10,
-      double var12,
-      double var14,
-      double var16,
-      double var18,
-      double var20,
-      double var22
+      long sceneHandle,
+      int id,
+      int otherId,
+      double localAnchorXA,
+      double localAnchorYA,
+      double localAnchorZA,
+      double localAnchorXB,
+      double localAnchorYB,
+      double localAnchorZB,
+      double localOrientationXB,
+      double localOrientationYB,
+      double localOrientationZB,
+      double localOrientationWB
    );
 
    @Internal
    public static native long addFreeConstraint(
-      long var0,
-      int var2,
-      int var3,
-      double var4,
-      double var6,
-      double var8,
-      double var10,
-      double var12,
-      double var14,
-      double var16,
-      double var18,
-      double var20,
-      double var22
+      long sceneHandle,
+      int id,
+      int otherId,
+      double localAnchorXA,
+      double localAnchorYA,
+      double localAnchorZA,
+      double localAnchorXB,
+      double localAnchorYB,
+      double localAnchorZB,
+      double localOrientationXB,
+      double localOrientationYB,
+      double localOrientationZB,
+      double localOrientationWB
    );
 
    @Internal
    public static native long addGenericConstraint(
-      long var0,
-      int var2,
-      int var3,
-      double var4,
-      double var6,
-      double var8,
-      double var10,
-      double var12,
-      double var14,
-      double var16,
-      double var18,
-      double var20,
-      double var22,
-      double var24,
-      double var26,
-      double var28,
-      double var30,
-      int var32
+      long sceneHandle,
+      int id,
+      int otherId,
+      double localAnchorXA,
+      double localAnchorYA,
+      double localAnchorZA,
+      double localOrientationXA,
+      double localOrientationYA,
+      double localOrientationZA,
+      double localOrientationWA,
+      double localAnchorXB,
+      double localAnchorYB,
+      double localAnchorZB,
+      double localOrientationXB,
+      double localOrientationYB,
+      double localOrientationZB,
+      double localOrientationWB,
+      int lockedAxesMask
    );
 
    @Internal
    public static native void setConstraintFrame(
-      long var0, long var2, int var4, double var5, double var7, double var9, double var11, double var13, double var15, double var17
+      long sceneHandle, long handle, int side, double localPosX, double localPosY, double localPosZ, double localOrientationX, double localOrientationY, double localOrientationZ, double localOrientationW
    );
 
    @Internal
-   public static native void setConstraintContactsEnabled(long var0, long var2, boolean var4);
+   public static native void setConstraintContactsEnabled(long sceneHandle, long handle, boolean contactsEnabled);
 
    @Internal
-   public static native void getConstraintImpulses(long var0, long var2, double[] var4);
+   public static native void getConstraintImpulses(long sceneHandle, long handle, double[] store);
 
    @Internal
-   public static native boolean isConstraintValid(long var0, long var2);
+   public static native boolean isConstraintValid(long sceneHandle, long handle);
 
    @Internal
-   public static native void removeConstraint(long var0, long var2);
+   public static native void removeConstraint(long sceneHandle, long handle);
 
    @Internal
-   public static native void setConstraintMotor(long var0, long var2, int var4, double var5, double var7, double var9, boolean var11, double var12);
+   public static native void setConstraintMotor(long sceneHandle, long handle, int axis, double desiredPosition, double stiffness, double damping, boolean hasForceLimit, double maxForce);
 
    @Internal
-   public static native void setConstraintLimit(long var0, long var2, int var4, double var5, double var7);
+   public static native void setConstraintLimit(long sceneHandle, long handle, int axis, double min, double max);
 
    @Internal
-   public static native void lockConstraintAxes(long var0, long var2, byte var4);
+   public static native void lockConstraintAxes(long sceneHandle, long handle, byte mask);
 
    @Internal
    public static native void addLinearAngularVelocities(
-      long var0, int var2, double var3, double var5, double var7, double var9, double var11, double var13, boolean var15
+      long sceneHandle, int bodyId, double linearX, double linearY, double linearZ, double angularX, double angularY, double angularZ, boolean wakeUp
    );
 
    @Internal
-   static native double[] clearCollisions(long var0);
+   static native double[] clearCollisions(long sceneHandle);
 
    @Internal
-   static native void applyForce(long var0, int var2, double var3, double var5, double var7, double var9, double var11, double var13, boolean var15);
+   static native void applyForce(long sceneHandle, int bodyID, double x, double y, double z, double fx, double fy, double fz, boolean wakeUp);
 
    @Internal
-   static native void applyForceAndTorque(long var0, int var2, double var3, double var5, double var7, double var9, double var11, double var13, boolean var15);
+   static native void applyForceAndTorque(long sceneHandle, int bodyID, double fx, double fy, double fz, double tx, double ty, double tz, boolean wakeUp);
 
    @Internal
-   static native void getLinearVelocity(long var0, int var2, double[] var3);
+   static native void getLinearVelocity(long sceneHandle, int bodyID, double[] store);
 
    @Internal
-   static native void getAngularVelocity(long var0, int var2, double[] var3);
+   static native void getAngularVelocity(long sceneHandle, int bodyID, double[] store);
 
    @Internal
-   static native void createKinematicContraption(long var0, int var2, int var3, double[] var4);
+   static native void createKinematicContraption(long sceneHandle, int mountId, int id, double[] pose);
 
    @Internal
-   static native void removeKinematicContraption(long var0, int var2);
+   static native void removeKinematicContraption(long sceneHandle, int id);
 
    @Internal
-   static native void setKinematicContraptionTransform(long var0, int var2, double[] var3, double[] var4, double[] var5);
+   static native void setKinematicContraptionTransform(long sceneHandle, int id, double[] centerOfMass, double[] pose, double[] velocities);
 
    @Internal
-   static native void addKinematicContraptionChunkSection(long var0, int var2, int var3, int var4, int var5, int[] var6);
+   static native void addKinematicContraptionChunkSection(long sceneHandle, int id, int x, int y, int z, int[] data);
 
    @Internal
-   public static native long createRope(long var0, double var2, double var4, double[] var6, int var7);
+   public static native long createRope(long sceneHandle, double pointRadius, double firstJointLength, double[] points, int pointCount);
 
    @Internal
-   public static native long removeRope(long var0, long var2);
+   public static native long removeRope(long sceneHandle, long ropeId);
 
    @Internal
-   public static native void setRopeAttachment(long var0, long var2, int var4, double var5, double var7, double var9, boolean var11);
+   public static native void setRopeAttachment(long sceneHandle, long ropeId, int subLevelId, double x, double y, double z, boolean end);
 
    @Internal
-   public static native void addRopePointAtStart(long var0, long var2, double var4, double var6, double var8);
+   public static native void addRopePointAtStart(long sceneHandle, long ropeId, double x, double y, double z);
 
    @Internal
-   public static native void removeRopePointAtStart(long var0, long var2);
+   public static native void removeRopePointAtStart(long sceneHandle, long ropeId);
 
    @Internal
-   public static native void wakeUpRope(long var0, long var2);
+   public static native void wakeUpRope(long sceneHandle, long ropeId);
 
    @Internal
-   public static native void setRopeFirstSegmentLength(long var0, long var2, double var4);
+   public static native void setRopeFirstSegmentLength(long sceneHandle, long ropeId, double firstSegmentLength);
 
    @Internal
-   public static native double[] queryRope(long var0, long var2);
+   public static native double[] queryRope(long sceneHandle, long ropeId);
 
    @Internal
-   static native void configFrequencyAndDamping(double var0, double var2);
+   static native void configFrequencyAndDamping(double contactNaturalFrequency, double contactDampingRatio);
 
    @Internal
-   static native void configSolverIterations(int var0, int var1, int var2);
+   static native void configSolverIterations(int solverIterations, int pgsIterations, int stabilizationIterations);
 
    @Internal
-   static native void configMinIslandSize(int var0);
+   static native void configMinIslandSize(int islandSize);
 
    @Internal
-   static native void dispose(long var0);
+   static native void dispose(long sceneHandle);
 
    @Internal
    static void setMassPropertiesFrom(long sceneHandle, int id, MassData massTracker) {

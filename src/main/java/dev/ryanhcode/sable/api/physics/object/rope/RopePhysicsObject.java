@@ -38,10 +38,10 @@ public class RopePhysicsObject implements ArbitraryPhysicsObject {
    public void getBoundingBox(BoundingBox3d dest) {
       Vector3d first = (Vector3d)this.points.getFirst();
       dest.set(first.x, first.y, first.z, first.x, first.y, first.z);
-      ObjectListIterator var3 = this.points.iterator();
+      ObjectListIterator iterator = this.points.iterator();
 
-      while (var3.hasNext()) {
-         Vector3d point = (Vector3d)var3.next();
+      while (iterator.hasNext()) {
+         Vector3d point = (Vector3d)iterator.next();
          dest.expandTo(point.x - this.collisionRadius, point.y - this.collisionRadius, point.z - this.collisionRadius);
          dest.expandTo(point.x + this.collisionRadius, point.y + this.collisionRadius, point.z + this.collisionRadius);
       }

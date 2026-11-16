@@ -27,19 +27,19 @@ public class FloatingClusterContainer {
    }
 
    public void processBlockChanges(Vector3dc centerOfMass) {
-      ObjectIterator var2 = this.removedBlocks.entrySet().iterator();
+      ObjectIterator iterator = this.removedBlocks.entrySet().iterator();
 
-      while (var2.hasNext()) {
-         Entry<Long, BlockState> entry = (Entry<Long, BlockState>)var2.next();
+      while (iterator.hasNext()) {
+         Entry<Long, BlockState> entry = (Entry<Long, BlockState>)iterator.next();
          BlockPos blockPos = BlockPos.of(entry.getKey());
          Vector3d pos = new Vector3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5).sub(centerOfMass);
          this.removeFloatingBlock(entry.getValue(), pos);
       }
 
-      var2 = this.addedBlocks.entrySet().iterator();
+      iterator = this.addedBlocks.entrySet().iterator();
 
-      while (var2.hasNext()) {
-         Entry<Long, BlockState> entry = (Entry<Long, BlockState>)var2.next();
+      while (iterator.hasNext()) {
+         Entry<Long, BlockState> entry = (Entry<Long, BlockState>)iterator.next();
          BlockPos blockPos = BlockPos.of(entry.getKey());
          Vector3d pos = new Vector3d(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5).sub(centerOfMass);
          this.addFloatingBlock(entry.getValue(), pos);

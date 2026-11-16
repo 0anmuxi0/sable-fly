@@ -5,9 +5,9 @@ import dev.ryanhcode.sable.sublevel.SubLevel;
 import it.unimi.dsi.fastutil.Function;
 
 public interface LevelPoseProviderExtension {
-   void sable$pushPoseSupplier(Function<SubLevel, Pose3dc> var1);
+   void sable$pushPoseSupplier(Function<SubLevel, Pose3dc> supplier);
 
    void sable$popPoseSupplier();
 
-   Pose3dc sable$getPose(SubLevel var1);
+   Pose3dc sable$getPose(SubLevel subLevel);
 }

@@ -12,5 +12,5 @@ public interface ClientSubLevelAccess extends SubLevelAccess {
    @Contract(
       pure = true
    )
-   Pose3dc renderPose(float var1);
+   Pose3dc renderPose(float partialTick);
 }

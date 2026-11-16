@@ -16,10 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin({AttackRange.class})
 public abstract class AttackRangeMixin {
    @Shadow
-   public abstract float effectiveMaxRange(Entity var1);
+   public abstract float effectiveMaxRange(Entity entity);
 
    @Shadow
-   public abstract float effectiveMinRange(Entity var1);
+   public abstract float effectiveMinRange(Entity entity);
 
    @Shadow
    public abstract float hitboxMargin();

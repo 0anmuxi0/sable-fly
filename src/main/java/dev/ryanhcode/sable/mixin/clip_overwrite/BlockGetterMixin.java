@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.Unique;
 )
 public interface BlockGetterMixin {
    @Shadow
-   BlockState getBlockState(BlockPos var1);
+   BlockState getBlockState(BlockPos blockPos);
 
    @Overwrite
    default BlockHitResult clip(ClipContext clipContext) {

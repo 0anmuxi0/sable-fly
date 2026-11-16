@@ -30,8 +30,8 @@ public class SableClientNetworkEventLoop {
    protected void doRunTask(Runnable runnable) {
       try {
          runnable.run();
-      } catch (Exception var3) {
-         Sable.LOGGER.error(LogUtils.FATAL_MARKER, "Error executing packet handle task", var3);
+      } catch (Exception e) {
+         Sable.LOGGER.error(LogUtils.FATAL_MARKER, "Error executing packet handle task", e);
       }
    }
 

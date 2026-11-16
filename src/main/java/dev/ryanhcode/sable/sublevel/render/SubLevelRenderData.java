@@ -16,11 +16,11 @@ public interface SubLevelRenderData extends Closeable {
 
    void rebuild();
 
-   boolean isSectionCompiled(int var1, int var2, int var3);
+   boolean isSectionCompiled(int x, int y, int z);
 
-   void setDirty(int var1, int var2, int var3, boolean var4);
+   void setDirty(int x, int y, int z, boolean playerChanged);
 
-   void compileSections(PrioritizeChunkUpdates var1, RenderRegionCache var2, Camera var3);
+   void compileSections(PrioritizeChunkUpdates chunkUpdates, RenderRegionCache renderRegionCache, Camera camera);
 
    int getVisibleSectionCount();
 
@@ -28,13 +28,13 @@ public interface SubLevelRenderData extends Closeable {
       return this.getTransformation(camX, camY, camZ, new Matrix4f());
    }
 
-   default Matrix4f getTransformation(double var1, double var3, double var5, Matrix4f var7) {
-      var7.identity();
-      Pose3dc var8 = this.getSubLevel().renderPose();
-      var7.translate((float)(var8.position().x() - var1), (float)(var8.position().y() - var3), (float)(var8.position().z() - var5));
-      var7.rotate(new Quaternionf(var8.orientation()));
-      var7.scale((float)var8.scale().x(), (float)var8.scale().y(), (float)var8.scale().z());
-      return var7;
+   default Matrix4f getTransformation(double camX, double camY, double camZ, Matrix4f store) {
+      store.identity();
+      Pose3dc pose = this.getSubLevel().renderPose();
+      store.translate((float)(pose.position().x() - camX), (float)(pose.position().y() - camY), (float)(pose.position().z() - camZ));
+      store.rotate(new Quaternionf(pose.orientation()));
+      store.scale((float)pose.scale().x(), (float)pose.scale().y(), (float)pose.scale().z());
+      return store;
    }
 
    ClientSubLevel getSubLevel();

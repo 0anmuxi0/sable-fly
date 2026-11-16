@@ -82,7 +82,7 @@ public abstract class LevelRendererMixin {
    }
 
    @Shadow
-   private void renderHitOutline(PoseStack var1, VertexConsumer var2, double var3, double var5, double var7, BlockOutlineRenderState var8, int var9, float var10) {
+   private void renderHitOutline(PoseStack poseStack, VertexConsumer builder, double camX, double camY, double camZ, BlockOutlineRenderState state, int color, float width) {
    }
 
    @Inject(
@@ -90,38 +90,38 @@ public abstract class LevelRendererMixin {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void sable$submitSubLevelBlockOutline(MultiBufferSource.BufferSource var0, PoseStack var1, boolean var2, LevelRenderState var3, CallbackInfo var4) {
-      BlockOutlineRenderState var5 = var3.blockOutlineRenderState;
-      if (var5 != null) {
-         ClientLevel var6 = Minecraft.getInstance().level;
-         if (var6 != null) {
-            BlockPos var7 = var5.pos();
-            if (Sable.HELPER.getContaining(var6, var7) instanceof ClientSubLevel var8) {
-               Vec3 var16 = var3.cameraRenderState.pos;
-               Pose3dc var10 = var8.renderPose();
-               Vector3dc var11 = var10.rotationPoint();
-               Vector3dc var12 = var10.scale();
-               var1.pushPose();
-               var1.translate(var10.position().x() - var16.x, var10.position().y() - var16.y, var10.position().z() - var16.z);
-               var1.rotateAround(this.sable$subLevelRotation.set(var10.orientation()), 0.0F, 0.0F, 0.0F);
-               var1.scale((float)var12.x(), (float)var12.y(), (float)var12.z());
-               var1.translate(var7.getX() - var11.x(), var7.getY() - var11.y(), var7.getZ() - var11.z());
-               boolean var13 = var5.highContrast();
-               if (var13) {
-                  this.renderHitOutline(var1, var0.getBuffer(RenderTypes.secondaryBlockOutline()), var7.getX(), var7.getY(), var7.getZ(), var5, -16777216, 7.0F);
+   private void sable$submitSubLevelBlockOutline(MultiBufferSource.BufferSource bufferSource, PoseStack poseStack, boolean onlyTranslucentBlocks, LevelRenderState levelRenderState, CallbackInfo ci) {
+      BlockOutlineRenderState state = levelRenderState.blockOutlineRenderState;
+      if (state != null) {
+         ClientLevel level = Minecraft.getInstance().level;
+         if (level != null) {
+            BlockPos pos = state.pos();
+            if (Sable.HELPER.getContaining(level, pos) instanceof ClientSubLevel subLevel) {
+               Vec3 cameraPos = levelRenderState.cameraRenderState.pos;
+               Pose3dc renderPose = subLevel.renderPose();
+               Vector3dc rotationPoint = renderPose.rotationPoint();
+               Vector3dc scale = renderPose.scale();
+               poseStack.pushPose();
+               poseStack.translate(renderPose.position().x() - cameraPos.x, renderPose.position().y() - cameraPos.y, renderPose.position().z() - cameraPos.z);
+               poseStack.rotateAround(this.sable$subLevelRotation.set(renderPose.orientation()), 0.0F, 0.0F, 0.0F);
+               poseStack.scale((float)scale.x(), (float)scale.y(), (float)scale.z());
+               poseStack.translate(pos.getX() - rotationPoint.x(), pos.getY() - rotationPoint.y(), pos.getZ() - rotationPoint.z());
+               boolean highContrast = state.highContrast();
+               if (highContrast) {
+                  this.renderHitOutline(poseStack, bufferSource.getBuffer(RenderTypes.secondaryBlockOutline()), pos.getX(), pos.getY(), pos.getZ(), state, -16777216, 7.0F);
                }
 
-               int var14 = var13 ? -11010079 : ARGB.black(102);
-               RenderType var15;
-               if (var13) {
-                  var15 = RenderTypes.lines();
+               int outlineColor = highContrast ? -11010079 : ARGB.black(102);
+               RenderType renderType;
+               if (highContrast) {
+                  renderType = RenderTypes.lines();
                } else {
-                  var15 = RenderTypes.linesTranslucent();
+                  renderType = RenderTypes.linesTranslucent();
                }
 
-               this.renderHitOutline(var1, var0.getBuffer(var15), var7.getX(), var7.getY(), var7.getZ(), var5, var14, Minecraft.getInstance().getWindow().getAppropriateLineWidth());
-               var1.popPose();
-               var4.cancel();
+               this.renderHitOutline(poseStack, bufferSource.getBuffer(renderType), pos.getX(), pos.getY(), pos.getZ(), state, outlineColor, Minecraft.getInstance().getWindow().getAppropriateLineWidth());
+               poseStack.popPose();
+               ci.cancel();
             }
          }
       }
@@ -131,17 +131,17 @@ public abstract class LevelRendererMixin {
       method = {"compileSections"},
       at = {@At("TAIL")}
    )
-   private void sable$compileSections(Camera var1, CallbackInfo var2) {
-      ClientLevel var3 = Minecraft.getInstance().level;
-      List<ClientSubLevel> var4 = ((ClientSubLevelContainer)((SubLevelContainerHolder)var3).sable$getPlotContainer()).getAllSubLevels();
-      RenderRegionCache var5 = new RenderRegionCache();
-      PrioritizeChunkUpdates var6 = Minecraft.getInstance().options.prioritizeChunkUpdates().get();
-      Camera var7 = Minecraft.getInstance().gameRenderer.getMainCamera();
+   private void sable$compileSections(Camera camera, CallbackInfo ci) {
+      ClientLevel level = Minecraft.getInstance().level;
+      List<ClientSubLevel> subLevels = ((ClientSubLevelContainer)((SubLevelContainerHolder)level).sable$getPlotContainer()).getAllSubLevels();
+      RenderRegionCache cache = new RenderRegionCache();
+      PrioritizeChunkUpdates chunkUpdates = Minecraft.getInstance().options.prioritizeChunkUpdates().get();
+      Camera mainCamera = Minecraft.getInstance().gameRenderer.getMainCamera();
 
-      for (ClientSubLevel var9 : var4) {
-         SubLevelRenderData var10 = var9.getRenderData();
-         if (var10 != null) {
-            var10.compileSections(var6, var5, var7);
+      for (ClientSubLevel subLevel : subLevels) {
+         SubLevelRenderData renderData = subLevel.getRenderData();
+         if (renderData != null) {
+            renderData.compileSections(chunkUpdates, cache, mainCamera);
          }
       }
    }
@@ -150,100 +150,100 @@ public abstract class LevelRendererMixin {
       method = {"prepareChunkRenders"},
       at = {@At("RETURN")}
    )
-   private void sable$prepareSubLevelTerrain(Matrix4fc var1, CallbackInfoReturnable<ChunkSectionsToRender> var2) {
-      this.sable$buildSubLevelTerrain(var1);
+   private void sable$prepareSubLevelTerrain(Matrix4fc modelViewMatrix, CallbackInfoReturnable<ChunkSectionsToRender> cir) {
+      this.sable$buildSubLevelTerrain(modelViewMatrix);
    }
 
    @Unique
-   private void sable$buildSubLevelTerrain(Matrix4fc var1) {
+   private void sable$buildSubLevelTerrain(Matrix4fc modelViewMatrix) {
    }
 
    @Inject(
       method = {"submitEntities"},
       at = {@At("TAIL")}
    )
-   private void sable$submitSubLevelBlocks(PoseStack var0, LevelRenderState var1, SubmitNodeCollector var2, CallbackInfo var3) {
-      PoseStack var5 = new PoseStack();
-      ClientLevel var6 = Minecraft.getInstance().level;
-      if (var6 != null) {
-         ClientSubLevelContainer var7 = SubLevelContainer.getContainer(var6);
-         if (var7 != null) {
-            Vec3 var8 = var1.cameraRenderState.pos;
-            double var9 = var8.x;
-            double var11 = var8.y;
-            double var13 = var8.z;
-            Frustum var15 = Minecraft.getInstance().gameRenderer.getMainCamera().getCullFrustum();
-            boolean var16 = SableClientConfig.SUB_LEVEL_OCCLUSION_CULLING.get();
-            boolean var17 = SableClientConfig.SUB_LEVEL_CULL_ENCLOSED_BLOCKS.get();
-            double var18 = SableClientConfig.SUB_LEVEL_RENDER_DISTANCE.get();
-            double var20 = var18 <= 0.0 ? Double.POSITIVE_INFINITY : var18 * var18;
-            boolean var22 = false;
-            Object var23 = null;
+   private void sable$submitSubLevelBlocks(PoseStack poseStack, LevelRenderState levelRenderState, SubmitNodeCollector output, CallbackInfo ci) {
+      PoseStack subLevelPoseStack = new PoseStack();
+      ClientLevel level = Minecraft.getInstance().level;
+      if (level != null) {
+         ClientSubLevelContainer container = SubLevelContainer.getContainer(level);
+         if (container != null) {
+            Vec3 cameraPos = levelRenderState.cameraRenderState.pos;
+            double camX = cameraPos.x;
+            double camY = cameraPos.y;
+            double camZ = cameraPos.z;
+            Frustum frustum = Minecraft.getInstance().gameRenderer.getMainCamera().getCullFrustum();
+            boolean occlusionCulling = SableClientConfig.SUB_LEVEL_OCCLUSION_CULLING.get();
+            boolean cullEnclosedBlocks = SableClientConfig.SUB_LEVEL_CULL_ENCLOSED_BLOCKS.get();
+            double renderDistance = SableClientConfig.SUB_LEVEL_RENDER_DISTANCE.get();
+            double renderDistanceSq = renderDistance <= 0.0 ? Double.POSITIVE_INFINITY : renderDistance * renderDistance;
+            boolean rendered = false;
+            Object builtGroup = null;
 
-            for (ClientSubLevel var25 : var7.getAllSubLevels()) {
-               ClientLevelPlot var26 = var25.getPlot();
-               BoundingBox3ic var27 = var26.getBoundingBox();
-               if (var27 != null && !(var27.volume() <= 0.0)) {
-                  Pose3dc var28 = var25.renderPose();
-                  Vector3dc var29 = var28.position();
-                  Vector3dc var30 = var28.rotationPoint();
-                  Vector3dc var31 = var28.scale();
-                  this.sable$subLevelRotation.set(var28.orientation());
-                  ClientLevel var32 = var25.getLevel();
-                  if (var25.getRenderData() instanceof VanillaChunkedSubLevelRenderData var33) {
-                     CardinalLighting var62 = var32.cardinalLighting();
-                     LevelLightEngine var35 = var32.getLightEngine();
-                     Vec3 var36 = var28.transformPosition(
-                        new Vec3((var27.minX() + var27.maxX() + 1) * 0.5, (var27.minY() + var27.maxY() + 1) * 0.5, (var27.minZ() + var27.maxZ() + 1) * 0.5)
+            for (ClientSubLevel subLevel : container.getAllSubLevels()) {
+               ClientLevelPlot plot = subLevel.getPlot();
+               BoundingBox3ic boundingBox = plot.getBoundingBox();
+               if (boundingBox != null && !(boundingBox.volume() <= 0.0)) {
+                  Pose3dc renderPose = subLevel.renderPose();
+                  Vector3dc position = renderPose.position();
+                  Vector3dc rotationPoint = renderPose.rotationPoint();
+                  Vector3dc scale = renderPose.scale();
+                  this.sable$subLevelRotation.set(renderPose.orientation());
+                  ClientLevel subLevelLevel = subLevel.getLevel();
+                  if (subLevel.getRenderData() instanceof VanillaChunkedSubLevelRenderData renderData) {
+                     CardinalLighting cardinalLighting = subLevelLevel.cardinalLighting();
+                     LevelLightEngine lightEngine = subLevelLevel.getLightEngine();
+                     Vec3 transformedCenter = renderPose.transformPosition(
+                        new Vec3((boundingBox.minX() + boundingBox.maxX() + 1) * 0.5, (boundingBox.minY() + boundingBox.maxY() + 1) * 0.5, (boundingBox.minZ() + boundingBox.maxZ() + 1) * 0.5)
                      );
-                     if (!(var36.distanceToSqr(var8) > var20)) {
-                        LongSet var37 = null;
+                     if (!(transformedCenter.distanceToSqr(cameraPos) > renderDistanceSq)) {
+                        LongSet visibleSections = null;
 
-                        for (PlotChunkHolder var39 : var26.getLoadedChunks()) {
-                           LevelChunk var40 = var39.getChunk();
-                           if (var40 != null) {
-                              ChunkPos var41 = var40.getPos();
-                              LevelChunkSection[] var42 = var40.getSections();
+                        for (PlotChunkHolder chunkHolder : plot.getLoadedChunks()) {
+                           LevelChunk chunk = chunkHolder.getChunk();
+                           if (chunk != null) {
+                              ChunkPos chunkPos = chunk.getPos();
+                              LevelChunkSection[] sections = chunk.getSections();
 
-                              for (int var43 = 0; var43 < var42.length; var43++) {
-                                 LevelChunkSection var44 = var42[var43];
-                                 if (var44 != null && !var44.hasOnlyAir()) {
-                                    int var45 = var40.getSectionYFromSectionIndex(var43);
-                                    long var46 = SectionPos.asLong(var41.x(), var45, var41.z());
-                                    if (var37 == null || var37.contains(var46)) {
-                                       int var48 = var45 << 4;
-                                       if (var15 == null || var15.isVisible(this.sable$sectionBounds(var28, var41, var48))) {
-                                          VanillaChunkedSubLevelRenderData.VisibleBlocks var49 = var33.sable$getVisibleBlocks(
-                                             var46, var44, var48, var41.x() << 4, var41.z() << 4, var17
+                              for (int sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
+                                 LevelChunkSection section = sections[sectionIndex];
+                                 if (section != null && !section.hasOnlyAir()) {
+                                    int sectionY = chunk.getSectionYFromSectionIndex(sectionIndex);
+                                    long sectionPos = SectionPos.asLong(chunkPos.x(), sectionY, chunkPos.z());
+                                    if (visibleSections == null || visibleSections.contains(sectionPos)) {
+                                       int sectionBaseY = sectionY << 4;
+                                       if (frustum == null || frustum.isVisible(this.sable$sectionBounds(renderPose, chunkPos, sectionBaseY))) {
+                                          VanillaChunkedSubLevelRenderData.VisibleBlocks visibleBlocks = renderData.sable$getVisibleBlocks(
+                                             sectionPos, section, sectionBaseY, chunkPos.x() << 4, chunkPos.z() << 4, cullEnclosedBlocks
                                           );
-                                          BlockPos[] var50 = var49.positions;
-                                          if (var50.length != 0) {
-                                             BlockState[] var51 = var49.states;
-                                             Holder[] var52 = var49.biomes;
-                                             var5.pushPose();
-                                             var5.translate(var29.x() - var9, var29.y() - var11, var29.z() - var13);
-                                             var5.rotateAround(this.sable$subLevelRotation, 0.0F, 0.0F, 0.0F);
-                                             var5.scale((float)var31.x(), (float)var31.y(), (float)var31.z());
+                                          BlockPos[] positions = visibleBlocks.positions;
+                                          if (positions.length != 0) {
+                                             BlockState[] states = visibleBlocks.states;
+                                             Holder[] biomes = visibleBlocks.biomes;
+                                             subLevelPoseStack.pushPose();
+                                             subLevelPoseStack.translate(position.x() - camX, position.y() - camY, position.z() - camZ);
+                                             subLevelPoseStack.rotateAround(this.sable$subLevelRotation, 0.0F, 0.0F, 0.0F);
+                                             subLevelPoseStack.scale((float)scale.x(), (float)scale.y(), (float)scale.z());
 
-                                             for (int var53 = 0; var53 < var50.length; var53++) {
-                                                BlockPos var54 = var50[var53];
-                                                double var55 = var54.getX() - var30.x();
-                                                double var57 = var54.getY() - var30.y();
-                                                double var59 = var54.getZ() - var30.z();
-                                                var5.translate(var55, var57, var59);
-                                                SubLevelMovingBlockRenderState var61 = new SubLevelMovingBlockRenderState();
-                                                var61.sable$setLevel(var32);
-                                                var61.blockPos = var54;
-                                                var61.randomSeedPos = var54;
-                                                var61.blockState = var51[var53];
-                                                var61.biome = var52[var53];
-                                                var61.cardinalLighting = var62;
-                                                var61.lightEngine = var35;
-                                                var2.submitMovingBlock(var5, var61);
-                                                var5.translate(-var55, -var57, -var59);
+                                             for (int i = 0; i < positions.length; i++) {
+                                                BlockPos blockPos = positions[i];
+                                                double offsetX = blockPos.getX() - rotationPoint.x();
+                                                double offsetY = blockPos.getY() - rotationPoint.y();
+                                                double offsetZ = blockPos.getZ() - rotationPoint.z();
+                                                subLevelPoseStack.translate(offsetX, offsetY, offsetZ);
+                                                SubLevelMovingBlockRenderState movingBlockState = new SubLevelMovingBlockRenderState();
+                                                movingBlockState.sable$setLevel(subLevelLevel);
+                                                movingBlockState.blockPos = blockPos;
+                                                movingBlockState.randomSeedPos = blockPos;
+                                                movingBlockState.blockState = states[i];
+                                                movingBlockState.biome = biomes[i];
+                                                movingBlockState.cardinalLighting = cardinalLighting;
+                                                movingBlockState.lightEngine = lightEngine;
+                                                output.submitMovingBlock(subLevelPoseStack, movingBlockState);
+                                                subLevelPoseStack.translate(-offsetX, -offsetY, -offsetZ);
                                              }
 
-                                             var5.popPose();
+                                             subLevelPoseStack.popPose();
                                           }
                                        }
                                     }
@@ -256,7 +256,7 @@ public abstract class LevelRendererMixin {
                }
             }
 
-            RopeManager.renderAll(var5, var2, var8);
+            RopeManager.renderAll(subLevelPoseStack, output, cameraPos);
          }
       }
    }
@@ -266,51 +266,51 @@ public abstract class LevelRendererMixin {
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void sable$isSectionCompiled(BlockPos var1, CallbackInfoReturnable<Boolean> var2) {
-      ClientLevel var3 = Minecraft.getInstance().level;
-      ClientSubLevelContainer var4 = SubLevelContainer.getContainer(var3);
-      if (var4 != null && var4.inBounds(var1)) {
-         ClientSubLevel var5 = (ClientSubLevel)Sable.HELPER.getContaining(var3, var1);
-         if (var5 == null) {
-            var2.setReturnValue(false);
+   private void sable$isSectionCompiled(BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
+      ClientLevel level = Minecraft.getInstance().level;
+      ClientSubLevelContainer container = SubLevelContainer.getContainer(level);
+      if (container != null && container.inBounds(blockPos)) {
+         ClientSubLevel subLevel = (ClientSubLevel)Sable.HELPER.getContaining(level, blockPos);
+         if (subLevel == null) {
+            cir.setReturnValue(false);
          } else {
-            SubLevelRenderData var6 = var5.getRenderData();
-            if (var6 == null) {
-               var2.setReturnValue(false);
+            SubLevelRenderData renderData = subLevel.getRenderData();
+            if (renderData == null) {
+               cir.setReturnValue(false);
                return;
             }
 
-            SectionPos var7 = SectionPos.of(var1);
-            var2.setReturnValue(var6.isSectionCompiled(var7.x(), var7.y(), var7.z()));
+            SectionPos sectionPos = SectionPos.of(blockPos);
+            cir.setReturnValue(renderData.isSectionCompiled(sectionPos.x(), sectionPos.y(), sectionPos.z()));
          }
       }
    }
 
    @Unique
-   private AABB sable$sectionBounds(Pose3dc var1, ChunkPos var2, int var3) {
-      int var4 = var2.x() << 4;
-      int var5 = var2.z() << 4;
-      double var6 = Double.POSITIVE_INFINITY;
-      double var8 = Double.POSITIVE_INFINITY;
-      double var10 = Double.POSITIVE_INFINITY;
-      double var12 = Double.NEGATIVE_INFINITY;
-      double var14 = Double.NEGATIVE_INFINITY;
-      double var16 = Double.NEGATIVE_INFINITY;
+   private AABB sable$sectionBounds(Pose3dc renderPose, ChunkPos chunkPos, int sectionBaseY) {
+      int baseX = chunkPos.x() << 4;
+      int baseZ = chunkPos.z() << 4;
+      double minX = Double.POSITIVE_INFINITY;
+      double minY = Double.POSITIVE_INFINITY;
+      double minZ = Double.POSITIVE_INFINITY;
+      double maxX = Double.NEGATIVE_INFINITY;
+      double maxY = Double.NEGATIVE_INFINITY;
+      double maxZ = Double.NEGATIVE_INFINITY;
 
-      for (byte var18 = 0; var18 <= 16; var18 += 16) {
-         for (byte var19 = 0; var19 <= 16; var19 += 16) {
-            for (byte var20 = 0; var20 <= 16; var20 += 16) {
-               Vector3d var21 = var1.transformPosition(new Vector3d(var4 + var18, var3 + var19, var5 + var20));
-               var6 = Math.min(var6, var21.x);
-               var8 = Math.min(var8, var21.y);
-               var10 = Math.min(var10, var21.z);
-               var12 = Math.max(var12, var21.x);
-               var14 = Math.max(var14, var21.y);
-               var16 = Math.max(var16, var21.z);
+      for (byte dx = 0; dx <= 16; dx += 16) {
+         for (byte dy = 0; dy <= 16; dy += 16) {
+            for (byte dz = 0; dz <= 16; dz += 16) {
+               Vector3d cornerPos = renderPose.transformPosition(new Vector3d(baseX + dx, sectionBaseY + dy, baseZ + dz));
+               minX = Math.min(minX, cornerPos.x);
+               minY = Math.min(minY, cornerPos.y);
+               minZ = Math.min(minZ, cornerPos.z);
+               maxX = Math.max(maxX, cornerPos.x);
+               maxY = Math.max(maxY, cornerPos.y);
+               maxZ = Math.max(maxZ, cornerPos.z);
             }
          }
       }
 
-      return new AABB(var6, var8, var10, var12, var14, var16);
+      return new AABB(minX, minY, minZ, maxX, maxY, maxZ);
    }
 }

@@ -4,11 +4,11 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public interface EntityTransformationExtension {
-   void sable$setSubLevelOrientation(Quaternionf var1);
+   void sable$setSubLevelOrientation(Quaternionf orientation);
 
-   void sable$setSubLevelScale(Vector3f var1);
+   void sable$setSubLevelScale(Vector3f scale);
 
-   void sable$setSubLevelPivot(Vector3f var1);
+   void sable$setSubLevelPivot(Vector3f pivot);
 
    Quaternionf sable$getSubLevelOrientation();
 

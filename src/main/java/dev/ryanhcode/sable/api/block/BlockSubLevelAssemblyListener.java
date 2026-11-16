@@ -8,5 +8,5 @@ public interface BlockSubLevelAssemblyListener {
    default void beforeMove(ServerLevel originLevel, ServerLevel resultingLevel, BlockState newState, BlockPos oldPos, BlockPos newPos) {
    }
 
-   void afterMove(ServerLevel var1, ServerLevel var2, BlockState var3, BlockPos var4, BlockPos var5);
+   void afterMove(ServerLevel sourceLevel, ServerLevel resultingLevel, BlockState state, BlockPos oldPos, BlockPos newPos);
 }

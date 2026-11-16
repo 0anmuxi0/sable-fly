@@ -261,41 +261,41 @@ public class SubLevelStorageFile implements AutoCloseable {
       if (dataInputStream == null) {
          return null;
       } else {
-         DataInputStream var3 = dataInputStream;
+         DataInputStream inputStream = dataInputStream;
 
-         CompoundTag var8;
+         CompoundTag compoundTag;
          label47: {
             try {
                if (COMPRESS_DATA) {
-                  var8 = NbtIo.readCompressed(dataInputStream, NbtAccounter.unlimitedHeap());
+                  compoundTag = NbtIo.readCompressed(dataInputStream, NbtAccounter.unlimitedHeap());
                   break label47;
                }
 
-               var8 = NbtIo.read(dataInputStream);
-            } catch (Throwable var7) {
+               compoundTag = NbtIo.read(dataInputStream);
+            } catch (Throwable throwable) {
                if (dataInputStream != null) {
                   try {
-                     var3.close();
-                  } catch (Throwable var6) {
-                     var7.addSuppressed(var6);
+                     inputStream.close();
+                  } catch (Throwable suppressedThrowable) {
+                     throwable.addSuppressed(suppressedThrowable);
                   }
                }
 
-               throw var7;
+               throw throwable;
             }
 
             if (dataInputStream != null) {
                dataInputStream.close();
             }
 
-            return var8;
+            return compoundTag;
          }
 
          if (dataInputStream != null) {
             dataInputStream.close();
          }
 
-         return var8;
+         return compoundTag;
       }
    }
 

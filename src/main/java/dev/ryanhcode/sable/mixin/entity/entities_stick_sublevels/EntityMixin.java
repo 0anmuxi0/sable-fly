@@ -28,41 +28,41 @@ public abstract class EntityMixin implements EntityStickExtension {
    private Vec3 sable$plotPosition = null;
 
    @Shadow
-   public abstract void setPos(Vec3 var1);
+   public abstract void setPos(Vec3 vec3);
 
    @Shadow
-   public abstract void snapTo(Vec3 var1);
+   public abstract void snapTo(Vec3 vec3);
 
    @Shadow
-   public abstract void snapTo(double var1, double var3, double var5);
+   public abstract void snapTo(double x, double y, double z);
 
    @Inject(
       method = {"tick"},
       at = {@At("RETURN")}
    )
-   private void sable$updateSubLevelPosition(CallbackInfo var1) {
-      Entity var2 = (Entity)(Object)this;
+   private void sable$updateSubLevelPosition(CallbackInfo ci) {
+      Entity self = (Entity)(Object)this;
       if (this.sable$plotPosition != null) {
-         SubLevel var4 = Sable.HELPER.getContaining(this.level, this.sable$plotPosition);
-         if (var4 != null) {
-            this.setPos(var4.logicalPose().transformPosition(this.sable$plotPosition));
-            ((EntityMovementExtension)this).sable$setTrackingSubLevel(var4);
+         SubLevel subLevel = Sable.HELPER.getContaining(this.level, this.sable$plotPosition);
+         if (subLevel != null) {
+            this.setPos(subLevel.logicalPose().transformPosition(this.sable$plotPosition));
+            ((EntityMovementExtension)this).sable$setTrackingSubLevel(subLevel);
          } else {
             this.sable$plotPosition = null;
          }
-      } else if (this.level.isClientSide() && !(var2 instanceof Player var3 && var3.isLocalPlayer()) && !(var2 instanceof ItemEntity)) {
+      } else if (this.level.isClientSide() && !(self instanceof Player player && player.isLocalPlayer()) && !(self instanceof ItemEntity)) {
          ((EntityMovementExtension)this).sable$setTrackingSubLevel(null);
       }
    }
 
    @Override
-   public void sable$plotLerpTo(Vec3 var1, int var2) {
-      this.sable$setPlotPosition(var1);
+   public void sable$plotLerpTo(Vec3 pos, int lerpSteps) {
+      this.sable$setPlotPosition(pos);
    }
 
    @Override
-   public void sable$setPlotPosition(@Nullable Vec3 var1) {
-      this.sable$plotPosition = var1;
+   public void sable$setPlotPosition(@Nullable Vec3 position) {
+      this.sable$plotPosition = position;
    }
 
    @Nullable
@@ -75,15 +75,15 @@ public abstract class EntityMixin implements EntityStickExtension {
       method = {"recreateFromPacket"},
       at = {@At("TAIL")}
    )
-   public void sable$recreateFromPacket(ClientboundAddEntityPacket var1, CallbackInfo var2) {
+   public void sable$recreateFromPacket(ClientboundAddEntityPacket packet, CallbackInfo ci) {
       if (EntitySubLevelUtil.shouldKick((Entity)(Object)this)) {
-         double var3 = var1.getX();
-         double var5 = var1.getY();
-         double var7 = var1.getZ();
-         SubLevel var9 = Sable.HELPER.getContaining(this.level, var3, var7);
-         if (var9 != null) {
-            Vector3d var10 = var9.logicalPose().transformPosition(new Vector3d(var3, var5, var7));
-            this.snapTo(var10.x, var10.y, var10.z);
+         double packetX = packet.getX();
+         double packetY = packet.getY();
+         double packetZ = packet.getZ();
+         SubLevel packetSubLevel = Sable.HELPER.getContaining(this.level, packetX, packetZ);
+         if (packetSubLevel != null) {
+            Vector3d globalPacketPos = packetSubLevel.logicalPose().transformPosition(new Vector3d(packetX, packetY, packetZ));
+            this.snapTo(globalPacketPos.x, globalPacketPos.y, globalPacketPos.z);
          }
       }
    }

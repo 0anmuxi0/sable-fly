@@ -20,9 +20,9 @@ public interface SubLevelRenderDispatcher extends NativeResource, ResourceManage
       return SubLevelRenderer.getDispatcher();
    }
 
-   SubLevelRenderData resize(ClientSubLevel var1, SubLevelRenderData var2);
+   SubLevelRenderData resize(ClientSubLevel subLevel, SubLevelRenderData renderData);
 
-   SubLevelRenderData createRenderData(ClientSubLevel var1);
+   SubLevelRenderData createRenderData(ClientSubLevel subLevel);
 
    default void rebuild(Iterable<ClientSubLevel> sublevels) {
       for (ClientSubLevel sublevel : sublevels) {
@@ -33,11 +33,11 @@ public interface SubLevelRenderDispatcher extends NativeResource, ResourceManage
       }
    }
 
-   void updateCulling(Iterable<ClientSubLevel> var1, double var2, double var4, double var6, Frustum var8, boolean var9);
+   void updateCulling(Iterable<ClientSubLevel> sublevels, double cameraX, double cameraY, double cameraZ, Frustum frustum, boolean isSpectator);
 
-   void renderBlockEntities(Iterable<ClientSubLevel> var1, SubLevelRenderDispatcher.BlockEntityRenderer var2, double var3, double var5, double var7, float var9);
+   void renderBlockEntities(Iterable<ClientSubLevel> sublevels, SubLevelRenderDispatcher.BlockEntityRenderer blockEntityRenderer, double cameraX, double cameraY, double cameraZ, float partialTick);
 
-   void addDebugInfo(Consumer<String> var1);
+   void addDebugInfo(Consumer<String> consumer);
 
    default void preRenderChunks(Camera camera) {
    }
@@ -51,7 +51,7 @@ public interface SubLevelRenderDispatcher extends NativeResource, ResourceManage
          }
       }
 
-      void renderSingleBE(BlockEntity var1, PoseStack var2, float var3, double var4, double var6, double var8);
+      void renderSingleBE(BlockEntity blockEntity, PoseStack poseStack, float partialTick, double cameraX, double cameraY, double cameraZ);
 
       BlockEntityRenderDispatcher getBlockEntityRenderDispatcher();
    }

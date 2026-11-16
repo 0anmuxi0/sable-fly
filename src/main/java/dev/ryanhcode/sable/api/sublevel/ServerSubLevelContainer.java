@@ -186,10 +186,10 @@ public class ServerSubLevelContainer extends SubLevelContainer {
          return List.of();
       } else {
          ObjectOpenHashSet<ServerSubLevel> subLevels = new ObjectOpenHashSet();
-         ObjectIterator var2 = this.activeTickets.keySet().iterator();
+         ObjectIterator ticketIterator = this.activeTickets.keySet().iterator();
 
-         while (var2.hasNext()) {
-            ServerSubLevel subLevel = (ServerSubLevel)var2.next();
+         while (ticketIterator.hasNext()) {
+            ServerSubLevel subLevel = (ServerSubLevel)ticketIterator.next();
             if (!subLevels.contains(subLevel)) {
                subLevels.addAll(SubLevelHelper.getLoadingDependencyChain(subLevel));
             }
@@ -210,10 +210,10 @@ public class ServerSubLevelContainer extends SubLevelContainer {
    }
 
    private void loadForceLoadedSubLevels() {
-      ObjectIterator var1 = this.allTickets.entrySet().iterator();
+      ObjectIterator ticketIterator = this.allTickets.entrySet().iterator();
 
-      while (var1.hasNext()) {
-         Entry<UUID, SubLevelTicketInfo> entry = (Entry<UUID, SubLevelTicketInfo>)var1.next();
+      while (ticketIterator.hasNext()) {
+         Entry<UUID, SubLevelTicketInfo> entry = (Entry<UUID, SubLevelTicketInfo>)ticketIterator.next();
          UUID uuid = entry.getKey();
          GlobalSavedSubLevelPointer pointer = entry.getValue().getPointer();
          if (pointer != null) {
@@ -245,8 +245,8 @@ public class ServerSubLevelContainer extends SubLevelContainer {
 
       try {
          this.holdingChunkMap.close();
-      } catch (Exception var5) {
-         Sable.LOGGER.error("Failed closing sub-level holding chunk map", var5);
+      } catch (Exception e) {
+         Sable.LOGGER.error("Failed closing sub-level holding chunk map", e);
       }
    }
 }

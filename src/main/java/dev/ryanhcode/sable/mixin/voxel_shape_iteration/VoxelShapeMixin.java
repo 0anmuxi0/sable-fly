@@ -24,7 +24,7 @@ public abstract class VoxelShapeMixin implements FastVoxelShapeIterable {
    protected DiscreteVoxelShape shape;
 
    @Shadow
-   public abstract DoubleList getCoords(Axis var1);
+   public abstract DoubleList getCoords(Axis axis);
 
    @Override
    public Iterator<BoundingBox3dc> sable$allBoxes() {

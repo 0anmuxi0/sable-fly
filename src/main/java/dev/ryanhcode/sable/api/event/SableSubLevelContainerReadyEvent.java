@@ -5,5 +5,5 @@ import net.minecraft.world.level.Level;
 
 @FunctionalInterface
 public interface SableSubLevelContainerReadyEvent {
-   void onSubLevelContainerReady(Level var1, SubLevelContainer var2);
+   void onSubLevelContainerReady(Level level, SubLevelContainer container);
 }

@@ -54,7 +54,7 @@ public class SubLevelDoubleRangeFilter implements SubLevelSelectorModifierType.M
 
    @FunctionalInterface
    public interface DoubleGetter {
-      double fromSublevel(ServerSubLevel var1, Vector3dc var2);
+      double fromSublevel(ServerSubLevel subLevel, Vector3dc sourcePos);
    }
 
    public static class Factory {

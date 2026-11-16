@@ -12,11 +12,11 @@ public interface BitSetDiscreteVoxelShapeAccessor extends DiscreteVoxelShapeAcce
    BitSet getStorage();
 
    @Invoker
-   boolean invokeIsZStripFull(int var1, int var2, int var3, int var4);
+   boolean invokeIsZStripFull(int i, int j, int k, int l);
 
    @Invoker
-   boolean invokeIsXZRectangleFull(int var1, int var2, int var3, int var4, int var5);
+   boolean invokeIsXZRectangleFull(int i, int j, int k, int l, int m);
 
    @Invoker
-   void invokeClearZStrip(int var1, int var2, int var3, int var4);
+   void invokeClearZStrip(int i, int j, int k, int l);
 }

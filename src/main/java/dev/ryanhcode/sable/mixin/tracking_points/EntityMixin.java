@@ -23,7 +23,7 @@ public abstract class EntityMixin {
    private Level level;
 
    @Shadow
-   public abstract void setPosRaw(double var1, double var3, double var5);
+   public abstract void setPosRaw(double x, double y, double z);
 
    @Inject(
       method = {"load"},

@@ -10,7 +10,7 @@ public interface ServerPlayerRespawnExtension {
    @Nullable
    UUID sable$getRespawnPoint();
 
-   void sable$takeQueuedFreezeFrom(ServerPlayer var1);
+   void sable$takeQueuedFreezeFrom(ServerPlayer oldPlayer);
 
    @Nullable
    Pair<UUID, Vector3d> sable$getQueuedFreeze();

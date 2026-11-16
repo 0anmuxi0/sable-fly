@@ -114,10 +114,10 @@ public class SubLevelHoldingChunk {
             }
          }
 
-         ObjectListIterator var12 = this.alsoLoad.iterator();
+         ObjectListIterator alsoLoadIterator = this.alsoLoad.iterator();
 
-         while (var12.hasNext()) {
-            HoldingSubLevel holdingSubLevel = (HoldingSubLevel)var12.next();
+         while (alsoLoadIterator.hasNext()) {
+            HoldingSubLevel holdingSubLevel = (HoldingSubLevel)alsoLoadIterator.next();
             UUID uuidx = holdingSubLevel.data().uuid();
             this.loadedHoldingSubLevels.remove(uuidx);
             readySubLevels.put(uuidx, holdingSubLevel);

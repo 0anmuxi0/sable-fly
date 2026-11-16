@@ -15,7 +15,7 @@ public abstract class MovingSoundInstanceDelegateMixin implements SoundInstance 
 
    @Unique
    @Override
-   public WeighedSoundEvents resolve(SoundManager var1) {
-      return this.instance.resolve(var1);
+   public WeighedSoundEvents resolve(SoundManager soundManager) {
+      return this.instance.resolve(soundManager);
    }
 }

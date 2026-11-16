@@ -41,18 +41,18 @@ public final class SubLevelDynamicLights {
          previousState = LIGHTS_BY_ENGINE.put(lightEngine, nextState);
       }
 
-      LongIterator var9 = nextState.sections.iterator();
+      LongIterator sectionIterator = nextState.sections.iterator();
 
-      while (var9.hasNext()) {
-         long packedSection = (Long)var9.next();
+      while (sectionIterator.hasNext()) {
+         long packedSection = (Long)sectionIterator.next();
          lightEngine.updateSectionStatus(SectionPos.of(packedSection), false);
       }
 
       if (previousState != null) {
-         var9 = previousState.sections.iterator();
+         sectionIterator = previousState.sections.iterator();
 
-         while (var9.hasNext()) {
-            long packedSection = (Long)var9.next();
+         while (sectionIterator.hasNext()) {
+            long packedSection = (Long)sectionIterator.next();
             if (!nextState.sections.contains(packedSection)) {
                restoreSectionStatus(level, lightEngine, packedSection);
             }
@@ -64,20 +64,20 @@ public final class SubLevelDynamicLights {
          positionsToCheck.addAll(previousState.lights.keySet());
       }
 
-      ObjectIterator var13 = nextState.blocks.long2ObjectEntrySet().iterator();
+      ObjectIterator blockStateIterator = nextState.blocks.long2ObjectEntrySet().iterator();
 
-      while (var13.hasNext()) {
-         Entry<BlockState> entry = (Entry<BlockState>)var13.next();
+      while (blockStateIterator.hasNext()) {
+         Entry<BlockState> entry = (Entry<BlockState>)blockStateIterator.next();
          if (previousState == null || previousState.blocks.get(entry.getLongKey()) != entry.getValue()) {
             positionsToCheck.add(entry.getLongKey());
          }
       }
 
       if (previousState != null) {
-         LongIterator var14 = previousState.blocks.keySet().iterator();
+         LongIterator previousBlocksIterator = previousState.blocks.keySet().iterator();
 
-         while (var14.hasNext()) {
-            long packedPos = (Long)var14.next();
+         while (previousBlocksIterator.hasNext()) {
+            long packedPos = (Long)previousBlocksIterator.next();
             if (!nextState.blocks.containsKey(packedPos)) {
                positionsToCheck.add(packedPos);
             }
@@ -85,10 +85,10 @@ public final class SubLevelDynamicLights {
       }
 
       if (!positionsToCheck.isEmpty()) {
-         LongIterator var15 = positionsToCheck.iterator();
+         LongIterator positionsIterator = positionsToCheck.iterator();
 
-         while (var15.hasNext()) {
-            long packedPos = (Long)var15.next();
+         while (positionsIterator.hasNext()) {
+            long packedPos = (Long)positionsIterator.next();
             lightEngine.checkBlock(BlockPos.of(packedPos));
          }
 
@@ -196,10 +196,10 @@ public final class SubLevelDynamicLights {
                   }
                }
 
-               LongIterator var25 = occlusionCandidates.iterator();
+               LongIterator occlusionIterator = occlusionCandidates.iterator();
 
-               while (var25.hasNext()) {
-                  long packedLocalPos = (Long)var25.next();
+               while (occlusionIterator.hasNext()) {
+                  long packedLocalPos = (Long)occlusionIterator.next();
                   localPos.set(packedLocalPos);
                   BlockState blockState = level.getBlockState(localPos);
                   if (!blockState.isAir()

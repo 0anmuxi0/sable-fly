@@ -8,17 +8,17 @@ import org.joml.Vector3dc;
 
 public interface RopeHandle {
    @OverrideOnly
-   void readPose(List<Vector3d> var1);
+   void readPose(List<Vector3d> dest);
 
    void remove();
 
-   void setFirstSegmentLength(double var1);
+   void setFirstSegmentLength(double length);
 
    void removeFirstPoint();
 
-   void addPoint(Vector3dc var1);
+   void addPoint(Vector3dc position);
 
-   void setAttachment(RopeHandle.AttachmentPoint var1, Vector3dc var2, ServerSubLevel var3);
+   void setAttachment(RopeHandle.AttachmentPoint attachmentPoint, Vector3dc location, ServerSubLevel subLevel);
 
    void wakeUp();
 

@@ -39,51 +39,51 @@ public class ExecuteCommandMixin {
       )}
    )
    private static ArgumentBuilder sable$then(
-      LiteralArgumentBuilder var0, ArgumentBuilder var1, Operation<ArgumentBuilder> var2, @Local LiteralCommandNode<CommandSourceStack> var3
+      LiteralArgumentBuilder instance, ArgumentBuilder argumentBuilder, Operation<ArgumentBuilder> original, @Local LiteralCommandNode<CommandSourceStack> literalCommandNode
    ) {
-      return var0.then(var1).then(Commands.literal("in_sub_level").then(Commands.argument("sub_levels", SubLevelArgumentType.subLevels()).fork(var3, var0x -> {
-         ArrayList var1x = Lists.newArrayList();
-         ServerSubLevelContainer var2x = SubLevelContainer.getContainer(((CommandSourceStack)var0x.getSource()).getLevel());
+      return instance.then(argumentBuilder).then(Commands.literal("in_sub_level").then(Commands.argument("sub_levels", SubLevelArgumentType.subLevels()).fork(literalCommandNode, commandContext -> {
+         ArrayList list = Lists.newArrayList();
+         ServerSubLevelContainer container = SubLevelContainer.getContainer(((CommandSourceStack)commandContext.getSource()).getLevel());
 
-         for (SubLevel var4 : SubLevelArgumentType.getSubLevels(var0x, "sub_levels")) {
-            Pose3d var5 = var4.logicalPose();
-            Vec3 var6 = var5.transformPositionInverse(((CommandSourceStack)var0x.getSource()).getPosition());
-            BlockPos var7 = BlockPos.containing(var6);
-            if (var2x.getPlot(new ChunkPos(SectionPos.blockToSectionCoord(var7.getX()), SectionPos.blockToSectionCoord(var7.getZ()))) != var4.getPlot()) {
+         for (SubLevel subLevel : SubLevelArgumentType.getSubLevels(commandContext, "sub_levels")) {
+            Pose3d pose = subLevel.logicalPose();
+            Vec3 localPos = pose.transformPositionInverse(((CommandSourceStack)commandContext.getSource()).getPosition());
+            BlockPos blockPos = BlockPos.containing(localPos);
+            if (container.getPlot(new ChunkPos(SectionPos.blockToSectionCoord(blockPos.getX()), SectionPos.blockToSectionCoord(blockPos.getZ()))) != subLevel.getPlot()) {
                throw SableCommandHelper.ERROR_NOT_INSIDE_SUB_LEVEL.create();
             }
 
-            var1x.add(((CommandSourceStack)var0x.getSource()).withLevel((ServerLevel)var4.getLevel()).withPosition(var6).withRotation(new Vec2(0.0F, 0.0F)));
+            list.add(((CommandSourceStack)commandContext.getSource()).withLevel((ServerLevel)subLevel.getLevel()).withPosition(localPos).withRotation(new Vec2(0.0F, 0.0F)));
          }
 
-         return var1x;
-      }))).then(Commands.literal("out_sub_level").then(Commands.argument("sub_levels", SubLevelArgumentType.subLevels()).fork(var3, var0x -> {
-         ArrayList var1x = Lists.newArrayList();
-         ServerSubLevelContainer var2x = SubLevelContainer.getContainer(((CommandSourceStack)var0x.getSource()).getLevel());
+         return list;
+      }))).then(Commands.literal("out_sub_level").then(Commands.argument("sub_levels", SubLevelArgumentType.subLevels()).fork(literalCommandNode, commandContext -> {
+         ArrayList list = Lists.newArrayList();
+         ServerSubLevelContainer container = SubLevelContainer.getContainer(((CommandSourceStack)commandContext.getSource()).getLevel());
 
-         for (SubLevel var4 : SubLevelArgumentType.getSubLevels(var0x, "sub_levels")) {
-            Pose3d var5 = var4.logicalPose();
-            Vec3 var6 = ((CommandSourceStack)var0x.getSource()).getPosition();
-            Vec3 var7 = var5.transformPosition(var6);
-            BlockPos var8 = BlockPos.containing(var6);
-            if (var2x.getPlot(new ChunkPos(SectionPos.blockToSectionCoord(var8.getX()), SectionPos.blockToSectionCoord(var8.getZ()))) != var4.getPlot()) {
+         for (SubLevel subLevel : SubLevelArgumentType.getSubLevels(commandContext, "sub_levels")) {
+            Pose3d pose = subLevel.logicalPose();
+            Vec3 sourcePosition = ((CommandSourceStack)commandContext.getSource()).getPosition();
+            Vec3 globalPos = pose.transformPosition(sourcePosition);
+            BlockPos sourceBlockPos = BlockPos.containing(sourcePosition);
+            if (container.getPlot(new ChunkPos(SectionPos.blockToSectionCoord(sourceBlockPos.getX()), SectionPos.blockToSectionCoord(sourceBlockPos.getZ()))) != subLevel.getPlot()) {
                throw SableCommandHelper.ERROR_NOT_INSIDE_SUB_LEVEL.create();
             }
 
-            var1x.add(((CommandSourceStack)var0x.getSource()).withLevel((ServerLevel)var4.getLevel()).withPosition(var7).withRotation(new Vec2(0.0F, 0.0F)));
+            list.add(((CommandSourceStack)commandContext.getSource()).withLevel((ServerLevel)subLevel.getLevel()).withPosition(globalPos).withRotation(new Vec2(0.0F, 0.0F)));
          }
 
-         return var1x;
-      }))).then(Commands.literal("centered_in_sub_level").then(Commands.argument("sub_levels", SubLevelArgumentType.subLevels()).fork(var3, var0x -> {
-         ArrayList var1x = Lists.newArrayList();
+         return list;
+      }))).then(Commands.literal("centered_in_sub_level").then(Commands.argument("sub_levels", SubLevelArgumentType.subLevels()).fork(literalCommandNode, commandContext -> {
+         ArrayList list = Lists.newArrayList();
 
-         for (SubLevel var3x : SubLevelArgumentType.getSubLevels(var0x, "sub_levels")) {
-            LevelPlot var4 = var3x.getPlot();
-            Vec3 var5 = Vec3.atCenterOf(var4.getCenterBlock());
-            var1x.add(((CommandSourceStack)var0x.getSource()).withLevel((ServerLevel)var3x.getLevel()).withPosition(var5).withRotation(new Vec2(0.0F, 0.0F)));
+         for (SubLevel subLevel : SubLevelArgumentType.getSubLevels(commandContext, "sub_levels")) {
+            LevelPlot plot = subLevel.getPlot();
+            Vec3 center = Vec3.atCenterOf(plot.getCenterBlock());
+            list.add(((CommandSourceStack)commandContext.getSource()).withLevel((ServerLevel)subLevel.getLevel()).withPosition(center).withRotation(new Vec2(0.0F, 0.0F)));
          }
 
-         return var1x;
+         return list;
       })));
    }
 }

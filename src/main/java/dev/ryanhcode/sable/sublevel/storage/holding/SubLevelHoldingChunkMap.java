@@ -134,10 +134,10 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
          if (!toUnload.isEmpty()) {
             SubLevelHoldingChunk holdingChunk = this.getOrLoadHoldingChunk(chunkPos, true);
             ObjectSet<ServerSubLevel> visited = new ObjectOpenHashSet();
-            ObjectIterator var9 = toUnload.iterator();
+            ObjectIterator iterator = toUnload.iterator();
 
-            while (var9.hasNext()) {
-               ServerSubLevel subLevel = (ServerSubLevel)var9.next();
+            while (iterator.hasNext()) {
+               ServerSubLevel subLevel = (ServerSubLevel)iterator.next();
                if (forceLoaded.contains(subLevel)) {
                   visited.add(subLevel);
                } else if (!visited.contains(subLevel)) {
@@ -211,10 +211,10 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
          }
       }
 
-      ObjectIterator var17 = this.loadedHoldingChunks.values().iterator();
+      ObjectIterator iterator = this.loadedHoldingChunks.values().iterator();
 
-      while (var17.hasNext()) {
-         SubLevelHoldingChunk holdingChunk = (SubLevelHoldingChunk)var17.next();
+      while (iterator.hasNext()) {
+         SubLevelHoldingChunk holdingChunk = (SubLevelHoldingChunk)iterator.next();
          ChunkPos holdingChunkPos = holdingChunk.getChunkPos();
 
          for (HoldingSubLevel holdingSubLevel : holdingChunk.getLoadedHoldingSubLevels()) {
@@ -246,10 +246,10 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
          }
       }
 
-      var17 = this.queuedUnloads.iterator();
+      iterator = this.queuedUnloads.iterator();
 
-      while (var17.hasNext()) {
-         ChunkPos unload = (ChunkPos)var17.next();
+      while (iterator.hasNext()) {
+         ChunkPos unload = (ChunkPos)iterator.next();
          SubLevelHoldingChunk holdingChunk = (SubLevelHoldingChunk)this.loadedHoldingChunks.get(unload.pack());
          if (this.verboseLogging) {
             Sable.LOGGER.info("Processing queued unload for chunk {} at position {}", holdingChunk, holdingChunk != null ? holdingChunk.getChunkPos() : null);
@@ -264,10 +264,10 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
          }
       }
 
-      LongIterator var19 = this.dirtyHoldingChunks.iterator();
+      LongIterator dirtyIterator = this.dirtyHoldingChunks.iterator();
 
-      while (var19.hasNext()) {
-         long longKey = (Long)var19.next();
+      while (dirtyIterator.hasNext()) {
+         long longKey = (Long)dirtyIterator.next();
          ChunkPos chunkPos = new ChunkPos(ChunkPos.getX(longKey), ChunkPos.getZ(longKey));
          SubLevelHoldingChunk holdingChunkx = (SubLevelHoldingChunk)this.loadedHoldingChunks.get(longKey);
          if (this.verboseLogging) {
@@ -279,10 +279,10 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
          }
       }
 
-      var17 = this.queuedUnloads.iterator();
+      iterator = this.queuedUnloads.iterator();
 
-      while (var17.hasNext()) {
-         ChunkPos unloadx = (ChunkPos)var17.next();
+      while (iterator.hasNext()) {
+         ChunkPos unloadx = (ChunkPos)iterator.next();
          this.loadedHoldingChunks.remove(unloadx.pack());
       }
 
@@ -294,8 +294,8 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
          }
 
          this.storage.flush();
-      } catch (IOException var14) {
-         Sable.LOGGER.error("Failed to flush sub-level storage to disk", var14);
+      } catch (IOException e) {
+         Sable.LOGGER.error("Failed to flush sub-level storage to disk", e);
       }
 
       SubLevelTicketsSavedData.getOrLoad(this.level).setDirty();
@@ -474,19 +474,19 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
       this.verboseLogging = SableConfig.VERBOSE_SERIALIZATION_LOGGING.get();
       this.processUnloads();
       Object2ObjectMap<UUID, HoldingSubLevel> readySubLevels = new Object2ObjectOpenHashMap();
-      ObjectIterator var2 = this.loadedHoldingChunks.values().iterator();
+      ObjectIterator iterator = this.loadedHoldingChunks.values().iterator();
 
-      while (var2.hasNext()) {
-         SubLevelHoldingChunk chunk = (SubLevelHoldingChunk)var2.next();
+      while (iterator.hasNext()) {
+         SubLevelHoldingChunk chunk = (SubLevelHoldingChunk)iterator.next();
          if (!this.queuedUnloads.contains(chunk.getChunkPos())) {
             chunk.collectReadySubLevels(this.level, readySubLevels);
          }
       }
 
-      var2 = readySubLevels.values().iterator();
+      iterator = readySubLevels.values().iterator();
 
-      while (var2.hasNext()) {
-         HoldingSubLevel holdingSubLevel = (HoldingSubLevel)var2.next();
+      while (iterator.hasNext()) {
+         HoldingSubLevel holdingSubLevel = (HoldingSubLevel)iterator.next();
          if (this.verboseLogging) {
             Sable.LOGGER.info("Holding sub-level {} with pointer {} reportedly ready to load", holdingSubLevel, holdingSubLevel.pointer());
          }
@@ -518,17 +518,17 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
 
    private void processUnloads() {
       Collection<ServerSubLevel> forceLoaded = this.container.collectForceLoadedSubLevels();
-      LongIterator var2 = this.chunksToUnload.iterator();
+      LongIterator iterator = this.chunksToUnload.iterator();
 
-      while (var2.hasNext()) {
-         long l = (Long)var2.next();
+      while (iterator.hasNext()) {
+         long l = (Long)iterator.next();
          this.processUnload(new ChunkPos(ChunkPos.getX(l), ChunkPos.getZ(l)), forceLoaded);
       }
 
-      var2 = this.chunksToLoad.iterator();
+      iterator = this.chunksToLoad.iterator();
 
-      while (var2.hasNext()) {
-         long l = (Long)var2.next();
+      while (iterator.hasNext()) {
+         long l = (Long)iterator.next();
          this.processLoad(new ChunkPos(ChunkPos.getX(l), ChunkPos.getZ(l)));
       }
 

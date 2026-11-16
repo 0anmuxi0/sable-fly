@@ -20,13 +20,13 @@ public class ClientPacketListenerMixin {
          target = "Lnet/minecraft/client/multiplayer/ClientLevel;queueLightUpdate(Ljava/lang/Runnable;)V"
       )}
    )
-   private void sable$queueLightData(ClientLevel var1, Runnable var2, Operation<Void> var3, @Local(argsOnly = true) ClientboundLevelChunkWithLightPacket var4) {
-      ClientSubLevelContainer var5 = SubLevelContainer.getContainer(var1);
-      if (var5.inBounds(var4.getX(), var4.getZ())) {
-         var2.run();
-         var1.getLightEngine().runLightUpdates();
+   private void sable$queueLightData(ClientLevel instance, Runnable task, Operation<Void> original, @Local(argsOnly = true) ClientboundLevelChunkWithLightPacket packet) {
+      ClientSubLevelContainer container = SubLevelContainer.getContainer(instance);
+      if (container.inBounds(packet.getX(), packet.getZ())) {
+         task.run();
+         instance.getLightEngine().runLightUpdates();
       } else {
-         var3.call(var1, var2);
+         original.call(instance, task);
       }
    }
 }

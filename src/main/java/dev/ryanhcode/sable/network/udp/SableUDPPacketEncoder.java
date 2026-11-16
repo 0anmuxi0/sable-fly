@@ -18,8 +18,8 @@ public class SableUDPPacketEncoder extends MessageToMessageEncoder<AddressedSabl
          buf.writeByte(packetType.ordinal());
          packetType.write(new RegistryFriendlyByteBuf(buf, null), msg);
          out.add(new DatagramPacket(buf, envelope.address()));
-      } catch (Exception var7) {
-         throw new EncoderException("Failed to encode %s packet of type %s".formatted(msg.getClass().getSimpleName(), packetType), var7);
+      } catch (Exception e) {
+         throw new EncoderException("Failed to encode %s packet of type %s".formatted(msg.getClass().getSimpleName(), packetType), e);
       }
    }
 }

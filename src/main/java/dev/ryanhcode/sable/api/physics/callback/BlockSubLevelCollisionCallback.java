@@ -19,7 +19,7 @@ public interface BlockSubLevelCollisionCallback {
       return new double[]{motion.x(), motion.y(), motion.z(), result.removeCollision ? 1.0 : 0.0};
    }
 
-   BlockSubLevelCollisionCallback.CollisionResult sable$onCollision(BlockPos var1, @Nullable BlockPos var2, Vector3d var3, double var4);
+   BlockSubLevelCollisionCallback.CollisionResult sable$onCollision(BlockPos hitBlockPos, @Nullable BlockPos otherHitBlockPos, Vector3d impactPosition, double impactVelocity);
 
    public record CollisionResult(Vector3dc tangentMotion, boolean removeCollision) {
       public static final BlockSubLevelCollisionCallback.CollisionResult NONE = new BlockSubLevelCollisionCallback.CollisionResult(JOMLConversion.ZERO, false);

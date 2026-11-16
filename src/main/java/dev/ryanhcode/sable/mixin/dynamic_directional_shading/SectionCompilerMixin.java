@@ -29,13 +29,13 @@ public class SectionCompilerMixin {
    private static Object sable$cacheValue() {
       try {
          if (sable$cacheField == null) {
-            Field var0 = Class.forName("net.minecraft.client.renderer.block.BlockModelLighter").getDeclaredField("CACHE");
-            var0.setAccessible(true);
-            sable$cacheField = (ThreadLocal<?>)var0.get(null);
+            Field field = Class.forName("net.minecraft.client.renderer.block.BlockModelLighter").getDeclaredField("CACHE");
+            field.setAccessible(true);
+            sable$cacheField = (ThreadLocal<?>)field.get(null);
          }
 
          return sable$cacheField.get();
-      } catch (ReflectiveOperationException var1) {
+      } catch (ReflectiveOperationException e) {
          return null;
       }
    }
@@ -45,14 +45,14 @@ public class SectionCompilerMixin {
       at = {@At("HEAD")}
    )
    private void sable$preCompile(
-      SectionPos var1, RenderSectionRegion var2, VertexSorting var3, SectionBufferBuilderPack var4, CallbackInfoReturnable<Results> var5
+      SectionPos sectionPos, RenderSectionRegion region, VertexSorting vertexSorting, SectionBufferBuilderPack builderPack, CallbackInfoReturnable<Results> cir
    ) {
-      ClientLevel var6 = Minecraft.getInstance().level;
-      ClientSubLevelContainer var7 = SubLevelContainer.getContainer(var6);
-      if (var7 != null) {
-         LevelPlot var8 = var7.getPlot(new ChunkPos(var1.getX() >> 4, var1.getZ() >> 4));
-         if (sable$cacheValue() instanceof ModelBlockRendererCacheExtension var10) {
-            var10.sable$setOnSubLevel(var8 != null);
+      ClientLevel level = Minecraft.getInstance().level;
+      ClientSubLevelContainer container = SubLevelContainer.getContainer(level);
+      if (container != null) {
+         LevelPlot plot = container.getPlot(new ChunkPos(sectionPos.getX() >> 4, sectionPos.getZ() >> 4));
+         if (sable$cacheValue() instanceof ModelBlockRendererCacheExtension cacheExtension) {
+            cacheExtension.sable$setOnSubLevel(plot != null);
          }
       }
    }
@@ -62,10 +62,10 @@ public class SectionCompilerMixin {
       at = {@At("TAIL")}
    )
    private void sable$postCompile(
-      SectionPos var1, RenderSectionRegion var2, VertexSorting var3, SectionBufferBuilderPack var4, CallbackInfoReturnable<Results> var5
+      SectionPos sectionPos, RenderSectionRegion region, VertexSorting vertexSorting, SectionBufferBuilderPack builderPack, CallbackInfoReturnable<Results> cir
    ) {
-      if (sable$cacheValue() instanceof ModelBlockRendererCacheExtension var7) {
-         var7.sable$setOnSubLevel(false);
+      if (sable$cacheValue() instanceof ModelBlockRendererCacheExtension cacheExtension) {
+         cacheExtension.sable$setOnSubLevel(false);
       }
    }
 }

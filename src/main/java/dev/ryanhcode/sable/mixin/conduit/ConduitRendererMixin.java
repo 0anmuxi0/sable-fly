@@ -23,10 +23,10 @@ public class ConduitRendererMixin {
          ordinal = 4
       )}
    )
-   private void sable$reorientEye(ConduitRenderState var1, PoseStack var2, SubmitNodeCollector var3, CameraRenderState var4, CallbackInfo var5) {
-      ClientSubLevel var6 = Sable.HELPER.getContainingClient(var1.blockPos);
-      if (var6 != null) {
-         var2.mulPose(var6.renderPose().orientation().get(new Quaternionf()).invert());
+   private void sable$reorientEye(ConduitRenderState renderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState, CallbackInfo ci) {
+      ClientSubLevel subLevel = Sable.HELPER.getContainingClient(renderState.blockPos);
+      if (subLevel != null) {
+         poseStack.mulPose(subLevel.renderPose().orientation().get(new Quaternionf()).invert());
       }
    }
 }

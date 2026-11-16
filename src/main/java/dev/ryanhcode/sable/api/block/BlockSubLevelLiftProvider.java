@@ -69,7 +69,7 @@ public interface BlockSubLevelLiftProvider {
    }
 
    @NotNull
-   Direction sable$getNormal(BlockState var1);
+   Direction sable$getNormal(BlockState state);
 
    default float sable$getParallelDragScalar() {
       return 0.75F;

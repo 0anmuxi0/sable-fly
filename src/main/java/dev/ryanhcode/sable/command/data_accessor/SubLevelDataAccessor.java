@@ -18,34 +18,34 @@ import net.minecraft.server.commands.data.DataAccessor;
 import net.minecraft.server.commands.data.DataCommands.DataProvider;
 
 public class SubLevelDataAccessor implements DataAccessor {
-   public static final Function<String, DataProvider> PROVIDER = var0 -> new DataProvider() {
+   public static final Function<String, DataProvider> PROVIDER = argumentName -> new DataProvider() {
       @Override
-      public DataAccessor access(CommandContext<CommandSourceStack> var1) throws CommandSyntaxException {
-         return new SubLevelDataAccessor(SubLevelArgumentType.getSingleSubLevel(var1, var0));
+      public DataAccessor access(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+         return new SubLevelDataAccessor(SubLevelArgumentType.getSingleSubLevel(context, argumentName));
       }
 
       @Override
       public ArgumentBuilder<CommandSourceStack, ?> wrap(
-         ArgumentBuilder<CommandSourceStack, ?> var1, Function<ArgumentBuilder<CommandSourceStack, ?>, ArgumentBuilder<CommandSourceStack, ?>> var2
+         ArgumentBuilder<CommandSourceStack, ?> builder, Function<ArgumentBuilder<CommandSourceStack, ?>, ArgumentBuilder<CommandSourceStack, ?>> action
       ) {
-         return var1.then(Commands.literal("sub_level").then((ArgumentBuilder)var2.apply(Commands.argument(var0, SubLevelArgumentType.singleSubLevel()))));
+         return builder.then(Commands.literal("sub_level").then((ArgumentBuilder)action.apply(Commands.argument(argumentName, SubLevelArgumentType.singleSubLevel()))));
       }
    };
    private final ServerSubLevel subLevel;
 
-   public SubLevelDataAccessor(ServerSubLevel var1) {
-      this.subLevel = var1;
+   public SubLevelDataAccessor(ServerSubLevel subLevel) {
+      this.subLevel = subLevel;
    }
 
    @Override
-   public void setData(CompoundTag var1) {
-      this.subLevel.setUserDataTag(var1);
+   public void setData(CompoundTag tag) {
+      this.subLevel.setUserDataTag(tag);
    }
 
    @Override
    public CompoundTag getData() {
-      CompoundTag var1 = this.subLevel.getUserDataTag();
-      return var1 != null ? var1 : new CompoundTag();
+      CompoundTag tag = this.subLevel.getUserDataTag();
+      return tag != null ? tag : new CompoundTag();
    }
 
    @Override
@@ -54,12 +54,12 @@ public class SubLevelDataAccessor implements DataAccessor {
    }
 
    @Override
-   public Component getPrintSuccess(Tag var1) {
-      return Component.translatable("commands.data.sub_level.query", this.subLevel.toString(), NbtUtils.toPrettyComponent(var1));
+   public Component getPrintSuccess(Tag tag) {
+      return Component.translatable("commands.data.sub_level.query", this.subLevel.toString(), NbtUtils.toPrettyComponent(tag));
    }
 
    @Override
-   public Component getPrintSuccess(NbtPath var1, double var2, int var4) {
-      return Component.translatable("commands.data.sub_level.get", var1.asString(), this.subLevel.toString(), String.format(Locale.ROOT, "%.2f", var2), var4);
+   public Component getPrintSuccess(NbtPath path, double scale, int integer) {
+      return Component.translatable("commands.data.sub_level.get", path.asString(), this.subLevel.toString(), String.format(Locale.ROOT, "%.2f", scale), integer);
    }
 }

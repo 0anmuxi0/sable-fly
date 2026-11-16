@@ -4,7 +4,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Vector3d;
 
 public interface BlockEntitySubLevelReactionWheel {
-   void sable$getAngularVelocity(Vector3d var1);
+   void sable$getAngularVelocity(Vector3d dest);
 
    BlockState getBlockState();
 }

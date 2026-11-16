@@ -15,7 +15,7 @@ public abstract class ChunkSectionsToRenderMixin {
       method = {"renderGroup(Lnet/minecraft/client/renderer/chunk/ChunkSectionLayerGroup;Lcom/mojang/blaze3d/textures/GpuSampler;)V"},
       at = {@At("TAIL")}
    )
-   private void sable$renderSubLevelTerrain(ChunkSectionLayerGroup var1, GpuSampler var2, CallbackInfo var3) {
-      SubLevelBatchedTerrainRenderer.renderGroup(var1, var2);
+   private void sable$renderSubLevelTerrain(ChunkSectionLayerGroup layerGroup, GpuSampler sampler, CallbackInfo ci) {
+      SubLevelBatchedTerrainRenderer.renderGroup(layerGroup, sampler);
    }
 }

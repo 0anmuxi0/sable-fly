@@ -19,7 +19,7 @@ public class ServerGamePacketListenerImplMixin {
          target = "Lnet/minecraft/server/level/ServerPlayer;isCreative()Z"
       )}
    )
-   private boolean sable$ignoreCreativeModeForSubLevelCollision(ServerPlayer var1) {
+   private boolean sable$ignoreCreativeModeForSubLevelCollision(ServerPlayer instance) {
       return true;
    }
 }

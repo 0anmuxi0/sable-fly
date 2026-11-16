@@ -50,7 +50,7 @@ public abstract class CameraMixin {
 
    @Shadow
    @Deprecated
-   protected abstract void setRotation(float var1, float var2);
+   protected abstract void setRotation(float yRot, float xRot);
 
    @Redirect(
       method = {"alignWithEntity"},

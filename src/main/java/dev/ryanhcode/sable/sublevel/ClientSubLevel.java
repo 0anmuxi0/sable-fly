@@ -162,8 +162,8 @@ public class ClientSubLevel extends SubLevel implements ClientSubLevelAccess {
 
             this.renderData = newData;
          }
-      } catch (Throwable var4) {
-         CrashReport crashreport = CrashReport.forThrowable(var4, "Updating render data");
+      } catch (Throwable throwable) {
+         CrashReport crashreport = CrashReport.forThrowable(throwable, "Updating render data");
          CrashReportCategory crashreportcategory = crashreport.addCategory("Render Dispatcher");
          crashreportcategory.setDetail("Class", () -> SubLevelRenderDispatcher.get().getClass().getName());
          throw new ReportedException(crashreport);

@@ -127,10 +127,10 @@ public class ServerLevelPlot extends LevelPlot {
    protected void onRemoveChunkHolder(LevelChunk levelChunk) {
       ChunkPos pos = levelChunk.getPos();
       ServerLevel serverLevel = this.getSubLevel().getLevel();
-      ServerChunkCache var5 = serverLevel.getChunkSource();
-      if (var5 instanceof ServerChunkCache) {
-         var5.chunkMap.updatingChunkMap.remove(pos.pack());
-         var5.chunkMap.modified = true;
+      ServerChunkCache chunkCache = serverLevel.getChunkSource();
+      if (chunkCache instanceof ServerChunkCache) {
+         chunkCache.chunkMap.updatingChunkMap.remove(pos.pack());
+         chunkCache.chunkMap.modified = true;
       }
 
       levelChunk.setLoaded(false);

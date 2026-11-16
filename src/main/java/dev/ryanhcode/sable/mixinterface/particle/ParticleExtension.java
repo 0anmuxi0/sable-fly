@@ -9,7 +9,7 @@ public interface ParticleExtension {
 
    void sable$moveWithInheritedVelocity();
 
-   void sable$setTrackingSubLevel(ClientSubLevel var1, Vec3 var2);
+   void sable$setTrackingSubLevel(ClientSubLevel subLevel, Vec3 particlePosition);
 
    SubLevel sable$getTrackingSubLevel();
 }

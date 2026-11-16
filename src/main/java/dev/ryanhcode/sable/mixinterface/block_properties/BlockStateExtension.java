@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
 public interface BlockStateExtension {
-   void sable$loadProperties(StateDefinition<Block, BlockState> var1, PhysicsBlockPropertiesDefinition var2);
+   void sable$loadProperties(StateDefinition<Block, BlockState> stateDefinition, PhysicsBlockPropertiesDefinition definition);
 
-   <T> T sable$getProperty(PhysicsBlockPropertyTypes.PhysicsBlockPropertyType<T> var1);
+   <T> T sable$getProperty(PhysicsBlockPropertyTypes.PhysicsBlockPropertyType<T> type);
 }

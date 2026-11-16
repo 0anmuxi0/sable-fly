@@ -26,21 +26,21 @@ public class ValueBoxMixin {
    @WrapMethod(
       method = {"render(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/zurrtum/create/client/catnip/render/SuperRenderTypeBuffer;Lnet/minecraft/world/phys/Vec3;F)V"}
    )
-   private void sable$submitAtWorldPos(Minecraft var1, PoseStack var2, SuperRenderTypeBuffer var3, Vec3 var4, float var5, Operation<Void> var6) {
-      ClientSubLevel var7 = this.sable$getSubLevel(var1);
-      if (var7 == null) {
-         var6.call(var1, var2, var3, var4, var5);
+   private void sable$submitAtWorldPos(Minecraft minecraft, PoseStack poseStack, SuperRenderTypeBuffer buffer, Vec3 position, float partialTicks, Operation<Void> operation) {
+      ClientSubLevel subLevel = this.sable$getSubLevel(minecraft);
+      if (subLevel == null) {
+         operation.call(minecraft, poseStack, buffer, position, partialTicks);
       } else {
-         SubLevelOutlinePose.runProjected(var2, var7, var4, var5x -> var6.call(var1, var2, var3, var5x, var5));
+         SubLevelOutlinePose.runProjected(poseStack, subLevel, position, projectedPos -> operation.call(minecraft, poseStack, buffer, projectedPos, partialTicks));
       }
    }
 
-   private ClientSubLevel sable$getSubLevel(Minecraft var1) {
-      ClientLevel var2 = var1.level;
-      if (var2 == null) {
+   private ClientSubLevel sable$getSubLevel(Minecraft minecraft) {
+      ClientLevel level = minecraft.level;
+      if (level == null) {
          return null;
       } else {
-         return Sable.HELPER.getContaining(var2, this.pos) instanceof ClientSubLevel var4 ? var4 : null;
+         return Sable.HELPER.getContaining(level, this.pos) instanceof ClientSubLevel subLevel ? subLevel : null;
       }
    }
 }

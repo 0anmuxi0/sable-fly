@@ -136,10 +136,10 @@ public class VanillaChunkedSubLevelRenderData implements SubLevelRenderData {
 
    @Override
    public void rebuild() {
-      ObjectListIterator var1 = this.allRenderSections.iterator();
+      ObjectListIterator iterator = this.allRenderSections.iterator();
 
-      while (var1.hasNext()) {
-         RenderSection renderSection = (RenderSection)var1.next();
+      while (iterator.hasNext()) {
+         RenderSection renderSection = (RenderSection)iterator.next();
          this.sable$markDirty(renderSection, true);
       }
    }
@@ -165,10 +165,10 @@ public class VanillaChunkedSubLevelRenderData implements SubLevelRenderData {
             this.dirtyRenderSections.clear();
             this.playerChangedSections.clear();
          } else {
-            ObjectListIterator var7 = this.dirtyRenderSections.iterator();
+            ObjectListIterator iterator = this.dirtyRenderSections.iterator();
 
-            while (var7.hasNext()) {
-               RenderSection renderSection = (RenderSection)var7.next();
+            while (iterator.hasNext()) {
+               RenderSection renderSection = (RenderSection)iterator.next();
                ((RenderSectionExtension)renderSection).sable$setListening(false);
                boolean playerChanged = this.playerChangedSections.contains(renderSection.getSectionNode());
                 boolean buildSync = false;
@@ -244,10 +244,10 @@ public class VanillaChunkedSubLevelRenderData implements SubLevelRenderData {
 
    @Override
    public void close() {
-      ObjectListIterator var1 = this.allRenderSections.iterator();
+      ObjectListIterator iterator = this.allRenderSections.iterator();
 
-      while (var1.hasNext()) {
-         RenderSection section = (RenderSection)var1.next();
+      while (iterator.hasNext()) {
+         RenderSection section = (RenderSection)iterator.next();
          section.reset();
       }
 
