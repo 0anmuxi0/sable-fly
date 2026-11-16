@@ -91,7 +91,7 @@
         "world_border.ClientLevelMixin"
     ],
     "mixins": [
-        "compatibility.create.ContraptionColliderPlayerMixin",
+        "compatibility.create.ContraptionStandOnMixin",
         "compatibility.create.ContraptionActorWorldPosMixin",
         "compatibility.create.AbstractContraptionEntityMixin",
         "assembly.AbstractFurnaceBlockEntityMixin",
