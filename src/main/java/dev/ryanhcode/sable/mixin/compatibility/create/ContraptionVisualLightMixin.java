@@ -26,24 +26,26 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  * 结构因此渲染成纯黑。
  *
  * <p><b>实现方式</b>：不在 {@code checkAndUpdateLightSections} 内部注入
- * （那里既拿不到 {@code entity} 字段 —— 它声明在父类
- * {@code AbstractEntityVisual}，{@code @Shadow} 会失败；
- * 也无法用 {@code @Local} —— {@code @WrapOperation} 的参数不允许 MixinExtras 的
- * {@code @Local} 注入，会报 {@code invalid signature}）。
+ * —— 那里既拿不到 {@code entity} 字段（它声明在父类 {@code AbstractEntityVisual}，
+ * {@code @Shadow} 会失败），也无法用 {@code @Local}
+ * （{@code @WrapOperation} 的参数不允许 MixinExtras 的 {@code @Local}，会报
+ * {@code invalid signature}）。
  *
  * <p>改为在 {@code setSectionCollector} 的<b>入参</b>上做文章：用一个包装过的
  * {@code SectionCollector} 替换原 collector。原始 collector 被调用时，
  * 我们先把 plot 坐标的 section 集合投影到真实世界，再转交。
- * 这样完全不依赖目标类的字段或局部变量，最稳妥。
+ * 完全不依赖目标类的字段或局部变量。
  *
- * <p><b>投影的具体做法</b>：取集合中第一个 section 的中心点，
- * 经 {@code Sable.HELPER.getContaining} 判断它属于哪个子关卡；
- * 若不在子关卡内（主世界 contraption），原样转发。
- * 确认在子关卡内后，把每个 section 的中心点经
- * {@code projectOutOfSubLevel} 变换到真实世界，再取对应 section 坐标。
+ * <p><b>防重复包装</b>：包装类实现了标记接口 {@link SableWrappedCollector}，
+ * 若入参已经是本 mixin 的包装（例如下层逻辑把我们的包装又传回来），
+ * 直接返回，避免坐标被二次投影。
  */
 @Mixin(value = ContraptionVisual.class, remap = false)
 public abstract class ContraptionVisualLightMixin {
+
+    /** 标记接口：用于识别本 mixin 生成的包装，防止重复投影。 */
+    public interface SableWrappedCollector {
+    }
 
     @ModifyVariable(
             method = "setSectionCollector",
@@ -51,18 +53,29 @@ public abstract class ContraptionVisualLightMixin {
             argsOnly = true,
             remap = false)
     private SectionCollector sable$wrapSectionCollector(SectionCollector original) {
-        if (original == null) {
-            return null;
+        if (original == null || original instanceof SableWrappedCollector) {
+            return original;
         }
-        return sections -> {
-            LongSet projected = sable$projectSections(sections);
-            original.sections(projected);
-        };
+        return new SableSectionCollector(original);
+    }
+
+    /** 包装类：投影后再转发。 */
+    private static final class SableSectionCollector implements SectionCollector, SableWrappedCollector {
+        private final SectionCollector delegate;
+
+        private SableSectionCollector(SectionCollector delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public void sections(LongSet plotSections) {
+            this.delegate.sections(sable$projectSections(plotSections));
+        }
     }
 
     /**
      * 把 plot 虚拟坐标的 section 集合投影到真实世界坐标。
-     * 不在子关卡内时原样返回。
+     * 不在子关卡内时原样返回（主世界 contraption 不受影响）。
      */
     private static LongSet sable$projectSections(LongSet plotSections) {
         if (plotSections == null || plotSections.isEmpty()) {
@@ -72,8 +85,6 @@ public abstract class ContraptionVisualLightMixin {
         if (level == null) {
             return plotSections;
         }
-        // 取第一个 section 的中心，判断它属于哪个子关卡
-        LongSet result;
         long first = plotSections.iterator().nextLong();
         Vector3d sample = new Vector3d(
                 SectionPos.x(first) * 16 + 8,
@@ -96,7 +107,6 @@ public abstract class ContraptionVisualLightMixin {
                     SectionPos.blockToSectionCoord((int) Math.floor(projected.y)),
                     SectionPos.blockToSectionCoord((int) Math.floor(projected.z))));
         }
-        result = mapped;
-        return result;
+        return mapped;
     }
 }
