@@ -74,17 +74,23 @@ public final class FlywheelCompat {
     /**
      * Returns the sublevel owning the given position (plot-virtual coordinates).
      * Works for any position, not just BE positions.
+     *
+     * <p>IMPORTANT: {@code SubLevelContainer.getSubLevel(x, z)} takes <b>local plot-grid
+     * indices</b> ({@code 0..(1<<logSideLength)}), not world chunk coordinates. Passing
+     * world chunk coordinates here misclassifies parent-world BEs near the world origin
+     * (chunk 0..1023) as sublevel BEs. Use {@code getPlot(chunkX, chunkZ)} instead - it
+     * takes world chunk coordinates and applies the plot-grid origin offset internally.</p>
      */
     public static ClientSubLevel getContainingSubLevel(ClientLevel clientLevel, BlockPos pos) {
         SubLevelContainer container = SubLevelContainer.getContainer(clientLevel);
         if (container == null) {
             return null;
         }
-        if (container.getSubLevel(pos.getX() >> 4, pos.getZ() >> 4)
-                instanceof ClientSubLevel subLevel) {
-            return subLevel;
+        LevelPlot plot = container.getPlot(pos.getX() >> 4, pos.getZ() >> 4);
+        if (plot == null) {
+            return null;
         }
-        return null;
+        return plot.getSubLevel() instanceof ClientSubLevel subLevel ? subLevel : null;
     }
 
     /**

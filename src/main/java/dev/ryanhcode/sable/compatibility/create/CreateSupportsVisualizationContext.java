@@ -1,5 +1,6 @@
 package dev.ryanhcode.sable.compatibility.create;
 
+import com.zurrtum.create.content.contraptions.AbstractContraptionEntity;
 import dev.ryanhcode.sable.Sable;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
@@ -29,6 +30,18 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public final class CreateSupportsVisualizationContext {
    private static final ThreadLocal<BlockEntity> CURRENT_BLOCK_ENTITY = new ThreadLocal<>();
 
+   /**
+    * 记录"当前正在提取渲染状态的 Contraption 实体"。
+    *
+    * <p>Create 的 {@code ContraptionEntityRenderer.extractRenderState} 会调用
+    * {@code VisualizationManager.supportsVisualization(entity.level())} 决定 Contraption
+    * 方块层走 Flywheel（ContraptionVisual，父世界坐标系）还是 vanilla SuperByteBuffer
+    * （正确以实体位置渲染）。子关卡内的 Contraption 实体位置在 plot 虚拟坐标（±20.48M），
+    * Flywheel 路径会把方块画在 20M 外 → 必须让该判定在"当前 Contraption 位于子关卡内"
+    * 时返回 false，改走 vanilla 路径（与 Sable 1.21.1 官方行为一致）。</p>
+    */
+   private static final ThreadLocal<AbstractContraptionEntity> CURRENT_CONTRAPTION = new ThreadLocal<>();
+
    private CreateSupportsVisualizationContext() {
    }
 
@@ -40,6 +53,22 @@ public final class CreateSupportsVisualizationContext {
    /** 清除"当前正在提取渲染状态的方块实体"。 */
    public static void clearCurrentBlockEntity() {
       CURRENT_BLOCK_ENTITY.remove();
+   }
+
+   /** 设置"当前正在提取渲染状态的 Contraption 实体"。 */
+   public static void setCurrentContraption(AbstractContraptionEntity contraption) {
+      CURRENT_CONTRAPTION.set(contraption);
+   }
+
+   /** 清除"当前正在提取渲染状态的 Contraption 实体"。 */
+   public static void clearCurrentContraption() {
+      CURRENT_CONTRAPTION.remove();
+   }
+
+   /** 当前正在提取渲染状态的 Contraption 实体是否位于某个 sub-level 内。 */
+   public static boolean isCurrentContraptionInSubLevel() {
+      AbstractContraptionEntity contraption = CURRENT_CONTRAPTION.get();
+      return contraption != null && Sable.HELPER.getContaining(contraption) != null;
    }
 
    /**

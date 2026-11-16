@@ -33,6 +33,7 @@
                    "compatibility.create.VisualizationHelperMixin",
                    "compatibility.create.FlwApiLinkImplMixin",
                    "compatibility.create.BlockEntityRenderDispatcherCreateMixin",
+                   "compatibility.create.ContraptionEntityRendererMixin",
                    "compatibility.create.FlywheelCompatBlockEntityStorageMixin",
                    "compatibility.create.FlywheelCompatRenderDispatcherMixin",
                    "compatibility.create.FlywheelCompatAbstractBlockEntityVisualMixin",
