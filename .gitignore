@@ -14,3 +14,4 @@ runs/
 bin/
 *.class
 %SystemDrive%/
+run-game.bat
