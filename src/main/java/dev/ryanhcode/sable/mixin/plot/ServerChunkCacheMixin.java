@@ -75,6 +75,21 @@ public class ServerChunkCacheMixin {
    }
 
    @Inject(
+      method = {"getChunk(IILnet/minecraft/world/level/chunk/status/ChunkStatus;Z)Lnet/minecraft/world/level/chunk/ChunkAccess;"},
+      at = {@At("HEAD")},
+      cancellable = true
+   )
+   private void sable$getChunk(int var1, int var2, ChunkStatus var3, boolean var4, CallbackInfoReturnable<ChunkAccess> var5) {
+      SubLevelContainer container = this.sable$getPlotContainer();
+      if (container != null && container.inBounds(var1, var2)) {
+         LevelChunk chunk = container.getChunk(new ChunkPos(var1, var2));
+         if (chunk != null) {
+            var5.setReturnValue(chunk);
+         }
+      }
+   }
+
+   @Inject(
       method = {"getChunkNow"},
       at = {@At("HEAD")},
       cancellable = true

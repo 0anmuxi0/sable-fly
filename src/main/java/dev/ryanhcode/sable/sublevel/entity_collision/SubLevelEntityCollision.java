@@ -49,12 +49,15 @@ public class SubLevelEntityCollision {
          collisionInfo.motion = collisionMotionMoj;
          SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(entity);
          if (trackingSubLevel != null) {
-            entity.setOnGround(true);
-            collisionInfo.verticalCollisionBelow = true;
-            collisionInfo.verticalCollision = true;
+            boolean wasOnGround = entity.onGround();
             collisionInfo.trackingSubLevel = trackingSubLevel;
-            if (entity.getDeltaMovement().y < 0.0) {
-               entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.0, 1.0));
+            if (wasOnGround) {
+               entity.setOnGround(true);
+               collisionInfo.verticalCollisionBelow = true;
+               collisionInfo.verticalCollision = true;
+               if (entity.getDeltaMovement().y < 0.0) {
+                  entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.0, 1.0));
+               }
             }
          }
 
