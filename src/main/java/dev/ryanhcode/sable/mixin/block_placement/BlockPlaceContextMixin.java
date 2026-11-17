@@ -43,8 +43,7 @@ public abstract class BlockPlaceContextMixin extends UseOnContext {
    @Override
    public abstract BlockPos getClickedPos();
 
-   @Redirect(
-      method = {"*"},
+   @Redirect(require = 0, method = {"*"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/core/Direction;getFacingAxis(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/Direction$Axis;)Lnet/minecraft/core/Direction;"
@@ -62,8 +61,7 @@ public abstract class BlockPlaceContextMixin extends UseOnContext {
       }
    }
 
-   @Redirect(
-      method = {"*"},
+   @Redirect(require = 0, method = {"*"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/core/Direction;orderedByNearest(Lnet/minecraft/world/entity/Entity;)[Lnet/minecraft/core/Direction;"
@@ -81,8 +79,7 @@ public abstract class BlockPlaceContextMixin extends UseOnContext {
       }
    }
 
-   @Inject(
-      method = {"canPlace"},
+   @Inject(require = 0, method = {"canPlace"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -113,7 +110,7 @@ public abstract class BlockPlaceContextMixin extends UseOnContext {
    @Unique
    private boolean sable$intersectBlocks(
       CallbackInfoReturnable<Boolean> cir,
-      @Nullable SubLevel otherSubLevel,
+      @org.jetbrains.annotations.Nullable SubLevel otherSubLevel,
       BoundingBox3dc placedBoxBoundingBox,
       LevelReusedVectors sink,
       Vector3d placedBoxPosition,

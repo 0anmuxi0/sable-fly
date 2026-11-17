@@ -28,8 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({LevelRenderer.class})
 public abstract class LevelRendererMixin {
-   @Inject(
-      method = {"submitBlockDestroyAnimation"},
+   @Inject(require = 0, method = {"submitBlockDestroyAnimation"},
       at = {@At(
          value = "INVOKE",
          target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V",
@@ -56,8 +55,7 @@ public abstract class LevelRendererMixin {
       }
    }
 
-   @WrapOperation(
-      method = {"submitBlockDestroyAnimation"},
+   @WrapOperation(require = 0, method = {"submitBlockDestroyAnimation"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitBreakingBlockModel(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;IZ)V"

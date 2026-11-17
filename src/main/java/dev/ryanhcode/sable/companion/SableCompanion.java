@@ -41,13 +41,13 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    SubLevelAccess getContaining(Level var1, int var2, int var3);
 
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default SubLevelAccess getContaining(Level level, ChunkPos chunkPos) {
       return this.getContaining(level, chunkPos.x, chunkPos.z);
    }
@@ -55,7 +55,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default SubLevelAccess getContaining(Level level, SectionPos pos) {
       return this.getContaining(level, pos.getX(), pos.getZ());
    }
@@ -63,7 +63,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default SubLevelAccess getContaining(Level level, Vec3i pos) {
       return this.getContaining(level, pos.getX() >> 4, pos.getZ() >> 4);
    }
@@ -71,7 +71,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default SubLevelAccess getContaining(Level level, Position pos) {
       return this.getContaining(level, Mth.floor(pos.x()) >> 4, Mth.floor(pos.z()) >> 4);
    }
@@ -79,7 +79,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default SubLevelAccess getContaining(Level level, Vector3dc pos) {
       return this.getContaining(level, Mth.floor(pos.x()) >> 4, Mth.floor(pos.z()) >> 4);
    }
@@ -87,7 +87,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default SubLevelAccess getContaining(Level level, double blockX, double blockZ) {
       return this.getContaining(level, Mth.floor(blockX) >> 4, Mth.floor(blockZ) >> 4);
    }
@@ -95,7 +95,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default SubLevelAccess getContaining(Entity entity) {
       return this.getContaining(entity.level(), entity.chunkPosition());
    }
@@ -103,7 +103,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default SubLevelAccess getContaining(BlockEntity blockEntity) {
       return this.getContaining(blockEntity.getLevel(), blockEntity.getBlockPos());
    }
@@ -111,7 +111,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(int chunkX, int chunkZ) {
       return (ClientSubLevelAccess)this.getContaining(this.getClientLevel(), chunkX, chunkZ);
    }
@@ -119,7 +119,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(ChunkPos chunkPos) {
       return (ClientSubLevelAccess)this.getContaining(this.getClientLevel(), chunkPos);
    }
@@ -127,7 +127,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(Position pos) {
       return (ClientSubLevelAccess)this.getContaining(this.getClientLevel(), pos);
    }
@@ -135,7 +135,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(Vector3dc pos) {
       return (ClientSubLevelAccess)this.getContaining(this.getClientLevel(), pos);
    }
@@ -143,7 +143,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(SectionPos pos) {
       return (ClientSubLevelAccess)this.getContaining(this.getClientLevel(), pos);
    }
@@ -151,7 +151,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(Vec3i pos) {
       return (ClientSubLevelAccess)this.getContaining(this.getClientLevel(), pos);
    }
@@ -159,7 +159,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(double blockX, double blockZ) {
       return (ClientSubLevelAccess)this.getContaining(this.getClientLevel(), blockX, blockZ);
    }
@@ -167,7 +167,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(Entity entity) {
       return (ClientSubLevelAccess)this.getContaining(entity);
    }
@@ -175,7 +175,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default ClientSubLevelAccess getContainingClient(BlockEntity blockEntity) {
       return (ClientSubLevelAccess)this.getContaining(blockEntity);
    }
@@ -216,18 +216,18 @@ public interface SableCompanion {
    @ScheduledForRemoval(
       inVersion = "2.0.0"
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Contract(
       pure = true
    )
-   <T, S extends SubLevelAccess> T runIncludingSubLevels(Level var1, Vec3 var2, boolean var3, @Nullable S var4, BiFunction<S, BlockPos, T> var5);
+   <T, S extends SubLevelAccess> T runIncludingSubLevels(Level var1, Vec3 var2, boolean var3, @org.jetbrains.annotations.Nullable S var4, BiFunction<S, BlockPos, T> var5);
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Contract(
       pure = true
    )
    default <T, S extends SubLevelAccess> T runIncludingSubLevels(
-      Level level, Position origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, T> converter
+      Level level, Position origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, T> converter
    ) {
       return this.runIncludingSubLevels(level, new Vec3(origin.x(), origin.y(), origin.z()), shouldCheckOrigin, subLevel, converter);
    }
@@ -239,13 +239,13 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   <S extends SubLevelAccess> boolean findIncludingSubLevels(Level var1, Vec3 var2, boolean var3, @Nullable S var4, BiFunction<S, BlockPos, Boolean> var5);
+   <S extends SubLevelAccess> boolean findIncludingSubLevels(Level var1, Vec3 var2, boolean var3, @org.jetbrains.annotations.Nullable S var4, BiFunction<S, BlockPos, Boolean> var5);
 
    @Contract(
       pure = true
    )
    default <S extends SubLevelAccess> boolean findIncludingSubLevels(
-      Level level, Position origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
+      Level level, Position origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
    ) {
       return this.findIncludingSubLevels(level, new Vec3(origin.x(), origin.y(), origin.z()), shouldCheckOrigin, subLevel, converter);
    }
@@ -463,25 +463,25 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    SubLevelAccess getTrackingSubLevel(Entity var1);
 
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    SubLevelAccess getLastTrackingSubLevel(Entity var1);
 
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    SubLevelAccess getTrackingOrVehicleSubLevel(Entity var1);
 
    @Contract(
       pure = true
    )
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    SubLevelAccess getVehicleSubLevel(Entity var1);
 
    @Contract(
@@ -497,7 +497,7 @@ public interface SableCompanion {
    @Contract(
       pure = true
    )
-   default Vector3d getFeetPos(Entity entity, float distanceDown, @Nullable Quaterniondc orientation) {
+   default Vector3d getFeetPos(Entity entity, float distanceDown, @org.jetbrains.annotations.Nullable Quaterniondc orientation) {
       Vector3d feetPos;
       if (orientation == null) {
          feetPos = JOMLConversion.toJOML(entity.position()).sub(0.0, distanceDown, 0.0);

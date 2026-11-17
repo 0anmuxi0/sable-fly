@@ -9,8 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin({Minecraft.class})
 public class GameRendererMixin {
-   @WrapMethod(
-      method = {"pick(F)V"}
+   @WrapMethod(require = 0, method = {"pick(F)V"}
    )
    private void sable$pickWithRenderPoses(float partialTick, Operation<Void> original) {
       Minecraft minecraft = Minecraft.getInstance();

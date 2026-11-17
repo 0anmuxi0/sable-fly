@@ -19,8 +19,7 @@ public abstract class AbstractMinecartMixin extends Entity {
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At("TAIL")}
    )
    private void sable$postTick(CallbackInfo ci) {

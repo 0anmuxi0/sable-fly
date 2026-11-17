@@ -15,13 +15,13 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin({EntityGetter.class})
 public interface EntityGetterMixin {
    @Shadow
-   List<Entity> getEntities(@Nullable Entity var1, AABB var2);
+   List<Entity> getEntities(@org.jetbrains.annotations.Nullable Entity var1, AABB var2);
 
    @Shadow
    List<? extends Player> players();
 
    @Overwrite
-   default boolean isUnobstructed(@Nullable Entity pEntity, VoxelShape voxelShape) {
+   default boolean isUnobstructed(@org.jetbrains.annotations.Nullable Entity pEntity, VoxelShape voxelShape) {
       if (!voxelShape.isEmpty()) {
          for (Entity entity : this.getEntities(pEntity, voxelShape.bounds())) {
             if (!entity.isRemoved()

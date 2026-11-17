@@ -18,8 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({PlayerList.class})
 public class PlayerListMixin {
-   @Inject(
-      method = {"placeNewPlayer"},
+   @Inject(require = 0, method = {"placeNewPlayer"},
       at = {@At("TAIL")}
    )
    private void sable$player(Connection connection, ServerPlayer serverPlayer, CommonListenerCookie commonListenerCookie, CallbackInfo ci) {
@@ -32,8 +31,7 @@ public class PlayerListMixin {
       }
    }
 
-   @Inject(
-      method = {"respawn"},
+   @Inject(require = 0, method = {"respawn"},
       at = {@At("TAIL")}
    )
    private void sable$respawn(ServerPlayer oldPlayer, boolean bl, RemovalReason removalReason, CallbackInfoReturnable<ServerPlayer> cir) {

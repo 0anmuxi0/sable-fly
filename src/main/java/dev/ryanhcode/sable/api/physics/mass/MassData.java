@@ -14,7 +14,7 @@ public interface MassData {
 
    Matrix3dc getInverseInertiaTensor();
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    Vector3dc getCenterOfMass();
 
    default boolean isInvalid() {

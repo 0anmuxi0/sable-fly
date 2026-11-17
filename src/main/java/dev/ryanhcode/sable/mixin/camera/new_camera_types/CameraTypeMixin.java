@@ -28,9 +28,9 @@ public class CameraTypeMixin {
 
    @Overwrite
    public CameraType cycle() {
-      if ((Object)this == SableCameraTypes.SUB_LEVEL_VIEW) {
+      if (((CameraType)(Object)this) == SableCameraTypes.SUB_LEVEL_VIEW) {
          return SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED;
-      } else if ((Object)this == SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED) {
+      } else if (((CameraType)(Object)this) == SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED) {
          return CameraType.THIRD_PERSON_FRONT;
       } else {
          return switch ((CameraType)(Object)this) {

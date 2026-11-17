@@ -61,17 +61,17 @@ public class ServerSubLevel extends SubLevel implements PhysicsPipelineBody {
    private final SubLevelHeatMapManager heatMapManager = new SubLevelHeatMapManager(this);
    private final FloatingBlockController floatingBlockController = new FloatingBlockController(this);
    private final ReactionWheelManager reactionWheelManager = new ReactionWheelManager(this);
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Object2ObjectMap<ForceGroup, QueuedForceGroup> queuedForceGroups = null;
    private MergedMassTracker massTracker;
    private boolean lastNetworkedStopped = false;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private UUID splitFromSubLevel = null;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Pose3d splitFromPose = null;
    @Internal
    private GlobalSavedSubLevelPointer lastSerializationPointer = null;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private CompoundTag userDataTag;
    private boolean trackIndividualQueuedForces = false;
 
@@ -291,7 +291,7 @@ public class ServerSubLevel extends SubLevel implements PhysicsPipelineBody {
    }
 
    @Override
-   public void setName(@Nullable String name) {
+   public void setName(@org.jetbrains.annotations.Nullable String name) {
       if (!Objects.equals(name, this.getName())) {
          this.playerSink().sendPacket(new ClientboundChangeSubLevelNamePacket(this.getUniqueId(), name));
       }
@@ -316,12 +316,12 @@ public class ServerSubLevel extends SubLevel implements PhysicsPipelineBody {
       this.splitFromPose = originalPose;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public UUID getSplitFromSubLevel() {
       return this.splitFromSubLevel;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public Pose3d getSplitFromPose() {
       return this.splitFromPose;
    }
@@ -372,12 +372,12 @@ public class ServerSubLevel extends SubLevel implements PhysicsPipelineBody {
       return this.trackIndividualQueuedForces;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public Object2ObjectMap<ForceGroup, QueuedForceGroup> getQueuedForceGroups() {
       return this.queuedForceGroups;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public CompoundTag getUserDataTag() {
       return this.userDataTag;
    }

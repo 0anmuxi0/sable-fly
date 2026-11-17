@@ -22,8 +22,7 @@ public class ClientboundEntityPositionSyncPacketMixin implements PacketActuallyI
    @Unique
    private boolean sable$actuallyInSubLevel;
 
-   @Inject(
-      method = {"<clinit>"},
+   @Inject(require = 0, method = {"<clinit>"},
       at = {@At("TAIL")}
    )
    private static void sable$extendStreamCodec(CallbackInfo ci) {

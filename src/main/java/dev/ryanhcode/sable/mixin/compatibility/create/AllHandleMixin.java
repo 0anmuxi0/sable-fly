@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Pseudo
 @Mixin(targets={"com.zurrtum.create.AllHandle"})
 public class AllHandleMixin {
-    @WrapOperation(method={"onBlockEntityConfiguration(Lnet/minecraft/server/network/ServerGamePacketListenerImpl;Lnet/minecraft/core/BlockPos;ILjava/util/function/Predicate;)V"}, at={@At(value="INVOKE", target="Lnet/minecraft/core/BlockPos;closerThan(Lnet/minecraft/core/Vec3i;D)Z")})
+    @WrapOperation(require = 0, method={"onBlockEntityConfiguration(Lnet/minecraft/server/network/ServerGamePacketListenerImpl;Lnet/minecraft/core/BlockPos;ILjava/util/function/Predicate;)V"}, at={@At(value="INVOKE", target="Lnet/minecraft/core/BlockPos;closerThan(Lnet/minecraft/core/Vec3i;D)Z")})
     private static boolean sable$poseAwareReachCheck(BlockPos pos, Vec3i playerPos, double distance, Operation<Boolean> original, @Local(argsOnly=true) ServerGamePacketListenerImpl listener) {
         double dz;
         double dy;
@@ -39,7 +39,7 @@ public class AllHandleMixin {
         return dx * dx + (dy = (double)pos.getY() - localPlayer.y()) * dy + (dz = (double)pos.getZ() - localPlayer.z()) * dz < distance * distance;
     }
 
-    @WrapOperation(method={"onSuperGlueRemoval(Lnet/minecraft/server/network/ServerGamePacketListenerImpl;Lcom/zurrtum/create/infrastructure/packet/c2s/SuperGlueRemovalPacket;)V"}, at={@At(value="INVOKE", target="Lnet/minecraft/server/level/ServerPlayer;distanceToSqr(Lnet/minecraft/world/phys/Vec3;)D")})
+    @WrapOperation(require = 0, method={"onSuperGlueRemoval(Lnet/minecraft/server/network/ServerGamePacketListenerImpl;Lcom/zurrtum/create/infrastructure/packet/c2s/SuperGlueRemovalPacket;)V"}, at={@At(value="INVOKE", target="Lnet/minecraft/server/level/ServerPlayer;distanceToSqr(Lnet/minecraft/world/phys/Vec3;)D")})
     private static double sable$poseAwareGlueRemovalReach(ServerPlayer player, Vec3 gluePos, Operation<Double> original) {
         double direct = (Double)original.call(player, gluePos);
         return direct <= 1024.0 ? direct : Sable.HELPER.distanceSquaredWithSubLevels((Level)player.level(), (Position)player.position(), (Position)gluePos);

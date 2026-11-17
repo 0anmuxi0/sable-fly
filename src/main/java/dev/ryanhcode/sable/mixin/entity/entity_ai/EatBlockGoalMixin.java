@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({EatBlockGoal.class})
 public class EatBlockGoalMixin {
-   @WrapOperation(
-      method = {"tick", "canUse"},
+   @WrapOperation(require = 0, method = {"tick", "canUse"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;blockPosition()Lnet/minecraft/core/BlockPos;"

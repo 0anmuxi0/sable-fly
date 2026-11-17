@@ -30,8 +30,7 @@ public abstract class LocalPlayerMixin extends Player {
       super(level, gameProfile);
    }
 
-   @Redirect(
-      method = {"aiStep"},
+   @Redirect(require = 0, method = {"aiStep"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;",
@@ -59,8 +58,7 @@ public abstract class LocalPlayerMixin extends Player {
       return new Vec3(k * l, -m, j * l);
    }
 
-   @Inject(
-      method = {"startRiding(Lnet/minecraft/world/entity/Entity;ZZ)Z"},
+   @Inject(require = 0, method = {"startRiding(Lnet/minecraft/world/entity/Entity;ZZ)Z"},
       at = {@At("RETURN")}
    )
    private void sable$onStartRiding(Entity entity, boolean bl, boolean sendEventAndTriggers, CallbackInfoReturnable<Boolean> cir) {
@@ -79,8 +77,7 @@ public abstract class LocalPlayerMixin extends Player {
       }
    }
 
-   @Inject(
-      method = {"removeVehicle"},
+   @Inject(require = 0, method = {"removeVehicle"},
       at = {@At("HEAD")}
    )
    private void sable$onStopRiding(CallbackInfo ci) {

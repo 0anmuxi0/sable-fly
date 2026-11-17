@@ -77,7 +77,7 @@ public class SubLevelSelectorModifierType {
    public interface Modifier {
       int getMaxResults();
 
-      @Nullable
+      @org.jetbrains.annotations.Nullable
       List<ServerSubLevel> apply(List<ServerSubLevel> var1, Vector3d var2);
    }
 

@@ -110,7 +110,7 @@ public class SubLevelTrackingSystem implements SubLevelObserver {
       }
    }
 
-   private void sendFullSync(ServerPlayer player, ServerSubLevel subLevel, @Nullable CustomPacketPayload extraPacket) {
+   private void sendFullSync(ServerPlayer player, ServerSubLevel subLevel, @org.jetbrains.annotations.Nullable CustomPacketPayload extraPacket) {
       SubLevelContainer container = SubLevelContainer.getContainer(this.level);
 
       assert container != null;

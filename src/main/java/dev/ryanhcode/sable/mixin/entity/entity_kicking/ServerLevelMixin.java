@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({ServerLevel.class})
 public class ServerLevelMixin {
-   @Inject(
-      method = {"addFreshEntity"},
+   @Inject(require = 0, method = {"addFreshEntity"},
       at = {@At("HEAD")}
    )
    public void sable$kickEntity(Entity entity, CallbackInfoReturnable<Boolean> cir) {

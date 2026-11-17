@@ -16,16 +16,14 @@ public abstract class ServerPlayerMixin {
    @Shadow
    public abstract ServerLevel level();
 
-   @WrapMethod(
-      method = {"teleportTo(DDD)V"}
+   @WrapMethod(require = 0, method = {"teleportTo(DDD)V"}
    )
    public void sable$teleportTo(double x, double y, double z, Operation<Void> original) {
       Vector3d globalPos = Sable.HELPER.projectOutOfSubLevel(this.level(), new Vector3d(x, y, z));
       original.call(globalPos.x, globalPos.y, globalPos.z);
    }
 
-   @WrapMethod(
-      method = {"teleportTo(Lnet/minecraft/server/level/ServerLevel;DDDLjava/util/Set;FFZ)Z"}
+   @WrapMethod(require = 0, method = {"teleportTo(Lnet/minecraft/server/level/ServerLevel;DDDLjava/util/Set;FFZ)Z"}
    )
    public boolean sable$teleportTo(
       ServerLevel serverLevel, double x, double y, double z, Set<Relative> set, float g, float h, boolean resetCamera, Operation<Boolean> original

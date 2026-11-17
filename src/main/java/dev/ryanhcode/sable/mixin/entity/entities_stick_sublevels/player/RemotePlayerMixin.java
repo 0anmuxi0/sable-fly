@@ -9,16 +9,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({RemotePlayer.class})
 public abstract class RemotePlayerMixin implements LivingEntityStickExtension {
-   @Inject(
-      method = {"aiStep"},
+   @Inject(require = 0, method = {"aiStep"},
       at = {@At("HEAD")}
    )
    private void sable$updateRotLerp(CallbackInfo ci) {
       this.sable$setupLerp();
    }
 
-   @Inject(
-      method = {"aiStep"},
+   @Inject(require = 0, method = {"aiStep"},
       at = {@At("TAIL")}
    )
    private void sable$updateSubLevelPosition(CallbackInfo ci) {

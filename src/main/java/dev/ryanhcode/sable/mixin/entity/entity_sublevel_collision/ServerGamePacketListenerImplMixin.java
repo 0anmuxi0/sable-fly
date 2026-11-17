@@ -12,8 +12,7 @@ public class ServerGamePacketListenerImplMixin {
    @Shadow
    public ServerPlayer player;
 
-   @Redirect(
-      method = {"handlePlayerPositionChange"},
+   @Redirect(require = 0, method = {"handlePlayerPositionChange"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerPlayer;isCreative()Z"

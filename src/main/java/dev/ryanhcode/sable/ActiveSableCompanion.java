@@ -57,7 +57,7 @@ public class ActiveSableCompanion implements SableCompanion {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(Level level, int chunkX, int chunkZ) {
       if (!(level instanceof SubLevelContainerHolder)) {
          return null;
@@ -72,93 +72,93 @@ public class ActiveSableCompanion implements SableCompanion {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(Level level, ChunkPos chunkPos) {
       return this.getContaining(level, chunkPos.x, chunkPos.z);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(Level level, SectionPos pos) {
       return this.getContaining(level, pos.getX(), pos.getZ());
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(Level level, Vec3i pos) {
       return this.getContaining(level, pos.getX() >> 4, pos.getZ() >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(Level level, Position pos) {
       return this.getContaining(level, Mth.floor(pos.x()) >> 4, Mth.floor(pos.z()) >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(Level level, Vector3dc pos) {
       return this.getContaining(level, Mth.floor(pos.x()) >> 4, Mth.floor(pos.z()) >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(Level level, double blockX, double blockZ) {
       return this.getContaining(level, Mth.floor(blockX) >> 4, Mth.floor(blockZ) >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(Entity entity) {
       ChunkPos chunkPos = entity.chunkPosition();
       return this.getContaining(entity.level(), chunkPos.x, chunkPos.z);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getContaining(BlockEntity blockEntity) {
       BlockPos pos = blockEntity.getBlockPos();
       return this.getContaining(blockEntity.getLevel(), pos.getX() >> 4, pos.getZ() >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(int chunkX, int chunkZ) {
-      return (ClientSubLevel)this.getContaining(SableDistUtil.getClientLevel(), chunkX, chunkZ);
+      return (ClientSubLevel)(Object)this.getContaining(SableDistUtil.getClientLevel(), chunkX, chunkZ);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(ChunkPos chunkPos) {
-      return (ClientSubLevel)this.getContaining(SableDistUtil.getClientLevel(), chunkPos.x, chunkPos.z);
+      return (ClientSubLevel)(Object)this.getContaining(SableDistUtil.getClientLevel(), chunkPos.x, chunkPos.z);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(Position pos) {
-      return (ClientSubLevel)this.getContaining(SableDistUtil.getClientLevel(), Mth.floor(pos.x()) >> 4, Mth.floor(pos.z()) >> 4);
+      return (ClientSubLevel)(Object)this.getContaining(SableDistUtil.getClientLevel(), Mth.floor(pos.x()) >> 4, Mth.floor(pos.z()) >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(Vector3dc pos) {
-      return (ClientSubLevel)this.getContaining(SableDistUtil.getClientLevel(), Mth.floor(pos.x()) >> 4, Mth.floor(pos.z()) >> 4);
+      return (ClientSubLevel)(Object)this.getContaining(SableDistUtil.getClientLevel(), Mth.floor(pos.x()) >> 4, Mth.floor(pos.z()) >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(SectionPos pos) {
-      return (ClientSubLevel)this.getContaining(SableDistUtil.getClientLevel(), pos.x(), pos.z());
+      return (ClientSubLevel)(Object)this.getContaining(SableDistUtil.getClientLevel(), pos.x(), pos.z());
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(Vec3i pos) {
-      return (ClientSubLevel)this.getContaining(SableDistUtil.getClientLevel(), pos.getX() >> 4, pos.getZ() >> 4);
+      return (ClientSubLevel)(Object)this.getContaining(SableDistUtil.getClientLevel(), pos.getX() >> 4, pos.getZ() >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(double blockX, double blockZ) {
-      return (ClientSubLevel)this.getContaining(SableDistUtil.getClientLevel(), Mth.floor(blockX) >> 4, Mth.floor(blockZ) >> 4);
+      return (ClientSubLevel)(Object)this.getContaining(SableDistUtil.getClientLevel(), Mth.floor(blockX) >> 4, Mth.floor(blockZ) >> 4);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(Entity entity) {
       ChunkPos chunkPos = entity.chunkPosition();
-      return (ClientSubLevel)this.getContaining(entity.level(), chunkPos.x, chunkPos.z);
+      return (ClientSubLevel)(Object)this.getContaining(entity.level(), chunkPos.x, chunkPos.z);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientSubLevel getContainingClient(BlockEntity blockEntity) {
       BlockPos pos = blockEntity.getBlockPos();
-      return (ClientSubLevel)this.getContaining(blockEntity.getLevel(), pos.getX() >> 4, pos.getZ() >> 4);
+      return (ClientSubLevel)(Object)this.getContaining(blockEntity.getLevel(), pos.getX() >> 4, pos.getZ() >> 4);
    }
 
    @Override
@@ -200,18 +200,18 @@ public class ActiveSableCompanion implements SableCompanion {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public <T, S extends SubLevelAccess> T runIncludingSubLevels(
-      Level level, Vec3 origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, T> converter
+      Level level, Vec3 origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, T> converter
    ) {
       return this.runIncludingSubLevels(level, (Position)origin, shouldCheckOrigin, subLevel, converter);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public <T, S extends SubLevelAccess> T runIncludingSubLevels(
-      Level level, Position origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, T> converter
+      Level level, Position origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, T> converter
    ) {
       MutableBlockPos mutableBlockPos = new MutableBlockPos(origin.x(), origin.y(), origin.z());
       Vector3d mutablePos = JOMLConversion.toJOML(origin);
@@ -250,14 +250,14 @@ public class ActiveSableCompanion implements SableCompanion {
 
    @Override
    public <S extends SubLevelAccess> boolean findIncludingSubLevels(
-      Level level, Vec3 origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
+      Level level, Vec3 origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
    ) {
       return this.findIncludingSubLevels(level, (Position)origin, shouldCheckOrigin, subLevel, converter);
    }
 
    @Override
    public <S extends SubLevelAccess> boolean findIncludingSubLevels(
-      Level level, Position origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
+      Level level, Position origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
    ) {
       return Boolean.TRUE
          .equals(
@@ -413,12 +413,12 @@ public class ActiveSableCompanion implements SableCompanion {
       return container != null && container.inBounds(chunkX, chunkZ);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getTrackingSubLevel(Entity entity) {
       return ((EntityMovementExtension)entity).sable$getTrackingSubLevel();
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getLastTrackingSubLevel(Entity entity) {
       UUID uuid = ((EntityMovementExtension)entity).sable$getLastTrackingSubLevelID();
       if (uuid != null) {
@@ -429,7 +429,7 @@ public class ActiveSableCompanion implements SableCompanion {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getTrackingOrVehicleSubLevel(Entity entity) {
       SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(entity);
       if (trackingSubLevel == null) {
@@ -439,7 +439,7 @@ public class ActiveSableCompanion implements SableCompanion {
       return trackingSubLevel;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevel getVehicleSubLevel(Entity entity) {
       return entity.getVehicle() != null ? Sable.HELPER.getContaining(entity.getVehicle()) : null;
    }

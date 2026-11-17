@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({ParticleGroup.class})
 public abstract class ParticleGroupMixin {
-   @WrapOperation(
-      method = {"tickParticle"},
+   @WrapOperation(require = 0, method = {"tickParticle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/particle/Particle;tick()V"

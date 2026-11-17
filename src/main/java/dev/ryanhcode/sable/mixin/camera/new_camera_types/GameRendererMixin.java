@@ -21,8 +21,7 @@ public class GameRendererMixin {
    @Final
    private Minecraft minecraft;
 
-   @Inject(
-      method = {"extractCamera"},
+   @Inject(require = 0, method = {"extractCamera"},
       at = {@At("HEAD")}
    )
    public void sable$setupCamera(DeltaTracker deltaTracker, float partialTick, CallbackInfo ci) {

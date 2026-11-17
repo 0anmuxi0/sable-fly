@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({ServerLevel.class})
 public class ServerLevelMixin {
-   @Inject(
-      method = {"<init>"},
+   @Inject(require = 0, method = {"<init>"},
       at = {@At("TAIL")}
    )
    private void sable$linkWorldBorder(CallbackInfo ci) {

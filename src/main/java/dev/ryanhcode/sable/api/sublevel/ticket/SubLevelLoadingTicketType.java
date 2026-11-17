@@ -19,7 +19,7 @@ public record SubLevelLoadingTicketType<T>(Identifier name, Codec<T> codec) {
       return type;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static SubLevelLoadingTicketType<?> byName(Identifier name) {
       return REGISTRY.get(name);
    }

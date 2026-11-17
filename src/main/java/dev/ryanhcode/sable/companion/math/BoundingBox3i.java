@@ -56,7 +56,7 @@ public final class BoundingBox3i implements BoundingBox3ic {
       this.set(Mth.floor(other.minX), Mth.floor(other.minY), Mth.floor(other.minZ), Mth.floor(other.maxX), Mth.floor(other.maxY), Mth.floor(other.maxZ));
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static BoundingBox3i from(Iterable<BlockPos> blocks) {
       Iterator<BlockPos> iterator = blocks.iterator();
       if (!iterator.hasNext()) {

@@ -21,8 +21,7 @@ public abstract class ServerPlayerMixin extends Player implements PlayerFreezeEx
       super(level, gameProfile);
    }
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At("HEAD")}
    )
    private void setSable$frozenToSubLevel(CallbackInfo ci) {

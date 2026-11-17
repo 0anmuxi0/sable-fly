@@ -30,21 +30,20 @@ public abstract class MinecraftMixin {
    @Final
    public Options options;
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientLevel level;
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public LocalPlayer player;
    @Shadow
    @Final
    public GameRenderer gameRenderer;
 
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public abstract Entity getCameraEntity();
 
-   @Inject(
-      method = {"handleKeybinds"},
+   @Inject(require = 0, method = {"handleKeybinds"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/Options;setCameraType(Lnet/minecraft/client/CameraType;)V",
@@ -63,8 +62,7 @@ public abstract class MinecraftMixin {
       }
    }
 
-   @Inject(
-      method = {"handleKeybinds"},
+   @Inject(require = 0, method = {"handleKeybinds"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/Options;setCameraType(Lnet/minecraft/client/CameraType;)V",

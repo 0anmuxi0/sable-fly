@@ -51,7 +51,7 @@ public class MassTracker implements MassData {
    private Matrix3d inertiaTensor;
    private double inverseMass;
    private Matrix3d inverseInertiaTensor;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Vector3d centerOfMass = null;
 
    public MassTracker() {
@@ -119,7 +119,7 @@ public class MassTracker implements MassData {
       }
    }
 
-   private static Matrix3d addBlockInertia(Vector3d blockPos, double blockMass, Matrix3d dest, @Nullable Vec3 blockInertia) {
+   private static Matrix3d addBlockInertia(Vector3d blockPos, double blockMass, Matrix3d dest, @org.jetbrains.annotations.Nullable Vec3 blockInertia) {
       if (blockInertia == null) {
          BLOCK_INERTIA.identity().scale(blockMass / 6.0);
       } else {
@@ -134,7 +134,7 @@ public class MassTracker implements MassData {
       return dest;
    }
 
-   public void addBlockMass(BlockGetter blockGetter, BlockState state, BlockPos blockPos, double blockMass, @Nullable Vec3 blockInertia) {
+   public void addBlockMass(BlockGetter blockGetter, BlockState state, BlockPos blockPos, double blockMass, @org.jetbrains.annotations.Nullable Vec3 blockInertia) {
       double oldMass = this.mass;
       double newMass = oldMass + blockMass;
       Vector3d blockCenter = new Vector3d(blockPos.getX(), blockPos.getY(), blockPos.getZ()).add(BLOCK_CENTER_OF_MASS.apply(blockGetter, state));

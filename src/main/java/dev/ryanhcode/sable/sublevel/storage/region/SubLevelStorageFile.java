@@ -119,7 +119,7 @@ public class SubLevelStorageFile implements AutoCloseable {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public DataInputStream getSubLevelDataInputStream(int index) throws IOException {
       int span = this.sectorSpans.get(index);
       int spanStart = this.getSpanStart(span);
@@ -242,7 +242,7 @@ public class SubLevelStorageFile implements AutoCloseable {
       }
    }
 
-   public void write(int index, @Nullable CompoundTag compoundTag) throws IOException {
+   public void write(int index, @org.jetbrains.annotations.Nullable CompoundTag compoundTag) throws IOException {
       if (compoundTag == null) {
          this.clear(index);
       } else {

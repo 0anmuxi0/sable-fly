@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Pseudo
 @Mixin(targets={"com.zurrtum.create.client.flywheel.lib.visualization.VisualizationHelper"})
 public class VisualizationHelperMixin {
-    @WrapOperation(method={"canVisualize"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/lib/visualization/VisualizationHelper;getVisualizer(Lnet/minecraft/world/level/block/entity/BlockEntity;)Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;")})
+    @WrapOperation(require = 0, method={"canVisualize"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/lib/visualization/VisualizationHelper;getVisualizer(Lnet/minecraft/world/level/block/entity/BlockEntity;)Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;")})
     private static BlockEntityVisualizer<?> sable$gateCanVisualize(BlockEntity blockEntity, Operation<BlockEntityVisualizer<?>> original) {
         if (Sable.HELPER.getContaining(blockEntity) == null) {
             return (BlockEntityVisualizer)original.call(blockEntity);
@@ -25,7 +25,7 @@ public class VisualizationHelperMixin {
         return (BlockEntityVisualizer)original.call(blockEntity);
     }
 
-    @WrapOperation(method={"skipVanillaRender"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/lib/visualization/VisualizationHelper;getVisualizer(Lnet/minecraft/world/level/block/entity/BlockEntity;)Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;")})
+    @WrapOperation(require = 0, method={"skipVanillaRender"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/lib/visualization/VisualizationHelper;getVisualizer(Lnet/minecraft/world/level/block/entity/BlockEntity;)Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;")})
     private static BlockEntityVisualizer<?> sable$gateSkipVanillaRender(BlockEntity blockEntity, Operation<BlockEntityVisualizer<?>> original) {
         if (Sable.HELPER.getContaining(blockEntity) == null) {
             return (BlockEntityVisualizer)original.call(blockEntity);
@@ -36,7 +36,7 @@ public class VisualizationHelperMixin {
         return (BlockEntityVisualizer)original.call(blockEntity);
     }
 
-    @WrapOperation(method={"tryAddBlockEntity"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/lib/visualization/VisualizationHelper;getVisualizer(Lnet/minecraft/world/level/block/entity/BlockEntity;)Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;")})
+    @WrapOperation(require = 0, method={"tryAddBlockEntity"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/lib/visualization/VisualizationHelper;getVisualizer(Lnet/minecraft/world/level/block/entity/BlockEntity;)Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;")})
     private static BlockEntityVisualizer<?> sable$gateTryAddBlockEntity(BlockEntity blockEntity, Operation<BlockEntityVisualizer<?>> original) {
         if (Sable.HELPER.getContaining(blockEntity) == null) {
             return (BlockEntityVisualizer)original.call(blockEntity);

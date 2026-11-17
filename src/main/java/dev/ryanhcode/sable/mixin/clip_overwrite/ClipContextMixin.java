@@ -11,35 +11,35 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin({ClipContext.class})
 public class ClipContextMixin implements ClipContextExtension {
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private SubLevel sable$ignoredSubLevel = null;
    @Unique
    private boolean sable$ignoreMainLevel = false;
    @Unique
    private boolean sable$doNotProject = false;
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Predicate<SubLevel> sable$subLevelIgnoring = null;
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public SubLevel sable$getIgnoredSubLevel() {
       return this.sable$ignoredSubLevel;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public Predicate<SubLevel> sable$getSubLevelIgnoring() {
       return this.sable$subLevelIgnoring;
    }
 
    @Override
-   public void sable$setIgnoredSubLevel(@Nullable SubLevel ignoredSubLevel) {
+   public void sable$setIgnoredSubLevel(@org.jetbrains.annotations.Nullable SubLevel ignoredSubLevel) {
       this.sable$ignoredSubLevel = ignoredSubLevel;
    }
 
    @Override
-   public void sable$setSubLevelIgnoring(@Nullable Predicate<SubLevel> subLevelIgnoring) {
+   public void sable$setSubLevelIgnoring(@org.jetbrains.annotations.Nullable Predicate<SubLevel> subLevelIgnoring) {
       this.sable$subLevelIgnoring = subLevelIgnoring;
    }
 

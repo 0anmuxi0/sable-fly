@@ -14,11 +14,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin({LevelExtractor.class})
 public class LevelExtractorMixin {
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private ClientLevel level;
 
-   @Redirect(
-      method = {"extractBlockDestroyAnimation"},
+   @Redirect(require = 0, method = {"extractBlockDestroyAnimation"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/core/BlockPos;distToCenterSqr(DDD)D"

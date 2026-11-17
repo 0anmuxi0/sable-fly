@@ -23,7 +23,7 @@ public class EntitySubLevelRotationHelper {
       return Minecraft.getInstance().options.getCameraType() != SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static Quaterniond getEntityOrientation(
       Entity cameraEntity, Function<SubLevel, Pose3dc> poseProvider, float partialTicks, EntitySubLevelRotationHelper.Type type
    ) {

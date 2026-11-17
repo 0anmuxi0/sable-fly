@@ -34,8 +34,7 @@ public class ServerEntityMixin {
    @Unique
    private Vec3 sable$oldPos = null;
 
-   @Inject(
-      method = {"sendChanges"},
+   @Inject(require = 0, method = {"sendChanges"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;trackingPosition()Lnet/minecraft/world/phys/Vec3;",
@@ -58,8 +57,7 @@ public class ServerEntityMixin {
       }
    }
 
-   @Inject(
-      method = {"sendChanges"},
+   @Inject(require = 0, method = {"sendChanges"},
       at = {@At("RETURN")}
    )
    private void sable$postTransform(CallbackInfo ci) {
@@ -69,8 +67,7 @@ public class ServerEntityMixin {
       }
    }
 
-   @WrapOperation(
-      method = {"sendChanges"},
+   @WrapOperation(require = 0, method = {"sendChanges"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerEntity$Synchronizer;sendToTrackingPlayers(Lnet/minecraft/network/protocol/Packet;)V"
@@ -86,8 +83,7 @@ public class ServerEntityMixin {
       original.call(instance, packet);
    }
 
-   @WrapOperation(
-      method = {"sendChanges"},
+   @WrapOperation(require = 0, method = {"sendChanges"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerEntity$Synchronizer;sendToTrackingPlayersAndSelf(Lnet/minecraft/network/protocol/Packet;)V"

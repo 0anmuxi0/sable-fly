@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({ServerLevel.class})
 public class ServerLevelMixin {
-   @WrapOperation(
-      method = {"*"},
+   @WrapOperation(require = 0, method = {"*"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/DistanceManager;inEntityTickingRange(J)Z"

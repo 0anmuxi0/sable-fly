@@ -58,8 +58,7 @@ public abstract class EntityRendererMixin {
       );
    }
 
-   @Redirect(
-      method = {"extractNameTags(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/entity/state/EntityRenderState;FDD)V"},
+   @Redirect(require = 0, method = {"extractNameTags(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/entity/state/EntityRenderState;FDD)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;distanceToSqr(Lnet/minecraft/world/entity/Entity;)D"
@@ -69,8 +68,7 @@ public abstract class EntityRendererMixin {
       return Sable.HELPER.distanceSquaredWithSubLevels(entity.level(), Minecraft.getInstance().gameRenderer.mainCamera().position(), entity.position());
    }
 
-   @Redirect(
-      method = {"getSkyLightLevel"},
+   @Redirect(require = 0, method = {"getSkyLightLevel"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;getBrightness(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I"
@@ -119,8 +117,7 @@ public abstract class EntityRendererMixin {
       return baseBrightness;
    }
 
-   @Inject(
-      method = {"shouldRender"},
+   @Inject(require = 0, method = {"shouldRender"},
       at = {@At("HEAD")},
       cancellable = true
    )

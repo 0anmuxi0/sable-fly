@@ -34,8 +34,7 @@ public abstract class ClientPacketListenerMixin {
    @Shadow
    private ClientLevel level;
 
-   @WrapOperation(
-      method = {"handleTeleportEntity"},
+   @WrapOperation(require = 0, method = {"handleTeleportEntity"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;setValuesFromPositionPacket(Lnet/minecraft/world/entity/PositionMoveRotation;Ljava/util/Set;Lnet/minecraft/world/entity/Entity;Z)Z",
@@ -64,8 +63,7 @@ public abstract class ClientPacketListenerMixin {
       );
    }
 
-   @WrapOperation(
-      method = {"handleMoveEntity"},
+   @WrapOperation(require = 0, method = {"handleMoveEntity"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;moveOrInterpolateTo(Lnet/minecraft/world/entity/PositionPath;FF)V"
@@ -82,8 +80,7 @@ public abstract class ClientPacketListenerMixin {
       });
    }
 
-   @WrapOperation(
-      method = {"handleEntityPositionSync"},
+   @WrapOperation(require = 0, method = {"handleEntityPositionSync"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;moveOrInterpolateTo(Lnet/minecraft/world/entity/PositionPath;FF)V"
@@ -98,8 +95,7 @@ public abstract class ClientPacketListenerMixin {
       }, packet);
    }
 
-   @WrapOperation(
-      method = {"handleEntityPositionSync"},
+   @WrapOperation(require = 0, method = {"handleEntityPositionSync"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;snapTo(Lnet/minecraft/world/phys/Vec3;FF)V"

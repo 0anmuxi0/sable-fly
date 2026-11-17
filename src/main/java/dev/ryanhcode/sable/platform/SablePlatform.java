@@ -11,7 +11,7 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 public interface SablePlatform {
    SablePlatform INSTANCE = SablePlatformUtil.load(SablePlatform.class);
 
-   boolean isWrappedLevel(@Nullable Level var1);
+   boolean isWrappedLevel(@org.jetbrains.annotations.Nullable Level var1);
 
    boolean isBlockstateLadder(BlockState var1, Level var2, BlockPos var3, LivingEntity var4);
 }

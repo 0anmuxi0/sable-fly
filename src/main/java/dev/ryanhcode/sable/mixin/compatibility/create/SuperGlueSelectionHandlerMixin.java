@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Pseudo
 @Mixin(targets={"com.zurrtum.create.client.content.contraptions.glue.SuperGlueSelectionHandler"})
 public class SuperGlueSelectionHandlerMixin {
-    @WrapOperation(method={"tick(Lnet/minecraft/client/Minecraft;)V"}, at={@At(value="INVOKE", target="Lnet/minecraft/world/phys/AABB;clip(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Ljava/util/Optional;")})
+    @WrapOperation(require = 0, method={"tick(Lnet/minecraft/client/Minecraft;)V"}, at={@At(value="INVOKE", target="Lnet/minecraft/world/phys/AABB;clip(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Ljava/util/Optional;")})
     private Optional<Vec3> sable$clipGlueInWorldSpace(AABB box, Vec3 from, Vec3 to, Operation<Optional<Vec3>> original) {
         ClientSubLevel subLevel = SubLevelOutlinePose.find((Position)box.getCenter());
         if (subLevel == null) {

@@ -26,7 +26,7 @@ public final class PhysicsColliderBlockGetter implements BlockGetter {
       this.state = Objects.requireNonNull(state, "state");
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public BlockEntity getBlockEntity(@NotNull BlockPos pos) {
       return null;

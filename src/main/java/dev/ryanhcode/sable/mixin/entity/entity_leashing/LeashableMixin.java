@@ -17,7 +17,7 @@ public interface LeashableMixin {
    default double leashDistanceTo(Entity handlerEntity) {
       ActiveSableCompanion helper = Sable.HELPER;
       Level level = handlerEntity.level();
-      Entity leashedEntity = (Entity)this;
+      Entity leashedEntity = (Entity)(Object)this;
       Vec3 handlerPos = helper.projectOutOfSubLevel(level, handlerEntity.getBoundingBox().getCenter());
       Vec3 leashedPos = helper.projectOutOfSubLevel(level, leashedEntity.getBoundingBox().getCenter());
       return handlerPos.distanceTo(leashedPos);
@@ -27,7 +27,7 @@ public interface LeashableMixin {
    default boolean checkElasticInteractions(Entity handlerEntity, LeashData leashData) {
       ActiveSableCompanion helper = Sable.HELPER;
       Level level = handlerEntity.level();
-      Entity leashedEntity = (Entity)this;
+      Entity leashedEntity = (Entity)(Object)this;
       Vec3 handlerPos = helper.projectOutOfSubLevel(level, handlerEntity.position());
       Vec3 leashedPos = helper.projectOutOfSubLevel(level, leashedEntity.position());
       double elasticDistance = ((Leashable)this).leashElasticDistance();

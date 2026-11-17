@@ -18,8 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({Ticker.class})
 public interface VibrationSystemTickerMixin {
-   @WrapOperation(
-      method = {"receiveVibration"},
+   @WrapOperation(require = 0, method = {"receiveVibration"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/gameevent/vibrations/VibrationInfo;pos()Lnet/minecraft/world/phys/Vec3;"
@@ -29,8 +28,7 @@ public interface VibrationSystemTickerMixin {
       return Sable.HELPER.projectOutOfSubLevel(level, original.call(instance));
    }
 
-   @WrapOperation(
-      method = {"receiveVibration", "method_51408", "tryReloadVibrationParticle"},
+   @WrapOperation(require = 0, method = {"receiveVibration", "method_51408", "tryReloadVibrationParticle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/gameevent/vibrations/VibrationSystem$User;getPositionSource()Lnet/minecraft/world/level/gameevent/PositionSource;"

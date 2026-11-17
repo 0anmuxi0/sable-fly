@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value={BlockEntityStorage.class}, remap=false)
 public abstract class FlywheelCompatBlockEntityStorageMixin {
-    @WrapOperation(method={"createRaw(Lcom/zurrtum/create/client/flywheel/api/visualization/VisualizationContext;Lnet/minecraft/world/level/block/entity/BlockEntity;F)Lcom/zurrtum/create/client/flywheel/api/visual/BlockEntityVisual;"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;createVisual(Lcom/zurrtum/create/client/flywheel/api/visualization/VisualizationContext;Lnet/minecraft/world/level/block/entity/BlockEntity;F)Lcom/zurrtum/create/client/flywheel/api/visual/BlockEntityVisual;", remap=false)})
+    @WrapOperation(require = 0, method={"createRaw(Lcom/zurrtum/create/client/flywheel/api/visualization/VisualizationContext;Lnet/minecraft/world/level/block/entity/BlockEntity;F)Lcom/zurrtum/create/client/flywheel/api/visual/BlockEntityVisual;"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/api/visualization/BlockEntityVisualizer;createVisual(Lcom/zurrtum/create/client/flywheel/api/visualization/VisualizationContext;Lnet/minecraft/world/level/block/entity/BlockEntity;F)Lcom/zurrtum/create/client/flywheel/api/visual/BlockEntityVisual;", remap=false)})
     private BlockEntityVisual<?> sable$useEmbeddingForSubLevel(BlockEntityVisualizer instance, VisualizationContext visualizationContext, BlockEntity blockEntity, float partialTick, Operation<BlockEntityVisual<?>> original) {
         if (!FlywheelCompat.ENABLED) {
             return (BlockEntityVisual)original.call(instance, visualizationContext, blockEntity, Float.valueOf(partialTick));

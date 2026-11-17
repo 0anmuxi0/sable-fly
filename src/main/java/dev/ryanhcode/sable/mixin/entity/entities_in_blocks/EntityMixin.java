@@ -38,8 +38,7 @@ public abstract class EntityMixin {
    @Shadow
    protected abstract void onInsideBlock(BlockState var1);
 
-   @Inject(
-      method = {"checkInsideBlocks(Ljava/util/List;Lnet/minecraft/world/entity/InsideBlockEffectApplier$StepBasedCollector;)V"},
+   @Inject(require = 0, method = {"checkInsideBlocks(Ljava/util/List;Lnet/minecraft/world/entity/InsideBlockEffectApplier$StepBasedCollector;)V"},
       at = {@At("TAIL")}
    )
    protected void checkInsideBlocks(CallbackInfo ci) {

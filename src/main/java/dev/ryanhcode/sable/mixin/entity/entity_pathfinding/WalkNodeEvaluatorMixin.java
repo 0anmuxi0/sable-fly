@@ -21,8 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({WalkNodeEvaluator.class})
 public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getBlockY()I"
@@ -33,8 +32,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return trackingSubLevel != null ? Mth.floor(trackingSubLevel.logicalPose().transformPositionInverse(mob.position()).y) : mob.getBlockY();
    }
 
-   @Inject(
-      method = {"getStart"},
+   @Inject(require = 0, method = {"getStart"},
       at = {@At("HEAD")}
    )
    private void sable$init(CallbackInfoReturnable<Node> cir, @Share("mobPosition") LocalRef<Vec3> mobPosition) {
@@ -46,8 +44,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       }
    }
 
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getX()D"
@@ -57,8 +54,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return mobPosition.get().x;
    }
 
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getZ()D"
@@ -68,8 +64,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return mobPosition.get().z;
    }
 
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getY()D"
@@ -79,8 +74,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return mobPosition.get().y;
    }
 
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;blockPosition()Lnet/minecraft/core/BlockPos;"
@@ -90,8 +84,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return BlockPos.containing(mobPosition.get());
    }
 
-   @Inject(
-      method = {"canReachWithoutCollision"},
+   @Inject(require = 0, method = {"canReachWithoutCollision"},
       at = {@At("HEAD")}
    )
    private void sable$canReachWithoutCollision(CallbackInfoReturnable<Boolean> cir, @Share("mobPosition") LocalRef<Vec3> mobPosition) {
@@ -108,8 +101,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return Sable.HELPER.getTrackingSubLevel(this.mob);
    }
 
-   @Redirect(
-      method = {"canReachWithoutCollision"},
+   @Redirect(require = 0, method = {"canReachWithoutCollision"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getX()D"
@@ -119,8 +111,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return mobPosition.get().x;
    }
 
-   @Redirect(
-      method = {"canReachWithoutCollision"},
+   @Redirect(require = 0, method = {"canReachWithoutCollision"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getZ()D"
@@ -130,8 +121,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return mobPosition.get().z;
    }
 
-   @Redirect(
-      method = {"canReachWithoutCollision"},
+   @Redirect(require = 0, method = {"canReachWithoutCollision"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getY()D"
@@ -141,8 +131,7 @@ public abstract class WalkNodeEvaluatorMixin extends NodeEvaluator {
       return mobPosition.get().y;
    }
 
-   @Redirect(
-      method = {"canReachWithoutCollision"},
+   @Redirect(require = 0, method = {"canReachWithoutCollision"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getBoundingBox()Lnet/minecraft/world/phys/AABB;"

@@ -23,8 +23,7 @@ public abstract class ProjectileMixin extends Entity {
       super(entityType, level);
    }
 
-   @WrapOperation(
-      method = {"shootFromRotation"},
+   @WrapOperation(require = 0, method = {"shootFromRotation"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/projectile/Projectile;shoot(DDDFF)V"
@@ -42,8 +41,7 @@ public abstract class ProjectileMixin extends Entity {
       }
    }
 
-   @Inject(
-      method = {"shootFromRotation"},
+   @Inject(require = 0, method = {"shootFromRotation"},
       at = {@At("TAIL")}
    )
    private void sable$shootFromRotation(Entity entity, float x, float y, float z, float i, float j, CallbackInfo ci) {

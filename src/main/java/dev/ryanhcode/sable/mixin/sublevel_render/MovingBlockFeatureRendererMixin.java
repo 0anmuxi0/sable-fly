@@ -7,8 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin({MovingBlockFeatureRenderer.class})
 public class MovingBlockFeatureRendererMixin {
-   @ModifyArg(
-      method = {"buildGroup"},
+   @ModifyArg(require = 0, method = {"buildGroup"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;<init>(ZZLnet/minecraft/client/color/block/BlockColors;)V"

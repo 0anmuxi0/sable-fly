@@ -78,7 +78,7 @@ public class SubLevelSerializer {
       return tag;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static SubLevelData fromData(CompoundTag tag) {
       UUID uuid = tag.<UUID>read("uuid", UUIDUtil.CODEC).orElseThrow();
       List<UUID> dependencies = List.of();

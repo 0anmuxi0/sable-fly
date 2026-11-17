@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Pseudo
 @Mixin(targets={"com.zurrtum.create.client.flywheel.impl.FlwApiLinkImpl"})
 public class FlwApiLinkImplMixin {
-    @WrapOperation(method={"supportsVisualization"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/impl/visualization/VisualizationManagerImpl;supportsVisualization(Lnet/minecraft/world/level/LevelAccessor;)Z")})
+    @WrapOperation(require = 0, method={"supportsVisualization"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/client/flywheel/impl/visualization/VisualizationManagerImpl;supportsVisualization(Lnet/minecraft/world/level/LevelAccessor;)Z")})
     private boolean sable$disableForSubLevel(LevelAccessor level, Operation<Boolean> original) {
         if (CreateSupportsVisualizationContext.isCurrentBlockEntityInSubLevel()) {
             return false;

@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({LocalPlayer.class})
 public class LocalPlayerMixin {
-   @Redirect(
-      method = {"filterHitResult"},
+   @Redirect(require = 0, method = {"filterHitResult"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/Vec3;closerThan(Lnet/minecraft/core/Position;D)Z"
@@ -23,8 +22,7 @@ public class LocalPlayerMixin {
       return Sable.HELPER.distanceSquaredWithSubLevels(Minecraft.getInstance().level, a, new Vec3(b.x(), b.y(), b.z())) < d * d;
    }
 
-   @Redirect(
-      method = {"pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;"},
+   @Redirect(require = 0, method = {"pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(Lnet/minecraft/world/phys/Vec3;)D"
@@ -34,8 +32,7 @@ public class LocalPlayerMixin {
       return Sable.HELPER.distanceSquaredWithSubLevels(Minecraft.getInstance().level, instance, other);
    }
 
-   @Redirect(
-      method = {"pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;"},
+   @Redirect(require = 0, method = {"pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;getEyePosition(F)Lnet/minecraft/world/phys/Vec3;"

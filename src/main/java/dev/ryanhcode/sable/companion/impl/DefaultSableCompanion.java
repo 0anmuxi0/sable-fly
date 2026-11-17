@@ -25,7 +25,7 @@ public final class DefaultSableCompanion implements SableCompanion {
       return List.of();
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public SubLevelAccess getContaining(Level level, int chunkX, int chunkZ) {
       return null;
@@ -46,32 +46,32 @@ public final class DefaultSableCompanion implements SableCompanion {
       return pos instanceof Vec3 vec3 ? vec3 : new Vec3(pos.x(), pos.y(), pos.z());
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public <T, S extends SubLevelAccess> T runIncludingSubLevels(
-      Level level, Vec3 origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, T> converter
+      Level level, Vec3 origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, T> converter
    ) {
       return shouldCheckOrigin ? converter.apply(subLevel, BlockPos.containing(origin)) : null;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public <T, S extends SubLevelAccess> T runIncludingSubLevels(
-      Level level, Position origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, T> converter
+      Level level, Position origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, T> converter
    ) {
       return shouldCheckOrigin ? converter.apply(subLevel, BlockPos.containing(origin)) : null;
    }
 
    @Override
    public <S extends SubLevelAccess> boolean findIncludingSubLevels(
-      Level level, Vec3 origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
+      Level level, Vec3 origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
    ) {
       return shouldCheckOrigin ? converter.apply(subLevel, BlockPos.containing(origin)) : false;
    }
 
    @Override
    public <S extends SubLevelAccess> boolean findIncludingSubLevels(
-      Level level, Position origin, boolean shouldCheckOrigin, @Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
+      Level level, Position origin, boolean shouldCheckOrigin, @org.jetbrains.annotations.Nullable S subLevel, BiFunction<S, BlockPos, Boolean> converter
    ) {
       return shouldCheckOrigin ? converter.apply(subLevel, BlockPos.containing(origin)) : false;
    }
@@ -188,25 +188,25 @@ public final class DefaultSableCompanion implements SableCompanion {
       return false;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public SubLevelAccess getTrackingSubLevel(Entity entity) {
       return null;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public SubLevelAccess getLastTrackingSubLevel(Entity entity) {
       return null;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public SubLevelAccess getTrackingOrVehicleSubLevel(Entity entity) {
       return null;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public SubLevelAccess getVehicleSubLevel(Entity entity) {
       return null;

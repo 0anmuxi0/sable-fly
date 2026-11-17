@@ -17,7 +17,7 @@ public class PhysicsBlockPropertyHelper {
       return !solid ? 0.0 : ((BlockStateExtension)state).sable$getProperty(PhysicsBlockPropertyTypes.MASS.get());
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static Vec3 getInertia(BlockGetter level, BlockPos pos, BlockState state) {
       boolean solid = VoxelNeighborhoodState.isSolid(level, pos, state);
       return !solid ? null : ((BlockStateExtension)state).sable$getProperty(PhysicsBlockPropertyTypes.INERTIA.get());

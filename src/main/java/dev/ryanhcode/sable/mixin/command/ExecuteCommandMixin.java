@@ -29,8 +29,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({ExecuteCommand.class})
 public class ExecuteCommandMixin {
-   @WrapOperation(
-      method = {"register"},
+   @WrapOperation(require = 0, method = {"register"},
       at = {@At(
          value = "INVOKE",
          target = "Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;then(Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;",

@@ -24,18 +24,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin({Minecraft.class})
 public abstract class MinecraftMixin {
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public LocalPlayer player;
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientLevel level;
 
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public abstract ClientPacketListener getConnection();
 
-   @Inject(
-      method = {"startAttack"},
+   @Inject(require = 0, method = {"startAttack"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -50,8 +49,7 @@ public abstract class MinecraftMixin {
       }
    }
 
-   @Inject(
-      method = {"startAttack"},
+   @Inject(require = 0, method = {"startAttack"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/player/LocalPlayer;resetAttackStrengthTicker()V"

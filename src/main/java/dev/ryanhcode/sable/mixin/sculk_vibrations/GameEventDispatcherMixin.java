@@ -32,8 +32,7 @@ public class GameEventDispatcherMixin {
    @Shadow
    private ServerLevel level;
 
-   @Inject(
-      method = {"post"},
+   @Inject(require = 0, method = {"post"},
       at = {@At(
          value = "NEW",
          target = "java/util/ArrayList"
@@ -63,8 +62,7 @@ public class GameEventDispatcherMixin {
       }
    }
 
-   @WrapMethod(
-      method = {"post"}
+   @WrapMethod(require = 0, method = {"post"}
    )
    private void sable$visitShipListeners(
       Holder<GameEvent> gameEvent, Vec3 pos, Context context, Operation<Void> original, @Share("bb") LocalRef<BoundingBox3ic> bbRef

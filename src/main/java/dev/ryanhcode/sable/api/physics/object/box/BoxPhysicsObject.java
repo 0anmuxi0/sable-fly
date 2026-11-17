@@ -131,7 +131,7 @@ public class BoxPhysicsObject implements ArbitraryPhysicsObject, PhysicsPipeline
          return this.inverseInertia;
       }
 
-      @Nullable
+      @org.jetbrains.annotations.Nullable
       @Override
       public Vector3dc getCenterOfMass() {
          return JOMLConversion.ZERO;

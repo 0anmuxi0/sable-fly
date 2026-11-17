@@ -11,8 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({Entity.class})
 public class EntityMixin {
-   @Redirect(
-      method = {"updateSwimming"},
+   @Redirect(require = 0, method = {"updateSwimming"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;getFluidState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;"

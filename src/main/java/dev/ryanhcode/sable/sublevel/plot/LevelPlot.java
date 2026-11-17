@@ -55,7 +55,7 @@ public abstract class LevelPlot {
    private final Object2ObjectOpenHashMap<BlockPos, BlockEntitySubLevelReactionWheel> blockEntityReactionWheels = new Object2ObjectOpenHashMap();
    private final Long2IntMap sable$renderRevisions = new Long2IntOpenHashMap();
    protected boolean expandPlotIfNecessary = true;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    protected BoundingBox3i localBounds = null;
    protected ResourceKey<Biome> biome = Biomes.PLAINS;
 
@@ -155,7 +155,7 @@ public abstract class LevelPlot {
       return new ChunkPos(local.x + (this.plotPos.x << this.logSize), local.z + (this.plotPos.z << this.logSize));
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public PlotChunkHolder getChunkHolder(ChunkPos local) {
       return local.x >= 0 && local.x < 1 << this.logSize && local.z >= 0 && local.z < 1 << this.logSize ? this.chunks[local.z << this.logSize | local.x] : null;
    }

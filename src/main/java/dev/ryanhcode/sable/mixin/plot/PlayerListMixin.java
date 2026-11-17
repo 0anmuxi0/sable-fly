@@ -22,7 +22,7 @@ public class PlayerListMixin {
    private List<ServerPlayer> players;
 
    @Overwrite
-   public void broadcast(@Nullable Player player, double x, double y, double z, double maxDistance, ResourceKey<Level> resourceKey, Packet<?> packet) {
+   public void broadcast(@org.jetbrains.annotations.Nullable Player player, double x, double y, double z, double maxDistance, ResourceKey<Level> resourceKey, Packet<?> packet) {
       ActiveSableCompanion helper = Sable.HELPER;
 
       for (ServerPlayer value : this.players) {

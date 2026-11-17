@@ -73,7 +73,7 @@ public class SableSubLevelCommands {
          );
    }
 
-   private static int setSubLevelNames(Collection<ServerSubLevel> subLevels, @Nullable String name) {
+   private static int setSubLevelNames(Collection<ServerSubLevel> subLevels, @org.jetbrains.annotations.Nullable String name) {
       int modifiedCount = 0;
 
       for (SubLevel target : subLevels) {
@@ -140,7 +140,7 @@ public class SableSubLevelCommands {
       }
    }
 
-   private static int executeTeleportSubLevelCommand(CommandContext<CommandSourceStack> ctx, @Nullable Coordinates angle) throws CommandSyntaxException {
+   private static int executeTeleportSubLevelCommand(CommandContext<CommandSourceStack> ctx, @org.jetbrains.annotations.Nullable Coordinates angle) throws CommandSyntaxException {
       PhysicsPipeline pipeline = SableCommandHelper.requireSubLevelPhysicsPipeline(ctx);
       Collection<ServerSubLevel> targets = SubLevelArgumentType.getSubLevels(ctx, "targets");
       if (targets.isEmpty()) {

@@ -7,6 +7,6 @@ import org.jetbrains.annotations.Nullable;
 public interface ServerConnectionListenerExtension {
    void sable$setupUDPServer(Channel var1);
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    SableUDPServer sable$getServer();
 }

@@ -12,13 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({LightEngine.class})
 public class LightEngineMixin {
-   @Inject(
-      method = {"getState"},
+   @Inject(require = 0, method = {"getState"},
       at = {@At("RETURN")},
       cancellable = true
    )
    private void sable$includeSubLevelOcclusion(BlockPos blockPos, CallbackInfoReturnable<BlockState> cir) {
-      if ((Object)this instanceof BlockLightEngine) {
+      if (((Object)this) instanceof BlockLightEngine) {
          BlockState subLevelState = SubLevelDynamicLights.getOccludingBlockState(blockPos.asLong());
          if (subLevelState != null) {
             cir.setReturnValue(subLevelState);

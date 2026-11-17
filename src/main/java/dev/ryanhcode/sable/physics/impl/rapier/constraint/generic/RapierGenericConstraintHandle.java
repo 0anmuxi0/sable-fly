@@ -22,7 +22,7 @@ public class RapierGenericConstraintHandle extends RapierConstraintHandle implem
    @Contract("_, _, _, _ -> new")
    @NotNull
    public static RapierGenericConstraintHandle create(
-      ServerLevel serverLevel, @Nullable PhysicsPipelineBody bodyA, @Nullable PhysicsPipelineBody bodyB, GenericConstraintConfiguration config
+      ServerLevel serverLevel, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyA, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyB, GenericConstraintConfiguration config
    ) {
       long sceneHandle = Rapier3D.getSceneHandle(serverLevel);
       int lockedAxesMask = 0;

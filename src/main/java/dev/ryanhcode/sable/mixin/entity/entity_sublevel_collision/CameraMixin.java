@@ -27,8 +27,7 @@ public class CameraMixin {
    @Unique
    private final Vector3d sable$endPos = new Vector3d();
 
-   @WrapOperation(
-      method = {"alignWithEntity"},
+   @WrapOperation(require = 0, method = {"alignWithEntity"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/Camera;setPosition(DDD)V"

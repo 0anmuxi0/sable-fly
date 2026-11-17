@@ -21,7 +21,7 @@ public class RigidBodyHandle {
    private final SubLevelPhysicsSystem physicsSystem;
 
    @Contract("_,_ -> _")
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static RigidBodyHandle of(ServerLevel level, PhysicsPipelineBody body) {
       ServerSubLevelContainer container = SubLevelContainer.getContainer(level);
       if (container == null) {
@@ -33,7 +33,7 @@ public class RigidBodyHandle {
    }
 
    @Contract("_ -> new")
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static RigidBodyHandle of(ServerSubLevel subLevel) {
       ServerLevel level = subLevel.getLevel();
       ServerSubLevelContainer container = SubLevelContainer.getContainer(level);

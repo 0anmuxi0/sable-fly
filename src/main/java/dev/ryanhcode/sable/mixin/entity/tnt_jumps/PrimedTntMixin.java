@@ -18,8 +18,7 @@ public abstract class PrimedTntMixin extends Entity {
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"<init>(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/entity/LivingEntity;)V"},
+   @Inject(require = 0, method = {"<init>(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/entity/LivingEntity;)V"},
       at = {@At("TAIL")}
    )
    private void sable$setTntJump(Level level, double d, double e, double f, LivingEntity livingEntity, CallbackInfo ci) {

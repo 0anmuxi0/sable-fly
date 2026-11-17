@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Pseudo
 @Mixin(targets={"com.zurrtum.create.client.catnip.outliner.BlockClusterOutline"})
 public class BlockClusterOutlineMixin {
-    @WrapOperation(method={"submitFaces"}, at={@At(value="INVOKE", target="Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V")})
+    @WrapOperation(require = 0, method={"submitFaces"}, at={@At(value="INVOKE", target="Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V")})
     private void sable$projectFacesOntoSubLevel(PoseStack ms, double x, double y, double z, Operation<Void> original, @Local(argsOnly=true) Vec3 camera, @Local BlockPos anchor) {
         ClientSubLevel subLevel = SubLevelOutlinePose.find((Position)Vec3.atLowerCornerOf((Vec3i)anchor));
         if (subLevel == null) {
@@ -31,7 +31,7 @@ public class BlockClusterOutlineMixin {
         }
     }
 
-    @WrapOperation(method={"submitEdges"}, at={@At(value="INVOKE", target="Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V")})
+    @WrapOperation(require = 0, method={"submitEdges"}, at={@At(value="INVOKE", target="Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V")})
     private void sable$projectEdgesOntoSubLevel(PoseStack ms, double x, double y, double z, Operation<Void> original, @Local(argsOnly=true) Vec3 camera, @Local BlockPos anchor) {
         ClientSubLevel subLevel = SubLevelOutlinePose.find((Position)Vec3.atLowerCornerOf((Vec3i)anchor));
         if (subLevel == null) {

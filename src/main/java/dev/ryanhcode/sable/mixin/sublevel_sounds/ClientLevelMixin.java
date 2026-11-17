@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({ClientLevel.class})
 public class ClientLevelMixin {
-   @Redirect(
-      method = {"playSound"},
+   @Redirect(require = 0, method = {"playSound"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(DDD)D"

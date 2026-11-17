@@ -25,8 +25,7 @@ public class ChunkMapMixin {
    @Final
    private ServerLevel level;
 
-   @Inject(
-      method = {"getPlayers"},
+   @Inject(require = 0, method = {"getPlayers"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -38,8 +37,7 @@ public class ChunkMapMixin {
       }
    }
 
-   @Inject(
-      method = {"saveChunkIfNeeded"},
+   @Inject(require = 0, method = {"saveChunkIfNeeded"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -49,8 +47,7 @@ public class ChunkMapMixin {
       }
    }
 
-   @Redirect(
-      method = {"hasWork"},
+   @Redirect(require = 0, method = {"hasWork"},
       at = {@At(
          value = "INVOKE",
          target = "Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;isEmpty()Z",
@@ -62,8 +59,7 @@ public class ChunkMapMixin {
       return !updatingChunkMap.values().stream().anyMatch(chunkHolder -> !(chunkHolder instanceof PlotChunkHolder));
    }
 
-   @Inject(
-      method = {"isChunkTracked"},
+   @Inject(require = 0, method = {"isChunkTracked"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -76,8 +72,7 @@ public class ChunkMapMixin {
       }
    }
 
-   @Inject(
-      method = {"anyPlayerCloseEnoughForSpawning"},
+   @Inject(require = 0, method = {"anyPlayerCloseEnoughForSpawning"},
       at = {@At("HEAD")},
       cancellable = true
    )

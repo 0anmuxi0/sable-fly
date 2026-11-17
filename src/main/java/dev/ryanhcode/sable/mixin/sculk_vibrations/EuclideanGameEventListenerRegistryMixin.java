@@ -14,8 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({EuclideanGameEventListenerRegistry.class})
 public class EuclideanGameEventListenerRegistryMixin {
-   @WrapOperation(
-      method = {"getPostableListenerPosition"},
+   @WrapOperation(require = 0, method = {"getPostableListenerPosition"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/core/BlockPos;distSqr(Lnet/minecraft/core/Vec3i;)D"

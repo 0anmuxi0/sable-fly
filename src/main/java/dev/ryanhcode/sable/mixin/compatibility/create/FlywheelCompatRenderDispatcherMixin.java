@@ -28,7 +28,7 @@ public abstract class FlywheelCompatRenderDispatcherMixin {
     @Final
     private VisualizationManagerImpl this$0;
 
-    @Inject(method={"onStartLevelRender(Lcom/zurrtum/create/client/flywheel/api/backend/RenderContext;)V"}, at={@At(value="HEAD")}, remap=false)
+    @Inject(require = 0, method={"onStartLevelRender(Lcom/zurrtum/create/client/flywheel/api/backend/RenderContext;)V"}, at={@At(value="HEAD")}, remap=false)
     private void sable$preVisualizationFrame(RenderContext ctx, CallbackInfo ci) {
         VisualizationManager manager;
         Map<ClientSubLevel, FlywheelCompat.FlywheelEmbeddingState> states = FlywheelCompat.embeddings();

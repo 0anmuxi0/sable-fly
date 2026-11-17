@@ -83,10 +83,10 @@ public interface PhysicsPipeline {
 
    void wakeUp(PhysicsPipelineBody var1);
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Contract("null, null, _ -> fail")
    default <T extends PhysicsConstraintHandle> T addConstraint(
-      @Nullable PhysicsPipelineBody bodyA, @Nullable PhysicsPipelineBody bodyB, @NotNull PhysicsConstraintConfiguration<T> configuration
+      @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyA, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyB, @NotNull PhysicsConstraintConfiguration<T> configuration
    ) {
       throw new UnsupportedOperationException("Not implemented");
    }

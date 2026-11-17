@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({NetherPortalBlock.class})
 public class NetherPortalBlockMixin {
-   @Redirect(
-      method = {"getPortalDestination"},
+   @Redirect(require = 0, method = {"getPortalDestination"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/border/WorldBorder;clampToBounds(DDD)Lnet/minecraft/core/BlockPos;"

@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value={ContraptionColliderClient.class}, remap=false)
 public abstract class ContraptionColliderClientMixin {
-    @WrapOperation(method={"collideEntities"}, at={@At(value="INVOKE", target="Lnet/minecraft/world/level/Level;getEntitiesOfClass(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;")})
+    @WrapOperation(require = 0, method={"collideEntities"}, at={@At(value="INVOKE", target="Lnet/minecraft/world/level/Level;getEntitiesOfClass(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;")})
     private static List<Entity> sable$searchInWorldSpace(Level level, Class<? extends Entity> type, AABB plotQuery, Predicate<? super Entity> filter, Operation<List<Entity>> original, @Local(argsOnly=true) AbstractContraptionEntity contraption) {
         SubLevel subLevel = Sable.HELPER.getContaining((Entity)contraption);
         if (subLevel == null) {
@@ -34,24 +34,24 @@ public abstract class ContraptionColliderClientMixin {
         return (List)original.call(level, type, ContraptionColliderClientMixin.sable$projectBox(plotQuery, subLevel.logicalPose()), filter);
     }
 
-    @Redirect(method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;getAnchorVec()Lnet/minecraft/world/phys/Vec3;")})
+    @Redirect(require = 0, method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;getAnchorVec()Lnet/minecraft/world/phys/Vec3;")})
     private static Vec3 sable$anchorToWorld(AbstractContraptionEntity contraption) {
         return ContraptionColliderClientMixin.sable$projectPoint(contraption, contraption.getAnchorVec());
     }
 
-    @WrapOperation(method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;position()Lnet/minecraft/world/phys/Vec3;"), @At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;getPrevPositionVec()Lnet/minecraft/world/phys/Vec3;")})
+    @WrapOperation(require = 0, method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;position()Lnet/minecraft/world/phys/Vec3;"), @At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;getPrevPositionVec()Lnet/minecraft/world/phys/Vec3;")})
     private static Vec3 sable$contraptionPositionToWorld(AbstractContraptionEntity contraption, Operation<Vec3> original) {
         return ContraptionColliderClientMixin.sable$projectPoint(contraption, (Vec3)original.call(contraption));
     }
 
-    @WrapOperation(method={"collideEntities"}, at={@At(value="INVOKE", ordinal=0, target="Lnet/minecraft/world/entity/Entity;getDeltaMovement()Lnet/minecraft/world/phys/Vec3;")})
+    @WrapOperation(require = 0, method={"collideEntities"}, at={@At(value="INVOKE", ordinal=0, target="Lnet/minecraft/world/entity/Entity;getDeltaMovement()Lnet/minecraft/world/phys/Vec3;")})
     private static Vec3 sable$entityVelocityToContraptionSpace(Entity entity, Operation<Vec3> original, @Local(argsOnly=true) AbstractContraptionEntity contraption) {
         Vec3 velocity = (Vec3)original.call(entity);
         SubLevel subLevel = Sable.HELPER.getContaining((Entity)contraption);
         return subLevel == null ? velocity : subLevel.logicalPose().transformNormalInverse(velocity);
     }
 
-    @WrapOperation(method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/ContraptionCollider;getWorldToLocalTranslation(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/Vec3;Lcom/zurrtum/create/foundation/collision/Matrix3d;F)Lnet/minecraft/world/phys/Vec3;")})
+    @WrapOperation(require = 0, method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/ContraptionCollider;getWorldToLocalTranslation(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/Vec3;Lcom/zurrtum/create/foundation/collision/Matrix3d;F)Lnet/minecraft/world/phys/Vec3;")})
     private static Vec3 sable$worldToContraptionTranslation(Entity entity, Vec3 worldAnchor, Matrix3d rotation, float yawOffset, Operation<Vec3> original, @Local(argsOnly=true) AbstractContraptionEntity contraption) {
         SubLevel subLevel = Sable.HELPER.getContaining((Entity)contraption);
         if (subLevel == null) {
@@ -63,20 +63,20 @@ public abstract class ContraptionColliderClientMixin {
         return entity.position().add(localTranslation);
     }
 
-    @WrapOperation(method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/foundation/collision/Matrix3d;transform(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")})
+    @WrapOperation(require = 0, method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/foundation/collision/Matrix3d;transform(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")})
     private static Vec3 sable$toContraptionDirection(Matrix3d rotation, Vec3 value, Operation<Vec3> original, @Local(argsOnly=true) AbstractContraptionEntity contraption) {
         SubLevel subLevel = Sable.HELPER.getContaining((Entity)contraption);
         return subLevel == null ? (Vec3)original.call(rotation, value) : (Vec3)original.call(rotation, subLevel.logicalPose().transformNormalInverse(value));
     }
 
-    @WrapOperation(method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/foundation/collision/Matrix3d;transformTransposed(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")})
+    @WrapOperation(require = 0, method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/foundation/collision/Matrix3d;transformTransposed(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")})
     private static Vec3 sable$fromContraptionDirection(Matrix3d rotation, Vec3 value, Operation<Vec3> original, @Local(argsOnly=true) AbstractContraptionEntity contraption) {
         SubLevel subLevel = Sable.HELPER.getContaining((Entity)contraption);
         Vec3 result = (Vec3)original.call(rotation, value);
         return subLevel == null ? result : subLevel.logicalPose().transformNormal(result);
     }
 
-    @WrapOperation(method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;getContactPointMotion(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")})
+    @WrapOperation(require = 0, method={"collideEntities"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;getContactPointMotion(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;")})
     private static Vec3 sable$contactMotionInWorld(AbstractContraptionEntity contraption, Vec3 worldPosition, Operation<Vec3> original) {
         SubLevel subLevel = Sable.HELPER.getContaining((Entity)contraption);
         if (subLevel == null) {
@@ -87,7 +87,7 @@ public abstract class ContraptionColliderClientMixin {
         return pose.transformNormal(localMotion);
     }
 
-    @WrapOperation(method={"collideEntities", "saveClientPlayerFromClipping", "saveRemotePlayerFromClipping"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;getY()D")})
+    @WrapOperation(require = 0, method={"collideEntities", "saveClientPlayerFromClipping", "saveRemotePlayerFromClipping"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;getY()D")})
     private static double sable$contraptionYToWorld(AbstractContraptionEntity contraption, Operation<Double> original) {
         double plotY = (Double)original.call(contraption);
         SubLevel subLevel = Sable.HELPER.getContaining((Entity)contraption);

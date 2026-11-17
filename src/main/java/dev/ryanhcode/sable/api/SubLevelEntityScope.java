@@ -13,13 +13,13 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public final class SubLevelEntityScope implements AutoCloseable {
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private final SubLevel subLevel;
    private final Set<Entity> included = Collections.newSetFromMap(new IdentityHashMap<>());
    private final List<Entity> projected = new ArrayList<>();
    private boolean closed;
 
-   private SubLevelEntityScope(@Nullable SubLevel subLevel) {
+   private SubLevelEntityScope(@org.jetbrains.annotations.Nullable SubLevel subLevel) {
       this.subLevel = subLevel;
    }
 
@@ -27,7 +27,7 @@ public final class SubLevelEntityScope implements AutoCloseable {
       return new SubLevelEntityScope(Sable.HELPER.getContaining(level, localPos));
    }
 
-   public static SubLevelEntityScope forSubLevel(@Nullable SubLevel subLevel) {
+   public static SubLevelEntityScope forSubLevel(@org.jetbrains.annotations.Nullable SubLevel subLevel) {
       return new SubLevelEntityScope(subLevel);
    }
 

@@ -22,7 +22,7 @@ public class SubLevelSortModifier implements SubLevelSelectorModifierType.Modifi
       return Integer.MAX_VALUE;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public List<ServerSubLevel> apply(List<ServerSubLevel> selected, Vector3d sourcePos) {
       Map<SubLevel, Double> distances = selected.stream()

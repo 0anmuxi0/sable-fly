@@ -144,7 +144,7 @@ public class SubLevelAssemblyHelper {
       Vector3d containingLinearVelocity,
       Vector3d containingAngularVelocity,
       Pose3d containingPose,
-      @Nullable SubLevel containingSubLevel
+      @org.jetbrains.annotations.Nullable SubLevel containingSubLevel
    ) {
       Pose3d originalPose = new Pose3d(subLevel.logicalPose());
       containingPose.transformPosition(subLevel.logicalPose().position());
@@ -159,7 +159,7 @@ public class SubLevelAssemblyHelper {
 
    @NotNull
    public static SubLevelAssemblyHelper.GatherResult gatherConnectedBlocks(
-      BlockPos gatherOrigin, ServerLevel level, int maximumBlocksToAssemble, @Nullable SubLevelAssemblyHelper.FrontierPredicate frontierPredicate
+      BlockPos gatherOrigin, ServerLevel level, int maximumBlocksToAssemble, @org.jetbrains.annotations.Nullable SubLevelAssemblyHelper.FrontierPredicate frontierPredicate
    ) {
       LinkedHashSet<Pair<BlockPos, BlockState>> frontier = new LinkedHashSet<>(4096);
       Set<BlockPos> blocks = new ObjectOpenHashSet(1024);
@@ -438,7 +438,7 @@ public class SubLevelAssemblyHelper {
    }
 
    public static void markAndNotifyBlock(
-      Level level, BlockPos pPos, @Nullable LevelChunk levelchunk, BlockState oldState, BlockState newState, int pFlags, int pRecursionLeft
+      Level level, BlockPos pPos, @org.jetbrains.annotations.Nullable LevelChunk levelchunk, BlockState oldState, BlockState newState, int pFlags, int pRecursionLeft
    ) {
       Block block = newState.getBlock();
       BlockState worldState = level.getBlockState(pPos);
@@ -519,11 +519,11 @@ public class SubLevelAssemblyHelper {
 
    @FunctionalInterface
    public interface FrontierPredicate {
-      boolean isValidConnection(BlockPos var1, BlockState var2, BlockPos var3, BlockState var4, @Nullable Direction var5);
+      boolean isValidConnection(BlockPos var1, BlockState var2, BlockPos var3, BlockState var4, @org.jetbrains.annotations.Nullable Direction var5);
    }
 
    public record GatherResult(
-      @Nullable Set<BlockPos> blocks, int checkedBlocks, @Nullable BoundingBox3i boundingBox, SubLevelAssemblyHelper.GatherResult.State assemblyState
+      @org.jetbrains.annotations.Nullable Set<BlockPos> blocks, int checkedBlocks, @org.jetbrains.annotations.Nullable BoundingBox3i boundingBox, SubLevelAssemblyHelper.GatherResult.State assemblyState
    ) {
       public static enum State {
          SUCCESS("commands.sable.sub_level.assemble.connected.success"),

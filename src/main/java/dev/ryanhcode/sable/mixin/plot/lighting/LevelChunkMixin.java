@@ -19,8 +19,7 @@ public class LevelChunkMixin {
    @Final
    private Level level;
 
-   @Redirect(
-      method = {"setBlockState"},
+   @Redirect(require = 0, method = {"setBlockState"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/chunk/ChunkSource;getLightEngine()Lnet/minecraft/world/level/lighting/LevelLightEngine;"

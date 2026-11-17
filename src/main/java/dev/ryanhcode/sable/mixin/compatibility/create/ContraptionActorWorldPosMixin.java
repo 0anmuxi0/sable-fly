@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value={AbstractContraptionEntity.class}, remap=false)
 public abstract class ContraptionActorWorldPosMixin {
-    @WrapOperation(method={"tickActors"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/api/behaviour/movement/MovementBehaviour;visitNewPosition(Lcom/zurrtum/create/content/contraptions/behaviour/MovementContext;Lnet/minecraft/core/BlockPos;)V")}, remap=false)
+    @WrapOperation(require = 0, method={"tickActors"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/api/behaviour/movement/MovementBehaviour;visitNewPosition(Lcom/zurrtum/create/content/contraptions/behaviour/MovementContext;Lnet/minecraft/core/BlockPos;)V")}, remap=false)
     private void sable$projectActorTargetToWorld(MovementBehaviour behaviour, MovementContext context, BlockPos plotPos, Operation<Void> original) {
         AbstractContraptionEntity self = (AbstractContraptionEntity)(Object)this;
         if (context == null || context.world == null || plotPos == null) {

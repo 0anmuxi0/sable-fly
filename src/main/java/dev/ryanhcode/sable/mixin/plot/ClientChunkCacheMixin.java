@@ -37,7 +37,7 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
    private LevelChunk emptyChunk;
 
    @Shadow
-   private static boolean isValidChunk(@Nullable LevelChunk levelChunk, int i, int j) {
+   private static boolean isValidChunk(@org.jetbrains.annotations.Nullable LevelChunk levelChunk, int i, int j) {
       return false;
    }
 
@@ -48,8 +48,7 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
       return container;
    }
 
-   @Inject(
-      method = {"getChunk(IILnet/minecraft/world/level/chunk/status/ChunkStatus;Z)Lnet/minecraft/world/level/chunk/LevelChunk;"},
+   @Inject(require = 0, method = {"getChunk(IILnet/minecraft/world/level/chunk/status/ChunkStatus;Z)Lnet/minecraft/world/level/chunk/LevelChunk;"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -66,8 +65,7 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
       }
    }
 
-   @Inject(
-      method = {"drop"},
+   @Inject(require = 0, method = {"drop"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -78,8 +76,7 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
       }
    }
 
-   @Inject(
-      method = {"replaceBiomes"},
+   @Inject(require = 0, method = {"replaceBiomes"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -96,8 +93,7 @@ public abstract class ClientChunkCacheMixin implements DebugChunkProviderAttachm
       }
    }
 
-   @Inject(
-      method = {"replaceWithPacketData"},
+   @Inject(require = 0, method = {"replaceWithPacketData"},
       at = {@At("HEAD")},
       cancellable = true
    )

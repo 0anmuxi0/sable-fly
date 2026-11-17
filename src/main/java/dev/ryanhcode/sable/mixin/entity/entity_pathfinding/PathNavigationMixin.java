@@ -30,13 +30,13 @@ public abstract class PathNavigationMixin {
    @Final
    protected Mob mob;
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    protected Path path;
    @Shadow
    @Final
    protected Level level;
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private BlockPos targetPos;
    @Shadow
    private int reachRange;
@@ -52,8 +52,7 @@ public abstract class PathNavigationMixin {
    @Shadow
    protected abstract void resetStuckTimeout();
 
-   @Inject(
-      method = {"createPath(Ljava/util/Set;IZIF)Lnet/minecraft/world/level/pathfinder/Path;"},
+   @Inject(require = 0, method = {"createPath(Ljava/util/Set;IZIF)Lnet/minecraft/world/level/pathfinder/Path;"},
       at = {@At("HEAD")},
       cancellable = true
    )

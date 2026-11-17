@@ -24,8 +24,7 @@ public abstract class LocalPlayerMixin extends Entity {
       super(pEntityType, pLevel);
    }
 
-   @Inject(
-      method = {"sendPosition"},
+   @Inject(require = 0, method = {"sendPosition"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/player/LocalPlayer;getX()D",
@@ -44,8 +43,7 @@ public abstract class LocalPlayerMixin extends Entity {
       }
    }
 
-   @Inject(
-      method = {"sendPosition"},
+   @Inject(require = 0, method = {"sendPosition"},
       at = {@At("RETURN")}
    )
    private void sable$postSendPosition(CallbackInfo ci) {

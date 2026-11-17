@@ -14,8 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({LevelExtractor.class})
 public class ViewAreaMixin {
-   @Inject(
-      method = {"setSectionDirty(IIIZ)V"},
+   @Inject(require = 0, method = {"setSectionDirty(IIIZ)V"},
       at = {@At("HEAD")},
       cancellable = true
    )

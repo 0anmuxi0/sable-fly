@@ -19,8 +19,7 @@ public class CombatTrackerMixin {
    @Final
    private LivingEntity mob;
 
-   @WrapOperation(
-      method = {"getFallMessage"},
+   @WrapOperation(require = 0, method = {"getFallMessage"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"

@@ -28,7 +28,7 @@ public class BoundedBitVolume3i {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static BoundedBitVolume3i fromBlocks(Iterable<BlockPos> blocks) {
       Vector3i minBlockPos = null;
       Vector3i maxBlockPos = null;

@@ -19,8 +19,7 @@ public abstract class FlameParticleMixin extends Particle implements ParticleExt
       super(clientLevel, d, e, f);
    }
 
-   @WrapMethod(
-      method = {"move"}
+   @WrapMethod(require = 0, method = {"move"}
    )
    public void move(double motionX, double motionY, double motionZ, Operation<Void> original) {
       SubLevel trackingSubLevel = this.sable$getTrackingSubLevel();

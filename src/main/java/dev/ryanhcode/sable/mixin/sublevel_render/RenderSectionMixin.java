@@ -24,8 +24,7 @@ public class RenderSectionMixin implements RenderSectionExtension {
    @Unique
    private boolean sable$listening = true;
 
-   @Inject(
-      method = {"createVertexSorting(Lnet/minecraft/core/SectionPos;Lnet/minecraft/world/phys/Vec3;)Lcom/mojang/blaze3d/vertex/VertexSorting;"},
+   @Inject(require = 0, method = {"createVertexSorting(Lnet/minecraft/core/SectionPos;Lnet/minecraft/world/phys/Vec3;)Lcom/mojang/blaze3d/vertex/VertexSorting;"},
       at = {@At("HEAD")},
       cancellable = true
    )

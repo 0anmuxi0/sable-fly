@@ -50,7 +50,7 @@ public class LevelAccelerator implements BlockGetter {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public BlockEntity getBlockEntity(BlockPos blockPos) {
       return this.level.getBlockEntity(blockPos);

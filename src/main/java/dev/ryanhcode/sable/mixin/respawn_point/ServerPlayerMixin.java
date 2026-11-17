@@ -44,10 +44,10 @@ public abstract class ServerPlayerMixin implements ServerPlayerRespawnExtension 
    @Shadow
    public ServerGamePacketListenerImpl connection;
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private RespawnConfig respawnConfig;
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private UUID sable$respawnPoint = null;
    @Unique
    private Pair<UUID, Vector3d> sable$queuedFreeze = null;
@@ -63,18 +63,17 @@ public abstract class ServerPlayerMixin implements ServerPlayerRespawnExtension 
    @Shadow
    public abstract void sendSystemMessage(Component var1);
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public UUID sable$getRespawnPoint() {
       return this.sable$respawnPoint;
    }
 
-   @Inject(
-      method = {"setRespawnPosition"},
+   @Inject(require = 0, method = {"setRespawnPosition"},
       at = {@At("HEAD")},
       cancellable = true
    )
-   private void sable$setRespawnPosition(@Nullable RespawnConfig newRespawnConfig, boolean sendMessage, CallbackInfo ci) {
+   private void sable$setRespawnPosition(@org.jetbrains.annotations.Nullable RespawnConfig newRespawnConfig, boolean sendMessage, CallbackInfo ci) {
       ServerLevel level = this.level();
       SubLevelTrackingPointSavedData data = SubLevelTrackingPointSavedData.getOrLoad(level);
       if (this.sable$respawnPoint != null) {
@@ -99,8 +98,7 @@ public abstract class ServerPlayerMixin implements ServerPlayerRespawnExtension 
       }
    }
 
-   @Inject(
-      method = {"addAdditionalSaveData"},
+   @Inject(require = 0, method = {"addAdditionalSaveData"},
       at = {@At("TAIL")}
    )
    private void sable$addRespawnPoint(ValueOutput output, CallbackInfo ci) {
@@ -109,8 +107,7 @@ public abstract class ServerPlayerMixin implements ServerPlayerRespawnExtension 
       }
    }
 
-   @Inject(
-      method = {"readAdditionalSaveData"},
+   @Inject(require = 0, method = {"readAdditionalSaveData"},
       at = {@At("TAIL")}
    )
    private void sable$readRespawnPoint(ValueInput input, CallbackInfo ci) {
@@ -139,14 +136,13 @@ public abstract class ServerPlayerMixin implements ServerPlayerRespawnExtension 
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public Pair<UUID, Vector3d> sable$getQueuedFreeze() {
       return this.sable$queuedFreeze;
    }
 
-   @Redirect(
-      method = {"findRespawnPositionAndUseSpawnBlock"},
+   @Redirect(require = 0, method = {"findRespawnPositionAndUseSpawnBlock"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerPlayer;findRespawnAndUseSpawnBlock(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer$RespawnConfig;Z)Ljava/util/Optional;"

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 @Pseudo
 @Mixin(targets={"com.zurrtum.create.client.catnip.outliner.LineOutline"})
 public class LineOutlineMixin {
-    @WrapMethod(method={"submitInner(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;FLorg/joml/Vector3d;Lorg/joml/Vector3d;FIIZ)V"})
+    @WrapMethod(require = 0, method={"submitInner(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;FLorg/joml/Vector3d;Lorg/joml/Vector3d;FIIZ)V"})
     private void sable$projectOutlineOntoSubLevel(PoseStack ms, SubmitNodeCollector queue, Vec3 camera, float pt, Vector3d start, Vector3d end, float width, int color, int lightmap, boolean disableNormals, Operation<Void> original) {
         ClientSubLevel subLevel = SubLevelOutlinePose.find((Position)new Vec3(start.x, start.y, start.z));
         if (subLevel == null) {

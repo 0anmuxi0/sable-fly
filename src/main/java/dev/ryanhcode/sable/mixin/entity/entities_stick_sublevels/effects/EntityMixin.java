@@ -65,8 +65,7 @@ public abstract class EntityMixin {
    @Shadow
    public abstract Vec3 getEyePosition();
 
-   @Inject(
-      method = {"spawnSprintParticle"},
+   @Inject(require = 0, method = {"spawnSprintParticle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;",
@@ -82,8 +81,7 @@ public abstract class EntityMixin {
       }
    }
 
-   @Redirect(
-      method = {"spawnSprintParticle"},
+   @Redirect(require = 0, method = {"spawnSprintParticle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;getX()D"
@@ -93,8 +91,7 @@ public abstract class EntityMixin {
       return localPosition.get().x;
    }
 
-   @Redirect(
-      method = {"spawnSprintParticle"},
+   @Redirect(require = 0, method = {"spawnSprintParticle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;getZ()D"
@@ -104,8 +101,7 @@ public abstract class EntityMixin {
       return localPosition.get().z;
    }
 
-   @Redirect(
-      method = {"spawnSprintParticle"},
+   @Redirect(require = 0, method = {"spawnSprintParticle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;getY()D"
@@ -115,8 +111,7 @@ public abstract class EntityMixin {
       return localPosition.get().y;
    }
 
-   @Redirect(
-      method = {"spawnSprintParticle"},
+   @Redirect(require = 0, method = {"spawnSprintParticle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"
@@ -157,8 +152,7 @@ public abstract class EntityMixin {
       }
    }
 
-   @Inject(
-      method = {"getOnPos(F)Lnet/minecraft/core/BlockPos;"},
+   @Inject(require = 0, method = {"getOnPos(F)Lnet/minecraft/core/BlockPos;"},
       at = {@At("HEAD")},
       cancellable = true
    )

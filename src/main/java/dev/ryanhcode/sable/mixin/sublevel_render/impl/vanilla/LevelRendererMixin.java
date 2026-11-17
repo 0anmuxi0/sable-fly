@@ -94,8 +94,7 @@ public abstract class LevelRendererMixin {
    ) {
    }
 
-   @Inject(
-      method = {"submitBlockOutline"},
+   @Inject(require = 0, method = {"submitBlockOutline"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -146,8 +145,7 @@ public abstract class LevelRendererMixin {
       }
    }
 
-   @Inject(
-      method = {"compileSections"},
+   @Inject(require = 0, method = {"compileSections"},
       at = {@At("TAIL")}
    )
    private void sable$compileSections(CameraRenderState camera, CallbackInfo ci) {
@@ -165,16 +163,14 @@ public abstract class LevelRendererMixin {
       }
    }
 
-   @Inject(
-      method = {"prepareChunkRenders"},
+   @Inject(require = 0, method = {"prepareChunkRenders"},
       at = {@At("RETURN")}
    )
    private void sable$prepareSubLevelTerrain(Matrix4fc viewRotation, boolean reverseTranslucent, CallbackInfoReturnable<ChunkSectionsToRender> cir) {
       this.sable$buildSubLevelTerrain(viewRotation, reverseTranslucent);
    }
 
-   @Inject(
-      method = {"prepareChunkRendersIndirect"},
+   @Inject(require = 0, method = {"prepareChunkRendersIndirect"},
       at = {@At("RETURN")}
    )
    private void sable$prepareSubLevelTerrainIndirect(Matrix4fc viewRotation, boolean reverseTranslucent, CallbackInfoReturnable<ChunkSectionsToRender> cir) {
@@ -195,8 +191,7 @@ public abstract class LevelRendererMixin {
       );
    }
 
-   @Inject(
-      method = {"submitTransientBlocks"},
+   @Inject(require = 0, method = {"submitTransientBlocks"},
       at = {@At("TAIL")}
    )
    private void sable$submitSubLevelBlocks(PoseStack poseStack, SubmitNodeCollector collector, LevelRenderState levelRenderState, CallbackInfo ci) {
@@ -306,8 +301,7 @@ public abstract class LevelRendererMixin {
       }
    }
 
-   @Inject(
-      method = {"isSectionCompiledAndVisible"},
+   @Inject(require = 0, method = {"isSectionCompiledAndVisible"},
       at = {@At("HEAD")},
       cancellable = true
    )

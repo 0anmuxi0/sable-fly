@@ -7,10 +7,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class SableUDPAuthenticationState {
    private SableUDPAuthenticationState.State state;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private UUID outgoingToken;
    private long tokenAssignmentTime;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private InetSocketAddress activeAddress;
    private int lastAlivePingIndex;
 
@@ -22,7 +22,7 @@ public class SableUDPAuthenticationState {
       return this.state;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public InetSocketAddress getActiveAddress() {
       return this.activeAddress;
    }

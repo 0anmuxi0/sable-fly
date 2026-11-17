@@ -32,8 +32,7 @@ public abstract class LivingEntityMixin extends Entity {
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"jumpFromGround"},
+   @Inject(require = 0, method = {"jumpFromGround"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -59,8 +58,7 @@ public abstract class LivingEntityMixin extends Entity {
       }
    }
 
-   @WrapOperation(
-      method = {"dismountVehicle"},
+   @WrapOperation(require = 0, method = {"dismountVehicle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/LivingEntity;dismountTo(DDD)V"
@@ -77,8 +75,7 @@ public abstract class LivingEntityMixin extends Entity {
       }
    }
 
-   @Redirect(
-      method = {"dismountVehicle"},
+   @Redirect(require = 0, method = {"dismountVehicle"},
       at = {@At(
          value = "INVOKE",
          target = "Ljava/lang/Math;max(DD)D"

@@ -25,12 +25,12 @@ public class MergedMassTracker implements MassData {
    private final Matrix3d inertiaTensor = new Matrix3d().zero();
    private double inverseMass;
    private final Matrix3d inverseInertiaTensor = new Matrix3d().zero();
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Vector3d centerOfMass;
    private double lastMass;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Vector3d lastCenterOfMass;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Matrix3d lastInertiaTensor;
 
    public MergedMassTracker(@NotNull ServerSubLevel subLevel, MassTracker selfTracker) {

@@ -92,16 +92,14 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       return this.sable$lerpTarget;
    }
 
-   @Inject(
-      method = {"aiStep"},
+   @Inject(require = 0, method = {"aiStep"},
       at = {@At("HEAD")}
    )
    private void sable$updateRotLerp(CallbackInfo ci) {
       this.sable$setupLerp();
    }
 
-   @Inject(
-      method = {"aiStep"},
+   @Inject(require = 0, method = {"aiStep"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(DDD)V",
@@ -118,8 +116,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       this.sable$sableLerpSteps = lerpSteps;
    }
 
-   @ModifyVariable(
-      method = {"tick"},
+   @ModifyVariable(require = 0, method = {"tick"},
       at = {@At("STORE")},
       ordinal = 0
    )
@@ -127,8 +124,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       return this.sable$getDifference(true).x;
    }
 
-   @ModifyVariable(
-      method = {"tick"},
+   @ModifyVariable(require = 0, method = {"tick"},
       at = {@At("STORE")},
       ordinal = 1
    )
@@ -136,8 +132,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       return this.sable$getDifference(true).z;
    }
 
-   @Redirect(
-      method = {"calculateEntityAnimation"},
+   @Redirect(require = 0, method = {"calculateEntityAnimation"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/LivingEntity;updateWalkAnimation(F)V"
@@ -155,7 +150,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       Vec3 oldPos = new Vec3(this.xo, this.yo, this.zo);
       Vec3 delta = currentPos.subtract(oldPos);
       SubLevel trackingSubLevel = Sable.HELPER.getTrackingSubLevel(this);
-      if (trackingSubLevel != null && (!(!countLocalPlayer && (Object)this instanceof Player player) || !player.isLocalPlayer())) {
+      if (trackingSubLevel != null && (!(!countLocalPlayer && ((Object)this) instanceof Player player) || !player.isLocalPlayer())) {
          Pose3d pose = trackingSubLevel.logicalPose();
          Pose3dc lastPose = trackingSubLevel.lastPose();
          currentPos = pose.transformPositionInverse(currentPos);
@@ -172,8 +167,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntitySt
       return delta;
    }
 
-   @Inject(
-      method = {"recreateFromPacket"},
+   @Inject(require = 0, method = {"recreateFromPacket"},
       at = {@At("TAIL")}
    )
    public void sable$recreateFromPacket(ClientboundAddEntityPacket packet, CallbackInfo ci) {

@@ -28,8 +28,7 @@ public abstract class PlayerMixin extends LivingEntity {
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"travel"},
+   @Inject(require = 0, method = {"travel"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/player/Player;getDeltaMovement()Lnet/minecraft/world/phys/Vec3;",
@@ -48,8 +47,7 @@ public abstract class PlayerMixin extends LivingEntity {
       }
    }
 
-   @Inject(
-      method = {"travel"},
+   @Inject(require = 0, method = {"travel"},
       at = {@At("RETURN")}
    )
    private void sable$restoreOrientedFlyingMovement(
@@ -66,8 +64,7 @@ public abstract class PlayerMixin extends LivingEntity {
       }
    }
 
-   @Redirect(
-      method = {"aiStep"},
+   @Redirect(require = 0, method = {"aiStep"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/AABB;minmax(Lnet/minecraft/world/phys/AABB;)Lnet/minecraft/world/phys/AABB;"

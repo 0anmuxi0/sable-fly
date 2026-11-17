@@ -1,0 +1,216 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Fabric Loom: 1.18.4
+
+> Task :compileJava
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:32: 错误: 找不到符号
+    private static CreateRegistrate REGISTRATE;
+                   ^
+  符号:   类 CreateRegistrate
+  位置: 类 AllBlockEntityTypesMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:34: 错误: 找不到符号
+    private static final BlockEntityEntry<RedstoneContactBlockEntity> REDSTONE_CONTACT;
+                         ^
+  符号:   类 BlockEntityEntry
+  位置: 类 AllBlockEntityTypesMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:37: 错误: 找不到符号
+    public BlockEntityEntry<RedstoneContactBlockEntity> sable$getRedstoneContactType() {
+           ^
+  符号:   类 BlockEntityEntry
+  位置: 类 AllBlockEntityTypesMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntityTypeGetter.java:12: 错误: 找不到符号
+    public BlockEntityEntry<RedstoneContactBlockEntity> sable$getRedstoneContactType();
+           ^
+  符号:   类 BlockEntityEntry
+  位置: 接口 RedstoneContactBlockEntityTypeGetter
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\AbstractContraptionEntityMixin.java:213: 错误: 找不到符号
+        Vec3 rotationOffset = VecHelper.getCenterOf((Vec3i)BlockPos.ZERO);
+                                       ^
+  符号:   方法 getCenterOf(Vec3i)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\entity_falls_on_block\BeltMillstoneBlocksMixin.java:46: 错误: 不兼容的类型: BeltMillstoneBlocksMixin无法转换为BeltBlock
+        Block entry = this instanceof BeltBlock ? AllBlocks.BELT : AllBlocks.MILLSTONE;
+                      ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:42: 错误: 找不到符号
+        REDSTONE_CONTACT = REGISTRATE.blockEntity("redstone_contact", RedstoneContactBlockEntity::new).validBlock((NonNullSupplier)AllBlocks.REDSTONE_CONTACT).register();
+                                                                                                                   ^
+  符号:   类 NonNullSupplier
+  位置: 类 AllBlockEntityTypesMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:50: 错误: RedstoneContactBlockEntity不是抽象的, 并且未覆盖SmartBlockEntity中的抽象方法addBehaviours(List<BlockEntityBehaviour<?>>)
+public class RedstoneContactBlockEntity
+       ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:58: 错误: 名称冲突: RedstoneContactBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour>) 和 SmartBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour<?>>) 具有相同疑符, 但两者均不覆盖对方
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+                ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:67: 错误: 找不到符号
+            Vector3d facingDir = JOMLConversion.atLowerCornerOf((Vec3i)facing.getNormal());
+                                                                             ^
+  符号:   方法 getNormal()
+  位置: 类型为Direction的变量 facing
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:92: 错误: 不兼容的类型: Object无法转换为AbstractContraptionEntity
+        for (AbstractContraptionEntity ace : contraptions) {
+                                             ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+            if (candidateBlock == null || !AllBlocks.REDSTONE_CONTACT.has(otherState = candidateBlock.state()) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) continue;
+                                                                     ^
+  符号:   方法 has(BlockState)
+  位置: 类型为RedstoneContactBlock的变量 REDSTONE_CONTACT
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+            if (candidateBlock == null || !AllBlocks.REDSTONE_CONTACT.has(otherState = candidateBlock.state()) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) continue;
+                                                                                                                                             ^
+  符号:   方法 has(BlockState)
+  位置: 类型为ElevatorContactBlock的变量 ELEVATOR_CONTACT
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:98: 错误: 找不到符号
+            Vec3 otherFacingMoj = Vec3.atLowerCornerOf((Vec3i)otherFacingDirection.getNormal());
+                                                                                  ^
+  符号:   方法 getNormal()
+  位置: 类型为Direction的变量 otherFacingDirection
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:107: 错误: 找不到符号
+        return Sable.HELPER.findIncludingSubLevels(this.getLevel(), this.getBlockPos().getCenter().relative(facing, 1.0), true, parentSublevel, (subLevel, pos) -> {
+                                                                                      ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+            if (!AllBlocks.REDSTONE_CONTACT.has(otherState) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) {
+                                           ^
+  符号:   方法 has(BlockState)
+  位置: 类型为RedstoneContactBlock的变量 REDSTONE_CONTACT
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+            if (!AllBlocks.REDSTONE_CONTACT.has(otherState) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) {
+                                                                                          ^
+  符号:   方法 has(BlockState)
+  位置: 类型为ElevatorContactBlock的变量 ELEVATOR_CONTACT
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:118: 错误: 找不到符号
+            Vector3d otherFacingDir = JOMLConversion.atLowerCornerOf((Vec3i)otherFacing.getNormal());
+                                                                                       ^
+  符号:   方法 getNormal()
+  位置: 类型为Direction的变量 otherFacing
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\RedstoneContactBlockMixin.java:55: 错误: isClientSide 在 Level 中是 private 访问控制
+        if (!level.isClientSide) {
+                  ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\RedstoneContactBlockMixin.java:56: 错误: 找不到符号
+            return super.getTicker(level, p_153213_, p_153214_);
+                        ^
+  符号: 方法 getTicker(Level,BlockState,BlockEntityType<S>)
+  其中, S是类型变量:
+    S扩展已在方法 <S>getTicker(Level,BlockState,BlockEntityType<S>)中声明的BlockEntity
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+20 个错误
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/_anmuxi_/Desktop/Sable-Fly/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:32: 错误: 找不到符号
+      private static CreateRegistrate REGISTRATE;
+                     ^
+    符号:   类 CreateRegistrate
+    位置: 类 AllBlockEntityTypesMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:34: 错误: 找不到符号
+      private static final BlockEntityEntry<RedstoneContactBlockEntity> REDSTONE_CONTACT;
+                           ^
+    符号:   类 BlockEntityEntry
+    位置: 类 AllBlockEntityTypesMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:37: 错误: 找不到符号
+      public BlockEntityEntry<RedstoneContactBlockEntity> sable$getRedstoneContactType() {
+             ^
+    符号:   类 BlockEntityEntry
+    位置: 类 AllBlockEntityTypesMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntityTypeGetter.java:12: 错误: 找不到符号
+      public BlockEntityEntry<RedstoneContactBlockEntity> sable$getRedstoneContactType();
+             ^
+    符号:   类 BlockEntityEntry
+    位置: 接口 RedstoneContactBlockEntityTypeGetter
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:42: 错误: 找不到符号
+          REDSTONE_CONTACT = REGISTRATE.blockEntity("redstone_contact", RedstoneContactBlockEntity::new).validBlock((NonNullSupplier)AllBlocks.REDSTONE_CONTACT).register();
+                                                                                                                     ^
+    符号:   类 NonNullSupplier
+    位置: 类 AllBlockEntityTypesMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\AbstractContraptionEntityMixin.java:213: 错误: 找不到符号
+          Vec3 rotationOffset = VecHelper.getCenterOf((Vec3i)BlockPos.ZERO);
+                                         ^
+    符号:   方法 getCenterOf(Vec3i)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:67: 错误: 找不到符号
+              Vector3d facingDir = JOMLConversion.atLowerCornerOf((Vec3i)facing.getNormal());
+                                                                               ^
+    符号:   方法 getNormal()
+    位置: 类型为Direction的变量 facing
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+              if (candidateBlock == null || !AllBlocks.REDSTONE_CONTACT.has(otherState = candidateBlock.state()) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) continue;
+                                                                       ^
+    符号:   方法 has(BlockState)
+    位置: 类型为RedstoneContactBlock的变量 REDSTONE_CONTACT
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+              if (candidateBlock == null || !AllBlocks.REDSTONE_CONTACT.has(otherState = candidateBlock.state()) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) continue;
+                                                                                                                                               ^
+    符号:   方法 has(BlockState)
+    位置: 类型为ElevatorContactBlock的变量 ELEVATOR_CONTACT
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:98: 错误: 找不到符号
+              Vec3 otherFacingMoj = Vec3.atLowerCornerOf((Vec3i)otherFacingDirection.getNormal());
+                                                                                    ^
+    符号:   方法 getNormal()
+    位置: 类型为Direction的变量 otherFacingDirection
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:107: 错误: 找不到符号
+          return Sable.HELPER.findIncludingSubLevels(this.getLevel(), this.getBlockPos().getCenter().relative(facing, 1.0), true, parentSublevel, (subLevel, pos) -> {
+                                                                                        ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+              if (!AllBlocks.REDSTONE_CONTACT.has(otherState) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) {
+                                             ^
+    符号:   方法 has(BlockState)
+    位置: 类型为RedstoneContactBlock的变量 REDSTONE_CONTACT
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+              if (!AllBlocks.REDSTONE_CONTACT.has(otherState) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) {
+                                                                                            ^
+    符号:   方法 has(BlockState)
+    位置: 类型为ElevatorContactBlock的变量 ELEVATOR_CONTACT
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:118: 错误: 找不到符号
+              Vector3d otherFacingDir = JOMLConversion.atLowerCornerOf((Vec3i)otherFacing.getNormal());
+                                                                                         ^
+    符号:   方法 getNormal()
+    位置: 类型为Direction的变量 otherFacing
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\entity_falls_on_block\BeltMillstoneBlocksMixin.java:46: 错误: 不兼容的类型: BeltMillstoneBlocksMixin无法转换为BeltBlock
+          Block entry = this instanceof BeltBlock ? AllBlocks.BELT : AllBlocks.MILLSTONE;
+                        ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:92: 错误: 不兼容的类型: Object无法转换为AbstractContraptionEntity
+          for (AbstractContraptionEntity ace : contraptions) {
+                                               ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:50: 错误: RedstoneContactBlockEntity不是抽象的, 并且未覆盖SmartBlockEntity中的抽象方法addBehaviours(List<BlockEntityBehaviour<?>>)
+  public class RedstoneContactBlockEntity
+         ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:58: 错误: 名称冲突: RedstoneContactBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour>) 和 SmartBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour<?>>) 具有相同疑符, 但两者均不覆盖对方
+      public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+                  ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\RedstoneContactBlockMixin.java:55: 错误: isClientSide 在 Level 中是 private 访问控制
+          if (!level.isClientSide) {
+                    ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\RedstoneContactBlockMixin.java:56: 错误: 找不到符号
+              return super.getTicker(level, p_153213_, p_153214_);
+                          ^
+    符号: 方法 getTicker(Level,BlockState,BlockEntityType<S>)
+    其中, S是类型变量:
+      S扩展已在方法 <S>getTicker(Level,BlockState,BlockEntityType<S>)中声明的BlockEntity
+  注: 某些输入文件使用或覆盖了已过时的 API。
+  注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+  注: 某些输入文件使用了未经检查或不安全的操作。
+  注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+  20 个错误
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 13s
+1 actionable task: 1 executed

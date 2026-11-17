@@ -19,7 +19,7 @@ public final class SubLevelOutlinePose {
    private SubLevelOutlinePose() {
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static ClientSubLevel find(Position pos) {
       ClientLevel level = Minecraft.getInstance().level;
       if (level == null) {
@@ -29,7 +29,7 @@ public final class SubLevelOutlinePose {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static ClientSubLevel find(AABB box) {
       ClientSubLevel center = find(box.getCenter());
       if (center != null) {

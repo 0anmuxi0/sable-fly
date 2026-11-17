@@ -24,13 +24,13 @@ public class VanillaSingleSubLevelRenderData implements SubLevelRenderData {
       this.rebuild();
    }
 
-   private void handleBlockEntity(@Nullable BlockEntity blockEntity) {
+   private void handleBlockEntity(@org.jetbrains.annotations.Nullable BlockEntity blockEntity) {
       if (!Objects.equals(this.singleBlockEntity, blockEntity)) {
          this.singleBlockEntity = blockEntity;
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public BlockEntity getRenderBlockEntity() {
       if (this.singleBlockState.isAir()) {
          this.rebuild();

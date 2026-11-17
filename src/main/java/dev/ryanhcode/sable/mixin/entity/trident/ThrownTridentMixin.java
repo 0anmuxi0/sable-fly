@@ -18,8 +18,7 @@ public abstract class ThrownTridentMixin extends Entity {
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/projectile/arrow/ThrownTrident;setNoPhysics(Z)V"

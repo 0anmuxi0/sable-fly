@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public interface SableUDPPacket {
-   static void configureSerialization(ChannelPipeline pipeline, PacketFlow flow, boolean memoryOnly, @Nullable BandwidthDebugMonitor debugMonitor) {
+   static void configureSerialization(ChannelPipeline pipeline, PacketFlow flow, boolean memoryOnly, @org.jetbrains.annotations.Nullable BandwidthDebugMonitor debugMonitor) {
       pipeline.addLast("splitter", createFrameDecoder(debugMonitor, memoryOnly))
          .addLast(new ChannelHandler[]{new FlowControlHandler()})
          .addLast("decoder", new SableUDPPacketDecoder())
@@ -30,7 +30,7 @@ public interface SableUDPPacket {
       return (ChannelOutboundHandler)(memoryOnly ? new LocalFrameEncoder() : new Varint21LengthFieldPrepender());
    }
 
-   private static ChannelInboundHandler createFrameDecoder(@Nullable BandwidthDebugMonitor debugMonitor, boolean memoryOnly) {
+   private static ChannelInboundHandler createFrameDecoder(@org.jetbrains.annotations.Nullable BandwidthDebugMonitor debugMonitor, boolean memoryOnly) {
       if (!memoryOnly) {
          return new Varint21FrameDecoder(debugMonitor);
       } else {

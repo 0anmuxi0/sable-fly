@@ -12,12 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value={BlockEntityRenderDispatcher.class})
 public class BlockEntityRenderDispatcherCreateMixin {
-    @Inject(method={"tryExtractRenderState"}, at={@At(value="HEAD")})
+    @Inject(require = 0, method={"tryExtractRenderState"}, at={@At(value="HEAD")})
     private void sable$setCreateContext(BlockEntity blockEntity, float partialTick, ModelFeatureRenderer.CrumblingOverlay crumblingOverlay, boolean bl, CallbackInfoReturnable<BlockEntityRenderState> cir) {
         CreateSupportsVisualizationContext.setCurrentBlockEntity(blockEntity);
     }
 
-    @Inject(method={"tryExtractRenderState"}, at={@At(value="RETURN")})
+    @Inject(require = 0, method={"tryExtractRenderState"}, at={@At(value="RETURN")})
     private void sable$clearCreateContext(BlockEntity blockEntity, float partialTick, ModelFeatureRenderer.CrumblingOverlay crumblingOverlay, boolean bl, CallbackInfoReturnable<BlockEntityRenderState> cir) {
         CreateSupportsVisualizationContext.clearCurrentBlockEntity();
     }

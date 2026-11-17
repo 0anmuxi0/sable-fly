@@ -24,13 +24,13 @@ public class ValueBoxMixin {
     @Shadow
     protected BlockPos pos;
 
-    @WrapMethod(method={"submit(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;F)V"})
+    @WrapMethod(require = 0, method={"submit(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;F)V"})
     private void sable$submitAtWorldPos(Minecraft var1, PoseStack var2, SubmitNodeCollector var3, Vec3 var4, float var5, Operation<Void> var6) {
         ClientSubLevel var7 = this.sable$getSubLevel(var1);
         if (var7 == null) {
-            var6.call(new Object[]{var1, var2, var3, var4, Float.valueOf(var5)});
+            var6.call(var1, var2, var3, var4, Float.valueOf(var5));
         } else {
-            SubLevelOutlinePose.runProjected(var2, var7, var4, var5x -> var6.call(new Object[]{var1, var2, var3, var5x, Float.valueOf(var5)}));
+            SubLevelOutlinePose.runProjected(var2, var7, var4, var5x -> var6.call(var1, var2, var3, var5x, Float.valueOf(var5)));
         }
     }
 

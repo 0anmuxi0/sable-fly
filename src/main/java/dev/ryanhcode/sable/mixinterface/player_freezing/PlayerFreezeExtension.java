@@ -5,10 +5,10 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3dc;
 
 public interface PlayerFreezeExtension {
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    UUID sable$getFrozenToSubLevel();
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    Vector3dc sable$getFrozenToSubLevelAnchor();
 
    void sable$tickStopFreezing();

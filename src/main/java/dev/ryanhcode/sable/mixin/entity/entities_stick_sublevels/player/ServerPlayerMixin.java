@@ -34,8 +34,7 @@ public abstract class ServerPlayerMixin extends Entity {
    @Shadow
    public abstract ServerLevel level();
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At("HEAD")}
    )
    public void tick(CallbackInfo ci) {
@@ -53,8 +52,7 @@ public abstract class ServerPlayerMixin extends Entity {
       }
    }
 
-   @WrapOperation(
-      method = {"setCamera"},
+   @WrapOperation(require = 0, method = {"setCamera"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerPlayer;teleportTo(Lnet/minecraft/server/level/ServerLevel;DDDLjava/util/Set;FFZ)Z"
@@ -82,8 +80,7 @@ public abstract class ServerPlayerMixin extends Entity {
       }
    }
 
-   @WrapOperation(
-      method = {"tick"},
+   @WrapOperation(require = 0, method = {"tick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerPlayer;absSnapTo(DDDFF)V"

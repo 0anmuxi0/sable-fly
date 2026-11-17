@@ -14,8 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({VineBlock.class})
 public class VineBlockMixin {
-   @WrapOperation(
-      method = {"randomTick"},
+   @WrapOperation(require = 0, method = {"randomTick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerLevel;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"

@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({ParticleEngine.class})
 public abstract class ParticleEngineMixin {
-   @Inject(
-      method = {"add"},
+   @Inject(require = 0, method = {"add"},
       at = {@At("TAIL")}
    )
    private void sable$onParticleAdd(Particle particle, CallbackInfo ci) {

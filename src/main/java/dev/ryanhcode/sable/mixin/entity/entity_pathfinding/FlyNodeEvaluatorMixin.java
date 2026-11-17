@@ -22,8 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({FlyNodeEvaluator.class})
 public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
-   @Inject(
-      method = {"getStart"},
+   @Inject(require = 0, method = {"getStart"},
       at = {@At("HEAD")}
    )
    private void sable$init(CallbackInfoReturnable<Node> cir, @Share("mobPosition") LocalRef<Vec3> mobPosition) {
@@ -35,8 +34,7 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
       }
    }
 
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getBlockY()I"
@@ -46,8 +44,7 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
       return Mth.floor(mobPosition.get().y);
    }
 
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getX()D"
@@ -57,8 +54,7 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
       return mobPosition.get().x;
    }
 
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getY()D"
@@ -68,8 +64,7 @@ public abstract class FlyNodeEvaluatorMixin extends NodeEvaluator {
       return mobPosition.get().y;
    }
 
-   @Redirect(
-      method = {"getStart"},
+   @Redirect(require = 0, method = {"getStart"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Mob;getZ()D"

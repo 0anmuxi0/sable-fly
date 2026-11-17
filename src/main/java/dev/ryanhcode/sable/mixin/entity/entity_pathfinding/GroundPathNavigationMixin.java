@@ -17,8 +17,7 @@ public abstract class GroundPathNavigationMixin {
    @Shadow
    public abstract Path createPath(BlockPos var1, int var2);
 
-   @Inject(
-      method = {"createPath(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;"},
+   @Inject(require = 0, method = {"createPath(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;"},
       at = {@At("HEAD")},
       cancellable = true
    )

@@ -19,8 +19,7 @@ public abstract class LocalPlayerMixin extends Entity {
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"playSound"},
+   @Inject(require = 0, method = {"playSound"},
       at = {@At("HEAD")},
       cancellable = true
    )

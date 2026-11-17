@@ -21,8 +21,7 @@ public class PathMixin implements PathExtension {
    @Unique
    private boolean sable$project;
 
-   @Inject(
-      method = {"getNextEntityPos"},
+   @Inject(require = 0, method = {"getNextEntityPos"},
       at = {@At("RETURN")},
       cancellable = true
    )
@@ -32,8 +31,7 @@ public class PathMixin implements PathExtension {
       }
    }
 
-   @Inject(
-      method = {"getNextNodePos"},
+   @Inject(require = 0, method = {"getNextNodePos"},
       at = {@At("RETURN")},
       cancellable = true
    )
@@ -48,8 +46,7 @@ public class PathMixin implements PathExtension {
       }
    }
 
-   @Inject(
-      method = {"getNodePos"},
+   @Inject(require = 0, method = {"getNodePos"},
       at = {@At("RETURN")},
       cancellable = true
    )

@@ -18,8 +18,7 @@ public interface LevelReaderMixin {
    @Shadow
    BlockMatcher findBlocksIn(AABB var1);
 
-   @Inject(
-      method = {"containsAnyLiquid"},
+   @Inject(require = 0, method = {"containsAnyLiquid"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -28,7 +27,7 @@ public interface LevelReaderMixin {
          BoundingBox3d globalBounds = new BoundingBox3d(box);
          BoundingBox3d localBounds = new BoundingBox3d();
 
-         for (SubLevel subLevel : Sable.HELPER.getAllIntersecting((Level)this, globalBounds)) {
+         for (SubLevel subLevel : Sable.HELPER.getAllIntersecting((Level)(Object)this, globalBounds)) {
             globalBounds.transformInverse(subLevel.lastPose(), localBounds);
             boolean containsLiquid = this.findBlocksIn(localBounds.toMojang()).filterState(state -> !state.getFluidState().isEmpty()).anyMatched();
             if (containsLiquid) {

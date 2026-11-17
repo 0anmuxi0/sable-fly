@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({EnchantingTableBlockEntity.class})
 public class EnchantingTableBlockEntityMixin {
-   @Redirect(
-      method = {"bookAnimationTick"},
+   @Redirect(require = 0, method = {"bookAnimationTick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/player/Player;getX()D"
@@ -24,8 +23,7 @@ public class EnchantingTableBlockEntityMixin {
       return subLevel != null ? subLevel.logicalPose().transformPositionInverse(instance.getEyePosition()).x() : instance.getX();
    }
 
-   @Redirect(
-      method = {"bookAnimationTick"},
+   @Redirect(require = 0, method = {"bookAnimationTick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/player/Player;getZ()D"

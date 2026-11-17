@@ -26,8 +26,7 @@ public abstract class LivingEntityMixin extends Entity {
       return true;
    }
 
-   @Redirect(
-      method = {"stopSleeping"},
+   @Redirect(require = 0, method = {"stopSleeping"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/LivingEntity;setPos(DDD)V"

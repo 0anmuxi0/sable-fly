@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RapierFreeConstraintHandle extends RapierConstraintHandle implements FreeConstraintHandle {
    public static RapierFreeConstraintHandle create(
-      ServerLevel serverLevel, @Nullable PhysicsPipelineBody bodyA, @Nullable PhysicsPipelineBody bodyB, FreeConstraintConfiguration config
+      ServerLevel serverLevel, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyA, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyB, FreeConstraintConfiguration config
    ) {
       long sceneHandle = Rapier3D.getSceneHandle(serverLevel);
       long handle = Rapier3D.addFreeConstraint(

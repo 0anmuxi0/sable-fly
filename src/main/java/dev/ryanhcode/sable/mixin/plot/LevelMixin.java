@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({Level.class})
 public class LevelMixin {
-   @Inject(
-      method = {"setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z"},
+   @Inject(require = 0, method = {"setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z"},
       at = {@At("HEAD")}
    )
    private void sable$ensurePlotChunk(BlockPos blockPos, BlockState blockState, int flags, int recursionLeft, CallbackInfoReturnable<Boolean> cir) {

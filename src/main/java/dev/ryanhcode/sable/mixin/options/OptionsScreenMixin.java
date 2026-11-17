@@ -25,8 +25,7 @@ public abstract class OptionsScreenMixin extends Screen {
       super(component);
    }
 
-   @Inject(
-      method = {"createOnlineButton"},
+   @Inject(require = 0, method = {"createOnlineButton"},
       at = {@At("RETURN")},
       cancellable = true
    )

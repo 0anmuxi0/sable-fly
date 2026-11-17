@@ -25,7 +25,7 @@ public abstract class SubLevel implements SubLevelAccess {
    private final LevelPlot plot;
    private boolean isRemoved = false;
    private UUID uniqueId = null;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private String name = null;
 
    protected SubLevel(Level level, int plotX, int plotY, Pose3d pose) {
@@ -110,13 +110,13 @@ public abstract class SubLevel implements SubLevelAccess {
       return this.uniqueId;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public String getName() {
       return this.name;
    }
 
-   public void setName(@Nullable String name) {
+   public void setName(@org.jetbrains.annotations.Nullable String name) {
       this.name = name;
    }
 

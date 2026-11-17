@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RapierFixedConstraintHandle extends RapierConstraintHandle implements FixedConstraintHandle {
    public static RapierFixedConstraintHandle create(
-      ServerLevel serverLevel, @Nullable PhysicsPipelineBody bodyA, @Nullable PhysicsPipelineBody bodyB, FixedConstraintConfiguration config
+      ServerLevel serverLevel, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyA, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyB, FixedConstraintConfiguration config
    ) {
       long sceneHandle = Rapier3D.getSceneHandle(serverLevel);
       long handle = Rapier3D.addFixedConstraint(

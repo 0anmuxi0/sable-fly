@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class SubLevelMovingBlockRenderState extends MovingBlockRenderState {
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Level level;
 
    public void sable$setLevel(Level level) {

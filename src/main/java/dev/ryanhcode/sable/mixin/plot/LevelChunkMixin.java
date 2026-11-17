@@ -36,16 +36,14 @@ public class LevelChunkMixin {
    @Unique
    private BlockPos sable$blockSet = null;
 
-   @Inject(
-      method = {"setBlockState"},
+   @Inject(require = 0, method = {"setBlockState"},
       at = {@At("HEAD")}
    )
    private void sable$preSetBlockState(BlockPos pPos, BlockState pState, int pFlags, CallbackInfoReturnable<BlockState> cir) {
       this.sable$blockSet = pPos;
    }
 
-   @Inject(
-      method = {"setBlockState"},
+   @Inject(require = 0, method = {"setBlockState"},
       at = {@At("RETURN")}
    )
    private void sable$postSetBlockState(BlockPos pPos, BlockState pState, int pFlags, CallbackInfoReturnable<BlockState> cir) {
@@ -59,8 +57,7 @@ public class LevelChunkMixin {
       this.sable$blockSet = null;
    }
 
-   @WrapOperation(
-      method = {"setBlockState"},
+   @WrapOperation(require = 0, method = {"setBlockState"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/chunk/LevelChunkSection;setBlockState(IIILnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/block/state/BlockState;"
@@ -84,8 +81,7 @@ public class LevelChunkMixin {
       return container != null && container.inBounds(((LevelChunk)(Object)this).getPos());
    }
 
-   @WrapOperation(
-      method = {"replaceWithPacketData(IILnet/minecraft/network/protocol/game/ClientboundLevelChunkPacketData;)V"},
+   @WrapOperation(require = 0, method = {"replaceWithPacketData(IILnet/minecraft/network/protocol/game/ClientboundLevelChunkPacketData;)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/chunk/LevelChunk;clearAllBlockEntities()V"
@@ -97,8 +93,7 @@ public class LevelChunkMixin {
       }
    }
 
-   @Inject(
-      method = {"replaceWithPacketData(IILnet/minecraft/network/protocol/game/ClientboundLevelChunkPacketData;)V"},
+   @Inject(require = 0, method = {"replaceWithPacketData(IILnet/minecraft/network/protocol/game/ClientboundLevelChunkPacketData;)V"},
       at = {@At("HEAD")}
    )
    private void sable$pruneStaleBlockEntities(int chunkX, int chunkZ, ClientboundLevelChunkPacketData data, CallbackInfo ci) {
@@ -116,8 +111,7 @@ public class LevelChunkMixin {
       }
    }
 
-   @Inject(
-      method = {"replaceWithPacketData(IILnet/minecraft/network/protocol/game/ClientboundLevelChunkPacketData;)V"},
+   @Inject(require = 0, method = {"replaceWithPacketData(IILnet/minecraft/network/protocol/game/ClientboundLevelChunkPacketData;)V"},
       at = {@At("RETURN")}
    )
    private void sable$resyncBlockStates(int chunkX, int chunkZ, ClientboundLevelChunkPacketData data, CallbackInfo ci) {

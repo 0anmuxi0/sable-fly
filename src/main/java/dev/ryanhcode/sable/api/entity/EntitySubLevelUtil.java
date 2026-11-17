@@ -67,7 +67,7 @@ public class EntitySubLevelUtil {
       return !entity.is(SableTags.RETAIN_IN_SUB_LEVEL);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static Quaterniondc getCustomEntityOrientation(Entity entity, float partialTicks) {
       return null;
    }

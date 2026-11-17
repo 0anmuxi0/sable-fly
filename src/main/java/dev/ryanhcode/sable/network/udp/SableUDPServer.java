@@ -42,7 +42,7 @@ public class SableUDPServer {
    }
 
    @Internal
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static SableUDPServer getServer(MinecraftServer server) {
       return server.getConnection() instanceof ServerConnectionListenerExtension extension ? extension.sable$getServer() : null;
    }

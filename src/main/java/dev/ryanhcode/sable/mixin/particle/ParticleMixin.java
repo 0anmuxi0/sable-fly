@@ -84,13 +84,13 @@ public abstract class ParticleMixin implements ParticleExtension {
    @Unique
    private boolean sable$checkedInitialKick = false;
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private volatile ClientSubLevel sable$trackingSubLevel = null;
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Vector3d sable$localTrackingAnchor = null;
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private volatile List<ClientSubLevel> sable$nearbySubLevels;
    @Shadow
    private boolean stoppedByCollision;
@@ -123,8 +123,7 @@ public abstract class ParticleMixin implements ParticleExtension {
       return 0.0;
    }
 
-   @Inject(
-      method = {"Lnet/minecraft/client/particle/Particle;<init>(Lnet/minecraft/client/multiplayer/ClientLevel;DDDDDD)V"},
+   @Inject(require = 0, method = {"Lnet/minecraft/client/particle/Particle;<init>(Lnet/minecraft/client/multiplayer/ClientLevel;DDDDDD)V"},
       at = {@At("TAIL")}
    )
    private void sable$addUpwardsVelocity(ClientLevel clientLevel, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
@@ -192,8 +191,7 @@ public abstract class ParticleMixin implements ParticleExtension {
       return this.sable$trackingSubLevel;
    }
 
-   @WrapMethod(
-      method = {"move"}
+   @WrapMethod(require = 0, method = {"move"}
    )
    private void sable$moveWithSubLevels(double motionX, double motionY, double motionZ, Operation<Void> original) {
       AABB bounds = this.getBoundingBox();
@@ -417,8 +415,7 @@ public abstract class ParticleMixin implements ParticleExtension {
       }
    }
 
-   @Inject(
-      method = {"getLightCoords"},
+   @Inject(require = 0, method = {"getLightCoords"},
       at = {@At("HEAD")},
       cancellable = true
    )

@@ -41,8 +41,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityMo
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"travel"},
+   @Inject(require = 0, method = {"travel"},
       at = {@At("RETURN")}
    )
    public void sable$beforeAnimation(Vec3 vec3, CallbackInfo ci) {
@@ -84,7 +83,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityMo
          this.sable$inheritedVelocity.mul(0.8, 0.6, 0.8);
       }
 
-      if ((Object)this instanceof Player player && player.getAbilities().flying) {
+      if (((Object)this) instanceof Player player && player.getAbilities().flying) {
          this.sable$inheritedVelocity.mul(0.9);
       }
 
@@ -112,7 +111,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityMo
          relativeVelocity.set(collisionInfo.globalDirection()).mul(-magnitude);
          if (collisionInfo.bouncy()) {
             SoundEvent sound = collisionInfo.block().getSoundType().getFallSound();
-            level.playSound((Object)this instanceof Player player ? player : null, this.getX(), this.getY(), this.getZ(), sound, SoundSource.BLOCKS, 0.75F, 1.0F);
+            level.playSound(((Object)this) instanceof Player player ? player : null, this.getX(), this.getY(), this.getZ(), sound, SoundSource.BLOCKS, 0.75F, 1.0F);
             this.addDeltaMovement(JOMLConversion.toMojang(collisionInfo.globalDirection()).scale(relativeVelocity.length() * 0.65));
             if (Sable.HELPER.getTrackingSubLevel(this) == null) {
                this.addDeltaMovement(JOMLConversion.toMojang(pointVelocity));

@@ -15,8 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({ChunkSectionsToRender.class})
 public abstract class ChunkSectionsToRenderMixin {
-   @Inject(
-      method = {"renderGroup(Lnet/minecraft/client/renderer/chunk/ChunkSectionLayerGroup;Lcom/mojang/renderpearl/api/commands/RenderPass;Lcom/mojang/renderpearl/api/textures/GpuSampler;Lcom/mojang/renderpearl/api/textures/GpuTextureView;Z)V"},
+   @Inject(require = 0, method = {"renderGroup(Lnet/minecraft/client/renderer/chunk/ChunkSectionLayerGroup;Lcom/mojang/renderpearl/api/commands/RenderPass;Lcom/mojang/renderpearl/api/textures/GpuSampler;Lcom/mojang/renderpearl/api/textures/GpuTextureView;Z)V"},
       at = {@At("TAIL")}
    )
    private void sable$renderSubLevelTerrain(
@@ -25,8 +24,7 @@ public abstract class ChunkSectionsToRenderMixin {
       SubLevelBatchedTerrainRenderer.renderGroup(layerGroup, renderPass, sampler, atlasView, wireframe);
    }
 
-   @Inject(
-      method = {"renderOit(Lcom/mojang/renderpearl/api/textures/GpuSampler;Lnet/minecraft/client/renderer/oit/OitStage;Lnet/minecraft/client/renderer/oit/OitRenderPassProvider$Parameters;Lcom/mojang/renderpearl/api/textures/GpuTextureView;Lcom/mojang/renderpearl/api/textures/GpuTextureView;)V"},
+   @Inject(require = 0, method = {"renderOit(Lcom/mojang/renderpearl/api/textures/GpuSampler;Lnet/minecraft/client/renderer/oit/OitStage;Lnet/minecraft/client/renderer/oit/OitRenderPassProvider$Parameters;Lcom/mojang/renderpearl/api/textures/GpuTextureView;Lcom/mojang/renderpearl/api/textures/GpuTextureView;)V"},
       at = {@At("TAIL")}
    )
    private void sable$renderSubLevelTerrainOit(

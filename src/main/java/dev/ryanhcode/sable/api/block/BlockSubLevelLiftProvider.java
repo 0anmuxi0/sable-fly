@@ -92,7 +92,7 @@ public interface BlockSubLevelLiftProvider {
       Vector3dc angularVelocity,
       Vector3d linearImpulse,
       Vector3d angularImpulse,
-      @Nullable BlockSubLevelLiftProvider.LiftProviderGroup group
+      @org.jetbrains.annotations.Nullable BlockSubLevelLiftProvider.LiftProviderGroup group
    ) {
       resetVectors();
       LIFT_NORMAL.set(ctx.dir.x(), ctx.dir.y(), ctx.dir.z());

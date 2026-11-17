@@ -39,8 +39,7 @@ public class EntityRenderDispatcherMixin {
    @Unique
    private Quaternionf sable$cameraOrientation;
 
-   @Inject(
-      method = {"extractEntity"},
+   @Inject(require = 0, method = {"extractEntity"},
       at = {@At("RETURN")}
    )
    private <E extends Entity> void sable$captureEntity(E entity, float partialTicks, CallbackInfoReturnable<EntityRenderState> cir) {
@@ -78,8 +77,7 @@ public class EntityRenderDispatcherMixin {
       this.sable$renderData.put(renderState, new EntityRenderDispatcherMixin.SableRenderData(entity, partialTicks));
    }
 
-   @Inject(
-      method = {"submit"},
+   @Inject(require = 0, method = {"submit"},
       at = {@At(
          value = "INVOKE",
          target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V",
@@ -107,8 +105,7 @@ public class EntityRenderDispatcherMixin {
       }
    }
 
-   @Inject(
-      method = {"submit"},
+   @Inject(require = 0, method = {"submit"},
       at = {@At(
          value = "INVOKE",
          target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V",

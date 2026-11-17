@@ -9,16 +9,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({LevelLightEngine.class})
 public class LevelLightEngineMixin {
-   @Inject(
-      method = {"runLightUpdates"},
+   @Inject(require = 0, method = {"runLightUpdates"},
       at = {@At("HEAD")}
    )
    private void sable$beginSubLevelLightUpdates(CallbackInfoReturnable<Integer> cir) {
       SubLevelDynamicLights.beginLightUpdates((LevelLightEngine)(Object)this);
    }
 
-   @Inject(
-      method = {"runLightUpdates"},
+   @Inject(require = 0, method = {"runLightUpdates"},
       at = {@At("RETURN")}
    )
    private void sable$endSubLevelLightUpdates(CallbackInfoReturnable<Integer> cir) {

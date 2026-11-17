@@ -16,8 +16,7 @@ public class ClientboundMoveEntityPacketPosRotMixin implements PacketActuallyInS
    @Unique
    private boolean sable$actuallyInSubLevel;
 
-   @Inject(
-      method = {"write"},
+   @Inject(require = 0, method = {"write"},
       at = {@At("TAIL")}
    )
    private void sable$writeActuallyInSubLevel(FriendlyByteBuf friendlyByteBuf, CallbackInfo ci) {
@@ -34,8 +33,7 @@ public class ClientboundMoveEntityPacketPosRotMixin implements PacketActuallyInS
       return this.sable$actuallyInSubLevel;
    }
 
-   @Inject(
-      method = {"read"},
+   @Inject(require = 0, method = {"read"},
       at = {@At("RETURN")}
    )
    private static void sable$readActuallyInSubLevel(FriendlyByteBuf friendlyByteBuf, CallbackInfoReturnable<Pos> cir) {

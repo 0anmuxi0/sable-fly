@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({Player.class})
 public class PlayerMixin {
-   @WrapOperation(
-      method = {"canPlayerFitWithinBlocksAndEntitiesWhen"},
+   @WrapOperation(require = 0, method = {"canPlayerFitWithinBlocksAndEntitiesWhen"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;noCollision(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Z"

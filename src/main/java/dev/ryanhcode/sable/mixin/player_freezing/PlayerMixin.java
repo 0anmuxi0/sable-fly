@@ -22,10 +22,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin({Player.class})
 public abstract class PlayerMixin extends Entity implements PlayerFreezeExtension {
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private UUID sable$frozenToSubLevel = null;
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Vector3dc sable$frozenToSubLevelAnchor = null;
    @Unique
    private int sable$frozenTicks = 0;
@@ -34,20 +34,19 @@ public abstract class PlayerMixin extends Entity implements PlayerFreezeExtensio
       super(entityType, level);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public UUID sable$getFrozenToSubLevel() {
       return this.sable$frozenToSubLevel;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public Vector3dc sable$getFrozenToSubLevelAnchor() {
       return this.sable$frozenToSubLevelAnchor;
    }
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At("HEAD")}
    )
    private void sable$preFrozenTick(CallbackInfo ci) {

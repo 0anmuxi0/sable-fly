@@ -36,8 +36,7 @@ public abstract class EntityMixin implements EntityStickExtension {
    @Shadow
    public abstract void snapTo(double var1, double var3, double var5);
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At("RETURN")}
    )
    private void sable$updateSubLevelPosition(CallbackInfo ci) {
@@ -61,18 +60,17 @@ public abstract class EntityMixin implements EntityStickExtension {
    }
 
    @Override
-   public void sable$setPlotPosition(@Nullable Vec3 position) {
+   public void sable$setPlotPosition(@org.jetbrains.annotations.Nullable Vec3 position) {
       this.sable$plotPosition = position;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public Vec3 sable$getPlotPosition() {
       return this.sable$plotPosition;
    }
 
-   @Inject(
-      method = {"recreateFromPacket"},
+   @Inject(require = 0, method = {"recreateFromPacket"},
       at = {@At("TAIL")}
    )
    public void sable$recreateFromPacket(ClientboundAddEntityPacket packet, CallbackInfo ci) {

@@ -21,8 +21,7 @@ public class PathfindingContextMixin {
    @Mutable
    private BlockPos mobPosition;
 
-   @Inject(
-      method = {"<init>"},
+   @Inject(require = 0, method = {"<init>"},
       at = {@At("TAIL")}
    )
    private void sable$init(CollisionGetter collisionGetter, Mob mob, CallbackInfo ci) {

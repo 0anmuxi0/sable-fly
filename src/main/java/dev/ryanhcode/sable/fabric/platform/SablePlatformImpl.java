@@ -11,7 +11,7 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 @Internal
 public class SablePlatformImpl implements SablePlatform {
    @Override
-   public boolean isWrappedLevel(@Nullable Level level) {
+   public boolean isWrappedLevel(@org.jetbrains.annotations.Nullable Level level) {
       return false;
    }
 

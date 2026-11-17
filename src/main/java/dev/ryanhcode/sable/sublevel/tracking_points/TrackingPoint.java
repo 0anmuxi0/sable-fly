@@ -7,8 +7,8 @@ import org.joml.Vector3d;
 
 public record TrackingPoint(
    boolean inSubLevel,
-   @Nullable UUID subLevelID,
-   @Nullable GlobalSavedSubLevelPointer lastSavedSubLevelPointer,
+   @org.jetbrains.annotations.Nullable UUID subLevelID,
+   @org.jetbrains.annotations.Nullable GlobalSavedSubLevelPointer lastSavedSubLevelPointer,
    Vector3d point,
    Vector3d globalPlaceholderPosition
 ) {

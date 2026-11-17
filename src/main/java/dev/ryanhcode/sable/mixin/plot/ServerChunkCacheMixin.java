@@ -47,8 +47,7 @@ public class ServerChunkCacheMixin {
    @Unique
    private EmptyLevelChunk sable$emptyChunk;
 
-   @Inject(
-      method = {"<init>"},
+   @Inject(require = 0, method = {"<init>"},
       at = {@At("RETURN")}
    )
    public void init(
@@ -74,8 +73,7 @@ public class ServerChunkCacheMixin {
       return container;
    }
 
-   @Inject(
-      method = {"getChunk(IILnet/minecraft/world/level/chunk/status/ChunkStatus;Z)Lnet/minecraft/world/level/chunk/ChunkAccess;"},
+   @Inject(require = 0, method = {"getChunk(IILnet/minecraft/world/level/chunk/status/ChunkStatus;Z)Lnet/minecraft/world/level/chunk/ChunkAccess;"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -89,8 +87,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"getChunkNow"},
+   @Inject(require = 0, method = {"getChunkNow"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -102,8 +99,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"getChunkFutureMainThread"},
+   @Inject(require = 0, method = {"getChunkFutureMainThread"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -122,8 +118,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"hasChunk"},
+   @Inject(require = 0, method = {"hasChunk"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -135,8 +130,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"getChunkForLighting"},
+   @Inject(require = 0, method = {"getChunkForLighting"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -148,8 +142,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"isPositionTicking"},
+   @Inject(require = 0, method = {"isPositionTicking"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -164,8 +157,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"getFullChunk"},
+   @Inject(require = 0, method = {"getFullChunk"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -184,8 +176,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"blockChanged"},
+   @Inject(require = 0, method = {"blockChanged"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -206,8 +197,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"getVisibleChunkIfPresent"},
+   @Inject(require = 0, method = {"getVisibleChunkIfPresent"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -222,8 +212,7 @@ public class ServerChunkCacheMixin {
       }
    }
 
-   @Inject(
-      method = {"addTicketWithRadius"},
+   @Inject(require = 0, method = {"addTicketWithRadius"},
       at = {@At("HEAD")},
       cancellable = true
    )

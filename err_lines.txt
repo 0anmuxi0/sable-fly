@@ -1,0 +1,370 @@
+﻿endererMixin.java:45: 错误: 程序包dev.ryanhcode.sable.mixinhelpers.block_outline_render不存在
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:62: 错误: 此处需要接口
+onControlsRendererMixin.java:19: 错误: 找不到符号
+onControlsRendererMixin.java:34: 错误: 找不到符号
+rInteractionHandlerMixin.java:38: 错误: 找不到符号
+rInteractionHandlerMixin.java:39: 错误: 找不到符号
+rInteractionHandlerMixin.java:83: 错误: 找不到符号
+InteractionHandlerMixin.java:36: 错误: 找不到符号
+InteractionHandlerMixin.java:46: 错误: 找不到符号
+lockEntityTypesMixin.java:32: 错误: 找不到符号
+lockEntityTypesMixin.java:34: 错误: 找不到符号
+lockEntityTypesMixin.java:37: 错误: 找不到符号
+\RedstoneContactBlockEntityTypeGetter.java:12: 错误: 找不到符号
+neMixin.java:28: 错误: 找不到符号
+neMixin.java:50: 错误: 找不到符号
+neMixin.java:58: 错误: 找不到符号
+neMixin.java:71: 错误: 找不到符号
+terOutlineMixin.java:25: 错误: 找不到符号
+terOutlineMixin.java:49: 错误: 找不到符号
+terOutlineMixin.java:74: 错误: 找不到符号
+BBOutlineMixin.java:25: 错误: 找不到符号
+BBOutlineMixin.java:43: 错误: 找不到符号
+BBOutlineMixin.java:54: 错误: 找不到符号
+EntityRendererMixin.java:15: 错误: 找不到符号
+sMixin.java:15: 错误: 找不到符号
+.java:26: 错误: 找不到符号
+.java:39: 错误: 找不到符号
+isualMixin.java:26: 错误: 找不到符号
+isualMixin.java:34: 错误: 找不到符号
+inBlockEntityMixin.java:50: 错误: Nullable 不是可重复的批注接口
+inBlockEntityMixin.java:50: 错误: Nullable 不是可重复的批注接口
+EntityRendererMixin.java:24: 错误: 找不到符号
+sMixin.java:24: 错误: 找不到符号
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableLightLut.java:71: 错误:
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableLightLut.java:127: 错误
+ityMixin.java:213: 错误: 找不到符号
+ypeMixin.java:30: 错误: 找不到符号
+inBlockEntityMixin.java:64: 错误: 找不到符号
+inBlockEntityMixin.java:79: 错误: 找不到符号
+inOperatingBlockEntityMixin.java:56: 错误: 找不到符号
+y\BlockEntityBehaviourMixin.java:60: 错误: 找不到符号
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:71: 错误: 找不到符号
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:73: 错误: 找不到符号
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:85: 错误: 找不到符号
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:88: 错误: 找不到符号
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:104: 错误: 找不到符号
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:105: 错误: 无法将类 CompoundTag中的方法 getList应用到给定类型;
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:105: 错误: 找不到符号
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:106: 错误: 找不到符号
+y\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:115: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+y\harvester_behaviour\HarvesterMovementBehaviourMixin.java:35: 错误: 找不到符号
+y\harvester_block_entity\HarvesterBlockEntityMixin.java:68: 错误: 找不到符号
+y\harvester_block_entity\HarvesterBlockMixin.java:41: 错误: isClientSide 在 Level 中是 private 访问控制
+eakingKineticBlockEntityMixin.java:59: 错误: 找不到符号
+eakingKineticBlockEntityMixin.java:59: 错误: 找不到符号
+ityMixin.java:34: 错误: 找不到符号
+ontraptionEntityMixin.java:163: 错误: 不兼容的类型: Object无法转换为Entity
+ontraptionEntityMixin.java:170: 错误: 不兼容的类型: CompoundTag无法转换为ValueOutput
+ontraptionEntityMixin.java:188: 错误: 找不到符号
+ontraptionEntityMixin.java:268: 错误: 找不到符号
+onColliderMixin.java:129: 错误: 不兼容的类型: com.zurrtum.create.foundation.collision.Matrix3d无法转换为org.joml.Matrix3d
+onColliderMixin.java:133: 错误: 不兼容的类型: com.zurrtum.create.foundation.collision.Matrix3d无法转换为org.joml.Matrix3d
+onVisualMixin.java:65: 错误: 不兼容的类型: Entity无法转换为AbstractContraptionEntity
+onVisualMixin.java:81: 错误: 找不到符号
+onVisualMixin.java:99: 错误: 找不到符号
+onVisualMixin.java:104: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+onVisualMixin.java:105: 错误: 找不到符号
+tityMixin.java:128: 错误: 找不到符号
+tityMixin.java:131: 错误: 找不到符号
+tityMixin.java:134: 错误: 找不到符号
+tityMixin.java:150: 错误: 找不到符号
+tityMixin.java:168: 错误: isClientSide 在 Level 中是 private 访问控制
+BeltMillstoneBlocksMixin.java:46: 错误: 找不到符号
+BeltMillstoneBlocksMixin.java:46: 错误: 不兼容的类型: BeltMillstoneBlocksMixin无法转换为BeltBlock
+lerDataMixin.java:61: 错误: 找不到符号
+EntityMixin.java:65: 错误: 不兼容的类型: Optional<Float>无法转换为float
+rBlockEntityMixin.java:57: 错误: 找不到符号
+rBlockEntityMixin.java:69: 错误: 找不到符号
+rInteractionHandlerMixin.java:87: 错误: 找不到符号
+rInteractionHandlerMixin.java:96: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+tityRendererMixin.java:40: 错误: 找不到符号
+tityRendererMixin.java:43: 错误: 找不到符号
+BlockEntityMixin.java:60: 错误: 找不到符号
+alArmSublevelFailure.java:49: 错误: 不兼容的类型: Object无法转换为Integer
+zzleBEFixesMixin.java:77: 错误: 对于getNearest(double,double,double), 找不到合适的方法
+zzleHoveringMixin.java:90: 错误: random 在 Level 中是 protected 访问控制
+zzleHoveringMixin.java:101: 错误: 不兼容的类型: NozzleHoveringMixin无法转换为NozzleBlockEntity
+ixin.java:97: 错误: 找不到符号
+lockEntityTypesMixin.java:42: 错误: 找不到符号
+\RedstoneContactBlockEntity.java:50: 错误: RedstoneContactBlockEntity不是抽象的, 并且未覆盖SmartBlockEntity中的抽象方法addBehaviours(List
+\RedstoneContactBlockEntity.java:58: 错误: 名称冲突: RedstoneContactBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour>) 
+\RedstoneContactBlockEntity.java:67: 错误: 找不到符号
+\RedstoneContactBlockEntity.java:92: 错误: 不兼容的类型: Object无法转换为AbstractContraptionEntity
+\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+\RedstoneContactBlockEntity.java:98: 错误: 找不到符号
+\RedstoneContactBlockEntity.java:107: 错误: 找不到符号
+\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+\RedstoneContactBlockEntity.java:118: 错误: 找不到符号
+toneContactBlockMixin.java:55: 错误: isClientSide 在 Level 中是 private 访问控制
+toneContactBlockMixin.java:56: 错误: 找不到符号
+kValueBoxMixin.java:29: 错误: 找不到符号
+neMixin.java:55: 错误: 找不到符号
+neMixin.java:63: 错误: 对于bufferCuboidLine(Pose,VertexConsumer,Vector3f,Direction,float,float,Vector4f,int,boolean), 找不到合适
+ixin.java:31: 错误: 找不到符号
+ixin.java:38: 错误: 找不到符号
+dQuillHandlerMixin.java:97: 错误: 找不到符号
+portMixin.java:127: 错误: 不兼容的类型: Object无法转换为SubLevel
+portMixin.java:134: 错误: 不兼容的类型: Block无法转换为List<Block>
+portMixin.java:139: 错误: 找不到符号
+ansformMixin.java:51: 错误: 找不到符号
+ansformMixin.java:53: 错误: 找不到符号
+mplateMixin.java:62: 错误: 无法将类 CompoundTag中的方法 getList应用到给定类型;
+mplateMixin.java:67: 错误: 找不到符号
+mplateMixin.java:68: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+mplateMixin.java:69: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+tityMixin.java:244: 错误: 找不到符号
+tityMixin.java:245: 错误: 程序包com.zurrtum.create.catnip.platform.CatnipServices不存在
+tityMixin.java:247: 错误: 程序包com.zurrtum.create.catnip.platform.CatnipServices不存在
+tityMixin.java:292: 错误: 不兼容的类型: Optional<Boolean>无法转换为boolean
+tityMixin.java:293: 错误: 无法将类 CompoundTag中的方法 contains应用到给定类型;
+tityMixin.java:294: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+tityMixin.java:295: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+tityMixin.java:300: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+tityMixin.java:301: 错误: 不兼容的类型: Optional<Double>无法转换为double
+tityMixin.java:302: 错误: 不兼容的类型: Optional<Double>无法转换为double
+tityMixin.java:303: 错误: 不兼容的类型: Optional<Double>无法转换为double
+tityMixin.java:45: 错误: 找不到符号
+Mixin.java:58: 错误: 不兼容的类型: 条件表达式中的类型错误
+Mixin.java:65: 错误: 不兼容的类型: Object无法转换为BlockPos
+Mixin.java:65: 错误: 不兼容的类型: Object无法转换为BlockPos
+Mixin.java:65: 错误: 不兼容的类型: 方法引用无效
+royPacketMixin.java:28: 错误: 找不到符号
+neMixin.java:108: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+tionVisualMixin.java:55: 错误: 不兼容的类型: AbstractContraptionEntity无法转换为CarriageContraptionEntity
+tionVisualMixin.java:74: 错误: 找不到符号
+isualMixin.java:40: 错误: 找不到符号
+isualMixin.java:43: 错误: 找不到符号
+Mixin.java:39: 错误: 找不到符号
+xin.java:38: 错误: 不兼容的类型: StarLightEngineMixin无法转换为BlockStarLightEngine
+xin.java:57: 错误: 不兼容的类型: StarLightEngineMixin无法转换为BlockStarLightEngine
+yMixin.java:158: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+n\ClientboundEntityPositionSyncPacketMixin.java:36: 错误: 不兼容的类型: ClientboundEntityPositionSyncPacket无法转换为PacketActuallyI
+n\ClientboundEntityPositionSyncPacketMixin.java:33: 错误: 不兼容的类型: ClientboundEntityPositionSyncPacket无法转换为PacketActuallyI
+n\ClientboundTeleportEntityPacketMixin.java:36: 错误: 不兼容的类型: ClientboundTeleportEntityPacket无法转换为PacketActuallyInSubLeve
+n\ClientboundTeleportEntityPacketMixin.java:33: 错误: 不兼容的类型: ClientboundTeleportEntityPacket无法转换为PacketActuallyInSubLeve
+in.java:102: 错误: 不兼容的类型: Path无法转换为PathExtension
+xin.java:161: 错误: 不兼容的类型: EntityMixin无法转换为ServerPlayer
+n.java:233: 错误: 不兼容的类型: EntityMixin无法转换为LivingEntity
+tyMixin.java:87: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+tyMixin.java:115: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\particle\ServerLevelMixin.java:21: 错误: 不兼容的
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:75: 错误: 不兼容的类型: L
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:84: 错误: 不兼容的类型: L
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:106: 错误: 不兼容的类型: 
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:125: 错误: 不兼容的类型: 
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\lighting\LevelChunkMixin.java:32: 错误: 
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:59: 错误: 不兼容的类型: 
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:60: 错误: 不兼容的类型: 
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:61: 错误: 不兼容的类型: 
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:79: 错误: 不兼容的类型: 
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:97: 错误: 不兼容的类型: 
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:117: 错误: 不兼容的类型:
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:132: 错误: 不兼容的类型:
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:146: 错误: 不兼容的类型:
+EngineMixin.java:17: 错误: 不兼容的类型: LevelLightEngineMixin无法转换为LevelLightEngine
+EngineMixin.java:25: 错误: 不兼容的类型: LevelLightEngineMixin无法转换为LevelLightEngine
+eMixin.java:21: 错误: 不兼容的类型: LightEngineMixin无法转换为BlockLightEngine
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\world_border\ServerLevelMixin.java:18: 错误: 
+ubLevelBlockBreakingUtility.java:63: 错误: 不兼容的类型: Object无法转换为BlockPos
+terTicker.java:45: 错误: 找不到符号
+ointHolder.java:29: 错误: 找不到符号
+ointHolder.java:36: 错误: 找不到符号
+ointHolder.java:37: 错误: 找不到符号
+ointHolder.java:37: 错误: 不兼容的类型: Object无法转换为PointHolder
+veringHelper.java:101: 错误: 找不到符号
+veringHelper.java:112: 错误: 找不到符号
+veringHelper.java:114: 错误: 找不到符号
+veringHelper.java:119: 错误: 找不到符号
+veringHelper.java:132: 错误: 找不到符号
+veringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+veringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+veringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\physics\callback\BeltBlockCallback.java:59: 错误: 找
+EntityMixin.java:245: 错误: 程序包com.zurrtum.create.catnip.platform.CatnipServices不存在
+EntityMixin.java:247: 错误: 程序包com.zurrtum.create.catnip.platform.CatnipServices不存在
+tionControlsRendererMixin.java:19: 错误: 找不到符号
+tionControlsRendererMixin.java:34: 错误: 找不到符号
+yorInteractionHandlerMixin.java:38: 错误: 找不到符号
+yorInteractionHandlerMixin.java:39: 错误: 找不到符号
+yorInteractionHandlerMixin.java:83: 错误: 找不到符号
+geInteractionHandlerMixin.java:36: 错误: 找不到符号
+geInteractionHandlerMixin.java:46: 错误: 找不到符号
+lBlockEntityTypesMixin.java:32: 错误: 找不到符号
+lBlockEntityTypesMixin.java:34: 错误: 找不到符号
+lBlockEntityTypesMixin.java:37: 错误: 找不到符号
+ct\RedstoneContactBlockEntityTypeGetter.java:12: 错误: 找不到符号
+lineMixin.java:28: 错误: 找不到符号
+lineMixin.java:50: 错误: 找不到符号
+lineMixin.java:58: 错误: 找不到符号
+lineMixin.java:71: 错误: 找不到符号
+usterOutlineMixin.java:25: 错误: 找不到符号
+usterOutlineMixin.java:49: 错误: 找不到符号
+usterOutlineMixin.java:74: 错误: 找不到符号
+AABBOutlineMixin.java:25: 错误: 找不到符号
+AABBOutlineMixin.java:43: 错误: 找不到符号
+AABBOutlineMixin.java:54: 错误: 找不到符号
+ckEntityRendererMixin.java:15: 错误: 找不到符号
+atsMixin.java:15: 错误: 找不到符号
+in.java:26: 错误: 找不到符号
+in.java:39: 错误: 找不到符号
+yVisualMixin.java:26: 错误: 找不到符号
+yVisualMixin.java:34: 错误: 找不到符号
+k\BeltMillstoneBlocksMixin.java:46: 错误: 找不到符号
+yorInteractionHandlerMixin.java:87: 错误: 找不到符号
+lBlockEntityTypesMixin.java:42: 错误: 找不到符号
+EntityMixin.java:45: 错误: 找不到符号
+yVisualMixin.java:40: 错误: 找不到符号
+yVisualMixin.java:43: 错误: 找不到符号
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:62: 错误: 此处需要接口
+asinBlockEntityMixin.java:50: 错误: Nullable 不是可重复的批注接口
+asinBlockEntityMixin.java:50: 错误: Nullable 不是可重复的批注接口
+ckEntityRendererMixin.java:24: 错误: 找不到符号
+atsMixin.java:24: 错误: 找不到符号
+lineMixin.java:55: 错误: 找不到符号
+ntityMixin.java:213: 错误: 找不到符号
+gTypeMixin.java:30: 错误: 找不到符号
+asinBlockEntityMixin.java:64: 错误: 找不到符号
+asinBlockEntityMixin.java:79: 错误: 找不到符号
+asinOperatingBlockEntityMixin.java:56: 错误: 找不到符号
+ity\BlockEntityBehaviourMixin.java:60: 错误: 找不到符号
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:71: 错误: 找不到符号
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:85: 错误: 找不到符号
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:88: 错误: 找不到符号
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:104: 错误: 找不到符号
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:105: 错误: 找不到符号
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:106: 错误: 找不到符号
+ity\harvester_behaviour\HarvesterMovementBehaviourMixin.java:35: 错误: 找不到符号
+ity\harvester_block_entity\HarvesterBlockEntityMixin.java:68: 错误: 找不到符号
+BreakingKineticBlockEntityMixin.java:59: 错误: 找不到符号
+BreakingKineticBlockEntityMixin.java:59: 错误: 找不到符号
+ntityMixin.java:34: 错误: 找不到符号
+tContraptionEntityMixin.java:188: 错误: 找不到符号
+tContraptionEntityMixin.java:268: 错误: 找不到符号
+tionVisualMixin.java:81: 错误: 找不到符号
+tionVisualMixin.java:99: 错误: 找不到符号
+tionVisualMixin.java:105: 错误: 找不到符号
+EntityMixin.java:128: 错误: 找不到符号
+EntityMixin.java:131: 错误: 找不到符号
+EntityMixin.java:134: 错误: 找不到符号
+EntityMixin.java:150: 错误: 找不到符号
+oilerDataMixin.java:61: 错误: 找不到符号
+yorBlockEntityMixin.java:57: 错误: 找不到符号
+yorBlockEntityMixin.java:69: 错误: 找不到符号
+EntityRendererMixin.java:40: 错误: 找不到符号
+EntityRendererMixin.java:43: 错误: 找不到符号
+eyBlockEntityMixin.java:60: 错误: 找不到符号
+eMixin.java:97: 错误: 找不到符号
+ct\RedstoneContactBlockEntity.java:67: 错误: 找不到符号
+ct\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+ct\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+ct\RedstoneContactBlockEntity.java:98: 错误: 找不到符号
+ct\RedstoneContactBlockEntity.java:107: 错误: 找不到符号
+ct\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+ct\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+ct\RedstoneContactBlockEntity.java:118: 错误: 找不到符号
+ockValueBoxMixin.java:29: 错误: 找不到符号
+xMixin.java:31: 错误: 找不到符号
+lMixin.java:38: 错误: 找不到符号
+AndQuillHandlerMixin.java:97: 错误: 找不到符号
+ExportMixin.java:139: 错误: 找不到符号
+TransformMixin.java:51: 错误: 找不到符号
+TransformMixin.java:53: 错误: 找不到符号
+TemplateMixin.java:67: 错误: 找不到符号
+EntityMixin.java:244: 错误: 找不到符号
+stroyPacketMixin.java:28: 错误: 找不到符号
+aptionVisualMixin.java:74: 错误: 找不到符号
+plMixin.java:39: 错误: 找不到符号
+esterTicker.java:45: 错误: 找不到符号
+\PointHolder.java:29: 错误: 找不到符号
+\PointHolder.java:36: 错误: 找不到符号
+\PointHolder.java:37: 错误: 找不到符号
+HoveringHelper.java:101: 错误: 找不到符号
+HoveringHelper.java:112: 错误: 找不到符号
+HoveringHelper.java:114: 错误: 找不到符号
+HoveringHelper.java:119: 错误: 找不到符号
+HoveringHelper.java:132: 错误: 找不到符号
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\physics\callback\BeltBlockCallback.java:59: 错误:
+e.java:164: 错误: 不兼容的类型: IntIterator无法转换为LongIterator
+e.java:166: 错误: 不兼容的类型: Long无法转换为Integer
+e.java:195: 错误: 不兼容的类型: Object无法转换为Entry
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:115: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+tContraptionEntityMixin.java:163: 错误: 不兼容的类型: Object无法转换为Entity
+tContraptionEntityMixin.java:170: 错误: 不兼容的类型: CompoundTag无法转换为ValueOutput
+tionColliderMixin.java:129: 错误: 不兼容的类型: com.zurrtum.create.foundation.collision.Matrix3d无法转换为org.joml.Matrix3d
+tionColliderMixin.java:133: 错误: 不兼容的类型: com.zurrtum.create.foundation.collision.Matrix3d无法转换为org.joml.Matrix3d
+tionVisualMixin.java:65: 错误: 不兼容的类型: Entity无法转换为AbstractContraptionEntity
+k\BeltMillstoneBlocksMixin.java:46: 错误: 不兼容的类型: BeltMillstoneBlocksMixin无法转换为BeltBlock
+ckEntityMixin.java:65: 错误: 不兼容的类型: Optional<Float>无法转换为float
+icalArmSublevelFailure.java:49: 错误: 不兼容的类型: Object无法转换为Integer
+NozzleHoveringMixin.java:101: 错误: 不兼容的类型: NozzleHoveringMixin无法转换为NozzleBlockEntity
+ct\RedstoneContactBlockEntity.java:92: 错误: 不兼容的类型: Object无法转换为AbstractContraptionEntity
+ExportMixin.java:127: 错误: 不兼容的类型: Object无法转换为SubLevel
+ExportMixin.java:134: 错误: 不兼容的类型: Block无法转换为List<Block>
+TemplateMixin.java:68: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+TemplateMixin.java:69: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+EntityMixin.java:292: 错误: 不兼容的类型: Optional<Boolean>无法转换为boolean
+EntityMixin.java:294: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+EntityMixin.java:295: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+EntityMixin.java:300: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+EntityMixin.java:301: 错误: 不兼容的类型: Optional<Double>无法转换为double
+EntityMixin.java:302: 错误: 不兼容的类型: Optional<Double>无法转换为double
+EntityMixin.java:303: 错误: 不兼容的类型: Optional<Double>无法转换为double
+erMixin.java:58: 错误: 不兼容的类型: 条件表达式中的类型错误
+erMixin.java:65: 错误: 不兼容的类型: Object无法转换为BlockPos
+erMixin.java:65: 错误: 不兼容的类型: Object无法转换为BlockPos
+erMixin.java:65: 错误: 不兼容的类型: 方法引用无效
+aptionVisualMixin.java:55: 错误: 不兼容的类型: AbstractContraptionEntity无法转换为CarriageContraptionEntity
+Mixin.java:38: 错误: 不兼容的类型: StarLightEngineMixin无法转换为BlockStarLightEngine
+Mixin.java:57: 错误: 不兼容的类型: StarLightEngineMixin无法转换为BlockStarLightEngine
+ityMixin.java:158: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+xin\ClientboundEntityPositionSyncPacketMixin.java:36: 错误: 不兼容的类型: ClientboundEntityPositionSyncPacket无法转换为PacketActuall
+xin\ClientboundEntityPositionSyncPacketMixin.java:33: 错误: 不兼容的类型: ClientboundEntityPositionSyncPacket无法转换为PacketActuall
+xin\ClientboundTeleportEntityPacketMixin.java:36: 错误: 不兼容的类型: ClientboundTeleportEntityPacket无法转换为PacketActuallyInSubLe
+xin\ClientboundTeleportEntityPacketMixin.java:33: 错误: 不兼容的类型: ClientboundTeleportEntityPacket无法转换为PacketActuallyInSubLe
+ixin.java:102: 错误: 不兼容的类型: Path无法转换为PathExtension
+Mixin.java:161: 错误: 不兼容的类型: EntityMixin无法转换为ServerPlayer
+xin.java:233: 错误: 不兼容的类型: EntityMixin无法转换为LivingEntity
+tityMixin.java:87: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+tityMixin.java:115: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\particle\ServerLevelMixin.java:21: 错误: 不兼
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:75: 错误: 不兼容的类型:
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:84: 错误: 不兼容的类型:
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:106: 错误: 不兼容的类型
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:125: 错误: 不兼容的类型
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\lighting\LevelChunkMixin.java:32: 错误
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:59: 错误: 不兼容的类型
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:60: 错误: 不兼容的类型
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:61: 错误: 不兼容的类型
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:79: 错误: 不兼容的类型
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:97: 错误: 不兼容的类型
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:117: 错误: 不兼容的类
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:132: 错误: 不兼容的类
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:146: 错误: 不兼容的类
+htEngineMixin.java:17: 错误: 不兼容的类型: LevelLightEngineMixin无法转换为LevelLightEngine
+htEngineMixin.java:25: 错误: 不兼容的类型: LevelLightEngineMixin无法转换为LevelLightEngine
+ineMixin.java:21: 错误: 不兼容的类型: LightEngineMixin无法转换为BlockLightEngine
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\world_border\ServerLevelMixin.java:18: 错误
+\SubLevelBlockBreakingUtility.java:63: 错误: 不兼容的类型: Object无法转换为BlockPos
+\PointHolder.java:37: 错误: 不兼容的类型: Object无法转换为PointHolder
+tionVisualMixin.java:104: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+yorInteractionHandlerMixin.java:96: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+NozzleBEFixesMixin.java:77: 错误: 对于getNearest(double,double,double), 找不到合适的方法
+lineMixin.java:63: 错误: 对于bufferCuboidLine(Pose,VertexConsumer,Vector3f,Direction,float,float,Vector4f,int,boolean), 找不到
+lineMixin.java:108: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:73: 错误: 找不到符号
+dstoneContactBlockMixin.java:56: 错误: 找不到符号
+ity\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:105: 错误: 无法将类 CompoundTag中的方法 getList应用到给定类型;
+TemplateMixin.java:62: 错误: 无法将类 CompoundTag中的方法 getList应用到给定类型;
+EntityMixin.java:293: 错误: 无法将类 CompoundTag中的方法 contains应用到给定类型;
+ity\harvester_block_entity\HarvesterBlockMixin.java:41: 错误: isClientSide 在 Level 中是 private 访问控制
+EntityMixin.java:168: 错误: isClientSide 在 Level 中是 private 访问控制
+NozzleHoveringMixin.java:90: 错误: random 在 Level 中是 protected 访问控制
+dstoneContactBlockMixin.java:55: 错误: isClientSide 在 Level 中是 private 访问控制
+HoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+HoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+HoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+ct\RedstoneContactBlockEntity.java:50: 错误: RedstoneContactBlockEntity不是抽象的, 并且未覆盖SmartBlockEntity中的抽象方法addBehaviours(Li
+ct\RedstoneContactBlockEntity.java:58: 错误: 名称冲突: RedstoneContactBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour>

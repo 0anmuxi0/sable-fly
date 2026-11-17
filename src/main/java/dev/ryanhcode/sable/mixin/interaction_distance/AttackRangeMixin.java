@@ -24,8 +24,7 @@ public abstract class AttackRangeMixin {
    @Shadow
    public abstract float hitboxMargin();
 
-   @Inject(
-      method = {"isInRange(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/Vec3;)Z"},
+   @Inject(require = 0, method = {"isInRange(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/Vec3;)Z"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -39,8 +38,7 @@ public abstract class AttackRangeMixin {
       }
    }
 
-   @Inject(
-      method = {"isInRange(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/AABB;D)Z"},
+   @Inject(require = 0, method = {"isInRange(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/AABB;D)Z"},
       at = {@At("HEAD")},
       cancellable = true
    )

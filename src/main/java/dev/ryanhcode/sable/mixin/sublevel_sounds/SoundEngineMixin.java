@@ -22,8 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin({SoundEngine.class})
 public class SoundEngineMixin {
-   @ModifyVariable(
-      method = {"play"},
+   @ModifyVariable(require = 0, method = {"play"},
       at = {@At("HEAD")},
       argsOnly = true
    )
@@ -37,8 +36,7 @@ public class SoundEngineMixin {
       }
    }
 
-   @ModifyVariable(
-      method = {"stop(Lnet/minecraft/client/resources/sounds/SoundInstance;)V"},
+   @ModifyVariable(require = 0, method = {"stop(Lnet/minecraft/client/resources/sounds/SoundInstance;)V"},
       at = {@At("HEAD")},
       argsOnly = true
    )
@@ -46,8 +44,7 @@ public class SoundEngineMixin {
       return (SoundInstance)(instance instanceof SoundInstanceDelegated delegated && delegated.getDelegate() != null ? delegated.getDelegate() : instance);
    }
 
-   @Inject(
-      method = {"tickInGameSound"},
+   @Inject(require = 0, method = {"tickInGameSound"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/sounds/ChannelAccess$ChannelHandle;execute(Ljava/util/function/Consumer;)V",
@@ -64,8 +61,7 @@ public class SoundEngineMixin {
       }
    }
 
-   @Inject(
-      method = {"stop(Lnet/minecraft/client/resources/sounds/SoundInstance;)V"},
+   @Inject(require = 0, method = {"stop(Lnet/minecraft/client/resources/sounds/SoundInstance;)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/sounds/ChannelAccess$ChannelHandle;execute(Ljava/util/function/Consumer;)V",

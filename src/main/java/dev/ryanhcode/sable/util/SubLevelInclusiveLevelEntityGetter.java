@@ -29,13 +29,13 @@ public class SubLevelInclusiveLevelEntityGetter<T extends EntityAccess> implemen
       Sable.LOGGER.error("Aborting entity get for abnormally large AABB: {}", aabb, new Throwable("Stack Trace"));
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public T get(int i) {
       return this.delegate.get(i);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public T get(UUID uUID) {
       return this.delegate.get(uUID);

@@ -62,7 +62,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
    @Shadow
    private Vec3 position;
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private BlockState inBlockState;
    @Shadow
    private BlockPos blockPosition;
@@ -80,8 +80,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
    @Shadow
    public abstract Level level();
 
-   @WrapOperation(
-      method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
+   @WrapOperation(require = 0, method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;setOnGroundWithMovement(ZZLnet/minecraft/world/phys/Vec3;)V"
@@ -95,8 +94,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
       original.call(instance, this.verticalCollisionBelow, this.horizontalCollision, arg);
    }
 
-   @WrapOperation(
-      method = {"restituteMovementAfterCollisions(Lnet/minecraft/world/level/block/state/BlockState;ZZLnet/minecraft/world/phys/Vec3;)V"},
+   @WrapOperation(require = 0, method = {"restituteMovementAfterCollisions(Lnet/minecraft/world/level/block/state/BlockState;ZZLnet/minecraft/world/phys/Vec3;)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/block/Block;bounceOn(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;D)V"
@@ -123,8 +121,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
       }
    }
 
-   @WrapOperation(
-      method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
+   @WrapOperation(require = 0, method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;checkFallDamage(DZLnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)V"
@@ -147,8 +144,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
       }
    }
 
-   @WrapOperation(
-      method = {"applyEffectsFromBlocks(Ljava/util/List;)V"},
+   @WrapOperation(require = 0, method = {"applyEffectsFromBlocks(Ljava/util/List;)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/block/Block;stepOn(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/Entity;)V"
@@ -171,8 +167,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
       }
    }
 
-   @Redirect(
-      method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
+   @Redirect(require = 0, method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;collide(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;"
@@ -221,8 +216,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
       return afterVanillaCollision;
    }
 
-   @Inject(
-      method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
+   @Inject(require = 0, method = {"move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"},
       at = {@At("TAIL")}
    )
    public void sable$moveInject(MoverType moverType, Vec3 vec3, CallbackInfo ci) {
@@ -230,7 +224,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
          this.horizontalCollision = this.horizontalCollision | this.sable$collisionInfo.subLevelHorizontalCollision;
       }
 
-      if (!((Object)this instanceof LivingEntity)
+      if (!(((Object)this) instanceof LivingEntity)
          && this.sable$collisionInfo != null
          && this.sable$collisionInfo.inheritedMotion != null
          && this.sable$collisionInfo.inheritedMotion.lengthSqr() > Math.pow(1.0E-6, 2.0)) {
@@ -242,7 +236,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
    public abstract void setPos(Vec3 var1);
 
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public abstract Entity getVehicle();
 
    @Shadow
@@ -260,8 +254,7 @@ public abstract class EntityMixin implements EntityMovementExtension {
    @Shadow
    public abstract void kill(ServerLevel var1);
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At("TAIL")}
    )
    public void sable$tickInject(CallbackInfo ci) {

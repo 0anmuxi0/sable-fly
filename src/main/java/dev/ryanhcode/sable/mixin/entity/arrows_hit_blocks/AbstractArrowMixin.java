@@ -33,8 +33,7 @@ public abstract class AbstractArrowMixin extends Entity {
       super(entityType, level);
    }
 
-   @Redirect(
-      method = {"onHitBlock"},
+   @Redirect(require = 0, method = {"onHitBlock"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/projectile/arrow/AbstractArrow;setPos(Lnet/minecraft/world/phys/Vec3;)V"
@@ -58,8 +57,7 @@ public abstract class AbstractArrowMixin extends Entity {
       }
    }
 
-   @Redirect(
-      method = {"onHitBlock"},
+   @Redirect(require = 0, method = {"onHitBlock"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/projectile/arrow/AbstractArrow;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V"
@@ -80,8 +78,7 @@ public abstract class AbstractArrowMixin extends Entity {
       }
    }
 
-   @Inject(
-      method = {"startFalling"},
+   @Inject(require = 0, method = {"startFalling"},
       at = {@At("TAIL")}
    )
    private void sable$startFalling(CallbackInfo ci) {
@@ -91,8 +88,7 @@ public abstract class AbstractArrowMixin extends Entity {
       }
    }
 
-   @Redirect(
-      method = {"shouldFall"},
+   @Redirect(require = 0, method = {"shouldFall"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;noCollision(Lnet/minecraft/world/phys/AABB;)Z"

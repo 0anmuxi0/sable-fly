@@ -21,8 +21,7 @@ public abstract class EntityMixin {
    @Shadow
    private Level level;
 
-   @Inject(
-      method = {"getViewVector"},
+   @Inject(require = 0, method = {"getViewVector"},
       at = {@At("RETURN")},
       cancellable = true
    )

@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({DataCommands.class})
 public class DataCommandsMixin {
-   @WrapOperation(
-      method = {"<clinit>"},
+   @WrapOperation(require = 0, method = {"<clinit>"},
       at = {@At(
          value = "INVOKE",
          target = "Ljava/util/List;of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;"

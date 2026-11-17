@@ -163,7 +163,7 @@ public class SableSpawnCommands {
       return builder;
    }
 
-   private static int spawnJenga(CommandContext<CommandSourceStack> ctx, @Nullable String name) throws CommandSyntaxException {
+   private static int spawnJenga(CommandContext<CommandSourceStack> ctx, @org.jetbrains.annotations.Nullable String name) throws CommandSyntaxException {
       CommandSourceStack source = (CommandSourceStack)ctx.getSource();
       SubLevelContainer container = SableCommandHelper.requireSubLevelContainer(ctx);
       Vec3 pos = Vec3.atCenterOf(BlockPos.containing(source.getPosition()));
@@ -210,7 +210,7 @@ public class SableSpawnCommands {
       return 1;
    }
 
-   private static int cloneSubLevel(CommandContext<CommandSourceStack> ctx, @Nullable String name) throws CommandSyntaxException {
+   private static int cloneSubLevel(CommandContext<CommandSourceStack> ctx, @org.jetbrains.annotations.Nullable String name) throws CommandSyntaxException {
       CommandSourceStack source = (CommandSourceStack)ctx.getSource();
       ServerSubLevelContainer plotContainer = SableCommandHelper.requireSubLevelContainer(ctx);
       ServerSubLevel toClone = SubLevelArgumentType.getSingleSubLevel(ctx, "sub_level");
@@ -231,7 +231,7 @@ public class SableSpawnCommands {
       return 1;
    }
 
-   private static int spawnSphere(CommandContext<CommandSourceStack> ctx, BlockState material, @Nullable String name) throws CommandSyntaxException {
+   private static int spawnSphere(CommandContext<CommandSourceStack> ctx, BlockState material, @org.jetbrains.annotations.Nullable String name) throws CommandSyntaxException {
       CommandSourceStack source = (CommandSourceStack)ctx.getSource();
       SubLevelContainer plotContainer = SableCommandHelper.requireSubLevelContainer(ctx);
       Vec3 playerPos = source.getPosition();
@@ -351,7 +351,7 @@ public class SableSpawnCommands {
       return 1;
    }
 
-   private static int spawnSlopeTest(CommandContext<CommandSourceStack> ctx, @Nullable String name) throws CommandSyntaxException {
+   private static int spawnSlopeTest(CommandContext<CommandSourceStack> ctx, @org.jetbrains.annotations.Nullable String name) throws CommandSyntaxException {
       CommandSourceStack source = (CommandSourceStack)ctx.getSource();
       ServerSubLevelContainer plotContainer = SableCommandHelper.requireSubLevelContainer(ctx);
       Vec3 playerPos = Vec3.atCenterOf(BlockPos.containing(source.getPosition()));
@@ -389,7 +389,7 @@ public class SableSpawnCommands {
       return 1;
    }
 
-   private static int spawnGrid(CommandContext<CommandSourceStack> ctx, BlockState material, @Nullable String name) throws CommandSyntaxException {
+   private static int spawnGrid(CommandContext<CommandSourceStack> ctx, BlockState material, @org.jetbrains.annotations.Nullable String name) throws CommandSyntaxException {
       CommandSourceStack source = (CommandSourceStack)ctx.getSource();
       SubLevelContainer plotContainer = SableCommandHelper.requireSubLevelContainer(ctx);
       Vec3 playerPos = source.getPosition();
@@ -420,7 +420,7 @@ public class SableSpawnCommands {
       return 1;
    }
 
-   private static int spawnBlock(CommandContext<CommandSourceStack> ctx, BlockState material, @Nullable String name) throws CommandSyntaxException {
+   private static int spawnBlock(CommandContext<CommandSourceStack> ctx, BlockState material, @org.jetbrains.annotations.Nullable String name) throws CommandSyntaxException {
       CommandSourceStack source = (CommandSourceStack)ctx.getSource();
       SubLevelContainer plotContainer = SableCommandHelper.requireSubLevelContainer(ctx);
       Vec3 playerPos = source.getPosition();
@@ -437,7 +437,7 @@ public class SableSpawnCommands {
       return 1;
    }
 
-   private static int spawnPlatform(CommandContext<CommandSourceStack> ctx, BlockState material, @Nullable String name) throws CommandSyntaxException {
+   private static int spawnPlatform(CommandContext<CommandSourceStack> ctx, BlockState material, @org.jetbrains.annotations.Nullable String name) throws CommandSyntaxException {
       CommandSourceStack source = (CommandSourceStack)ctx.getSource();
       SubLevelContainer plotContainer = SableCommandHelper.requireSubLevelContainer(ctx);
       Vec3 playerPos = source.getPosition();
@@ -471,6 +471,6 @@ public class SableSpawnCommands {
 
    @FunctionalInterface
    private interface NamedSpawnInvoker<S> {
-      int run(CommandContext<S> var1, @Nullable String var2) throws CommandSyntaxException;
+      int run(CommandContext<S> var1, @org.jetbrains.annotations.Nullable String var2) throws CommandSyntaxException;
    }
 }

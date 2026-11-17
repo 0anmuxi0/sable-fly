@@ -12,12 +12,12 @@ public interface BlockEntitySubLevelActor {
    default void sable$physicsTick(ServerSubLevel subLevel, RigidBodyHandle handle, double timeStep) {
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default Iterable<SubLevel> sable$getLoadingDependencies() {
       return this.sable$getConnectionDependencies();
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    default Iterable<SubLevel> sable$getConnectionDependencies() {
       return null;
    }

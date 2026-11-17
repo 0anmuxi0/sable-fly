@@ -27,8 +27,7 @@ public abstract class PlayerMixin extends LivingEntity {
    @Shadow
    public abstract double entityInteractionRange();
 
-   @Inject(
-      method = {"isWithinBlockInteractionRange"},
+   @Inject(require = 0, method = {"isWithinBlockInteractionRange"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -44,8 +43,7 @@ public abstract class PlayerMixin extends LivingEntity {
       }
    }
 
-   @Inject(
-      method = {"isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z"},
+   @Inject(require = 0, method = {"isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z"},
       at = {@At("HEAD")},
       cancellable = true
    )

@@ -25,8 +25,7 @@ public abstract class EntityMixin {
    @Shadow
    public abstract void setPosRaw(double var1, double var3, double var5);
 
-   @Inject(
-      method = {"load"},
+   @Inject(require = 0, method = {"load"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;setPosRaw(DDD)V",

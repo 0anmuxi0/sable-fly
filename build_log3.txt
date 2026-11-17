@@ -1,0 +1,44 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Fabric Loom: 1.18.4
+
+> Task :compileJava
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\AbstractContraptionEntityMixin.java:213: 错误: 找不到符号
+        Vec3 rotationOffset = VecHelper.getCenterOf((Vec3i)BlockPos.ZERO);
+                                       ^
+  符号:   方法 getCenterOf(Vec3i)
+  位置: 类 VecHelper
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+1 个错误
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/_anmuxi_/Desktop/Sable-Fly/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\AbstractContraptionEntityMixin.java:213: 错误: 找不到符号
+          Vec3 rotationOffset = VecHelper.getCenterOf((Vec3i)BlockPos.ZERO);
+                                         ^
+    符号:   方法 getCenterOf(Vec3i)
+    位置: 类 VecHelper
+  注: 某些输入文件使用或覆盖了已过时的 API。
+  注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+  注: 某些输入文件使用了未经检查或不安全的操作。
+  注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+  1 个错误
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 13s
+1 actionable task: 1 executed

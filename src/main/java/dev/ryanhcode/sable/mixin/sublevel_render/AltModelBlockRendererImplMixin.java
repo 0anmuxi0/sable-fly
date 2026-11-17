@@ -8,8 +8,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
    targets = {"net.fabricmc.fabric.impl.client.indigo.renderer.render.AltModelBlockRendererImpl"}
 )
 public class AltModelBlockRendererImplMixin {
-   @ModifyVariable(
-      method = {"<init>"},
+   @ModifyVariable(require = 0, method = {"<init>"},
       at = {@At("HEAD")},
       argsOnly = true,
       index = 2

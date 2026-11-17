@@ -19,8 +19,7 @@ public class ChunkMapMixin {
    @Final
    private ServerLevel level;
 
-   @WrapOperation(
-      method = {"*"},
+   @WrapOperation(require = 0, method = {"*"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ChunkMap$DistanceManager;inEntityTickingRange(J)Z"

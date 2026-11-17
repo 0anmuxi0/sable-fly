@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 public class PlotChunkHolder extends ChunkHolder {
    private final LevelChunk chunk;
    private final HeatDataChunkSection[] heatSections;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private BoundingBox3i boundingBox;
    private boolean networkDirty = false;
 
@@ -143,7 +143,7 @@ public class PlotChunkHolder extends ChunkHolder {
    }
 
    @Override
-   public void rescheduleChunkTask(ChunkMap chunkMap, @Nullable ChunkStatus chunkStatus) {
+   public void rescheduleChunkTask(ChunkMap chunkMap, @org.jetbrains.annotations.Nullable ChunkStatus chunkStatus) {
    }
 
    @Override
@@ -157,7 +157,7 @@ public class PlotChunkHolder extends ChunkHolder {
       return this.chunk;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public HeatDataChunkSection getHeatSection(int y) {
       int index = y - this.chunk.getMinSectionY();
       return index >= 0 && index < this.heatSections.length ? this.heatSections[index] : null;

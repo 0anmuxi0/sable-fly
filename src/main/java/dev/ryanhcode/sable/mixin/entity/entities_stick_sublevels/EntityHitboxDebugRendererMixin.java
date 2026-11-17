@@ -24,8 +24,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({EntityHitboxDebugRenderer.class})
 public class EntityHitboxDebugRendererMixin {
-   @WrapOperation(
-      method = {"showHitboxes"},
+   @WrapOperation(require = 0, method = {"showHitboxes"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/gizmos/Gizmos;cuboid(Lnet/minecraft/world/phys/AABB;Lnet/minecraft/gizmos/GizmoStyle;)Lnet/minecraft/gizmos/GizmoProperties;",
@@ -42,8 +41,7 @@ public class EntityHitboxDebugRendererMixin {
       return this.sable$drawRotatedBox(aabb, style, original, entity, partialTicks);
    }
 
-   @WrapOperation(
-      method = {"showHitboxes"},
+   @WrapOperation(require = 0, method = {"showHitboxes"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/gizmos/Gizmos;cuboid(Lnet/minecraft/world/phys/AABB;Lnet/minecraft/gizmos/GizmoStyle;)Lnet/minecraft/gizmos/GizmoProperties;",
@@ -78,8 +76,7 @@ public class EntityHitboxDebugRendererMixin {
       }
    }
 
-   @WrapOperation(
-      method = {"showHitboxes"},
+   @WrapOperation(require = 0, method = {"showHitboxes"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/gizmos/Gizmos;cuboid(Lnet/minecraft/world/phys/AABB;Lnet/minecraft/gizmos/GizmoStyle;)Lnet/minecraft/gizmos/GizmoProperties;",

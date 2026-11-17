@@ -23,14 +23,13 @@ public abstract class UseOnContextMixin {
    private Level level;
    @Shadow
    @Final
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Player player;
 
    @Shadow
    public abstract BlockPos getClickedPos();
 
-   @Inject(
-      method = {"getHorizontalDirection"},
+   @Inject(require = 0, method = {"getHorizontalDirection"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -46,8 +45,7 @@ public abstract class UseOnContextMixin {
       }
    }
 
-   @Inject(
-      method = {"getRotation"},
+   @Inject(require = 0, method = {"getRotation"},
       at = {@At("HEAD")},
       cancellable = true
    )

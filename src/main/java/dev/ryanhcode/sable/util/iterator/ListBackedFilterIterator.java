@@ -19,7 +19,7 @@ public class ListBackedFilterIterator<T> implements Iterator<T> {
       this.backingList = backingList;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public T findNextObject() {
       if (this.nextObject != null) {
          return this.nextObject;

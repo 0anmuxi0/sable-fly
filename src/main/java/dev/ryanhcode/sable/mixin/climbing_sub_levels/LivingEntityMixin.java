@@ -29,8 +29,7 @@ public abstract class LivingEntityMixin extends Entity {
       super(entityType, level);
    }
 
-   @Redirect(
-      method = {"onClimbable"},
+   @Redirect(require = 0, method = {"onClimbable"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/LivingEntity;blockPosition()Lnet/minecraft/core/BlockPos;"
@@ -61,8 +60,7 @@ public abstract class LivingEntityMixin extends Entity {
       }
    }
 
-   @WrapOperation(
-      method = {"onClimbable"},
+   @WrapOperation(require = 0, method = {"onClimbable"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/LivingEntity;getInBlockState()Lnet/minecraft/world/level/block/state/BlockState;"

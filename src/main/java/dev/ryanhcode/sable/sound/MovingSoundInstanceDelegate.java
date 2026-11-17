@@ -71,19 +71,19 @@ public class MovingSoundInstanceDelegate implements SoundInstance, TickableSound
       return this.instance.getIdentifier();
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public WeighedSoundEvents getOrResolve(@NonNull SoundManager soundManager) {
       return this.instance.getOrResolve(soundManager);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public Sound getSound() {
       return this.instance.getSound();
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public WeighedSoundEvents getSoundEvent() {
       return this.instance.getSoundEvent();

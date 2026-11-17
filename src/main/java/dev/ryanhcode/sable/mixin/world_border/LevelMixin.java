@@ -11,8 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({ServerLevel.class})
 public class LevelMixin {
-   @Inject(
-      method = {"getWorldBorder"},
+   @Inject(require = 0, method = {"getWorldBorder"},
       at = {@At("RETURN")}
    )
    private void sable$initializeWorldBorder(CallbackInfoReturnable<WorldBorder> cir) {

@@ -17,8 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin({Listener.class})
 public class VibrationSystemListenerMixin {
-   @WrapMethod(
-      method = {"scheduleVibration"}
+   @WrapMethod(require = 0, method = {"scheduleVibration"}
    )
    private void sable$useGlobalPos(
       ServerLevel level, Data data, Holder<GameEvent> gameEvent, Context context, Vec3 pos, Vec3 sensorPos, Operation<Void> original
@@ -26,8 +25,7 @@ public class VibrationSystemListenerMixin {
       original.call(level, data, gameEvent, context, Sable.HELPER.projectOutOfSubLevel(level, pos), Sable.HELPER.projectOutOfSubLevel(level, sensorPos));
    }
 
-   @WrapMethod(
-      method = {"isOccluded"}
+   @WrapMethod(require = 0, method = {"isOccluded"}
    )
    private static boolean sable$occlusionChecks(Level level, Vec3 pos1, Vec3 pos2, Operation<Boolean> original) {
       ActiveSableCompanion helper = Sable.HELPER;

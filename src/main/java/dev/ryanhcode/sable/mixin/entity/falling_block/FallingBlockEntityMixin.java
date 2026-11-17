@@ -21,8 +21,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;onGround()Z",

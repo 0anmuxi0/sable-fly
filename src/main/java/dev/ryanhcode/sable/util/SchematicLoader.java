@@ -18,7 +18,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import org.jetbrains.annotations.Nullable;
 
 public class SchematicLoader {
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static StructureTemplate loadSchematic(ServerLevel level, Identifier location) {
       String namespace = location.getNamespace();
       String path = "schematics/" + location.getPath() + ".nbt";

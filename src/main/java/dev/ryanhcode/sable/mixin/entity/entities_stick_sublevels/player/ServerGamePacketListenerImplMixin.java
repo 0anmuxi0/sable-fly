@@ -19,8 +19,7 @@ public class ServerGamePacketListenerImplMixin {
    @Shadow
    public ServerPlayer player;
 
-   @Inject(
-      method = {"handleMovePlayer"},
+   @Inject(require = 0, method = {"handleMovePlayer"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
@@ -31,8 +30,7 @@ public class ServerGamePacketListenerImplMixin {
       ((ServerboundMovePlayerPacketExtension)packet).sable$handle(this.player);
    }
 
-   @WrapOperation(
-      method = {"handlePlayerPositionChange"},
+   @WrapOperation(require = 0, method = {"handlePlayerPositionChange"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerPlayer;isChangingDimension()Z"

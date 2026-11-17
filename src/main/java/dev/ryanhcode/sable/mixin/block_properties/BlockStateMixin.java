@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin({BlockState.class})
 public class BlockStateMixin implements BlockStateExtension {
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Object[] sable$properties = null;
 
    @Override

@@ -16,8 +16,7 @@ public abstract class ItemEntityMixin extends Entity {
       super(entityType, level);
    }
 
-   @Redirect(
-      method = {"tick"},
+   @Redirect(require = 0, method = {"tick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/Vec3;horizontalDistanceSqr()D"

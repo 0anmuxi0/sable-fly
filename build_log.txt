@@ -1,0 +1,1830 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Fabric Loom: 1.18.4
+
+> Task :compileJava
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:45: 错误: 程序包dev.ryanhcode.sable.mixinhelpers.block_outline_render不存在
+import dev.ryanhcode.sable.mixinhelpers.block_outline_render.SubLevelCamera;
+                                                            ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:51: 错误: 找不到符号
+import net.minecraft.client.renderer.MultiBufferSource;
+                                    ^
+  符号:   类 MultiBufferSource
+  位置: 程序包 net.minecraft.client.renderer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:75: 错误: 找不到符号
+    private final SubLevelCamera sable$sublevelCamera = new SubLevelCamera();
+                  ^
+  符号:   类 SubLevelCamera
+  位置: 类 LevelRendererMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:81: 错误: 找不到符号
+    private boolean sable$preRenderHitOutline(LevelRenderer context, Camera camera, HitResult target, DeltaTracker deltaTracker, PoseStack poseStack, MultiBufferSource bufferSource, Operation<Boolean> original, @Share(value="drawn") LocalBooleanRef drawnRef) {
+                                                                                                                                                      ^
+  符号:   类 MultiBufferSource
+  位置: 类 LevelRendererMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:62: 错误: 此处需要接口
+implements MovementBehaviour {
+           ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionControlsRendererMixin.java:19: 错误: 找不到符号
+import com.zurrtum.create.client.content.contraptions.render.ContraptionMatrices;
+                                                            ^
+  符号:   类 ContraptionMatrices
+  位置: 程序包 com.zurrtum.create.client.content.contraptions.render
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionControlsRendererMixin.java:34: 错误: 找不到符号
+    private static PoseStack sable$getViewProjection(ContraptionMatrices instance) {
+                                                     ^
+  符号:   类 ContraptionMatrices
+  位置: 类 ContraptionControlsRendererMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:38: 错误: 找不到符号
+import net.minecraft.client.renderer.MultiBufferSource;
+                                    ^
+  符号:   类 MultiBufferSource
+  位置: 程序包 net.minecraft.client.renderer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:39: 错误: 找不到符号
+import net.minecraft.client.renderer.RenderType;
+                                    ^
+  符号:   类 RenderType
+  位置: 程序包 net.minecraft.client.renderer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:83: 错误: 找不到符号
+    public static void drawCustomBlockSelection(PoseStack ms, MultiBufferSource buffer, Vec3 camera) {
+                                                              ^
+  符号:   类 MultiBufferSource
+  位置: 类 ChainConveyorInteractionHandlerMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainPackageInteractionHandlerMixin.java:36: 错误: 找不到符号
+    private static Vec3 sable$getTraceOrigin(LocalPlayer instance, @Local(argsOnly=true) ChainConveyorPackage.ChainConveyorPackagePhysicsData data) {
+                                                                                                             ^
+  符号:   类 ChainConveyorPackagePhysicsData
+  位置: 类 ChainConveyorPackage
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainPackageInteractionHandlerMixin.java:46: 错误: 找不到符号
+    private static Vec3 sable$getTraceTarget(Player playerIn, double range, Vec3 from, @Local(argsOnly=true) ChainConveyorPackage.ChainConveyorPackagePhysicsData data) {
+                                                                                                                                 ^
+  符号:   类 ChainConveyorPackagePhysicsData
+  位置: 类 ChainConveyorPackage
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:32: 错误: 找不到符号
+    private static CreateRegistrate REGISTRATE;
+                   ^
+  符号:   类 CreateRegistrate
+  位置: 类 AllBlockEntityTypesMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:34: 错误: 找不到符号
+    private static final BlockEntityEntry<RedstoneContactBlockEntity> REDSTONE_CONTACT;
+                         ^
+  符号:   类 BlockEntityEntry
+  位置: 类 AllBlockEntityTypesMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:37: 错误: 找不到符号
+    public BlockEntityEntry<RedstoneContactBlockEntity> sable$getRedstoneContactType() {
+           ^
+  符号:   类 BlockEntityEntry
+  位置: 类 AllBlockEntityTypesMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntityTypeGetter.java:12: 错误: 找不到符号
+    public BlockEntityEntry<RedstoneContactBlockEntity> sable$getRedstoneContactType();
+           ^
+  符号:   类 BlockEntityEntry
+  位置: 接口 RedstoneContactBlockEntityTypeGetter
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\AABBOutlineMixin.java:28: 错误: 找不到符号
+import com.zurrtum.create.client.catnip.render.SuperRenderTypeBuffer;
+                                              ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 程序包 com.zurrtum.create.client.catnip.render
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\AABBOutlineMixin.java:50: 错误: 找不到符号
+    public abstract void render(PoseStack var1, SuperRenderTypeBuffer var2, Vec3 var3, float var4);
+                                                ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 类 AABBOutlineMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\AABBOutlineMixin.java:58: 错误: 找不到符号
+    private void sable$pushPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                              ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 类 AABBOutlineMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\AABBOutlineMixin.java:71: 错误: 找不到符号
+    private void sable$popPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                             ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 类 AABBOutlineMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\BlockClusterOutlineMixin.java:25: 错误: 找不到符号
+import com.zurrtum.create.client.catnip.render.SuperRenderTypeBuffer;
+                                              ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 程序包 com.zurrtum.create.client.catnip.render
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\BlockClusterOutlineMixin.java:49: 错误: 找不到符号
+    private void sable$projectFromSublevel(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                                         ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 类 BlockClusterOutlineMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\BlockClusterOutlineMixin.java:74: 错误: 找不到符号
+    private void sable$popPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                             ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 类 BlockClusterOutlineMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\ChasingAABBOutlineMixin.java:25: 错误: 找不到符号
+import com.zurrtum.create.client.catnip.render.SuperRenderTypeBuffer;
+                                              ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 程序包 com.zurrtum.create.client.catnip.render
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\ChasingAABBOutlineMixin.java:43: 错误: 找不到符号
+    private void sable$pushPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                              ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 类 ChasingAABBOutlineMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\ChasingAABBOutlineMixin.java:54: 错误: 找不到符号
+    private void sable$popPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                             ^
+  符号:   类 SuperRenderTypeBuffer
+  位置: 类 ChasingAABBOutlineMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\SafeBlockEntityRendererMixin.java:15: 错误: 找不到符号
+import com.zurrtum.create.client.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
+                                                                ^
+  符号:   类 SafeBlockEntityRenderer
+  位置: 程序包 com.zurrtum.create.client.foundation.blockEntity.renderer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\stock_ticker\EntityHatsMixin.java:15: 错误: 找不到符号
+import com.zurrtum.create.client.content.equipment.hats.EntityHats;
+                                                       ^
+  符号:   类 EntityHats
+  位置: 程序包 com.zurrtum.create.client.content.equipment.hats
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\zapper\ZapperItemMixin.java:26: 错误: 找不到符号
+import net.minecraft.world.InteractionResultHolder;
+                          ^
+  符号:   类 InteractionResultHolder
+  位置: 程序包 net.minecraft.world
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\zapper\ZapperItemMixin.java:39: 错误: 找不到符号
+    private void sable$projectTargetPos(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir, @Local LocalRef<BlockHitResult> raytrace) {
+                                                                                                                 ^
+  符号:   类 InteractionResultHolder
+  位置: 类 ZapperItemMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\AbstractBlockEntityVisualMixin.java:26: 错误: 找不到符号
+import net.minecraft.world.level.BlockAndTintGetter;
+                                ^
+  符号:   类 BlockAndTintGetter
+  位置: 程序包 net.minecraft.world.level
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\AbstractBlockEntityVisualMixin.java:34: 错误: 找不到符号
+    private int sable$getLightColor(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos) {
+                                    ^
+  符号:   类 BlockAndTintGetter
+  位置: 类 AbstractBlockEntityVisualMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinBlockEntityMixin.java:50: 错误: Nullable 不是可重复的批注接口
+     @org.jetbrains.annotations.Nullable @org.jetbrains.annotations.Nullable BlazeBurnerBlock.HeatLevel cachedHeatLevel;
+     ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinBlockEntityMixin.java:50: 错误: Nullable 不是可重复的批注接口
+     @org.jetbrains.annotations.Nullable @org.jetbrains.annotations.Nullable BlazeBurnerBlock.HeatLevel cachedHeatLevel;
+                                         ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\SafeBlockEntityRendererMixin.java:24: 错误: 找不到符号
+@Mixin(value={SafeBlockEntityRenderer.class})
+              ^
+  符号: 类 SafeBlockEntityRenderer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\stock_ticker\EntityHatsMixin.java:24: 错误: 找不到符号
+@Mixin(value={EntityHats.class})
+              ^
+  符号: 类 EntityHats
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\FlywheelCompatNeoForge.java:84: 错误: 找不到符号
+        long plotCoord = ChunkPos.asLong((int)(plotPos.x - container.getOrigin().x), (int)(plotPos.z - container.getOrigin().y));
+                                 ^
+  符号:   方法 asLong(int,int)
+  位置: 类 ChunkPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableFlywheelLightStorage.java:164: 错误: 不兼容的类型: IntIterator无法转换为LongIterator
+        longIterator = this.scene2SectionArenaIndexMap.keySet().iterator();
+                                                                        ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableFlywheelLightStorage.java:166: 错误: 不兼容的类型: Long无法转换为Integer
+            int scene = (Integer)longIterator.next();
+                                                  ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableFlywheelLightStorage.java:195: 错误: 不兼容的类型: Object无法转换为Entry
+        for (Int2ObjectMap.Entry entry : sectionsToCollect.int2ObjectEntrySet()) {
+                                                                             ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableLightLut.java:71: 错误: 不兼容的类型: Object无法转换为T
+                inner.accept(innerIndices, lut);
+                             ^
+  其中, T是类型变量:
+    T扩展已在类 Layer中声明的Object
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableLightLut.java:127: 错误: 不兼容的类型: Object无法转换为T
+                if (o == null || !inner.prune(o)) continue;
+                                              ^
+  其中, T是类型变量:
+    T扩展已在类 Layer中声明的Object
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_entity_visible\LevelRendererMixin.java:43: 错误: 找不到符号
+        AABB renderBounds = renderer.getRenderBoundingBox(blockEntity);
+                                    ^
+  符号:   方法 getRenderBoundingBox(BlockEntity)
+  位置: 类型为BlockEntityRenderer的变量 renderer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:75: 错误: 找不到符号
+    private final SubLevelCamera sable$sublevelCamera = new SubLevelCamera();
+                                                            ^
+  符号:   类 SubLevelCamera
+  位置: 类 LevelRendererMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:96: 错误: 找不到符号
+        Vec3 realCameraPosition = camera.getPosition();
+                                        ^
+  符号:   方法 getPosition()
+  位置: 类型为Camera的变量 camera
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:102: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+        poseStack.mulPose(this.sable$orientationStorage.set(orientation));
+                 ^
+    方法 PoseStack.mulPose(Matrix4fc)不适用
+      (参数不匹配; Quaternionf无法转换为Matrix4fc)
+    方法 PoseStack.mulPose(Transformation)不适用
+      (参数不匹配; Quaternionf无法转换为Transformation)
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_placement\BlockPlaceContextMixin.java:135: 错误: 不兼容的类型: BlockPlaceContextMixin无法转换为BlockPlaceContext
+         boolean replaced = this.replaceClicked || this.getLevel().getBlockState(position).canBeReplaced((BlockPlaceContext)this);
+                                                                                                                            ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_properties\BlockStateMixin.java:32: 错误: 不兼容的类型: BlockStateMixin无法转换为BlockState
+            if (override.getKey().matches(stateDefinition, (BlockState)this)) {
+                                                                       ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\camera\new_camera_types\CameraTypeMixin.java:31: 错误: 不可比较的类型: CameraTypeMixin和CameraType
+      if (this == SableCameraTypes.SUB_LEVEL_VIEW) {
+               ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\camera\new_camera_types\CameraTypeMixin.java:33: 错误: 不可比较的类型: CameraTypeMixin和CameraType
+      } else if (this == SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED) {
+                      ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\camera\new_camera_types\CameraTypeMixin.java:36: 错误: 不兼容的类型: CameraTypeMixin无法转换为CameraType
+         return switch ((CameraType)this) {
+                                    ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\climbing_sub_levels\LivingEntityMixin.java:41: 错误: 不兼容的类型: LivingEntityMixin无法转换为LivingEntity
+      LivingEntity self = (LivingEntity)this;
+                                        ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\AbstractContraptionEntityMixin.java:213: 错误: 找不到符号
+        Vec3 rotationOffset = VecHelper.getCenterOf((Vec3i)BlockPos.ZERO);
+                                       ^
+  符号:   方法 getCenterOf(Vec3i)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\airflow\FanProcessingTypeMixin.java:30: 错误: 找不到符号
+        return helper.runIncludingSubLevels(level, pos.getCenter(), true, helper.getContaining(level, (Vec3i)pos), (subLevel, relativePos) -> (FanProcessingType)original.call(level, relativePos));
+                                                      ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 pos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinBlockEntityMixin.java:64: 错误: 找不到符号
+        BlazeBurnerBlock.HeatLevel heatLevel = helper.runIncludingSubLevels(level, (originalPos = this.getBlockPos().below()).getCenter(), false, helper.getContaining(level, (Vec3i)originalPos), (subLevel, pos) -> {
+                                                                                                                             ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinBlockEntityMixin.java:79: 错误: 找不到符号
+        return helper.runIncludingSubLevels(level, pos.getCenter(), true, helper.getContaining(level, (Vec3i)pos), (subLevel, internalPos) -> (BlockEntity)original.call(level, internalPos));
+                                                      ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 pos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinOperatingBlockEntityMixin.java:56: 错误: 找不到符号
+        return helper.runIncludingSubLevels(level, pos.getCenter(), true, helper.getContaining(level, (Vec3i)pos), (subLevel, internalPos) -> level.getBlockEntity(internalPos));
+                                                      ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 pos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\BlockEntityBehaviourMixin.java:60: 错误: 找不到符号
+            if (BlockEntityBehaviourMixin.sable$checkType(type) && (caughtBE = (helper = Sable.HELPER).runIncludingSubLevels(level, pos.getCenter(), true, helper.getContaining(level, (Vec3i)pos), (subLevel, internalPos) -> level.getBlockEntity(internalPos))) != null) {
+                                                                                                                                       ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 pos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:71: 错误: 找不到符号
+                Vec3 localCenter = context.localPos.getCenter();
+                                                   ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 localPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:73: 错误: 找不到符号
+                Vec3 subLevelLocalDir = (Vec3)context.rotation.apply(this.getActiveAreaOffset(context));
+                                                                         ^
+  符号: 方法 getActiveAreaOffset(MovementContext)
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:85: 错误: 找不到符号
+            if ((targetSublevel = Sable.HELPER.getContaining(context.world, (Vec3i)NbtUtils.readBlockPos((CompoundTag)context.data, (String)"BreakingPos").orElseThrow())) != null) {
+                                                                                           ^
+  符号:   方法 readBlockPos(CompoundTag,String)
+  位置: 类 NbtUtils
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:88: 错误: 找不到符号
+            context.data.put("ProjectedPos", (Tag)VecHelper.writeNBT((Vec3)JOMLConversion.toMojang((Vector3dc)checkPos)));
+                                                           ^
+  符号:   方法 writeNBT(Vec3)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:104: 错误: 找不到符号
+        Vec3 sublevelLocalCenter = context.contraption.entity.toGlobalVector(context.localPos.getCenter(), 1.0f);
+                                                                                             ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 localPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:105: 错误: 无法将类 CompoundTag中的方法 getList应用到给定类型;
+        if (data.contains("ProjectedPos") && Sable.HELPER.distanceSquaredWithSubLevels(context.world, (Position)VecHelper.readNBT((ListTag)data.getList("ProjectedPos", 6)), (Position)sublevelLocalCenter) > 4.0) {
+                                                                                                                                               ^
+  需要: String
+  找到:    String,int
+  原因: 实际参数列表和形式参数列表长度不同
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:105: 错误: 找不到符号
+        if (data.contains("ProjectedPos") && Sable.HELPER.distanceSquaredWithSubLevels(context.world, (Position)VecHelper.readNBT((ListTag)data.getList("ProjectedPos", 6)), (Position)sublevelLocalCenter) > 4.0) {
+                                                                                                                         ^
+  符号:   方法 readNBT(ListTag)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:106: 错误: 找不到符号
+            BlockPos blockPos = NbtUtils.readBlockPos((CompoundTag)data, (String)"BreakingPos").orElse(null);
+                                        ^
+  符号:   方法 readBlockPos(CompoundTag,String)
+  位置: 类 NbtUtils
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:115: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+                context.world.destroyBlockProgress(data.getInt("BreakerId"), blockPos, -1);
+                                                              ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\harvester_behaviour\HarvesterMovementBehaviourMixin.java:35: 错误: 找不到符号
+        helper.runIncludingSubLevels(context.world, pos.getCenter(), true, helper.getContaining((Entity)context.contraption.entity), (sublevel, blockPos) -> {
+                                                       ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 pos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\harvester_block_entity\HarvesterBlockEntityMixin.java:68: 错误: 找不到符号
+        Vec3 center = this.getBlockPos().getCenter();
+                                        ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\harvester_block_entity\HarvesterBlockMixin.java:41: 错误: isClientSide 在 Level 中是 private 访问控制
+        if (level.isClientSide) {
+                 ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\block_breakers\BlockBreakingKineticBlockEntityMixin.java:59: 错误: 找不到符号
+            return SubLevelBlockBreakingUtility.findBreakingPos((pos, state) -> this.canBreak((BlockState)state, state.getDestroySpeed((BlockGetter)this.level, pos)), Sable.HELPER.getContaining(this), this.getLevel(), Vec3.atLowerCornerOf((Vec3i)((Direction)this.getBlockState().getValue((Property)SawBlock.FACING)).getNormal()), this.getBlockPos().getCenter(), breakingPos);
+                                                                                                                                                                                                                                                                                                                           ^
+  符号:   方法 getNormal()
+  位置: 类 Direction
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\block_breakers\BlockBreakingKineticBlockEntityMixin.java:59: 错误: 找不到符号
+            return SubLevelBlockBreakingUtility.findBreakingPos((pos, state) -> this.canBreak((BlockState)state, state.getDestroySpeed((BlockGetter)this.level, pos)), Sable.HELPER.getContaining(this), this.getLevel(), Vec3.atLowerCornerOf((Vec3i)((Direction)this.getBlockState().getValue((Property)SawBlock.FACING)).getNormal()), this.getBlockPos().getCenter(), breakingPos);
+                                                                                                                                                                                                                                                                                                                                                            ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\blueprint\BlueprintEntityMixin.java:34: 错误: 找不到符号
+        return player.canInteractWithEntity((Entity)(Object)this, 8.0);
+                     ^
+  符号:   方法 canInteractWithEntity(Entity,double)
+  位置: 类型为Player的变量 player
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\AbstractContraptionEntityMixin.java:163: 错误: 不兼容的类型: Object无法转换为Entity
+        for (Entity entity : passengers) {
+                             ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\AbstractContraptionEntityMixin.java:170: 错误: 不兼容的类型: CompoundTag无法转换为ValueOutput
+        CompoundTag tag = super.saveWithoutId(nbt);
+                                              ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\AbstractContraptionEntityMixin.java:188: 错误: 找不到符号
+                BlockSubLevelLiftProvider.LiftProviderContext context = new BlockSubLevelLiftProvider.LiftProviderContext(blockPos, state, Vec3.atLowerCornerOf((Vec3i)prov.sable$getNormal(state).getNormal()));
+                                                                                                                                                                                                  ^
+  符号:   方法 getNormal()
+  位置: 类 Direction
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\AbstractContraptionEntityMixin.java:268: 错误: 找不到符号
+        Vec3 rotationOffset = VecHelper.getCenterOf((Vec3i)BlockPos.ZERO);
+                                       ^
+  符号:   方法 getCenterOf(Vec3i)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionColliderMixin.java:129: 错误: 不兼容的类型: com.zurrtum.create.foundation.collision.Matrix3d无法转换为org.joml.Matrix3d
+            org.joml.Matrix3d jomlMatrix = ContraptionColliderMixin.sable$toJOML(rotationState.asMatrix());
+                                                                                                       ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionColliderMixin.java:133: 错误: 不兼容的类型: com.zurrtum.create.foundation.collision.Matrix3d无法转换为org.joml.Matrix3d
+        return rotationState.asMatrix();
+                                     ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:65: 错误: 不兼容的类型: Entity无法转换为AbstractContraptionEntity
+        super(ctx, (Entity)entity, partialTick);
+                   ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:81: 错误: 找不到符号
+        FlywheelCompatNeoForge.SubLevelFlwRenderState state = FlywheelCompatNeoForge.getInfo(ChunkPos.asLong((int)plotX, (int)(plotZ = (chunkPos.z >> container.getLogPlotSize()) - container.getOrigin().y)));
+                                                                                                     ^
+  符号:   方法 asLong(int,int)
+  位置: 类 ChunkPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:99: 错误: 找不到符号
+        ((AbstractContraptionEntity)(Object)this.entity).applyLocalTransforms(sceneMatrix, partialTick);
+                                                        ^
+  符号:   方法 applyLocalTransforms(PoseStack,float)
+  位置: 类 AbstractContraptionEntity
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:104: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+        this.contraptionMatrix.mulPose(new Quaternionf(renderPose.orientation()));
+                              ^
+    方法 PoseStack.mulPose(Matrix4fc)不适用
+      (参数不匹配; Quaternionf无法转换为Matrix4fc)
+    方法 PoseStack.mulPose(Transformation)不适用
+      (参数不匹配; Quaternionf无法转换为Transformation)
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:105: 错误: 找不到符号
+        ((AbstractContraptionEntity)(Object)this.entity).applyLocalTransforms(this.contraptionMatrix, partialTick);
+                                                        ^
+  符号:   方法 applyLocalTransforms(PoseStack,float)
+  位置: 类 AbstractContraptionEntity
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:128: 错误: 找不到符号
+        Vec3 localHit = Vec3.atLowerCornerOf((Vec3i)this.getFacing().getNormal()).scale(vx).add(verticalImpulse);
+                                                                    ^
+  符号:   方法 getNormal()
+  位置: 类 Direction
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:131: 错误: 找不到符号
+        otherHandle.applyImpulseAtPoint(scanResult.result().getBlockPos().getCenter(), otherSubLevel.logicalPose().transformNormalInverse(globalHitDirection));
+                                                                         ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:134: 错误: 找不到符号
+            handle.applyImpulseAtPoint(blockPos.getCenter(), containingSubLevel.logicalPose().transformNormalInverse(globalHitDirection).scale(-1.0));
+                                               ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 blockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:150: 错误: 找不到符号
+        ClipContext clipContext = new ClipContext(blockPos.getCenter(), Vec3.upFromBottomCenterOf((Vec3i)blockPos, (double)1.0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty());
+                                                          ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 blockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:168: 错误: isClientSide 在 Level 中是 private 访问控制
+        if (this.level.isClientSide && !this.isVirtual()) {
+                      ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\entity_falls_on_block\BeltMillstoneBlocksMixin.java:46: 错误: 找不到符号
+        BlockEntry entry = this instanceof BeltBlock ? AllBlocks.BELT : AllBlocks.MILLSTONE;
+        ^
+  符号:   类 BlockEntry
+  位置: 类 BeltMillstoneBlocksMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\entity_falls_on_block\BeltMillstoneBlocksMixin.java:46: 错误: 不兼容的类型: BeltMillstoneBlocksMixin无法转换为BeltBlock
+        BlockEntry entry = this instanceof BeltBlock ? AllBlocks.BELT : AllBlocks.MILLSTONE;
+                           ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\fluid_tank_heating\BoilerDataMixin.java:61: 错误: 找不到符号
+        Float gatheredHeat = helper.runIncludingSubLevels(level, pos.getCenter(), false, helper.getContaining(level, (Vec3i)pos), (subLevel, internalPos) -> {
+                                                                    ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 pos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\flywheel\FlywheelBlockEntityMixin.java:65: 错误: 不兼容的类型: Optional<Float>无法转换为float
+        this.sable$smoothedSpeed = compound.getFloat("SmoothedSpeed");
+                                                    ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorBlockEntityMixin.java:57: 错误: 找不到符号
+        Vec3 frogPos = instance.getBlockPos().getCenter();
+                                             ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorBlockEntityMixin.java:69: 错误: 找不到符号
+        Vec3 frogPos = this.worldPosition.offset((Vec3i)entry.getKey()).getCenter();
+                                                                       ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:87: 错误: 找不到符号
+        VertexConsumer vb = buffer.getBuffer(RenderType.lines());
+                                             ^
+  符号:   变量 RenderType
+  位置: 类 ChainConveyorInteractionHandlerMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:96: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+            ms.mulPose(new Quaternionf(renderPose.orientation()));
+              ^
+    方法 PoseStack.mulPose(Matrix4fc)不适用
+      (参数不匹配; Quaternionf无法转换为Matrix4fc)
+    方法 PoseStack.mulPose(Transformation)不适用
+      (参数不匹配; Quaternionf无法转换为Transformation)
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\SmartBlockEntityRendererMixin.java:40: 错误: 找不到符号
+            return instance.cameraOrientation();
+                           ^
+  符号:   方法 cameraOrientation()
+  位置: 类型为EntityRenderDispatcher的变量 instance
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\SmartBlockEntityRendererMixin.java:43: 错误: 找不到符号
+        return instance.cameraOrientation().premul((Quaternionfc)new Quaternionf(subLevelOrientation).conjugate());
+                       ^
+  符号:   方法 cameraOrientation()
+  位置: 类型为EntityRenderDispatcher的变量 instance
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\hose_pulley\HosePulleyBlockEntityMixin.java:60: 错误: 找不到符号
+        BlockState gatheredState = helper.runIncludingSubLevels(level, blockPos.getCenter(), true, helper.getContaining(level, (Vec3i)this.getBlockPos()), (sublevel, pos) -> {
+                                                                               ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 blockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\mechnical_arm\MechanicalArmSublevelFailure.java:49: 错误: 不兼容的类型: Object无法转换为Integer
+        pointsRemovedSublevel.set((Object)0);
+                                  ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\nozzle\block_entity\NozzleBEFixesMixin.java:77: 错误: 对于getNearest(double,double,double), 找不到合适的方法
+        Direction nearest = Direction.getNearest((double)direction.x, (double)direction.y, (double)direction.z);
+                                     ^
+    方法 Direction.getNearest(int,int,int,@org.jspecify.annotations.Nullable Direction)不适用
+      (实际参数列表和形式参数列表长度不同)
+    方法 Direction.getNearest(Vec3i,@org.jspecify.annotations.Nullable Direction)不适用
+      (实际参数列表和形式参数列表长度不同)
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\nozzle\block_entity\NozzleHoveringMixin.java:90: 错误: random 在 Level 中是 protected 访问控制
+            Couple<Vec3> ray = this.sable$rayPoints.get(this.level.random.nextInt(this.sable$rayPoints.size()));
+                                                                  ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\nozzle\block_entity\NozzleHoveringMixin.java:101: 错误: 不兼容的类型: NozzleHoveringMixin无法转换为NozzleBlockEntity
+        Vector3d force = NozzleHoveringHelper.gatherForceFromRays(subLevel, timeStep, this.getLevel(), this.getBlockPos(), (NozzleBlockEntity)this, this.sable$rayPoints);
+                                                                                                                                              ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\particles\AirParticleMixin.java:97: 错误: 找不到符号
+        Vec3 twirl = VecHelper.rotate((Vec3)new Vec3(0.0, (double)this.twirlRadius, 0.0), (double)angle, (Direction.Axis)this.twirlAxis);
+                              ^
+  符号:   方法 rotate(Vec3,double,Axis)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:42: 错误: 找不到符号
+        REDSTONE_CONTACT = REGISTRATE.blockEntity("redstone_contact", RedstoneContactBlockEntity::new).validBlock((NonNullSupplier)AllBlocks.REDSTONE_CONTACT).register();
+                                                                                                                   ^
+  符号:   类 NonNullSupplier
+  位置: 类 AllBlockEntityTypesMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:50: 错误: RedstoneContactBlockEntity不是抽象的, 并且未覆盖SmartBlockEntity中的抽象方法addBehaviours(List<BlockEntityBehaviour<?>>)
+public class RedstoneContactBlockEntity
+       ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:58: 错误: 名称冲突: RedstoneContactBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour>) 和 SmartBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour<?>>) 具有相同疑符, 但两者均不覆盖对方
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+                ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:67: 错误: 找不到符号
+            Vector3d facingDir = JOMLConversion.atLowerCornerOf((Vec3i)facing.getNormal());
+                                                                             ^
+  符号:   方法 getNormal()
+  位置: 类型为Direction的变量 facing
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:92: 错误: 不兼容的类型: Object无法转换为AbstractContraptionEntity
+        for (AbstractContraptionEntity ace : contraptions) {
+                                             ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+            if (candidateBlock == null || !AllBlocks.REDSTONE_CONTACT.has(otherState = candidateBlock.state()) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) continue;
+                                                                     ^
+  符号:   方法 has(BlockState)
+  位置: 类型为RedstoneContactBlock的变量 REDSTONE_CONTACT
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+            if (candidateBlock == null || !AllBlocks.REDSTONE_CONTACT.has(otherState = candidateBlock.state()) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) continue;
+                                                                                                                                             ^
+  符号:   方法 has(BlockState)
+  位置: 类型为ElevatorContactBlock的变量 ELEVATOR_CONTACT
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:98: 错误: 找不到符号
+            Vec3 otherFacingMoj = Vec3.atLowerCornerOf((Vec3i)otherFacingDirection.getNormal());
+                                                                                  ^
+  符号:   方法 getNormal()
+  位置: 类型为Direction的变量 otherFacingDirection
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:107: 错误: 找不到符号
+        return Sable.HELPER.findIncludingSubLevels(this.getLevel(), this.getBlockPos().getCenter().relative(facing, 1.0), true, parentSublevel, (subLevel, pos) -> {
+                                                                                      ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+            if (!AllBlocks.REDSTONE_CONTACT.has(otherState) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) {
+                                           ^
+  符号:   方法 has(BlockState)
+  位置: 类型为RedstoneContactBlock的变量 REDSTONE_CONTACT
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+            if (!AllBlocks.REDSTONE_CONTACT.has(otherState) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) {
+                                                                                          ^
+  符号:   方法 has(BlockState)
+  位置: 类型为ElevatorContactBlock的变量 ELEVATOR_CONTACT
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:118: 错误: 找不到符号
+            Vector3d otherFacingDir = JOMLConversion.atLowerCornerOf((Vec3i)otherFacing.getNormal());
+                                                                                       ^
+  符号:   方法 getNormal()
+  位置: 类型为Direction的变量 otherFacing
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\RedstoneContactBlockMixin.java:55: 错误: isClientSide 在 Level 中是 private 访问控制
+        if (!level.isClientSide) {
+                  ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\RedstoneContactBlockMixin.java:56: 错误: 找不到符号
+            return super.getTicker(level, p_153213_, p_153214_);
+                        ^
+  符号: 方法 getTicker(Level,BlockState,BlockEntityType<S>)
+  其中, S是类型变量:
+    S扩展已在方法 <S>getTicker(Level,BlockState,BlockEntityType<S>)中声明的BlockEntity
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\GhostBlockValueBoxMixin.java:29: 错误: 找不到符号
+        Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+                                                          ^
+  符号:   方法 getMainCamera()
+  位置: 类型为GameRenderer的变量 gameRenderer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\LineOutlineMixin.java:55: 错误: 找不到符号
+        Vector3f diff = this.diffPosTemp;
+                            ^
+  符号: 变量 diffPosTemp
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\LineOutlineMixin.java:63: 错误: 对于bufferCuboidLine(Pose,VertexConsumer,Vector3f,Direction,float,float,Vector4f,int,boolean), 找不到合适的方法
+        this.bufferCuboidLine(poseStack.last(), consumer, new Vector3f(), Direction.SOUTH, length, width, color, lightmap, disableNormals);
+            ^
+    方法 Outline.bufferCuboidLine(Pose,VertexConsumer,Vector3f,Direction,float,float,int,int,boolean)不适用
+      (参数不匹配; Vector4f无法转换为int)
+    方法 LineOutlineMixin.bufferCuboidLine(PoseStack,VertexConsumer,Vec3,Vector3d,Vector3d,float,Vector4f,int,boolean)不适用
+      (参数不匹配; Pose无法转换为PoseStack)
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\ValueBoxMixin.java:31: 错误: 找不到符号
+        Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+                                                          ^
+  符号:   方法 getMainCamera()
+  位置: 类型为GameRenderer的变量 gameRenderer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\DeployToolMixin.java:38: 错误: 找不到符号
+        Vec3 trans = SublevelRenderOffsetHelper.translation(this.selectedPos.getCenter());
+                                                                            ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 selectedPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicAndQuillHandlerMixin.java:97: 错误: 找不到符号
+            Vec3 loc = instance.getBlockPos().getCenter();
+                                             ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicExportMixin.java:127: 错误: 不兼容的类型: Object无法转换为SubLevel
+        for (SubLevel subLevel : (Iterable)intersectingRef.get()) {
+                                 ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicExportMixin.java:134: 错误: 不兼容的类型: Block无法转换为List<Block>
+            structure.fillFromWorld(level, origin, (Vec3i)bounds, true, Blocks.AIR);
+                                                                              ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicExportMixin.java:139: 错误: 找不到符号
+            subLevelData.putUUID("uuid", mapping.newUUID());
+                        ^
+  符号:   方法 putUUID(String,UUID)
+  位置: 类型为CompoundTag的变量 subLevelData
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicTransformMixin.java:51: 错误: 找不到符号
+        Vec3 center = this.getAnchor().getCenter();
+                                      ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicTransformMixin.java:53: 错误: 找不到符号
+        return instance.translate(VecHelper.lerp((float)pt, (Vec3)this.prevChasingPos, (Vec3)this.chasingPos).subtract(SublevelRenderOffsetHelper.translation(center)).subtract(camera));
+                                           ^
+  符号:   方法 lerp(float,Vec3,Vec3)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\StructureTemplateMixin.java:62: 错误: 无法将类 CompoundTag中的方法 getList应用到给定类型;
+        ListTag subLevelTags = tag.getList("sub_levels", 10);
+                                  ^
+  需要: String
+  找到:    String,int
+  原因: 实际参数列表和形式参数列表长度不同
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\StructureTemplateMixin.java:67: 错误: 找不到符号
+            UUID uuid = subLevelCompound.getUUID("uuid");
+                                        ^
+  符号:   方法 getUUID(String)
+  位置: 类型为CompoundTag的变量 subLevelCompound
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\StructureTemplateMixin.java:68: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+            Vector3d position = SableNBTUtils.readVector3d(subLevelCompound.getCompound("position"));
+                                                                                       ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\StructureTemplateMixin.java:69: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+            Quaterniond orientation = SableNBTUtils.readQuaternion(subLevelCompound.getCompound("orientation"));
+                                                                                               ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:244: 错误: 找不到符号
+                    SuperGlueItem.spawnParticles((Level)(Object)this.level, (BlockPos)this.worldPosition, (Direction)((Direction)this.getBlockState().getValue((Property)StickerBlock.FACING)), (boolean)true);
+                                 ^
+  符号:   方法 spawnParticles(Level,BlockPos,Direction,boolean)
+  位置: 类 SuperGlueItem
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:245: 错误: 程序包com.zurrtum.create.catnip.platform.CatnipServices不存在
+                    com.zurrtum.create.catnip.platform.CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> this.playSound(true));
+                                                                     ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:247: 错误: 程序包com.zurrtum.create.catnip.platform.CatnipServices不存在
+                    com.zurrtum.create.catnip.platform.CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> this.playSound(false));
+                                                                     ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:292: 错误: 不兼容的类型: Optional<Boolean>无法转换为boolean
+            this.sable$hasConstraint = compound.getBoolean("SableHasConstraint");
+                                                          ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:293: 错误: 无法将类 CompoundTag中的方法 contains应用到给定类型;
+        } else if (compound.contains("SableConstraint", 10)) {
+                           ^
+  需要: String
+  找到:    String,int
+  原因: 实际参数列表和形式参数列表长度不同
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:294: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+            CompoundTag constraint = compound.getCompound("SableConstraint");
+                                                         ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:295: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+            BlockPos thisPos = new BlockPos(constraint.getInt("ThisX"), constraint.getInt("ThisY"), constraint.getInt("ThisZ"));
+                                                             ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:300: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+            this.sable$attachedPos = new BlockPos(constraint.getInt("X"), constraint.getInt("Y"), constraint.getInt("Z"));
+                                                                   ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:301: 错误: 不兼容的类型: Optional<Double>无法转换为double
+            this.sable$constraintPos1 = new Vector3d(constraint.getDouble("FromX"), constraint.getDouble("FromY"), constraint.getDouble("FromZ"));
+                                                                         ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:302: 错误: 不兼容的类型: Optional<Double>无法转换为double
+            this.sable$constraintPos2 = new Vector3d(constraint.getDouble("ToX"), constraint.getDouble("ToY"), constraint.getDouble("ToZ"));
+                                                                         ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:303: 错误: 不兼容的类型: Optional<Double>无法转换为double
+            this.sable$constraintOrientation = new Quaterniond(constraint.getDouble("QuatX"), constraint.getDouble("QuatY"), constraint.getDouble("QuatZ"), constraint.getDouble("QuatW"));
+                                                                                   ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\super_glue\SuperGlueEntityMixin.java:45: 错误: 找不到符号
+                return AbortableIterationConsumer.Continuation.CONTINUE;
+                                                 ^
+  符号:   变量 Continuation
+  位置: 接口 AbortableIterationConsumer
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\toolbox\ToolboxHandlerMixin.java:58: 错误: 不兼容的类型: 条件表达式中的类型错误
+        cir.setReturnValue((ToolboxHandlerMixin.sable$getDistance((LevelAccessor)player.level(), player.position(), box.getBlockPos()) < maxRange * maxRange ? 1 : 0));
+                                                                                                                                                             ^
+    int无法转换为Boolean
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\toolbox\ToolboxHandlerMixin.java:65: 错误: 不兼容的类型: Object无法转换为BlockPos
+        cir.setReturnValue(((WeakHashMap)toolboxes.get(world)).keySet().stream().filter(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p) < maxRange * maxRange).sorted(Comparator.comparingDouble(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p))).limit(maxAmount).map(((WeakHashMap)toolboxes.get(world))::get).filter(ToolboxBlockEntity::isFullyInitialized).collect(Collectors.toList()));
+                                                                                                                                                    ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\toolbox\ToolboxHandlerMixin.java:65: 错误: 不兼容的类型: Object无法转换为BlockPos
+        cir.setReturnValue(((WeakHashMap)toolboxes.get(world)).keySet().stream().filter(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p) < maxRange * maxRange).sorted(Comparator.comparingDouble(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p))).limit(maxAmount).map(((WeakHashMap)toolboxes.get(world))::get).filter(ToolboxBlockEntity::isFullyInitialized).collect(Collectors.toList()));
+                                                                                                                                                                                                                                                                            ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\toolbox\ToolboxHandlerMixin.java:65: 错误: 不兼容的类型: 方法引用无效
+        cir.setReturnValue(((WeakHashMap)toolboxes.get(world)).keySet().stream().filter(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p) < maxRange * maxRange).sorted(Comparator.comparingDouble(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p))).limit(maxAmount).map(((WeakHashMap)toolboxes.get(world))::get).filter(ToolboxBlockEntity::isFullyInitialized).collect(Collectors.toList()));
+                                                                                                                                                                                                                                                                                                                                                       ^
+    无法将 类 ToolboxBlockEntity中的 方法 isFullyInitialized应用到给定类型
+      需要: 没有参数
+      找到:    Object
+      原因: 实际参数列表和形式参数列表长度不同
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\tracks\CurvedTrackDestroyPacketMixin.java:28: 错误: 找不到符号
+        return BlockPos.containing((Position)Sable.HELPER.projectOutOfSubLevel(instance.getLevel(), instance.getBlockPos().getCenter()));
+                                                                                                                          ^
+  符号:   方法 getCenter()
+  位置: 类 BlockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\tracks\TrackBlockOutlineMixin.java:108: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+        instance.mulPose(new Quaternionf(subLevel.renderPose().orientation()));
+                ^
+    方法 PoseStack.mulPose(Matrix4fc)不适用
+      (参数不匹配; Quaternionf无法转换为Matrix4fc)
+    方法 PoseStack.mulPose(Transformation)不适用
+      (参数不匹配; Quaternionf无法转换为Transformation)
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\trains\CarriageContraptionVisualMixin.java:55: 错误: 不兼容的类型: AbstractContraptionEntity无法转换为CarriageContraptionEntity
+        super(ctx, (AbstractContraptionEntity)entity, partialTick);
+                   ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\trains\CarriageContraptionVisualMixin.java:74: 错误: 找不到符号
+        FlywheelCompatNeoForge.SubLevelFlwRenderState state = FlywheelCompatNeoForge.getInfo(ChunkPos.asLong((int)plotX, (int)(plotZ = (chunkPos.z >> container.getLogPlotSize()) - container.getOrigin().y)));
+                                                                                                     ^
+  符号:   方法 asLong(int,int)
+  位置: 类 ChunkPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\AbstractBlockEntityVisualMixin.java:40: 错误: 找不到符号
+            int color = LevelRenderer.getLightColor((BlockAndTintGetter)blockAndTintGetter, (BlockPos)blockPos);
+                                                     ^
+  符号:   类 BlockAndTintGetter
+  位置: 类 AbstractBlockEntityVisualMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\AbstractBlockEntityVisualMixin.java:43: 错误: 找不到符号
+        return LevelRenderer.getLightColor((BlockAndTintGetter)blockAndTintGetter, (BlockPos)blockPos);
+                                            ^
+  符号:   类 BlockAndTintGetter
+  位置: 类 AbstractBlockEntityVisualMixin
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\RenderDispatcherImplMixin.java:39: 错误: 找不到符号
+        FlywheelCompatNeoForge.preVisualizationFrame((Level)ctx.level(), ctx.partialTick());
+                                                               ^
+  符号:   方法 level()
+  位置: 类型为RenderContext的变量 ctx
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\scalablelux\StarLightEngineMixin.java:38: 错误: 不兼容的类型: StarLightEngineMixin无法转换为BlockStarLightEngine
+      if (this instanceof BlockStarLightEngine) {
+          ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\scalablelux\StarLightEngineMixin.java:57: 错误: 不兼容的类型: StarLightEngineMixin无法转换为BlockStarLightEngine
+      if (this instanceof BlockStarLightEngine) {
+          ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\LivingEntityMixin.java:158: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+      if (trackingSubLevel != null && (!(!countLocalPlayer && this instanceof Player player) || !player.isLocalPlayer())) {
+                                                              ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\packet_mixin\ClientboundEntityPositionSyncPacketMixin.java:36: 错误: 不兼容的类型: ClientboundEntityPositionSyncPacket无法转换为PacketActuallyInSubLevelExtension
+         ((PacketActuallyInSubLevelExtension)packet).sable$setActuallyInSubLevel(buffer.readBoolean());
+                                             ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\packet_mixin\ClientboundEntityPositionSyncPacketMixin.java:33: 错误: 不兼容的类型: ClientboundEntityPositionSyncPacket无法转换为PacketActuallyInSubLevelExtension
+         buffer.writeBoolean(((PacketActuallyInSubLevelExtension)packet).sable$isActuallyInSubLevel());
+                                                                 ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\packet_mixin\ClientboundTeleportEntityPacketMixin.java:36: 错误: 不兼容的类型: ClientboundTeleportEntityPacket无法转换为PacketActuallyInSubLevelExtension
+         ((PacketActuallyInSubLevelExtension)packet).sable$setActuallyInSubLevel(buffer.readBoolean());
+                                             ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\packet_mixin\ClientboundTeleportEntityPacketMixin.java:33: 错误: 不兼容的类型: ClientboundTeleportEntityPacket无法转换为PacketActuallyInSubLevelExtension
+         buffer.writeBoolean(((PacketActuallyInSubLevelExtension)packet).sable$isActuallyInSubLevel());
+                                                                 ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_pathfinding\PathNavigationMixin.java:102: 错误: 不兼容的类型: Path无法转换为PathExtension
+               ((PathExtension)path).sable$setLocalPath(this.level, true);
+                               ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_rotations_and_riding\EntityMixin.java:161: 错误: 不兼容的类型: EntityMixin无法转换为ServerPlayer
+            if (this instanceof ServerPlayer serverPlayer) {
+                ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_sublevel_collision\EntityMixin.java:233: 错误: 不兼容的类型: EntityMixin无法转换为LivingEntity
+      if (!(this instanceof LivingEntity)
+            ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_sublevel_collision\LivingEntityMixin.java:87: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+      if (this instanceof Player player && player.getAbilities().flying) {
+          ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_sublevel_collision\LivingEntityMixin.java:115: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+            level.playSound(this instanceof Player player ? player : null, this.getX(), this.getY(), this.getZ(), sound, SoundSource.BLOCKS, 0.75F, 1.0F);
+                            ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_swimming\LivingEntityMixin.java:22: 错误: 不兼容的类型: LivingEntityMixin无法转换为LivingEntity
+      return SubLevelFluidHelper.getFluidStateAt((LivingEntity)this, pos);
+                                                               ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_swimming\PlayerMixin.java:22: 错误: 不兼容的类型: PlayerMixin无法转换为Player
+      return SubLevelFluidHelper.getFluidStateAt((Player)this, pos);
+                                                         ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\particle\ServerLevelMixin.java:21: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+      return Sable.HELPER.distanceSquaredWithSubLevels((ServerLevel)this, pos, blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5)
+                                                                    ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:75: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+         SableCommonEvents.handleBlockChange(serverLevel, (LevelChunk)this, pX, pY, pZ, oldState, newState);
+                                                                      ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:84: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+      return container != null && container.inBounds(((LevelChunk)this).getPos());
+                                                                  ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:106: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+         LevelChunk self = (LevelChunk)this;
+                                       ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:125: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+         LevelChunk self = (LevelChunk)this;
+                                       ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\lighting\LevelChunkMixin.java:32: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+         LevelChunk chunk = (LevelChunk)this;
+                                        ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\serialization\LevelChunkTicksMixin.java:25: 错误: 不兼容的类型: LevelChunkTicks<T>无法转换为LevelChunkTicksMixin
+      this.pendingTicks = ((LevelChunkTicksMixin)ticks).pendingTicks;
+                                                 ^
+  其中, T是类型变量:
+    T扩展已在类 LevelChunkTicksMixin中声明的Object
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:59: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+      if (!SablePlatform.INSTANCE.isWrappedLevel((ServerLevel)this)) {
+                                                              ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:60: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+         SubLevelOccupancySavedData.getOrLoad((ServerLevel)this);
+                                                           ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:61: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+         SubLevelTicketsSavedData.getOrLoad((ServerLevel)this);
+                                                         ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:79: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+      ServerLevel self = (ServerLevel)this;
+                                      ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:97: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+      ServerLevel self = (ServerLevel)this;
+                                      ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:117: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+      SubLevelContainer plotContainer = SubLevelContainer.getContainer((ServerLevel)this);
+                                                                                    ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:132: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+      SubLevelContainer plotContainer = SubLevelContainer.getContainer((ServerLevel)this);
+                                                                                    ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:146: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+      ServerLevel self = (ServerLevel)this;
+                                      ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\sound\MovingSoundInstanceDelegateMixin.java:33: 错误: 找不到符号
+        return this.instance.getStream(soundBuffers, sound, looping);
+                            ^
+  符号:   方法 getStream(SoundBufferLibrary,Sound,boolean)
+  位置: 类型为SoundInstance的变量 instance
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\sublevel_render\dynamic_lighting\LevelLightEngineMixin.java:17: 错误: 不兼容的类型: LevelLightEngineMixin无法转换为LevelLightEngine
+      SubLevelDynamicLights.beginLightUpdates((LevelLightEngine)this);
+                                                                ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\sublevel_render\dynamic_lighting\LevelLightEngineMixin.java:25: 错误: 不兼容的类型: LevelLightEngineMixin无法转换为LevelLightEngine
+      SubLevelDynamicLights.endLightUpdates((LevelLightEngine)this);
+                                                              ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\sublevel_render\dynamic_lighting\LightEngineMixin.java:21: 错误: 不兼容的类型: LightEngineMixin无法转换为BlockLightEngine
+      if (this instanceof BlockLightEngine) {
+          ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\tracking_points\ServerPlayerMixin.java:26: 错误: 不兼容的类型: ServerPlayerMixin无法转换为ServerPlayer
+      UUID loginPointUUID = data.generateTrackingPoint((ServerPlayer)this);
+                                                                     ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\world_border\ServerLevelMixin.java:18: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+      ServerLevel self = (ServerLevel)this;
+                                      ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\block_breakers\SubLevelBlockBreakingUtility.java:63: 错误: 不兼容的类型: Object无法转换为BlockPos
+        for (BlockPos possiblyBreakableBlock : possiblyBreakableBlocks) {
+                                               ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\harvester\HarvesterTicker.java:45: 错误: 找不到符号
+            Vec3 center = sable$selfPos.getCenter();
+                                       ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 sable$selfPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\mechanical_arm\PointHolder.java:29: 错误: 找不到符号
+        Tag pos = NbtUtils.writeBlockPos((BlockPos)this.pos.subtract((Vec3i)anchor));
+                          ^
+  符号:   方法 writeBlockPos(BlockPos)
+  位置: 类 NbtUtils
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\mechanical_arm\PointHolder.java:36: 错误: 找不到符号
+        Optional pos = NbtUtils.readBlockPos((CompoundTag)tag, (String)"pos");
+                               ^
+  符号:   方法 readBlockPos(CompoundTag,String)
+  位置: 类 NbtUtils
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\mechanical_arm\PointHolder.java:37: 错误: 找不到符号
+        return pos.map(blockPos -> new PointHolder(blockPos.offset((Vec3i)anchor), (ArmInteractionPoint.Mode)NBTHelper.readEnum((CompoundTag)tag, (String)"mode", ArmInteractionPoint.Mode.class), new MutableBoolean(false))).orElse(null);
+                                                           ^
+  符号:   方法 offset(Vec3i)
+  位置: 类型为Object的变量 blockPos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\mechanical_arm\PointHolder.java:37: 错误: 不兼容的类型: Object无法转换为PointHolder
+        return pos.map(blockPos -> new PointHolder(blockPos.offset((Vec3i)anchor), (ArmInteractionPoint.Mode)NBTHelper.readEnum((CompoundTag)tag, (String)"mode", ArmInteractionPoint.Mode.class), new MutableBoolean(false))).orElse(null);
+                                                                                                                                                                                                                                     ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:101: 错误: 找不到符号
+                    Vec3 start = Vec3.atLowerCornerOf((Vec3i)startingDir.getNormal()).scale(0.8).add(0.5, 0.5, 0.5);
+                                                                        ^
+  符号:   方法 getNormal()
+  位置: 类型为Direction的变量 startingDir
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:112: 错误: 找不到符号
+                        start = VecHelper.rotateCentered((Vec3)start, (double)angle, (Direction.Axis)axis);
+                                         ^
+  符号:   方法 rotateCentered(Vec3,double,Axis)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:114: 错误: 找不到符号
+                    start = VecHelper.rotateCentered((Vec3)start, (double)(60 * i), (Direction.Axis)facing.getAxis());
+                                     ^
+  符号:   方法 rotateCentered(Vec3,double,Axis)
+  位置: 类 VecHelper
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:119: 错误: 找不到符号
+            Vec3 start = Vec3.atLowerCornerOf((Vec3i)facing.getNormal()).scale(0.8).add(0.5, 0.5, 0.5);
+                                                           ^
+  符号:   方法 getNormal()
+  位置: 类型为Direction的变量 facing
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:132: 错误: 找不到符号
+        Optional be = level.getBlockEntity(blockStart.relative(((Direction)nbe.getBlockState().getValue((Property)BlockStateProperties.FACING)).getOpposite()), (BlockEntityType)AllBlockEntityTypes.ENCASED_FAN.get());
+                                                                                                                                                                                                                ^
+  符号:   方法 get()
+  位置: 类型为BlockEntityType<EncasedFanBlockEntity>的变量 ENCASED_FAN
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+            Vector3d offset = new Vector3d(level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0);
+                                                ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+            Vector3d offset = new Vector3d(level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0);
+                                                                                       ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+            Vector3d offset = new Vector3d(level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0);
+                                                                                                                              ^
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\physics\callback\AbstractBellBlockCallback.java:45: 错误: 找不到符号
+        Vec3 hitDir = pos.getCenter().subtract(hitPos.x, hitPos.y, hitPos.z);
+                         ^
+  符号:   方法 getCenter()
+  位置: 类型为BlockPos的变量 pos
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\physics\callback\AbstractBellBlockCallback.java:54: 错误: 对于getNearest(double,double,double), 找不到合适的方法
+        Direction ringDir = Direction.getNearest((double)(hitDir.x * (double)xMul), (double)0.0, (double)(hitDir.z * (double)zMul)).getOpposite();
+                                     ^
+    方法 Direction.getNearest(int,int,int,@org.jspecify.annotations.Nullable Direction)不适用
+      (实际参数列表和形式参数列表长度不同)
+    方法 Direction.getNearest(Vec3i,@org.jspecify.annotations.Nullable Direction)不适用
+      (实际参数列表和形式参数列表长度不同)
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\physics\callback\BeltBlockCallback.java:59: 错误: 找不到符号
+        Vec3i normal = Direction.get((Direction.AxisDirection)Direction.AxisDirection.POSITIVE, (Direction.Axis)facing.getAxis()).getNormal();
+                                                                                                                                 ^
+  符号:   方法 getNormal()
+  位置: 类 Direction
+C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\sublevel\storage\SubLevelTicketsSavedData.java:79: 错误: 找不到符号
+                  .getFirst();
+                  ^
+  符号:   方法 getFirst()
+  位置: 接口 Pair
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+注: 某些消息已经过简化; 请使用 -Xdiags:verbose 重新编译以获得完整输出
+210 个错误
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/_anmuxi_/Desktop/Sable-Fly/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:45: 错误: 程序包dev.ryanhcode.sable.mixinhelpers.block_outline_render不存在
+  import dev.ryanhcode.sable.mixinhelpers.block_outline_render.SubLevelCamera;
+                                                              ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:245: 错误: 程序包com.zurrtum.create.catnip.platform.CatnipServices不存在
+                      com.zurrtum.create.catnip.platform.CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> this.playSound(true));
+                                                                       ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:247: 错误: 程序包com.zurrtum.create.catnip.platform.CatnipServices不存在
+                      com.zurrtum.create.catnip.platform.CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> this.playSound(false));
+                                                                       ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:51: 错误: 找不到符号
+  import net.minecraft.client.renderer.MultiBufferSource;
+                                      ^
+    符号:   类 MultiBufferSource
+    位置: 程序包 net.minecraft.client.renderer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:75: 错误: 找不到符号
+      private final SubLevelCamera sable$sublevelCamera = new SubLevelCamera();
+                    ^
+    符号:   类 SubLevelCamera
+    位置: 类 LevelRendererMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:81: 错误: 找不到符号
+      private boolean sable$preRenderHitOutline(LevelRenderer context, Camera camera, HitResult target, DeltaTracker deltaTracker, PoseStack poseStack, MultiBufferSource bufferSource, Operation<Boolean> original, @Share(value="drawn") LocalBooleanRef drawnRef) {
+                                                                                                                                                        ^
+    符号:   类 MultiBufferSource
+    位置: 类 LevelRendererMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionControlsRendererMixin.java:19: 错误: 找不到符号
+  import com.zurrtum.create.client.content.contraptions.render.ContraptionMatrices;
+                                                              ^
+    符号:   类 ContraptionMatrices
+    位置: 程序包 com.zurrtum.create.client.content.contraptions.render
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionControlsRendererMixin.java:34: 错误: 找不到符号
+      private static PoseStack sable$getViewProjection(ContraptionMatrices instance) {
+                                                       ^
+    符号:   类 ContraptionMatrices
+    位置: 类 ContraptionControlsRendererMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:38: 错误: 找不到符号
+  import net.minecraft.client.renderer.MultiBufferSource;
+                                      ^
+    符号:   类 MultiBufferSource
+    位置: 程序包 net.minecraft.client.renderer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:39: 错误: 找不到符号
+  import net.minecraft.client.renderer.RenderType;
+                                      ^
+    符号:   类 RenderType
+    位置: 程序包 net.minecraft.client.renderer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:83: 错误: 找不到符号
+      public static void drawCustomBlockSelection(PoseStack ms, MultiBufferSource buffer, Vec3 camera) {
+                                                                ^
+    符号:   类 MultiBufferSource
+    位置: 类 ChainConveyorInteractionHandlerMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainPackageInteractionHandlerMixin.java:36: 错误: 找不到符号
+      private static Vec3 sable$getTraceOrigin(LocalPlayer instance, @Local(argsOnly=true) ChainConveyorPackage.ChainConveyorPackagePhysicsData data) {
+                                                                                                               ^
+    符号:   类 ChainConveyorPackagePhysicsData
+    位置: 类 ChainConveyorPackage
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainPackageInteractionHandlerMixin.java:46: 错误: 找不到符号
+      private static Vec3 sable$getTraceTarget(Player playerIn, double range, Vec3 from, @Local(argsOnly=true) ChainConveyorPackage.ChainConveyorPackagePhysicsData data) {
+                                                                                                                                   ^
+    符号:   类 ChainConveyorPackagePhysicsData
+    位置: 类 ChainConveyorPackage
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:32: 错误: 找不到符号
+      private static CreateRegistrate REGISTRATE;
+                     ^
+    符号:   类 CreateRegistrate
+    位置: 类 AllBlockEntityTypesMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:34: 错误: 找不到符号
+      private static final BlockEntityEntry<RedstoneContactBlockEntity> REDSTONE_CONTACT;
+                           ^
+    符号:   类 BlockEntityEntry
+    位置: 类 AllBlockEntityTypesMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:37: 错误: 找不到符号
+      public BlockEntityEntry<RedstoneContactBlockEntity> sable$getRedstoneContactType() {
+             ^
+    符号:   类 BlockEntityEntry
+    位置: 类 AllBlockEntityTypesMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntityTypeGetter.java:12: 错误: 找不到符号
+      public BlockEntityEntry<RedstoneContactBlockEntity> sable$getRedstoneContactType();
+             ^
+    符号:   类 BlockEntityEntry
+    位置: 接口 RedstoneContactBlockEntityTypeGetter
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\AABBOutlineMixin.java:28: 错误: 找不到符号
+  import com.zurrtum.create.client.catnip.render.SuperRenderTypeBuffer;
+                                                ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 程序包 com.zurrtum.create.client.catnip.render
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\AABBOutlineMixin.java:50: 错误: 找不到符号
+      public abstract void render(PoseStack var1, SuperRenderTypeBuffer var2, Vec3 var3, float var4);
+                                                  ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 类 AABBOutlineMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\AABBOutlineMixin.java:58: 错误: 找不到符号
+      private void sable$pushPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                                ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 类 AABBOutlineMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\AABBOutlineMixin.java:71: 错误: 找不到符号
+      private void sable$popPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                               ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 类 AABBOutlineMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\BlockClusterOutlineMixin.java:25: 错误: 找不到符号
+  import com.zurrtum.create.client.catnip.render.SuperRenderTypeBuffer;
+                                                ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 程序包 com.zurrtum.create.client.catnip.render
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\BlockClusterOutlineMixin.java:49: 错误: 找不到符号
+      private void sable$projectFromSublevel(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                                           ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 类 BlockClusterOutlineMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\BlockClusterOutlineMixin.java:74: 错误: 找不到符号
+      private void sable$popPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                               ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 类 BlockClusterOutlineMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\ChasingAABBOutlineMixin.java:25: 错误: 找不到符号
+  import com.zurrtum.create.client.catnip.render.SuperRenderTypeBuffer;
+                                                ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 程序包 com.zurrtum.create.client.catnip.render
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\ChasingAABBOutlineMixin.java:43: 错误: 找不到符号
+      private void sable$pushPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                                ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 类 ChasingAABBOutlineMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\ChasingAABBOutlineMixin.java:54: 错误: 找不到符号
+      private void sable$popPose(PoseStack ms, SuperRenderTypeBuffer buffer, Vec3 camera, float pt, CallbackInfo ci) {
+                                               ^
+    符号:   类 SuperRenderTypeBuffer
+    位置: 类 ChasingAABBOutlineMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\SafeBlockEntityRendererMixin.java:15: 错误: 找不到符号
+  import com.zurrtum.create.client.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
+                                                                  ^
+    符号:   类 SafeBlockEntityRenderer
+    位置: 程序包 com.zurrtum.create.client.foundation.blockEntity.renderer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\stock_ticker\EntityHatsMixin.java:15: 错误: 找不到符号
+  import com.zurrtum.create.client.content.equipment.hats.EntityHats;
+                                                         ^
+    符号:   类 EntityHats
+    位置: 程序包 com.zurrtum.create.client.content.equipment.hats
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\zapper\ZapperItemMixin.java:26: 错误: 找不到符号
+  import net.minecraft.world.InteractionResultHolder;
+                            ^
+    符号:   类 InteractionResultHolder
+    位置: 程序包 net.minecraft.world
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\zapper\ZapperItemMixin.java:39: 错误: 找不到符号
+      private void sable$projectTargetPos(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir, @Local LocalRef<BlockHitResult> raytrace) {
+                                                                                                                   ^
+    符号:   类 InteractionResultHolder
+    位置: 类 ZapperItemMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\AbstractBlockEntityVisualMixin.java:26: 错误: 找不到符号
+  import net.minecraft.world.level.BlockAndTintGetter;
+                                  ^
+    符号:   类 BlockAndTintGetter
+    位置: 程序包 net.minecraft.world.level
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\AbstractBlockEntityVisualMixin.java:34: 错误: 找不到符号
+      private int sable$getLightColor(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos) {
+                                      ^
+    符号:   类 BlockAndTintGetter
+    位置: 类 AbstractBlockEntityVisualMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:75: 错误: 找不到符号
+      private final SubLevelCamera sable$sublevelCamera = new SubLevelCamera();
+                                                              ^
+    符号:   类 SubLevelCamera
+    位置: 类 LevelRendererMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\entity_falls_on_block\BeltMillstoneBlocksMixin.java:46: 错误: 找不到符号
+          BlockEntry entry = this instanceof BeltBlock ? AllBlocks.BELT : AllBlocks.MILLSTONE;
+          ^
+    符号:   类 BlockEntry
+    位置: 类 BeltMillstoneBlocksMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:87: 错误: 找不到符号
+          VertexConsumer vb = buffer.getBuffer(RenderType.lines());
+                                               ^
+    符号:   变量 RenderType
+    位置: 类 ChainConveyorInteractionHandlerMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\AllBlockEntityTypesMixin.java:42: 错误: 找不到符号
+          REDSTONE_CONTACT = REGISTRATE.blockEntity("redstone_contact", RedstoneContactBlockEntity::new).validBlock((NonNullSupplier)AllBlocks.REDSTONE_CONTACT).register();
+                                                                                                                     ^
+    符号:   类 NonNullSupplier
+    位置: 类 AllBlockEntityTypesMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\super_glue\SuperGlueEntityMixin.java:45: 错误: 找不到符号
+                  return AbortableIterationConsumer.Continuation.CONTINUE;
+                                                   ^
+    符号:   变量 Continuation
+    位置: 接口 AbortableIterationConsumer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\AbstractBlockEntityVisualMixin.java:40: 错误: 找不到符号
+              int color = LevelRenderer.getLightColor((BlockAndTintGetter)blockAndTintGetter, (BlockPos)blockPos);
+                                                       ^
+    符号:   类 BlockAndTintGetter
+    位置: 类 AbstractBlockEntityVisualMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\AbstractBlockEntityVisualMixin.java:43: 错误: 找不到符号
+          return LevelRenderer.getLightColor((BlockAndTintGetter)blockAndTintGetter, (BlockPos)blockPos);
+                                              ^
+    符号:   类 BlockAndTintGetter
+    位置: 类 AbstractBlockEntityVisualMixin
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:62: 错误: 此处需要接口
+  implements MovementBehaviour {
+             ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinBlockEntityMixin.java:50: 错误: Nullable 不是可重复的批注接口
+       @org.jetbrains.annotations.Nullable @org.jetbrains.annotations.Nullable BlazeBurnerBlock.HeatLevel cachedHeatLevel;
+       ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinBlockEntityMixin.java:50: 错误: Nullable 不是可重复的批注接口
+       @org.jetbrains.annotations.Nullable @org.jetbrains.annotations.Nullable BlazeBurnerBlock.HeatLevel cachedHeatLevel;
+                                           ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\SafeBlockEntityRendererMixin.java:24: 错误: 找不到符号
+  @Mixin(value={SafeBlockEntityRenderer.class})
+                ^
+    符号: 类 SafeBlockEntityRenderer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\stock_ticker\EntityHatsMixin.java:24: 错误: 找不到符号
+  @Mixin(value={EntityHats.class})
+                ^
+    符号: 类 EntityHats
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\LineOutlineMixin.java:55: 错误: 找不到符号
+          Vector3f diff = this.diffPosTemp;
+                              ^
+    符号: 变量 diffPosTemp
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\FlywheelCompatNeoForge.java:84: 错误: 找不到符号
+          long plotCoord = ChunkPos.asLong((int)(plotPos.x - container.getOrigin().x), (int)(plotPos.z - container.getOrigin().y));
+                                   ^
+    符号:   方法 asLong(int,int)
+    位置: 类 ChunkPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_entity_visible\LevelRendererMixin.java:43: 错误: 找不到符号
+          AABB renderBounds = renderer.getRenderBoundingBox(blockEntity);
+                                      ^
+    符号:   方法 getRenderBoundingBox(BlockEntity)
+    位置: 类型为BlockEntityRenderer的变量 renderer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:96: 错误: 找不到符号
+          Vec3 realCameraPosition = camera.getPosition();
+                                          ^
+    符号:   方法 getPosition()
+    位置: 类型为Camera的变量 camera
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\AbstractContraptionEntityMixin.java:213: 错误: 找不到符号
+          Vec3 rotationOffset = VecHelper.getCenterOf((Vec3i)BlockPos.ZERO);
+                                         ^
+    符号:   方法 getCenterOf(Vec3i)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\airflow\FanProcessingTypeMixin.java:30: 错误: 找不到符号
+          return helper.runIncludingSubLevels(level, pos.getCenter(), true, helper.getContaining(level, (Vec3i)pos), (subLevel, relativePos) -> (FanProcessingType)original.call(level, relativePos));
+                                                        ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 pos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinBlockEntityMixin.java:64: 错误: 找不到符号
+          BlazeBurnerBlock.HeatLevel heatLevel = helper.runIncludingSubLevels(level, (originalPos = this.getBlockPos().below()).getCenter(), false, helper.getContaining(level, (Vec3i)originalPos), (subLevel, pos) -> {
+                                                                                                                               ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinBlockEntityMixin.java:79: 错误: 找不到符号
+          return helper.runIncludingSubLevels(level, pos.getCenter(), true, helper.getContaining(level, (Vec3i)pos), (subLevel, internalPos) -> (BlockEntity)original.call(level, internalPos));
+                                                        ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 pos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\basin_interactions\BasinOperatingBlockEntityMixin.java:56: 错误: 找不到符号
+          return helper.runIncludingSubLevels(level, pos.getCenter(), true, helper.getContaining(level, (Vec3i)pos), (subLevel, internalPos) -> level.getBlockEntity(internalPos));
+                                                        ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 pos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\BlockEntityBehaviourMixin.java:60: 错误: 找不到符号
+              if (BlockEntityBehaviourMixin.sable$checkType(type) && (caughtBE = (helper = Sable.HELPER).runIncludingSubLevels(level, pos.getCenter(), true, helper.getContaining(level, (Vec3i)pos), (subLevel, internalPos) -> level.getBlockEntity(internalPos))) != null) {
+                                                                                                                                         ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 pos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:71: 错误: 找不到符号
+                  Vec3 localCenter = context.localPos.getCenter();
+                                                     ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 localPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:85: 错误: 找不到符号
+              if ((targetSublevel = Sable.HELPER.getContaining(context.world, (Vec3i)NbtUtils.readBlockPos((CompoundTag)context.data, (String)"BreakingPos").orElseThrow())) != null) {
+                                                                                             ^
+    符号:   方法 readBlockPos(CompoundTag,String)
+    位置: 类 NbtUtils
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:88: 错误: 找不到符号
+              context.data.put("ProjectedPos", (Tag)VecHelper.writeNBT((Vec3)JOMLConversion.toMojang((Vector3dc)checkPos)));
+                                                             ^
+    符号:   方法 writeNBT(Vec3)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:104: 错误: 找不到符号
+          Vec3 sublevelLocalCenter = context.contraption.entity.toGlobalVector(context.localPos.getCenter(), 1.0f);
+                                                                                               ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 localPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:105: 错误: 找不到符号
+          if (data.contains("ProjectedPos") && Sable.HELPER.distanceSquaredWithSubLevels(context.world, (Position)VecHelper.readNBT((ListTag)data.getList("ProjectedPos", 6)), (Position)sublevelLocalCenter) > 4.0) {
+                                                                                                                           ^
+    符号:   方法 readNBT(ListTag)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:106: 错误: 找不到符号
+              BlockPos blockPos = NbtUtils.readBlockPos((CompoundTag)data, (String)"BreakingPos").orElse(null);
+                                          ^
+    符号:   方法 readBlockPos(CompoundTag,String)
+    位置: 类 NbtUtils
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\harvester_behaviour\HarvesterMovementBehaviourMixin.java:35: 错误: 找不到符号
+          helper.runIncludingSubLevels(context.world, pos.getCenter(), true, helper.getContaining((Entity)context.contraption.entity), (sublevel, blockPos) -> {
+                                                         ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 pos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\harvester_block_entity\HarvesterBlockEntityMixin.java:68: 错误: 找不到符号
+          Vec3 center = this.getBlockPos().getCenter();
+                                          ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\block_breakers\BlockBreakingKineticBlockEntityMixin.java:59: 错误: 找不到符号
+              return SubLevelBlockBreakingUtility.findBreakingPos((pos, state) -> this.canBreak((BlockState)state, state.getDestroySpeed((BlockGetter)this.level, pos)), Sable.HELPER.getContaining(this), this.getLevel(), Vec3.atLowerCornerOf((Vec3i)((Direction)this.getBlockState().getValue((Property)SawBlock.FACING)).getNormal()), this.getBlockPos().getCenter(), breakingPos);
+                                                                                                                                                                                                                                                                                                                             ^
+    符号:   方法 getNormal()
+    位置: 类 Direction
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\block_breakers\BlockBreakingKineticBlockEntityMixin.java:59: 错误: 找不到符号
+              return SubLevelBlockBreakingUtility.findBreakingPos((pos, state) -> this.canBreak((BlockState)state, state.getDestroySpeed((BlockGetter)this.level, pos)), Sable.HELPER.getContaining(this), this.getLevel(), Vec3.atLowerCornerOf((Vec3i)((Direction)this.getBlockState().getValue((Property)SawBlock.FACING)).getNormal()), this.getBlockPos().getCenter(), breakingPos);
+                                                                                                                                                                                                                                                                                                                                                              ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\blueprint\BlueprintEntityMixin.java:34: 错误: 找不到符号
+          return player.canInteractWithEntity((Entity)(Object)this, 8.0);
+                       ^
+    符号:   方法 canInteractWithEntity(Entity,double)
+    位置: 类型为Player的变量 player
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\AbstractContraptionEntityMixin.java:188: 错误: 找不到符号
+                  BlockSubLevelLiftProvider.LiftProviderContext context = new BlockSubLevelLiftProvider.LiftProviderContext(blockPos, state, Vec3.atLowerCornerOf((Vec3i)prov.sable$getNormal(state).getNormal()));
+                                                                                                                                                                                                    ^
+    符号:   方法 getNormal()
+    位置: 类 Direction
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\AbstractContraptionEntityMixin.java:268: 错误: 找不到符号
+          Vec3 rotationOffset = VecHelper.getCenterOf((Vec3i)BlockPos.ZERO);
+                                         ^
+    符号:   方法 getCenterOf(Vec3i)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:81: 错误: 找不到符号
+          FlywheelCompatNeoForge.SubLevelFlwRenderState state = FlywheelCompatNeoForge.getInfo(ChunkPos.asLong((int)plotX, (int)(plotZ = (chunkPos.z >> container.getLogPlotSize()) - container.getOrigin().y)));
+                                                                                                       ^
+    符号:   方法 asLong(int,int)
+    位置: 类 ChunkPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:99: 错误: 找不到符号
+          ((AbstractContraptionEntity)(Object)this.entity).applyLocalTransforms(sceneMatrix, partialTick);
+                                                          ^
+    符号:   方法 applyLocalTransforms(PoseStack,float)
+    位置: 类 AbstractContraptionEntity
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:105: 错误: 找不到符号
+          ((AbstractContraptionEntity)(Object)this.entity).applyLocalTransforms(this.contraptionMatrix, partialTick);
+                                                          ^
+    符号:   方法 applyLocalTransforms(PoseStack,float)
+    位置: 类 AbstractContraptionEntity
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:128: 错误: 找不到符号
+          Vec3 localHit = Vec3.atLowerCornerOf((Vec3i)this.getFacing().getNormal()).scale(vx).add(verticalImpulse);
+                                                                      ^
+    符号:   方法 getNormal()
+    位置: 类 Direction
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:131: 错误: 找不到符号
+          otherHandle.applyImpulseAtPoint(scanResult.result().getBlockPos().getCenter(), otherSubLevel.logicalPose().transformNormalInverse(globalHitDirection));
+                                                                           ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:134: 错误: 找不到符号
+              handle.applyImpulseAtPoint(blockPos.getCenter(), containingSubLevel.logicalPose().transformNormalInverse(globalHitDirection).scale(-1.0));
+                                                 ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 blockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:150: 错误: 找不到符号
+          ClipContext clipContext = new ClipContext(blockPos.getCenter(), Vec3.upFromBottomCenterOf((Vec3i)blockPos, (double)1.0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty());
+                                                            ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 blockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\fluid_tank_heating\BoilerDataMixin.java:61: 错误: 找不到符号
+          Float gatheredHeat = helper.runIncludingSubLevels(level, pos.getCenter(), false, helper.getContaining(level, (Vec3i)pos), (subLevel, internalPos) -> {
+                                                                      ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 pos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorBlockEntityMixin.java:57: 错误: 找不到符号
+          Vec3 frogPos = instance.getBlockPos().getCenter();
+                                               ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorBlockEntityMixin.java:69: 错误: 找不到符号
+          Vec3 frogPos = this.worldPosition.offset((Vec3i)entry.getKey()).getCenter();
+                                                                         ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\SmartBlockEntityRendererMixin.java:40: 错误: 找不到符号
+              return instance.cameraOrientation();
+                             ^
+    符号:   方法 cameraOrientation()
+    位置: 类型为EntityRenderDispatcher的变量 instance
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\SmartBlockEntityRendererMixin.java:43: 错误: 找不到符号
+          return instance.cameraOrientation().premul((Quaternionfc)new Quaternionf(subLevelOrientation).conjugate());
+                         ^
+    符号:   方法 cameraOrientation()
+    位置: 类型为EntityRenderDispatcher的变量 instance
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\hose_pulley\HosePulleyBlockEntityMixin.java:60: 错误: 找不到符号
+          BlockState gatheredState = helper.runIncludingSubLevels(level, blockPos.getCenter(), true, helper.getContaining(level, (Vec3i)this.getBlockPos()), (sublevel, pos) -> {
+                                                                                 ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 blockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\particles\AirParticleMixin.java:97: 错误: 找不到符号
+          Vec3 twirl = VecHelper.rotate((Vec3)new Vec3(0.0, (double)this.twirlRadius, 0.0), (double)angle, (Direction.Axis)this.twirlAxis);
+                                ^
+    符号:   方法 rotate(Vec3,double,Axis)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:67: 错误: 找不到符号
+              Vector3d facingDir = JOMLConversion.atLowerCornerOf((Vec3i)facing.getNormal());
+                                                                               ^
+    符号:   方法 getNormal()
+    位置: 类型为Direction的变量 facing
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+              if (candidateBlock == null || !AllBlocks.REDSTONE_CONTACT.has(otherState = candidateBlock.state()) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) continue;
+                                                                       ^
+    符号:   方法 has(BlockState)
+    位置: 类型为RedstoneContactBlock的变量 REDSTONE_CONTACT
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:96: 错误: 找不到符号
+              if (candidateBlock == null || !AllBlocks.REDSTONE_CONTACT.has(otherState = candidateBlock.state()) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) continue;
+                                                                                                                                               ^
+    符号:   方法 has(BlockState)
+    位置: 类型为ElevatorContactBlock的变量 ELEVATOR_CONTACT
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:98: 错误: 找不到符号
+              Vec3 otherFacingMoj = Vec3.atLowerCornerOf((Vec3i)otherFacingDirection.getNormal());
+                                                                                    ^
+    符号:   方法 getNormal()
+    位置: 类型为Direction的变量 otherFacingDirection
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:107: 错误: 找不到符号
+          return Sable.HELPER.findIncludingSubLevels(this.getLevel(), this.getBlockPos().getCenter().relative(facing, 1.0), true, parentSublevel, (subLevel, pos) -> {
+                                                                                        ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+              if (!AllBlocks.REDSTONE_CONTACT.has(otherState) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) {
+                                             ^
+    符号:   方法 has(BlockState)
+    位置: 类型为RedstoneContactBlock的变量 REDSTONE_CONTACT
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:114: 错误: 找不到符号
+              if (!AllBlocks.REDSTONE_CONTACT.has(otherState) && !AllBlocks.ELEVATOR_CONTACT.has(otherState)) {
+                                                                                            ^
+    符号:   方法 has(BlockState)
+    位置: 类型为ElevatorContactBlock的变量 ELEVATOR_CONTACT
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:118: 错误: 找不到符号
+              Vector3d otherFacingDir = JOMLConversion.atLowerCornerOf((Vec3i)otherFacing.getNormal());
+                                                                                         ^
+    符号:   方法 getNormal()
+    位置: 类型为Direction的变量 otherFacing
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\GhostBlockValueBoxMixin.java:29: 错误: 找不到符号
+          Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+                                                            ^
+    符号:   方法 getMainCamera()
+    位置: 类型为GameRenderer的变量 gameRenderer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\ValueBoxMixin.java:31: 错误: 找不到符号
+          Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+                                                            ^
+    符号:   方法 getMainCamera()
+    位置: 类型为GameRenderer的变量 gameRenderer
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\DeployToolMixin.java:38: 错误: 找不到符号
+          Vec3 trans = SublevelRenderOffsetHelper.translation(this.selectedPos.getCenter());
+                                                                              ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 selectedPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicAndQuillHandlerMixin.java:97: 错误: 找不到符号
+              Vec3 loc = instance.getBlockPos().getCenter();
+                                               ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicExportMixin.java:139: 错误: 找不到符号
+              subLevelData.putUUID("uuid", mapping.newUUID());
+                          ^
+    符号:   方法 putUUID(String,UUID)
+    位置: 类型为CompoundTag的变量 subLevelData
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicTransformMixin.java:51: 错误: 找不到符号
+          Vec3 center = this.getAnchor().getCenter();
+                                        ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicTransformMixin.java:53: 错误: 找不到符号
+          return instance.translate(VecHelper.lerp((float)pt, (Vec3)this.prevChasingPos, (Vec3)this.chasingPos).subtract(SublevelRenderOffsetHelper.translation(center)).subtract(camera));
+                                             ^
+    符号:   方法 lerp(float,Vec3,Vec3)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\StructureTemplateMixin.java:67: 错误: 找不到符号
+              UUID uuid = subLevelCompound.getUUID("uuid");
+                                          ^
+    符号:   方法 getUUID(String)
+    位置: 类型为CompoundTag的变量 subLevelCompound
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:244: 错误: 找不到符号
+                      SuperGlueItem.spawnParticles((Level)(Object)this.level, (BlockPos)this.worldPosition, (Direction)((Direction)this.getBlockState().getValue((Property)StickerBlock.FACING)), (boolean)true);
+                                   ^
+    符号:   方法 spawnParticles(Level,BlockPos,Direction,boolean)
+    位置: 类 SuperGlueItem
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\tracks\CurvedTrackDestroyPacketMixin.java:28: 错误: 找不到符号
+          return BlockPos.containing((Position)Sable.HELPER.projectOutOfSubLevel(instance.getLevel(), instance.getBlockPos().getCenter()));
+                                                                                                                            ^
+    符号:   方法 getCenter()
+    位置: 类 BlockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\trains\CarriageContraptionVisualMixin.java:74: 错误: 找不到符号
+          FlywheelCompatNeoForge.SubLevelFlwRenderState state = FlywheelCompatNeoForge.getInfo(ChunkPos.asLong((int)plotX, (int)(plotZ = (chunkPos.z >> container.getLogPlotSize()) - container.getOrigin().y)));
+                                                                                                       ^
+    符号:   方法 asLong(int,int)
+    位置: 类 ChunkPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\flywheel\RenderDispatcherImplMixin.java:39: 错误: 找不到符号
+          FlywheelCompatNeoForge.preVisualizationFrame((Level)ctx.level(), ctx.partialTick());
+                                                                 ^
+    符号:   方法 level()
+    位置: 类型为RenderContext的变量 ctx
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\sound\MovingSoundInstanceDelegateMixin.java:33: 错误: 找不到符号
+          return this.instance.getStream(soundBuffers, sound, looping);
+                              ^
+    符号:   方法 getStream(SoundBufferLibrary,Sound,boolean)
+    位置: 类型为SoundInstance的变量 instance
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\harvester\HarvesterTicker.java:45: 错误: 找不到符号
+              Vec3 center = sable$selfPos.getCenter();
+                                         ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 sable$selfPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\mechanical_arm\PointHolder.java:29: 错误: 找不到符号
+          Tag pos = NbtUtils.writeBlockPos((BlockPos)this.pos.subtract((Vec3i)anchor));
+                            ^
+    符号:   方法 writeBlockPos(BlockPos)
+    位置: 类 NbtUtils
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\mechanical_arm\PointHolder.java:36: 错误: 找不到符号
+          Optional pos = NbtUtils.readBlockPos((CompoundTag)tag, (String)"pos");
+                                 ^
+    符号:   方法 readBlockPos(CompoundTag,String)
+    位置: 类 NbtUtils
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\mechanical_arm\PointHolder.java:37: 错误: 找不到符号
+          return pos.map(blockPos -> new PointHolder(blockPos.offset((Vec3i)anchor), (ArmInteractionPoint.Mode)NBTHelper.readEnum((CompoundTag)tag, (String)"mode", ArmInteractionPoint.Mode.class), new MutableBoolean(false))).orElse(null);
+                                                             ^
+    符号:   方法 offset(Vec3i)
+    位置: 类型为Object的变量 blockPos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:101: 错误: 找不到符号
+                      Vec3 start = Vec3.atLowerCornerOf((Vec3i)startingDir.getNormal()).scale(0.8).add(0.5, 0.5, 0.5);
+                                                                          ^
+    符号:   方法 getNormal()
+    位置: 类型为Direction的变量 startingDir
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:112: 错误: 找不到符号
+                          start = VecHelper.rotateCentered((Vec3)start, (double)angle, (Direction.Axis)axis);
+                                           ^
+    符号:   方法 rotateCentered(Vec3,double,Axis)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:114: 错误: 找不到符号
+                      start = VecHelper.rotateCentered((Vec3)start, (double)(60 * i), (Direction.Axis)facing.getAxis());
+                                       ^
+    符号:   方法 rotateCentered(Vec3,double,Axis)
+    位置: 类 VecHelper
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:119: 错误: 找不到符号
+              Vec3 start = Vec3.atLowerCornerOf((Vec3i)facing.getNormal()).scale(0.8).add(0.5, 0.5, 0.5);
+                                                             ^
+    符号:   方法 getNormal()
+    位置: 类型为Direction的变量 facing
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:132: 错误: 找不到符号
+          Optional be = level.getBlockEntity(blockStart.relative(((Direction)nbe.getBlockState().getValue((Property)BlockStateProperties.FACING)).getOpposite()), (BlockEntityType)AllBlockEntityTypes.ENCASED_FAN.get());
+                                                                                                                                                                                                                  ^
+    符号:   方法 get()
+    位置: 类型为BlockEntityType<EncasedFanBlockEntity>的变量 ENCASED_FAN
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\physics\callback\AbstractBellBlockCallback.java:45: 错误: 找不到符号
+          Vec3 hitDir = pos.getCenter().subtract(hitPos.x, hitPos.y, hitPos.z);
+                           ^
+    符号:   方法 getCenter()
+    位置: 类型为BlockPos的变量 pos
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\physics\callback\BeltBlockCallback.java:59: 错误: 找不到符号
+          Vec3i normal = Direction.get((Direction.AxisDirection)Direction.AxisDirection.POSITIVE, (Direction.Axis)facing.getAxis()).getNormal();
+                                                                                                                                   ^
+    符号:   方法 getNormal()
+    位置: 类 Direction
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\sublevel\storage\SubLevelTicketsSavedData.java:79: 错误: 找不到符号
+                    .getFirst();
+                    ^
+    符号:   方法 getFirst()
+    位置: 接口 Pair
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableFlywheelLightStorage.java:164: 错误: 不兼容的类型: IntIterator无法转换为LongIterator
+          longIterator = this.scene2SectionArenaIndexMap.keySet().iterator();
+                                                                          ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableFlywheelLightStorage.java:166: 错误: 不兼容的类型: Long无法转换为Integer
+              int scene = (Integer)longIterator.next();
+                                                    ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableFlywheelLightStorage.java:195: 错误: 不兼容的类型: Object无法转换为Entry
+          for (Int2ObjectMap.Entry entry : sectionsToCollect.int2ObjectEntrySet()) {
+                                                                               ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableLightLut.java:71: 错误: 不兼容的类型: Object无法转换为T
+                  inner.accept(innerIndices, lut);
+                               ^
+    其中, T是类型变量:
+      T扩展已在类 Layer中声明的Object
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\compatibility\flywheel\SableLightLut.java:127: 错误: 不兼容的类型: Object无法转换为T
+                  if (o == null || !inner.prune(o)) continue;
+                                                ^
+    其中, T是类型变量:
+      T扩展已在类 Layer中声明的Object
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_placement\BlockPlaceContextMixin.java:135: 错误: 不兼容的类型: BlockPlaceContextMixin无法转换为BlockPlaceContext
+           boolean replaced = this.replaceClicked || this.getLevel().getBlockState(position).canBeReplaced((BlockPlaceContext)this);
+                                                                                                                              ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_properties\BlockStateMixin.java:32: 错误: 不兼容的类型: BlockStateMixin无法转换为BlockState
+              if (override.getKey().matches(stateDefinition, (BlockState)this)) {
+                                                                         ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\camera\new_camera_types\CameraTypeMixin.java:36: 错误: 不兼容的类型: CameraTypeMixin无法转换为CameraType
+           return switch ((CameraType)this) {
+                                      ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\climbing_sub_levels\LivingEntityMixin.java:41: 错误: 不兼容的类型: LivingEntityMixin无法转换为LivingEntity
+        LivingEntity self = (LivingEntity)this;
+                                          ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:115: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+                  context.world.destroyBlockProgress(data.getInt("BreakerId"), blockPos, -1);
+                                                                ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\AbstractContraptionEntityMixin.java:163: 错误: 不兼容的类型: Object无法转换为Entity
+          for (Entity entity : passengers) {
+                               ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\AbstractContraptionEntityMixin.java:170: 错误: 不兼容的类型: CompoundTag无法转换为ValueOutput
+          CompoundTag tag = super.saveWithoutId(nbt);
+                                                ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionColliderMixin.java:129: 错误: 不兼容的类型: com.zurrtum.create.foundation.collision.Matrix3d无法转换为org.joml.Matrix3d
+              org.joml.Matrix3d jomlMatrix = ContraptionColliderMixin.sable$toJOML(rotationState.asMatrix());
+                                                                                                         ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionColliderMixin.java:133: 错误: 不兼容的类型: com.zurrtum.create.foundation.collision.Matrix3d无法转换为org.joml.Matrix3d
+          return rotationState.asMatrix();
+                                       ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:65: 错误: 不兼容的类型: Entity无法转换为AbstractContraptionEntity
+          super(ctx, (Entity)entity, partialTick);
+                     ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\entity_falls_on_block\BeltMillstoneBlocksMixin.java:46: 错误: 不兼容的类型: BeltMillstoneBlocksMixin无法转换为BeltBlock
+          BlockEntry entry = this instanceof BeltBlock ? AllBlocks.BELT : AllBlocks.MILLSTONE;
+                             ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\flywheel\FlywheelBlockEntityMixin.java:65: 错误: 不兼容的类型: Optional<Float>无法转换为float
+          this.sable$smoothedSpeed = compound.getFloat("SmoothedSpeed");
+                                                      ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\mechnical_arm\MechanicalArmSublevelFailure.java:49: 错误: 不兼容的类型: Object无法转换为Integer
+          pointsRemovedSublevel.set((Object)0);
+                                    ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\nozzle\block_entity\NozzleHoveringMixin.java:101: 错误: 不兼容的类型: NozzleHoveringMixin无法转换为NozzleBlockEntity
+          Vector3d force = NozzleHoveringHelper.gatherForceFromRays(subLevel, timeStep, this.getLevel(), this.getBlockPos(), (NozzleBlockEntity)this, this.sable$rayPoints);
+                                                                                                                                                ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:92: 错误: 不兼容的类型: Object无法转换为AbstractContraptionEntity
+          for (AbstractContraptionEntity ace : contraptions) {
+                                               ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicExportMixin.java:127: 错误: 不兼容的类型: Object无法转换为SubLevel
+          for (SubLevel subLevel : (Iterable)intersectingRef.get()) {
+                                   ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\SchematicExportMixin.java:134: 错误: 不兼容的类型: Block无法转换为List<Block>
+              structure.fillFromWorld(level, origin, (Vec3i)bounds, true, Blocks.AIR);
+                                                                                ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\StructureTemplateMixin.java:68: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+              Vector3d position = SableNBTUtils.readVector3d(subLevelCompound.getCompound("position"));
+                                                                                         ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\StructureTemplateMixin.java:69: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+              Quaterniond orientation = SableNBTUtils.readQuaternion(subLevelCompound.getCompound("orientation"));
+                                                                                                 ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:292: 错误: 不兼容的类型: Optional<Boolean>无法转换为boolean
+              this.sable$hasConstraint = compound.getBoolean("SableHasConstraint");
+                                                            ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:294: 错误: 不兼容的类型: Optional<CompoundTag>无法转换为CompoundTag
+              CompoundTag constraint = compound.getCompound("SableConstraint");
+                                                           ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:295: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+              BlockPos thisPos = new BlockPos(constraint.getInt("ThisX"), constraint.getInt("ThisY"), constraint.getInt("ThisZ"));
+                                                               ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:300: 错误: 不兼容的类型: Optional<Integer>无法转换为int
+              this.sable$attachedPos = new BlockPos(constraint.getInt("X"), constraint.getInt("Y"), constraint.getInt("Z"));
+                                                                     ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:301: 错误: 不兼容的类型: Optional<Double>无法转换为double
+              this.sable$constraintPos1 = new Vector3d(constraint.getDouble("FromX"), constraint.getDouble("FromY"), constraint.getDouble("FromZ"));
+                                                                           ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:302: 错误: 不兼容的类型: Optional<Double>无法转换为double
+              this.sable$constraintPos2 = new Vector3d(constraint.getDouble("ToX"), constraint.getDouble("ToY"), constraint.getDouble("ToZ"));
+                                                                           ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:303: 错误: 不兼容的类型: Optional<Double>无法转换为double
+              this.sable$constraintOrientation = new Quaterniond(constraint.getDouble("QuatX"), constraint.getDouble("QuatY"), constraint.getDouble("QuatZ"), constraint.getDouble("QuatW"));
+                                                                                     ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\toolbox\ToolboxHandlerMixin.java:58: 错误: 不兼容的类型: 条件表达式中的类型错误
+          cir.setReturnValue((ToolboxHandlerMixin.sable$getDistance((LevelAccessor)player.level(), player.position(), box.getBlockPos()) < maxRange * maxRange ? 1 : 0));
+                                                                                                                                                               ^
+      int无法转换为Boolean
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\toolbox\ToolboxHandlerMixin.java:65: 错误: 不兼容的类型: Object无法转换为BlockPos
+          cir.setReturnValue(((WeakHashMap)toolboxes.get(world)).keySet().stream().filter(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p) < maxRange * maxRange).sorted(Comparator.comparingDouble(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p))).limit(maxAmount).map(((WeakHashMap)toolboxes.get(world))::get).filter(ToolboxBlockEntity::isFullyInitialized).collect(Collectors.toList()));
+                                                                                                                                                      ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\toolbox\ToolboxHandlerMixin.java:65: 错误: 不兼容的类型: Object无法转换为BlockPos
+          cir.setReturnValue(((WeakHashMap)toolboxes.get(world)).keySet().stream().filter(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p) < maxRange * maxRange).sorted(Comparator.comparingDouble(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p))).limit(maxAmount).map(((WeakHashMap)toolboxes.get(world))::get).filter(ToolboxBlockEntity::isFullyInitialized).collect(Collectors.toList()));
+                                                                                                                                                                                                                                                                              ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\toolbox\ToolboxHandlerMixin.java:65: 错误: 不兼容的类型: 方法引用无效
+          cir.setReturnValue(((WeakHashMap)toolboxes.get(world)).keySet().stream().filter(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p) < maxRange * maxRange).sorted(Comparator.comparingDouble(p -> ToolboxHandlerMixin.sable$getDistance(world, location, p))).limit(maxAmount).map(((WeakHashMap)toolboxes.get(world))::get).filter(ToolboxBlockEntity::isFullyInitialized).collect(Collectors.toList()));
+                                                                                                                                                                                                                                                                                                                                                         ^
+      无法将 类 ToolboxBlockEntity中的 方法 isFullyInitialized应用到给定类型
+        需要: 没有参数
+        找到:    Object
+        原因: 实际参数列表和形式参数列表长度不同
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\trains\CarriageContraptionVisualMixin.java:55: 错误: 不兼容的类型: AbstractContraptionEntity无法转换为CarriageContraptionEntity
+          super(ctx, (AbstractContraptionEntity)entity, partialTick);
+                     ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\scalablelux\StarLightEngineMixin.java:38: 错误: 不兼容的类型: StarLightEngineMixin无法转换为BlockStarLightEngine
+        if (this instanceof BlockStarLightEngine) {
+            ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\scalablelux\StarLightEngineMixin.java:57: 错误: 不兼容的类型: StarLightEngineMixin无法转换为BlockStarLightEngine
+        if (this instanceof BlockStarLightEngine) {
+            ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\LivingEntityMixin.java:158: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+        if (trackingSubLevel != null && (!(!countLocalPlayer && this instanceof Player player) || !player.isLocalPlayer())) {
+                                                                ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\packet_mixin\ClientboundEntityPositionSyncPacketMixin.java:36: 错误: 不兼容的类型: ClientboundEntityPositionSyncPacket无法转换为PacketActuallyInSubLevelExtension
+           ((PacketActuallyInSubLevelExtension)packet).sable$setActuallyInSubLevel(buffer.readBoolean());
+                                               ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\packet_mixin\ClientboundEntityPositionSyncPacketMixin.java:33: 错误: 不兼容的类型: ClientboundEntityPositionSyncPacket无法转换为PacketActuallyInSubLevelExtension
+           buffer.writeBoolean(((PacketActuallyInSubLevelExtension)packet).sable$isActuallyInSubLevel());
+                                                                   ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\packet_mixin\ClientboundTeleportEntityPacketMixin.java:36: 错误: 不兼容的类型: ClientboundTeleportEntityPacket无法转换为PacketActuallyInSubLevelExtension
+           ((PacketActuallyInSubLevelExtension)packet).sable$setActuallyInSubLevel(buffer.readBoolean());
+                                               ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entities_stick_sublevels\packet_mixin\ClientboundTeleportEntityPacketMixin.java:33: 错误: 不兼容的类型: ClientboundTeleportEntityPacket无法转换为PacketActuallyInSubLevelExtension
+           buffer.writeBoolean(((PacketActuallyInSubLevelExtension)packet).sable$isActuallyInSubLevel());
+                                                                   ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_pathfinding\PathNavigationMixin.java:102: 错误: 不兼容的类型: Path无法转换为PathExtension
+                 ((PathExtension)path).sable$setLocalPath(this.level, true);
+                                 ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_rotations_and_riding\EntityMixin.java:161: 错误: 不兼容的类型: EntityMixin无法转换为ServerPlayer
+              if (this instanceof ServerPlayer serverPlayer) {
+                  ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_sublevel_collision\EntityMixin.java:233: 错误: 不兼容的类型: EntityMixin无法转换为LivingEntity
+        if (!(this instanceof LivingEntity)
+              ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_sublevel_collision\LivingEntityMixin.java:87: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+        if (this instanceof Player player && player.getAbilities().flying) {
+            ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_sublevel_collision\LivingEntityMixin.java:115: 错误: 不兼容的类型: LivingEntityMixin无法转换为Player
+              level.playSound(this instanceof Player player ? player : null, this.getX(), this.getY(), this.getZ(), sound, SoundSource.BLOCKS, 0.75F, 1.0F);
+                              ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_swimming\LivingEntityMixin.java:22: 错误: 不兼容的类型: LivingEntityMixin无法转换为LivingEntity
+        return SubLevelFluidHelper.getFluidStateAt((LivingEntity)this, pos);
+                                                                 ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\entity\entity_swimming\PlayerMixin.java:22: 错误: 不兼容的类型: PlayerMixin无法转换为Player
+        return SubLevelFluidHelper.getFluidStateAt((Player)this, pos);
+                                                           ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\particle\ServerLevelMixin.java:21: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+        return Sable.HELPER.distanceSquaredWithSubLevels((ServerLevel)this, pos, blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5)
+                                                                      ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:75: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+           SableCommonEvents.handleBlockChange(serverLevel, (LevelChunk)this, pX, pY, pZ, oldState, newState);
+                                                                        ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:84: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+        return container != null && container.inBounds(((LevelChunk)this).getPos());
+                                                                    ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:106: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+           LevelChunk self = (LevelChunk)this;
+                                         ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\LevelChunkMixin.java:125: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+           LevelChunk self = (LevelChunk)this;
+                                         ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\lighting\LevelChunkMixin.java:32: 错误: 不兼容的类型: LevelChunkMixin无法转换为LevelChunk
+           LevelChunk chunk = (LevelChunk)this;
+                                          ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\serialization\LevelChunkTicksMixin.java:25: 错误: 不兼容的类型: LevelChunkTicks<T>无法转换为LevelChunkTicksMixin
+        this.pendingTicks = ((LevelChunkTicksMixin)ticks).pendingTicks;
+                                                   ^
+    其中, T是类型变量:
+      T扩展已在类 LevelChunkTicksMixin中声明的Object
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:59: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+        if (!SablePlatform.INSTANCE.isWrappedLevel((ServerLevel)this)) {
+                                                                ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:60: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+           SubLevelOccupancySavedData.getOrLoad((ServerLevel)this);
+                                                             ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:61: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+           SubLevelTicketsSavedData.getOrLoad((ServerLevel)this);
+                                                           ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:79: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+        ServerLevel self = (ServerLevel)this;
+                                        ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:97: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+        ServerLevel self = (ServerLevel)this;
+                                        ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:117: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+        SubLevelContainer plotContainer = SubLevelContainer.getContainer((ServerLevel)this);
+                                                                                      ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:132: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+        SubLevelContainer plotContainer = SubLevelContainer.getContainer((ServerLevel)this);
+                                                                                      ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\plot\ServerLevelMixin.java:146: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+        ServerLevel self = (ServerLevel)this;
+                                        ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\sublevel_render\dynamic_lighting\LevelLightEngineMixin.java:17: 错误: 不兼容的类型: LevelLightEngineMixin无法转换为LevelLightEngine
+        SubLevelDynamicLights.beginLightUpdates((LevelLightEngine)this);
+                                                                  ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\sublevel_render\dynamic_lighting\LevelLightEngineMixin.java:25: 错误: 不兼容的类型: LevelLightEngineMixin无法转换为LevelLightEngine
+        SubLevelDynamicLights.endLightUpdates((LevelLightEngine)this);
+                                                                ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\sublevel_render\dynamic_lighting\LightEngineMixin.java:21: 错误: 不兼容的类型: LightEngineMixin无法转换为BlockLightEngine
+        if (this instanceof BlockLightEngine) {
+            ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\tracking_points\ServerPlayerMixin.java:26: 错误: 不兼容的类型: ServerPlayerMixin无法转换为ServerPlayer
+        UUID loginPointUUID = data.generateTrackingPoint((ServerPlayer)this);
+                                                                       ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\world_border\ServerLevelMixin.java:18: 错误: 不兼容的类型: ServerLevelMixin无法转换为ServerLevel
+        ServerLevel self = (ServerLevel)this;
+                                        ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\block_breakers\SubLevelBlockBreakingUtility.java:63: 错误: 不兼容的类型: Object无法转换为BlockPos
+          for (BlockPos possiblyBreakableBlock : possiblyBreakableBlocks) {
+                                                 ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\mechanical_arm\PointHolder.java:37: 错误: 不兼容的类型: Object无法转换为PointHolder
+          return pos.map(blockPos -> new PointHolder(blockPos.offset((Vec3i)anchor), (ArmInteractionPoint.Mode)NBTHelper.readEnum((CompoundTag)tag, (String)"mode", ArmInteractionPoint.Mode.class), new MutableBoolean(false))).orElse(null);
+                                                                                                                                                                                                                                       ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\block_outline_render\LevelRendererMixin.java:102: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+          poseStack.mulPose(this.sable$orientationStorage.set(orientation));
+                   ^
+      方法 PoseStack.mulPose(Matrix4fc)不适用
+        (参数不匹配; Quaternionf无法转换为Matrix4fc)
+      方法 PoseStack.mulPose(Transformation)不适用
+        (参数不匹配; Quaternionf无法转换为Transformation)
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\contraptions\ContraptionVisualMixin.java:104: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+          this.contraptionMatrix.mulPose(new Quaternionf(renderPose.orientation()));
+                                ^
+      方法 PoseStack.mulPose(Matrix4fc)不适用
+        (参数不匹配; Quaternionf无法转换为Matrix4fc)
+      方法 PoseStack.mulPose(Transformation)不适用
+        (参数不匹配; Quaternionf无法转换为Transformation)
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\frogports\ChainConveyorInteractionHandlerMixin.java:96: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+              ms.mulPose(new Quaternionf(renderPose.orientation()));
+                ^
+      方法 PoseStack.mulPose(Matrix4fc)不适用
+        (参数不匹配; Quaternionf无法转换为Matrix4fc)
+      方法 PoseStack.mulPose(Transformation)不适用
+        (参数不匹配; Quaternionf无法转换为Transformation)
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\nozzle\block_entity\NozzleBEFixesMixin.java:77: 错误: 对于getNearest(double,double,double), 找不到合适的方法
+          Direction nearest = Direction.getNearest((double)direction.x, (double)direction.y, (double)direction.z);
+                                       ^
+      方法 Direction.getNearest(int,int,int,@org.jspecify.annotations.Nullable Direction)不适用
+        (实际参数列表和形式参数列表长度不同)
+      方法 Direction.getNearest(Vec3i,@org.jspecify.annotations.Nullable Direction)不适用
+        (实际参数列表和形式参数列表长度不同)
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\render_fixes\LineOutlineMixin.java:63: 错误: 对于bufferCuboidLine(Pose,VertexConsumer,Vector3f,Direction,float,float,Vector4f,int,boolean), 找不到合适的方法
+          this.bufferCuboidLine(poseStack.last(), consumer, new Vector3f(), Direction.SOUTH, length, width, color, lightmap, disableNormals);
+              ^
+      方法 Outline.bufferCuboidLine(Pose,VertexConsumer,Vector3f,Direction,float,float,int,int,boolean)不适用
+        (参数不匹配; Vector4f无法转换为int)
+      方法 LineOutlineMixin.bufferCuboidLine(PoseStack,VertexConsumer,Vec3,Vector3d,Vector3d,float,Vector4f,int,boolean)不适用
+        (参数不匹配; Pose无法转换为PoseStack)
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\tracks\TrackBlockOutlineMixin.java:108: 错误: 对于mulPose(Quaternionf), 找不到合适的方法
+          instance.mulPose(new Quaternionf(subLevel.renderPose().orientation()));
+                  ^
+      方法 PoseStack.mulPose(Matrix4fc)不适用
+        (参数不匹配; Quaternionf无法转换为Matrix4fc)
+      方法 PoseStack.mulPose(Transformation)不适用
+        (参数不匹配; Quaternionf无法转换为Transformation)
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\physics\callback\AbstractBellBlockCallback.java:54: 错误: 对于getNearest(double,double,double), 找不到合适的方法
+          Direction ringDir = Direction.getNearest((double)(hitDir.x * (double)xMul), (double)0.0, (double)(hitDir.z * (double)zMul)).getOpposite();
+                                       ^
+      方法 Direction.getNearest(int,int,int,@org.jspecify.annotations.Nullable Direction)不适用
+        (实际参数列表和形式参数列表长度不同)
+      方法 Direction.getNearest(Vec3i,@org.jspecify.annotations.Nullable Direction)不适用
+        (实际参数列表和形式参数列表长度不同)
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\camera\new_camera_types\CameraTypeMixin.java:31: 错误: 不可比较的类型: CameraTypeMixin和CameraType
+        if (this == SableCameraTypes.SUB_LEVEL_VIEW) {
+                 ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\camera\new_camera_types\CameraTypeMixin.java:33: 错误: 不可比较的类型: CameraTypeMixin和CameraType
+        } else if (this == SableCameraTypes.SUB_LEVEL_VIEW_UNLOCKED) {
+                        ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:73: 错误: 找不到符号
+                  Vec3 subLevelLocalDir = (Vec3)context.rotation.apply(this.getActiveAreaOffset(context));
+                                                                           ^
+    符号: 方法 getActiveAreaOffset(MovementContext)
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\RedstoneContactBlockMixin.java:56: 错误: 找不到符号
+              return super.getTicker(level, p_153213_, p_153214_);
+                          ^
+    符号: 方法 getTicker(Level,BlockState,BlockEntityType<S>)
+    其中, S是类型变量:
+      S扩展已在方法 <S>getTicker(Level,BlockState,BlockEntityType<S>)中声明的BlockEntity
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\block_breaking_behaviour\BlockBreakingMovementBehaviourMixin.java:105: 错误: 无法将类 CompoundTag中的方法 getList应用到给定类型;
+          if (data.contains("ProjectedPos") && Sable.HELPER.distanceSquaredWithSubLevels(context.world, (Position)VecHelper.readNBT((ListTag)data.getList("ProjectedPos", 6)), (Position)sublevelLocalCenter) > 4.0) {
+                                                                                                                                                 ^
+    需要: String
+    找到:    String,int
+    原因: 实际参数列表和形式参数列表长度不同
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\schematics\StructureTemplateMixin.java:62: 错误: 无法将类 CompoundTag中的方法 getList应用到给定类型;
+          ListTag subLevelTags = tag.getList("sub_levels", 10);
+                                    ^
+    需要: String
+    找到:    String,int
+    原因: 实际参数列表和形式参数列表长度不同
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\sticker\StickerBlockEntityMixin.java:293: 错误: 无法将类 CompoundTag中的方法 contains应用到给定类型;
+          } else if (compound.contains("SableConstraint", 10)) {
+                             ^
+    需要: String
+    找到:    String,int
+    原因: 实际参数列表和形式参数列表长度不同
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\behaviour_compatibility\harvester_block_entity\HarvesterBlockMixin.java:41: 错误: isClientSide 在 Level 中是 private 访问控制
+          if (level.isClientSide) {
+                   ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\ejector\EjectorBlockEntityMixin.java:168: 错误: isClientSide 在 Level 中是 private 访问控制
+          if (this.level.isClientSide && !this.isVirtual()) {
+                        ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\nozzle\block_entity\NozzleHoveringMixin.java:90: 错误: random 在 Level 中是 protected 访问控制
+              Couple<Vec3> ray = this.sable$rayPoints.get(this.level.random.nextInt(this.sable$rayPoints.size()));
+                                                                    ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixin\compatibility\create\redstone_contacts\RedstoneContactBlockMixin.java:55: 错误: isClientSide 在 Level 中是 private 访问控制
+          if (!level.isClientSide) {
+                    ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+              Vector3d offset = new Vector3d(level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0);
+                                                  ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+              Vector3d offset = new Vector3d(level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0);
+                                                                                         ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\nozzles\NozzleHoveringHelper.java:203: 错误: random 在 Level 中是 protected 访问控制
+              Vector3d offset = new Vector3d(level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0, level.random.nextDouble() * 2.0 - 1.0);
+                                                                                                                                ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:50: 错误: RedstoneContactBlockEntity不是抽象的, 并且未覆盖SmartBlockEntity中的抽象方法addBehaviours(List<BlockEntityBehaviour<?>>)
+  public class RedstoneContactBlockEntity
+         ^
+  C:\Users\_anmuxi_\Desktop\Sable-Fly\src\main\java\dev\ryanhcode\sable\mixinhelper\compatibility\create\redstone_contact\RedstoneContactBlockEntity.java:58: 错误: 名称冲突: RedstoneContactBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour>) 和 SmartBlockEntity 中的 addBehaviours(List<BlockEntityBehaviour<?>>) 具有相同疑符, 但两者均不覆盖对方
+      public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+                  ^
+  注: 某些输入文件使用或覆盖了已过时的 API。
+  注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+  注: 某些输入文件使用了未经检查或不安全的操作。
+  注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+  注: 某些消息已经过简化; 请使用 -Xdiags:verbose 重新编译以获得完整输出
+  210 个错误
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 12s
+1 actionable task: 1 executed

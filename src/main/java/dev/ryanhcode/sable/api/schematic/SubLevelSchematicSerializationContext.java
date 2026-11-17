@@ -39,7 +39,7 @@ public class SubLevelSchematicSerializationContext {
    }
 
    @Internal
-   public static void setCurrentContext(@Nullable SubLevelSchematicSerializationContext context) {
+   public static void setCurrentContext(@org.jetbrains.annotations.Nullable SubLevelSchematicSerializationContext context) {
       THREAD_LOCAL.set(context);
    }
 
@@ -61,12 +61,12 @@ public class SubLevelSchematicSerializationContext {
       this.setupTransform = transform;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevelSchematicSerializationContext.SchematicMapping getMapping(SubLevel subLevel) {
       return this.mappings.get(subLevel.getUniqueId());
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public SubLevelSchematicSerializationContext.SchematicMapping getMapping(UUID uuid) {
       return this.mappings.get(uuid);
    }

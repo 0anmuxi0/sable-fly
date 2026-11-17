@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({ConduitBlockEntity.class})
 public class ConduitBlockEntityMixin {
-   @Redirect(
-      method = {"applyEffects"},
+   @Redirect(require = 0, method = {"applyEffects"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/core/BlockPos;closerThan(Lnet/minecraft/core/Vec3i;D)Z"

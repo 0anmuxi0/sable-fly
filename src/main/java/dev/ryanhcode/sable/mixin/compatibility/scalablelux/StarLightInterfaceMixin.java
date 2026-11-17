@@ -31,8 +31,7 @@ public abstract class StarLightInterfaceMixin {
    @Final
    public LevelLightEngine lightEngine;
 
-   @Inject(
-      method = {"getAnyChunkNow"},
+   @Inject(require = 0, method = {"getAnyChunkNow"},
       at = {@At("HEAD")},
       cancellable = true,
       remap = false
@@ -46,8 +45,7 @@ public abstract class StarLightInterfaceMixin {
       }
    }
 
-   @WrapMethod(
-      method = {"handleUpdateInternal"}
+   @WrapMethod(require = 0, method = {"handleUpdateInternal"}
    )
    private void sable$withSubLevelLights(ChunkTasks task, SkyStarLightEngine skyEngine, BlockStarLightEngine blockEngine, Operation<Void> original) {
       SubLevelDynamicLights.beginLightUpdates(this.lightEngine);

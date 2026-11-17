@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value={AbstractBlockEntityVisual.class}, remap=false)
 public abstract class FlywheelCompatAbstractBlockEntityVisualMixin {
-    @Inject(method={"relight(Lnet/minecraft/core/BlockPos;[Lcom/zurrtum/create/client/flywheel/lib/instance/FlatLit;)V"}, at={@At(value="HEAD")}, cancellable=true, remap=false)
+    @Inject(require = 0, method={"relight(Lnet/minecraft/core/BlockPos;[Lcom/zurrtum/create/client/flywheel/lib/instance/FlatLit;)V"}, at={@At(value="HEAD")}, cancellable=true, remap=false)
     private void sable$relightArray(BlockPos pos, FlatLit[] instances, CallbackInfo ci) {
         Integer light = FlywheelCompatAbstractBlockEntityVisualMixin.sable$subLevelLight(pos);
         if (light == null) {
@@ -29,7 +29,7 @@ public abstract class FlywheelCompatAbstractBlockEntityVisualMixin {
         ci.cancel();
     }
 
-    @Inject(method={"relight(Lnet/minecraft/core/BlockPos;Ljava/util/Iterator;)V"}, at={@At(value="HEAD")}, cancellable=true, remap=false)
+    @Inject(require = 0, method={"relight(Lnet/minecraft/core/BlockPos;Ljava/util/Iterator;)V"}, at={@At(value="HEAD")}, cancellable=true, remap=false)
     private void sable$relightIterator(BlockPos pos, Iterator<? extends FlatLit> instances, CallbackInfo ci) {
         Integer light = FlywheelCompatAbstractBlockEntityVisualMixin.sable$subLevelLight(pos);
         if (light == null) {
@@ -39,7 +39,7 @@ public abstract class FlywheelCompatAbstractBlockEntityVisualMixin {
         ci.cancel();
     }
 
-    @Inject(method={"relight(Lnet/minecraft/core/BlockPos;Ljava/lang/Iterable;)V"}, at={@At(value="HEAD")}, cancellable=true, remap=false)
+    @Inject(require = 0, method={"relight(Lnet/minecraft/core/BlockPos;Ljava/lang/Iterable;)V"}, at={@At(value="HEAD")}, cancellable=true, remap=false)
     private void sable$relightIterable(BlockPos pos, Iterable<? extends FlatLit> instances, CallbackInfo ci) {
         Integer light = FlywheelCompatAbstractBlockEntityVisualMixin.sable$subLevelLight(pos);
         if (light == null) {

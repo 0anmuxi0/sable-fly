@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin({ClientLevel.class})
 public abstract class ClientLevelMixin extends Level {
    @Shadow
-   public abstract void doAnimateTick(int var1, int var2, int var3, int var4, RandomSource var5, @Nullable Block var6, MutableBlockPos var7);
+   public abstract void doAnimateTick(int var1, int var2, int var3, int var4, RandomSource var5, @org.jetbrains.annotations.Nullable Block var6, MutableBlockPos var7);
 
    private ClientLevelMixin(
       WritableLevelData writableLevelData,
@@ -44,8 +44,7 @@ public abstract class ClientLevelMixin extends Level {
       super(writableLevelData, resourceKey, registryAccess, holder, bl, bl2, l, i);
    }
 
-   @Inject(
-      method = {"animateTick"},
+   @Inject(require = 0, method = {"animateTick"},
       at = {@At("TAIL")}
    )
    public void sable$subLevelAnimateTick(int x, int y, int z, CallbackInfo ci, @Local RandomSource randomSource, @Local Block block, @Local MutableBlockPos pos) {
@@ -71,8 +70,7 @@ public abstract class ClientLevelMixin extends Level {
       }
    }
 
-   @Redirect(
-      method = {"doAddParticle"},
+   @Redirect(require = 0, method = {"doAddParticle"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(DDD)D"

@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({Mob.class, FleeSunGoal.class, GroundPathNavigation.class})
 public class SubLevelsBlockSkyMixin {
-   @WrapOperation(
-      method = {"*"},
+   @WrapOperation(require = 0, method = {"*"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;canSeeSky(Lnet/minecraft/core/BlockPos;)Z"

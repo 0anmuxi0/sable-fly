@@ -14,8 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({TestCommand.class})
 public class TestCommandMixin {
-   @Inject(
-      method = {"resetGameTestInfo"},
+   @Inject(require = 0, method = {"resetGameTestInfo"},
       at = {@At("HEAD")}
    )
    private static void resetGameTestInfo(CommandSourceStack source, GameTestInfo gameTestInfo, CallbackInfoReturnable<Integer> cir) {

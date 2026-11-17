@@ -14,8 +14,7 @@ public abstract class BlockEntityRenderDispatcherMixin implements BlockEntityRen
    @Unique
    private Vec3 sable$cameraPos;
 
-   @ModifyArg(
-      method = {"tryExtractRenderState"},
+   @ModifyArg(require = 0, method = {"tryExtractRenderState"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderer;shouldRender(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/phys/Vec3;)Z"
@@ -27,7 +26,7 @@ public abstract class BlockEntityRenderDispatcherMixin implements BlockEntityRen
    }
 
    @Override
-   public void sable$setCameraPosition(@Nullable Vec3 pos) {
+   public void sable$setCameraPosition(@org.jetbrains.annotations.Nullable Vec3 pos) {
       this.sable$cameraPos = pos;
    }
 }

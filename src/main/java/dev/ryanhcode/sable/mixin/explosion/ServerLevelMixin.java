@@ -22,8 +22,7 @@ public abstract class ServerLevelMixin {
    @Shadow
    public abstract ServerLevel getLevel();
 
-   @WrapMethod(
-      method = {"explode"}
+   @WrapMethod(require = 0, method = {"explode"}
    )
    public void sable$preExplode(
       Entity entity,

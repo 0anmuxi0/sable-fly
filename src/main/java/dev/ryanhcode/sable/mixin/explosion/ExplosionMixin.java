@@ -49,19 +49,17 @@ public class ExplosionMixin {
    private ExplosionDamageCalculator damageCalculator;
    @Shadow
    @Final
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Entity source;
 
-   @Inject(
-      method = {"calculateExplodedPositions"},
+   @Inject(require = 0, method = {"calculateExplodedPositions"},
       at = {@At("HEAD")}
    )
    private void sable$preExplode(CallbackInfoReturnable<List<BlockPos>> cir, @Share("explodedSet") LocalRef<Set<BlockPos>> explodedSet) {
       explodedSet.set(new ObjectOpenHashSet());
    }
 
-   @Inject(
-      method = {"calculateExplodedPositions"},
+   @Inject(require = 0, method = {"calculateExplodedPositions"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/ExplosionDamageCalculator;getBlockExplosionResistance(Lnet/minecraft/world/level/Explosion;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/material/FluidState;)Ljava/util/Optional;"

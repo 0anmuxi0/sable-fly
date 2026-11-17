@@ -19,8 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({ProjectileDispenseBehavior.class})
 public class ProjectileDispenseBehaviorMixin {
-   @Inject(
-      method = {"execute"},
+   @Inject(require = 0, method = {"execute"},
       at = {@At("TAIL")}
    )
    private void sable$applyRecoil(

@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({ServerLevel.class})
 public class ServerLevelMixin {
-   @Redirect(
-      method = {"sendParticles(Lnet/minecraft/server/level/ServerPlayer;ZDDDLnet/minecraft/network/protocol/Packet;)Z"},
+   @Redirect(require = 0, method = {"sendParticles(Lnet/minecraft/server/level/ServerPlayer;ZDDDLnet/minecraft/network/protocol/Packet;)Z"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/core/BlockPos;closerToCenterThan(Lnet/minecraft/core/Position;D)Z"

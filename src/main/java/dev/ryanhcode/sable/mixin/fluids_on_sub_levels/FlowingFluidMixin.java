@@ -18,8 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({FlowingFluid.class})
 public class FlowingFluidMixin {
-   @Inject(
-      at = {@At("HEAD")},
+   @Inject(require = 0, at = {@At("HEAD")},
       method = {"canPassThrough"},
       cancellable = true
    )

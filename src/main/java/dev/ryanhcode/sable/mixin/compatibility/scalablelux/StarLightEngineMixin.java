@@ -24,8 +24,7 @@ public abstract class StarLightEngineMixin {
    @Shadow
    protected int chunkOffsetZ;
 
-   @Inject(
-      target = {@Desc(
+   @Inject(require = 0, target = {@Desc(
          value = "getBlockState",
          ret = BlockState.class,
          args = {int.class, int.class, int.class}
@@ -35,7 +34,7 @@ public abstract class StarLightEngineMixin {
       remap = false
    )
    private void sable$includeSubLevelOcclusion(int worldX, int worldY, int worldZ, CallbackInfoReturnable<BlockState> cir) {
-      if ((Object)this instanceof BlockStarLightEngine) {
+      if (((Object)this) instanceof BlockStarLightEngine) {
          BlockState projected = SubLevelDynamicLights.getOccludingBlockState(BlockPos.asLong(worldX, worldY, worldZ));
          if (projected != null) {
             cir.setReturnValue(projected);
@@ -43,8 +42,7 @@ public abstract class StarLightEngineMixin {
       }
    }
 
-   @Inject(
-      target = {@Desc(
+   @Inject(require = 0, target = {@Desc(
          value = "getBlockState",
          ret = BlockState.class,
          args = {int.class, int.class}
@@ -54,7 +52,7 @@ public abstract class StarLightEngineMixin {
       remap = false
    )
    private void sable$includeCachedSubLevelOcclusion(int sectionIndex, int localIndex, CallbackInfoReturnable<BlockState> cir) {
-      if ((Object)this instanceof BlockStarLightEngine) {
+      if (((Object)this) instanceof BlockStarLightEngine) {
          int sectionX = sectionIndex % 5 - this.chunkOffsetX;
          int sectionZ = sectionIndex / 5 % 5 - this.chunkOffsetZ;
          int sectionY = sectionIndex / 25 - this.chunkOffsetY;

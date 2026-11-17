@@ -63,7 +63,7 @@ public enum VoxelNeighborhoodState {
       return state.liquid() || state.getBlock() instanceof KelpPlantBlock || state.getBlock() instanceof KelpBlock;
    }
 
-   public static VoxelNeighborhoodState getState(LevelAccelerator level, BlockPos pos, @Nullable LevelChunk chunk) {
+   public static VoxelNeighborhoodState getState(LevelAccelerator level, BlockPos pos, @org.jetbrains.annotations.Nullable LevelChunk chunk) {
       ChunkPos initialPos = new ChunkPos(SectionPos.blockToSectionCoord(pos.getX()), SectionPos.blockToSectionCoord(pos.getZ()));
       BlockState state = chunk != null ? level.getBlockState(chunk, pos) : level.getBlockState(pos);
       if (!isLiquid(state) && !BlockWithSubLevelCollisionCallback.hasCallback(state)) {

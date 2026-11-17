@@ -51,8 +51,7 @@ public class LevelRenderMixin {
       return maxHeight;
    }
 
-   @WrapOperation(
-      method = {"extractRenderState"},
+   @WrapOperation(require = 0, method = {"extractRenderState"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/multiplayer/ClientLevel;getHeight(Lnet/minecraft/world/level/levelgen/Heightmap$Types;II)I"

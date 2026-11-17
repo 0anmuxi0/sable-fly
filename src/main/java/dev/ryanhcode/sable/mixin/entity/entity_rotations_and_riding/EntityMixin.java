@@ -33,7 +33,7 @@ public abstract class EntityMixin {
    @Shadow
    private Level level;
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private Entity vehicle;
    @Shadow
    private Vec3 position;
@@ -60,7 +60,7 @@ public abstract class EntityMixin {
    public abstract Level level();
 
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public abstract Entity getVehicle();
 
    @Shadow
@@ -86,8 +86,7 @@ public abstract class EntityMixin {
    @Shadow
    public abstract Vec3 getDeltaMovement();
 
-   @WrapOperation(
-      method = {"applyMovementEmissionAndPlaySound"},
+   @WrapOperation(require = 0, method = {"applyMovementEmissionAndPlaySound"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/Vec3;horizontalDistance()D"
@@ -98,8 +97,7 @@ public abstract class EntityMixin {
       return orientation == null ? original.call(vec) : original.call(JOMLConversion.toMojang(orientation.transformInverse(JOMLConversion.toJOML(vec))));
    }
 
-   @Inject(
-      method = {"moveRelative"},
+   @Inject(require = 0, method = {"moveRelative"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -113,8 +111,7 @@ public abstract class EntityMixin {
       }
    }
 
-   @Inject(
-      method = {"rideTick"},
+   @Inject(require = 0, method = {"rideTick"},
       at = {@At("TAIL")}
    )
    public void sable$onRidingTick(CallbackInfo ci) {
@@ -130,8 +127,7 @@ public abstract class EntityMixin {
       }
    }
 
-   @Inject(
-      method = {"positionRider(Lnet/minecraft/world/entity/Entity;)V"},
+   @Inject(require = 0, method = {"positionRider(Lnet/minecraft/world/entity/Entity;)V"},
       at = {@At("TAIL")}
    )
    public void sable$onPositionRider(Entity entity, CallbackInfo ci) {
@@ -144,8 +140,7 @@ public abstract class EntityMixin {
       }
    }
 
-   @WrapOperation(
-      method = {"saveWithoutId"},
+   @WrapOperation(require = 0, method = {"saveWithoutId"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/storage/ValueOutput;store(Ljava/lang/String;Lcom/mojang/serialization/Codec;Ljava/lang/Object;)V",
@@ -158,7 +153,7 @@ public abstract class EntityMixin {
       } else {
          SubLevel subLevel = Sable.HELPER.getContaining(this.vehicle);
          if (subLevel != null) {
-            if ((Object)this instanceof ServerPlayer serverPlayer) {
+            if (((Object)this) instanceof ServerPlayer serverPlayer) {
                SubLevelTrackingPointSavedData data = SubLevelTrackingPointSavedData.getOrLoad((ServerLevel)this.level());
                UUID loginPointUUID = data.generateTrackingPoint(serverPlayer, (ServerSubLevel)subLevel);
                if (loginPointUUID != null) {

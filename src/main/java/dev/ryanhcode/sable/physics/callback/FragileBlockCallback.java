@@ -25,7 +25,7 @@ public class FragileBlockCallback implements BlockSubLevelCollisionCallback {
 
    @Override
    public BlockSubLevelCollisionCallback.CollisionResult sable$onCollision(
-      BlockPos pos, @Nullable BlockPos otherHitBlockPos, Vector3d pos1, double impactVelocity
+      BlockPos pos, @org.jetbrains.annotations.Nullable BlockPos otherHitBlockPos, Vector3d pos1, double impactVelocity
    ) {
       double triggerVelocity = this.getTriggerVelocity();
       if (impactVelocity * impactVelocity < triggerVelocity * triggerVelocity) {

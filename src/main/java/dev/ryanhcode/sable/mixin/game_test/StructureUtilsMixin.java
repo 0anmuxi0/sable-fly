@@ -14,8 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({StructureUtils.class})
 public class StructureUtilsMixin {
-   @Inject(
-      method = {"clearSpaceForStructure"},
+   @Inject(require = 0, method = {"clearSpaceForStructure"},
       at = {@At("TAIL")}
    )
    private static void clearSpaceForStructure(BoundingBox box, ServerLevel level, CallbackInfo ci) {

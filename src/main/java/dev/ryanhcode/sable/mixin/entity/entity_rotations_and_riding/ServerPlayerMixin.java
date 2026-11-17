@@ -28,8 +28,7 @@ public abstract class ServerPlayerMixin extends Player {
       super(level, gameProfile);
    }
 
-   @WrapOperation(
-      method = {"startRiding"},
+   @WrapOperation(require = 0, method = {"startRiding"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/network/ServerGamePacketListenerImpl;teleport(Lnet/minecraft/world/entity/PositionMoveRotation;Ljava/util/Set;)V"

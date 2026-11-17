@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin({LevelChunkTicks.class})
 public class LevelChunkTicksMixin<T> implements LevelChunkTicksExtension<T> {
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private List<SavedTick<T>> pendingTicks;
    @Shadow
    @Final

@@ -11,8 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({LivingEntity.class})
 public class LivingEntityMixin {
-   @Redirect(
-      method = {"travel"},
+   @Redirect(require = 0, method = {"travel"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;getFluidState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;"

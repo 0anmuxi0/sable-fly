@@ -42,9 +42,9 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 import org.joml.Vector3d;
 
 public class ServerSubLevelContainer extends SubLevelContainer {
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private SubLevelPhysicsSystem physics;
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private SubLevelTrackingSystem tracking;
    private SubLevelHoldingChunkMap holdingChunkMap;
    protected final Object2ObjectMap<ServerSubLevel, ObjectSet<SubLevelLoadingTicket<?>>> activeTickets = new Object2ObjectOpenHashMap();
@@ -91,7 +91,7 @@ public class ServerSubLevelContainer extends SubLevelContainer {
 
    @Override
    public void removeSubLevel(int x, int z, SubLevelRemovalReason reason) {
-      ServerSubLevel subLevel = (ServerSubLevel)this.getSubLevel(x, z);
+      ServerSubLevel subLevel = (ServerSubLevel)(Object)this.getSubLevel(x, z);
       if (subLevel == null) {
          throw new IllegalStateException("No sub-level at " + x + ", " + z);
       } else {

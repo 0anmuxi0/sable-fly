@@ -45,8 +45,7 @@ public abstract class PlayerMixin extends LivingEntity {
       super(entityType, level);
    }
 
-   @Inject(
-      method = {"maybeBackOffFromEdge"},
+   @Inject(require = 0, method = {"maybeBackOffFromEdge"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -122,8 +121,7 @@ public abstract class PlayerMixin extends LivingEntity {
       return CanFallAtleastHelper.canFallAtleastWithSubLevels(this.level(), boundsToCheck) == null;
    }
 
-   @Redirect(
-      method = {"canFallAtLeast"},
+   @Redirect(require = 0, method = {"canFallAtLeast"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/Level;noCollision(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Z"

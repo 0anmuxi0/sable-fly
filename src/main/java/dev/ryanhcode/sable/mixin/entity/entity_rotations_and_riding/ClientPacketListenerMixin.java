@@ -15,8 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({ClientPacketListener.class})
 public class ClientPacketListenerMixin {
-   @Inject(
-      method = {"handleMovePlayer"},
+   @Inject(require = 0, method = {"handleMovePlayer"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/network/Connection;send(Lnet/minecraft/network/protocol/Packet;)V",

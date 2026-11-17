@@ -51,8 +51,7 @@ public class LevelExtractorMixin implements SubLevelBlockEntityRenderExtension {
    @Final
    private LevelRenderState levelRenderState;
 
-   @Inject(
-      method = {"extractVisibleBlockEntities"},
+   @Inject(require = 0, method = {"extractVisibleBlockEntities"},
       at = {@At("RETURN")}
    )
    private void sable$extractBlockEntities(Camera camera, float partialTick, LevelRenderState levelRenderState, CallbackInfo ci) {

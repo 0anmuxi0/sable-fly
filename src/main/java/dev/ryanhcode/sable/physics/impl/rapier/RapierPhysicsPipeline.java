@@ -108,7 +108,7 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
    }
 
    @Override
-   public void init(@Nullable Vector3dc gravity, double universalDrag) {
+   public void init(@org.jetbrains.annotations.Nullable Vector3dc gravity, double universalDrag) {
       try {
          this.scene = new RapierPhysicsScene(Rapier3D.initialize(gravity.x(), gravity.y(), gravity.z(), universalDrag));
       } catch (UnsatisfiedLinkError var7) {
@@ -432,10 +432,10 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public <T extends PhysicsConstraintHandle> T addConstraint(
-      @Nullable PhysicsPipelineBody bodyA, @Nullable PhysicsPipelineBody bodyB, @NotNull PhysicsConstraintConfiguration<T> configuration
+      @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyA, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyB, @NotNull PhysicsConstraintConfiguration<T> configuration
    ) {
       if (bodyA == null && bodyB == null) {
          throw new IllegalArgumentException("Cannot add a constraint between the static world and static world");
@@ -541,8 +541,8 @@ public class RapierPhysicsPipeline implements PhysicsPipeline {
          localNormalB.set(collisions[startIndex + 6], collisions[startIndex + 7], collisions[startIndex + 8]);
          localPointA.set(collisions[startIndex + 9], collisions[startIndex + 10], collisions[startIndex + 11]);
          localPointB.set(collisions[startIndex + 12], collisions[startIndex + 13], collisions[startIndex + 14]);
-         ServerSubLevel subLevelA = (ServerSubLevel)this.activeSubLevels.get(idA);
-         ServerSubLevel subLevelB = (ServerSubLevel)this.activeSubLevels.get(idB);
+         ServerSubLevel subLevelA = (ServerSubLevel)(Object)this.activeSubLevels.get(idA);
+         ServerSubLevel subLevelB = (ServerSubLevel)(Object)this.activeSubLevels.get(idB);
          double minMass = Math.min(
             subLevelA != null ? subLevelA.getMassTracker().getMass() : Double.MAX_VALUE,
             subLevelB != null ? subLevelB.getMassTracker().getMass() : Double.MAX_VALUE

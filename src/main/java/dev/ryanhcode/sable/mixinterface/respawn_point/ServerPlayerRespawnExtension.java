@@ -7,11 +7,11 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3d;
 
 public interface ServerPlayerRespawnExtension {
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    UUID sable$getRespawnPoint();
 
    void sable$takeQueuedFreezeFrom(ServerPlayer var1);
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    Pair<UUID, Vector3d> sable$getQueuedFreeze();
 }

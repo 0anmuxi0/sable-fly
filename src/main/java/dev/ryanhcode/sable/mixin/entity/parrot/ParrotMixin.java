@@ -17,8 +17,7 @@ public abstract class ParrotMixin extends ShoulderRidingEntity {
       super(entityType, level);
    }
 
-   @Redirect(
-      method = {"aiStep"},
+   @Redirect(require = 0, method = {"aiStep"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/core/BlockPos;closerToCenterThan(Lnet/minecraft/core/Position;D)Z"

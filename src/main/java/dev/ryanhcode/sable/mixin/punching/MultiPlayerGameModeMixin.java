@@ -31,8 +31,7 @@ public class MultiPlayerGameModeMixin {
    @Final
    private Minecraft minecraft;
 
-   @Inject(
-      method = {"startDestroyBlock"},
+   @Inject(require = 0, method = {"startDestroyBlock"},
       at = {@At("HEAD")}
    )
    private void onBlockBreakStart(BlockPos blockPos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
@@ -43,8 +42,7 @@ public class MultiPlayerGameModeMixin {
       }
    }
 
-   @Inject(
-      method = {"useItemOn"},
+   @Inject(require = 0, method = {"useItemOn"},
       at = {@At("RETURN")}
    )
    private void sable$swingOnSubLevelUseOn(LocalPlayer player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {

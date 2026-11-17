@@ -19,8 +19,7 @@ public class PersistentEntitySectionManagerMixin {
    @Final
    public EntitySectionStorage<EntityAccess> sectionStorage;
 
-   @Inject(
-      method = {"processChunkUnload"},
+   @Inject(require = 0, method = {"processChunkUnload"},
       at = {@At("HEAD")}
    )
    private void processChunkUnload(long l, CallbackInfoReturnable<Boolean> cir) {

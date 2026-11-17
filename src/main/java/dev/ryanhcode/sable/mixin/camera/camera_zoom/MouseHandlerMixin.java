@@ -21,8 +21,7 @@ public class MouseHandlerMixin {
    @Final
    private Minecraft minecraft;
 
-   @WrapOperation(
-      method = {"onScroll"},
+   @WrapOperation(require = 0, method = {"onScroll"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/player/Inventory;setSelectedSlot(I)V"

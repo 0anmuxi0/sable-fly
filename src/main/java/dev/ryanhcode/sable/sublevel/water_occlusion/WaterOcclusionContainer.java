@@ -22,7 +22,7 @@ public abstract class WaterOcclusionContainer<T extends WaterOcclusionRegion> {
       this.level = level;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public static WaterOcclusionContainer<?> getContainer(Level level) {
       return level instanceof WaterOcclusionContainerHolder holder ? holder.sable$getWaterOcclusionContainer() : null;
    }
@@ -42,7 +42,7 @@ public abstract class WaterOcclusionContainer<T extends WaterOcclusionRegion> {
       return false;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public T getOccludingRegion(Vec3 location) {
       ActiveSableCompanion helper = Sable.HELPER;
 

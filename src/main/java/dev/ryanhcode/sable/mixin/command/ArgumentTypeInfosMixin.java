@@ -23,8 +23,7 @@ public abstract class ArgumentTypeInfosMixin {
       return null;
    }
 
-   @Inject(
-      method = {"bootstrap"},
+   @Inject(require = 0, method = {"bootstrap"},
       at = {@At("TAIL")}
    )
    private static void sable$bootstrap(Registry<ArgumentTypeInfo<?, ?>> registry, CallbackInfoReturnable<ArgumentTypeInfo<?, ?>> cir) {

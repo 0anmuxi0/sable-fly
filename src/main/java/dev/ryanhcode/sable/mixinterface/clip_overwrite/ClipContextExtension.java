@@ -5,15 +5,15 @@ import java.util.function.Predicate;
 import org.jetbrains.annotations.Nullable;
 
 public interface ClipContextExtension {
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    SubLevel sable$getIgnoredSubLevel();
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    Predicate<SubLevel> sable$getSubLevelIgnoring();
 
-   void sable$setIgnoredSubLevel(@Nullable SubLevel var1);
+   void sable$setIgnoredSubLevel(@org.jetbrains.annotations.Nullable SubLevel var1);
 
-   void sable$setSubLevelIgnoring(@Nullable Predicate<SubLevel> var1);
+   void sable$setSubLevelIgnoring(@org.jetbrains.annotations.Nullable Predicate<SubLevel> var1);
 
    void sable$setIgnoreMainLevel(boolean var1);
 

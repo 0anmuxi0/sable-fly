@@ -19,8 +19,7 @@ public abstract class GameTestInfoMixin {
    @Shadow
    public abstract ServerLevel getLevel();
 
-   @Inject(
-      method = {"succeed"},
+   @Inject(require = 0, method = {"succeed"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerLevel;getEntitiesOfClass(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;"

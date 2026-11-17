@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 @Pseudo
 @Mixin(targets={"com.zurrtum.create.client.catnip.outliner.AABBOutline"})
 public class AABBOutlineMixin {
-    @WrapMethod(method={"submitBox(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/AABB;IIZ)V"})
+    @WrapMethod(require = 0, method={"submitBox(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/AABB;IIZ)V"})
     private void sable$projectOutlineOntoSubLevel(PoseStack ms, SubmitNodeCollector queue, Vec3 camera, AABB box, int color, int lightmap, boolean disableLineNormals, Operation<Void> original) {
         ClientSubLevel subLevel = SubLevelOutlinePose.find(box);
         if (subLevel == null) {

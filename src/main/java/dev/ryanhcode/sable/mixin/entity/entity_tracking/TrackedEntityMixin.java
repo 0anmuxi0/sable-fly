@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
    targets = {"net.minecraft.server.level.ChunkMap$TrackedEntity"}
 )
 public class TrackedEntityMixin {
-   @Redirect(
-      method = {"updatePlayer"},
+   @Redirect(require = 0, method = {"updatePlayer"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;position()Lnet/minecraft/world/phys/Vec3;"

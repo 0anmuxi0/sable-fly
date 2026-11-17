@@ -15,7 +15,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
 import org.jetbrains.annotations.Nullable;
 
-public record ClientboundChangeSubLevelNamePacket(UUID subLevelID, @Nullable String name) implements SableTCPPacket {
+public record ClientboundChangeSubLevelNamePacket(UUID subLevelID, @org.jetbrains.annotations.Nullable String name) implements SableTCPPacket {
    public static Type<ClientboundChangeSubLevelNamePacket> TYPE = new Type<>(Sable.sablePath("change_sub_level_name"));
    public static StreamCodec<RegistryFriendlyByteBuf, ClientboundChangeSubLevelNamePacket> CODEC = StreamCodec.composite(
       UUIDUtil.STREAM_CODEC,

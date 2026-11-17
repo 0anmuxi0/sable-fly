@@ -15,8 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin({Biome.class})
 public class BiomeMixin {
-   @WrapMethod(
-      method = {"shouldFreeze(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Z)Z"}
+   @WrapMethod(require = 0, method = {"shouldFreeze(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Z)Z"}
    )
    public boolean sable$preventFreezing(LevelReader levelReader, BlockPos blockPos, boolean bl, Operation<Boolean> original) {
       if (!original.call(levelReader, blockPos, bl)) {

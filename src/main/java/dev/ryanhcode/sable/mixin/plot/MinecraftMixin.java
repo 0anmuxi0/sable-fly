@@ -16,16 +16,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin({Minecraft.class})
 public class MinecraftMixin {
    @Shadow
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public ClientLevel level;
    @Shadow
    private volatile boolean pause;
    @Unique
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private ClientLevel sable$dynamicLightLevel;
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/tutorial/Tutorial;onLookAt(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/world/phys/HitResult;)V"

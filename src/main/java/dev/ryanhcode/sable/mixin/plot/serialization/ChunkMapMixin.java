@@ -37,8 +37,7 @@ public class ChunkMapMixin {
    @Final
    private ServerLevel level;
 
-   @Inject(
-      method = {"<init>"},
+   @Inject(require = 0, method = {"<init>"},
       at = {@At("TAIL")}
    )
    private void sable$init(
@@ -59,8 +58,7 @@ public class ChunkMapMixin {
       this.unloadQueue = new ConcurrentLinkedDeque<>();
    }
 
-   @Inject(
-      method = {"onFullChunkStatusChange"},
+   @Inject(require = 0, method = {"onFullChunkStatusChange"},
       at = {@At("TAIL")}
    )
    private void sable$onStatusChange(ChunkPos chunkPos, FullChunkStatus fullChunkStatus, CallbackInfo ci) {

@@ -51,8 +51,7 @@ public abstract class ServerLevelMixin extends Level {
    @Override
    public abstract ChunkSource getChunkSource();
 
-   @Inject(
-      method = {"<init>"},
+   @Inject(require = 0, method = {"<init>"},
       at = {@At("TAIL")}
    )
    private void sable$init(CallbackInfo ci) {
@@ -67,8 +66,7 @@ public abstract class ServerLevelMixin extends Level {
       }
    }
 
-   @Inject(
-      method = {"save"},
+   @Inject(require = 0, method = {"save"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/server/level/ServerLevel;saveLevelData(Z)V",
@@ -89,8 +87,7 @@ public abstract class ServerLevelMixin extends Level {
       holdingChunkMap.saveAll();
    }
 
-   @Inject(
-      method = {"tick(Ljava/util/function/BooleanSupplier;)V"},
+   @Inject(require = 0, method = {"tick(Ljava/util/function/BooleanSupplier;)V"},
       at = {@At("HEAD")}
    )
    private void sable$tickPlotContainer(BooleanSupplier booleanSupplier, CallbackInfo ci) {
@@ -108,8 +105,7 @@ public abstract class ServerLevelMixin extends Level {
       SubLevelDynamicLights.tick(self);
    }
 
-   @Inject(
-      method = {"shouldTickBlocksAt"},
+   @Inject(require = 0, method = {"shouldTickBlocksAt"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -123,8 +119,7 @@ public abstract class ServerLevelMixin extends Level {
       }
    }
 
-   @Inject(
-      method = {"anyPlayerCloseEnoughForSpawning(Lnet/minecraft/world/level/ChunkPos;)Z"},
+   @Inject(require = 0, method = {"anyPlayerCloseEnoughForSpawning(Lnet/minecraft/world/level/ChunkPos;)Z"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -138,8 +133,7 @@ public abstract class ServerLevelMixin extends Level {
       }
    }
 
-   @Inject(
-      method = {"close"},
+   @Inject(require = 0, method = {"close"},
       at = {@At("TAIL")}
    )
    private void sable$close(CallbackInfo ci) {

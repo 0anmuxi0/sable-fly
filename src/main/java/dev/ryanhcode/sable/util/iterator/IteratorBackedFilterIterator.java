@@ -17,7 +17,7 @@ public class IteratorBackedFilterIterator<T> implements Iterator<T> {
       this.backingIterator = backingIterator;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public T findNextObject() {
       if (this.nextObject != null) {
          return this.nextObject;

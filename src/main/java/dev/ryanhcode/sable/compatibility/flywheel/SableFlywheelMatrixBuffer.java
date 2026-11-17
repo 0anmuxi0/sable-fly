@@ -1,0 +1,9 @@
+/*
+ * Decompiled with CFR 0.152.
+ */
+package dev.ryanhcode.sable.compatibility.flywheel;
+
+public class SableFlywheelMatrixBuffer {
+    public static final int INFO_SIZE_BYTES = 192;
+}
+

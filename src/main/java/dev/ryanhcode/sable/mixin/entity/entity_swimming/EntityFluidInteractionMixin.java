@@ -24,8 +24,7 @@ public class EntityFluidInteractionMixin {
    @Unique
    private final Map<TagKey<Fluid>, SubLevelFluidHelper.Found> sable$subLevelCurrents = new HashMap<>();
 
-   @Inject(
-      method = {"update(Lnet/minecraft/world/entity/Entity;Z)Z"},
+   @Inject(require = 0, method = {"update(Lnet/minecraft/world/entity/Entity;Z)Z"},
       at = {@At("HEAD")}
    )
    private void sable$gatherSubLevelFluids(Entity entity, boolean ignoreCurrent, CallbackInfoReturnable<Boolean> cir) {
@@ -74,8 +73,7 @@ public class EntityFluidInteractionMixin {
       }
    }
 
-   @Inject(
-      method = {"applyCurrentTo(Lnet/minecraft/tags/TagKey;Lnet/minecraft/world/entity/Entity;D)V"},
+   @Inject(require = 0, method = {"applyCurrentTo(Lnet/minecraft/tags/TagKey;Lnet/minecraft/world/entity/Entity;D)V"},
       at = {@At("TAIL")}
    )
    private void sable$applySubLevelCurrent(TagKey<Fluid> fluid, Entity entity, double scale, CallbackInfo ci) {

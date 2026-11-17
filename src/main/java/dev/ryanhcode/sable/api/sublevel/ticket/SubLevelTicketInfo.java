@@ -9,7 +9,7 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 @Internal
 public class SubLevelTicketInfo {
    private final ObjectSet<SubLevelLoadingTicket<?>> tickets = new ObjectArraySet();
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private GlobalSavedSubLevelPointer pointer = null;
 
    public SubLevelTicketInfo() {
@@ -20,12 +20,12 @@ public class SubLevelTicketInfo {
       this.tickets.addAll(tickets);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public GlobalSavedSubLevelPointer getPointer() {
       return this.pointer;
    }
 
-   public void setPointer(@Nullable GlobalSavedSubLevelPointer pointer) {
+   public void setPointer(@org.jetbrains.annotations.Nullable GlobalSavedSubLevelPointer pointer) {
       this.pointer = pointer;
    }
 

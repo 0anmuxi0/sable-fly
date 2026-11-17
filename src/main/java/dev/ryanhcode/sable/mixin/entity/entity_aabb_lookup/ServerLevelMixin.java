@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({ServerLevel.class})
 public class ServerLevelMixin {
-   @Inject(
-      method = {"getEntities()Lnet/minecraft/world/level/entity/LevelEntityGetter;"},
+   @Inject(require = 0, method = {"getEntities()Lnet/minecraft/world/level/entity/LevelEntityGetter;"},
       at = {@At("RETURN")},
       cancellable = true
    )

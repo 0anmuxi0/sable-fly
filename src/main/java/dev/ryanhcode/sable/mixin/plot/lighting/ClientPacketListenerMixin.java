@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({ClientPacketListener.class})
 public class ClientPacketListenerMixin {
-   @WrapOperation(
-      method = {"handleLevelChunkWithLight"},
+   @WrapOperation(require = 0, method = {"handleLevelChunkWithLight"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/multiplayer/ClientLevel;queueLightUpdate(Ljava/lang/Runnable;)V"

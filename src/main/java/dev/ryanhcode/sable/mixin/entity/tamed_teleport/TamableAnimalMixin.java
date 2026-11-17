@@ -19,8 +19,7 @@ public class TamableAnimalMixin {
    @Unique
    private static final BoundingBox3d sable$BOX = new BoundingBox3d();
 
-   @WrapOperation(
-      method = {"maybeTeleportTo"},
+   @WrapOperation(require = 0, method = {"maybeTeleportTo"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/TamableAnimal;canTeleportTo(Lnet/minecraft/core/BlockPos;)Z"

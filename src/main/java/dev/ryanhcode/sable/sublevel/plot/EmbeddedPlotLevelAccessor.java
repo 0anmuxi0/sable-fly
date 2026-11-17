@@ -66,7 +66,7 @@ public class EmbeddedPlotLevelAccessor implements CommonLevelAccessor, ServerLev
       return this.level.getWorldBorder();
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public BlockEntity getBlockEntity(BlockPos blockPos) {
       return this.level.getBlockEntity(blockPos.offset(this.center));
@@ -83,7 +83,7 @@ public class EmbeddedPlotLevelAccessor implements CommonLevelAccessor, ServerLev
    }
 
    @Override
-   public List<Entity> getEntities(@Nullable Entity entity, AABB aABB, Predicate<? super Entity> predicate) {
+   public List<Entity> getEntities(@org.jetbrains.annotations.Nullable Entity entity, AABB aABB, Predicate<? super Entity> predicate) {
       return this.level.getEntities(entity, aABB.move(this.center.getX(), this.center.getY(), this.center.getZ()), predicate);
    }
 
@@ -97,7 +97,7 @@ public class EmbeddedPlotLevelAccessor implements CommonLevelAccessor, ServerLev
       return this.level.players();
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public ChunkAccess getChunk(int i, int j, ChunkStatus chunkStatus, boolean bl) {
       return this.level.getChunk(i + this.centerChunk.x, j + this.centerChunk.z, chunkStatus, bl);
@@ -128,7 +128,7 @@ public class EmbeddedPlotLevelAccessor implements CommonLevelAccessor, ServerLev
       return this.getLevel().getCurrentDifficultyAt(blockPos.offset(this.center));
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    @Override
    public MinecraftServer getServer() {
       return this.level.getServer();
@@ -150,7 +150,7 @@ public class EmbeddedPlotLevelAccessor implements CommonLevelAccessor, ServerLev
    }
 
    @Override
-   public void playSound(@Nullable Entity entity, BlockPos blockPos, SoundEvent soundEvent, SoundSource soundSource, float f, float g) {
+   public void playSound(@org.jetbrains.annotations.Nullable Entity entity, BlockPos blockPos, SoundEvent soundEvent, SoundSource soundSource, float f, float g) {
       this.level.playSound(entity, blockPos.offset(this.center), soundEvent, soundSource, f, g);
    }
 
@@ -160,7 +160,7 @@ public class EmbeddedPlotLevelAccessor implements CommonLevelAccessor, ServerLev
    }
 
    @Override
-   public void levelEvent(@Nullable Entity entity, int i, BlockPos blockPos, int j) {
+   public void levelEvent(@org.jetbrains.annotations.Nullable Entity entity, int i, BlockPos blockPos, int j) {
       this.level.levelEvent(entity, i, blockPos.offset(this.center), j);
    }
 
@@ -243,7 +243,7 @@ public class EmbeddedPlotLevelAccessor implements CommonLevelAccessor, ServerLev
    }
 
    @Override
-   public boolean destroyBlock(BlockPos blockPos, boolean bl, @Nullable Entity entity, int i) {
+   public boolean destroyBlock(BlockPos blockPos, boolean bl, @org.jetbrains.annotations.Nullable Entity entity, int i) {
       return this.level.destroyBlock(blockPos.offset(this.center), bl, entity, i);
    }
 

@@ -9,8 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin({Entity.class})
 public class EntityMixin {
-   @Redirect(
-      method = {"pick"},
+   @Redirect(require = 0, method = {"pick"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/Entity;getEyePosition(F)Lnet/minecraft/world/phys/Vec3;"

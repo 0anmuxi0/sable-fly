@@ -57,8 +57,7 @@ public abstract class CameraMixin implements CameraZoomExtension {
    @Shadow
    protected abstract void setPosition(double var1, double var3, double var5);
 
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At("HEAD")}
    )
    private void sable$preTick(CallbackInfo ci) {
@@ -66,8 +65,7 @@ public abstract class CameraMixin implements CameraZoomExtension {
       this.sable$interpolatedZoom = Mth.lerp(0.725F, this.sable$interpolatedZoom, this.sable$zoomAmount);
    }
 
-   @Inject(
-      method = {"alignWithEntity"},
+   @Inject(require = 0, method = {"alignWithEntity"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/Camera;setPosition(DDD)V",
@@ -121,8 +119,7 @@ public abstract class CameraMixin implements CameraZoomExtension {
       return zoom;
    }
 
-   @Inject(
-      method = {"getMaxZoom"},
+   @Inject(require = 0, method = {"getMaxZoom"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -160,8 +157,7 @@ public abstract class CameraMixin implements CameraZoomExtension {
       this.sable$pushed = true;
    }
 
-   @Redirect(
-      method = {"getMaxZoom"},
+   @Redirect(require = 0, method = {"getMaxZoom"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(Lnet/minecraft/world/phys/Vec3;)D"
@@ -171,8 +167,7 @@ public abstract class CameraMixin implements CameraZoomExtension {
       return Sable.HELPER.distanceSquaredWithSubLevels(this.entity.level(), instance, vec3);
    }
 
-   @Inject(
-      method = {"getMaxZoom"},
+   @Inject(require = 0, method = {"getMaxZoom"},
       at = {@At("RETURN")}
    )
    private void sable$getMaxZoomTail(float f, CallbackInfoReturnable<Float> cir) {

@@ -20,8 +20,7 @@ public class WorldBorderMixin implements WorldBorderExtension {
    @Unique
    private Level sable$level;
 
-   @Inject(
-      method = {"isWithinBounds(DDD)Z"},
+   @Inject(require = 0, method = {"isWithinBounds(DDD)Z"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -34,8 +33,7 @@ public class WorldBorderMixin implements WorldBorderExtension {
       }
    }
 
-   @Inject(
-      method = {"clampToBounds(DDD)Lnet/minecraft/core/BlockPos;"},
+   @Inject(require = 0, method = {"clampToBounds(DDD)Lnet/minecraft/core/BlockPos;"},
       at = {@At("HEAD")},
       cancellable = true
    )
@@ -48,8 +46,7 @@ public class WorldBorderMixin implements WorldBorderExtension {
       }
    }
 
-   @Inject(
-      method = {"isInsideCloseToBorder"},
+   @Inject(require = 0, method = {"isInsideCloseToBorder"},
       at = {@At("HEAD")},
       cancellable = true
    )

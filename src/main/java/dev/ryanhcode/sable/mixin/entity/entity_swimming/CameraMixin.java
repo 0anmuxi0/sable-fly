@@ -34,8 +34,7 @@ public abstract class CameraMixin {
    @Shadow
    public abstract NearPlane getNearPlane(float var1);
 
-   @Inject(
-      method = {"getFluidInCamera"},
+   @Inject(require = 0, method = {"getFluidInCamera"},
       at = {@At("RETURN")},
       cancellable = true
    )

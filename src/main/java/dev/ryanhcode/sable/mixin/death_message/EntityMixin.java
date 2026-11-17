@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({Entity.class})
 public abstract class EntityMixin {
-   @Inject(
-      method = {"tick"},
+   @Inject(require = 0, method = {"tick"},
       at = {@At("RETURN")}
    )
    private void sable$updateLastSubLevelId(CallbackInfo ci) {

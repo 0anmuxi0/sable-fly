@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
    targets = {"net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection$CompileTask"}
 )
 public abstract class CompileTaskMixin {
-   @WrapOperation(
-      method = {"doTask(Lnet/minecraft/client/renderer/SectionBufferBuilderPack;)Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection$SectionTask$SectionTaskResult;"},
+   @WrapOperation(require = 0, method = {"doTask(Lnet/minecraft/client/renderer/SectionBufferBuilderPack;)Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection$SectionTask$SectionTaskResult;"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/renderer/chunk/TranslucencyPointOfView;of(Lnet/minecraft/world/phys/Vec3;J)Lnet/minecraft/client/renderer/chunk/TranslucencyPointOfView;"

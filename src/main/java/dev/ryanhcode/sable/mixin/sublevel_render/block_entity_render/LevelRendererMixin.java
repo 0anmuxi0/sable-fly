@@ -31,8 +31,7 @@ public class LevelRendererMixin implements BlockEntityTransformsHolder {
       return this.sable$blockEntityTransforms;
    }
 
-   @Inject(
-      method = {"submitBlockEntities"},
+   @Inject(require = 0, method = {"submitBlockEntities"},
       at = {@At(
          value = "INVOKE",
          target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V",
@@ -62,8 +61,7 @@ public class LevelRendererMixin implements BlockEntityTransformsHolder {
       }
    }
 
-   @Inject(
-      method = {"submitBlockEntities"},
+   @Inject(require = 0, method = {"submitBlockEntities"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;submit(Lnet/minecraft/client/renderer/blockentity/state/BlockEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",

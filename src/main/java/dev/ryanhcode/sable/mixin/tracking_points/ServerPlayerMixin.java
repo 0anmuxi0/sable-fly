@@ -17,8 +17,7 @@ public abstract class ServerPlayerMixin {
    @Shadow
    public abstract ServerLevel level();
 
-   @Inject(
-      method = {"addAdditionalSaveData"},
+   @Inject(require = 0, method = {"addAdditionalSaveData"},
       at = {@At("TAIL")}
    )
    private void addAdditionalSaveData(ValueOutput output, CallbackInfo ci) {

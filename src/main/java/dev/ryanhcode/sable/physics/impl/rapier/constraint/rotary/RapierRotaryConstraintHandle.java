@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RapierRotaryConstraintHandle extends RapierConstraintHandle implements RotaryConstraintHandle {
    public static RapierRotaryConstraintHandle create(
-      ServerLevel serverLevel, @Nullable PhysicsPipelineBody bodyA, @Nullable PhysicsPipelineBody bodyB, RotaryConstraintConfiguration config
+      ServerLevel serverLevel, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyA, @org.jetbrains.annotations.Nullable PhysicsPipelineBody bodyB, RotaryConstraintConfiguration config
    ) {
       long sceneHandle = Rapier3D.getSceneHandle(serverLevel);
       long handle = Rapier3D.addRotaryConstraint(

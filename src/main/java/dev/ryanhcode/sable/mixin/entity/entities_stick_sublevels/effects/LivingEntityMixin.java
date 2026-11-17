@@ -11,8 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({LivingEntity.class})
 public class LivingEntityMixin {
-   @WrapOperation(
-      method = {"checkFallDamage"},
+   @WrapOperation(require = 0, method = {"checkFallDamage"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/entity/LivingEntity;blockPosition()Lnet/minecraft/core/BlockPos;"

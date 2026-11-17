@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({BlockLightEngine.class})
 public class BlockLightEngineMixin {
-   @Inject(
-      method = {"getEmission(JLnet/minecraft/world/level/block/state/BlockState;)I"},
+   @Inject(require = 0, method = {"getEmission(JLnet/minecraft/world/level/block/state/BlockState;)I"},
       at = {@At("RETURN")},
       cancellable = true
    )

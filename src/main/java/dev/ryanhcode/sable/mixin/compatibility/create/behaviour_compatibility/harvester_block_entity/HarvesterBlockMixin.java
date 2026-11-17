@@ -1,0 +1,47 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  com.zurrtum.create.content.contraptions.actors.AttachedActorBlock
+ *  com.zurrtum.create.content.contraptions.actors.harvester.HarvesterBlock
+ *  com.zurrtum.create.content.contraptions.actors.harvester.HarvesterBlockEntity
+ *  com.zurrtum.create.foundation.block.IBE
+ *  net.minecraft.world.level.Level
+ *  net.minecraft.world.level.block.entity.BlockEntity
+ *  net.minecraft.world.level.block.entity.BlockEntityTicker
+ *  net.minecraft.world.level.block.entity.BlockEntityType
+ *  net.minecraft.world.level.block.state.BlockBehaviour$Properties
+ *  net.minecraft.world.level.block.state.BlockState
+ *  org.spongepowered.asm.mixin.Mixin
+ */
+package dev.ryanhcode.sable.mixin.compatibility.create.behaviour_compatibility.harvester_block_entity;
+
+import com.zurrtum.create.content.contraptions.actors.AttachedActorBlock;
+import com.zurrtum.create.content.contraptions.actors.harvester.HarvesterBlock;
+import com.zurrtum.create.content.contraptions.actors.harvester.HarvesterBlockEntity;
+import com.zurrtum.create.foundation.block.IBE;
+import dev.ryanhcode.sable.mixinhelper.compatibility.create.harvester.HarvesterTicker;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.Mixin;
+
+@Mixin(value={HarvesterBlock.class})
+public abstract class HarvesterBlockMixin
+extends AttachedActorBlock
+implements IBE<HarvesterBlockEntity> {
+    protected HarvesterBlockMixin(BlockBehaviour.Properties properties) {
+        super(properties);
+    }
+
+    public <S extends BlockEntity> BlockEntityTicker<S> getTicker(Level level, BlockState state, BlockEntityType<S> blockEntityType) {
+        if (level.isClientSide()) {
+            return new HarvesterTicker();
+        }
+        return null;
+    }
+}
+

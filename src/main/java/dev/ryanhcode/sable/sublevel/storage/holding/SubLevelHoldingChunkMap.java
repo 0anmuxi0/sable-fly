@@ -311,7 +311,7 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
    }
 
    private GlobalSavedSubLevelPointer moveAndSaveSubLevel(
-      @Nullable ServerSubLevel subLevel, SubLevelData data, GlobalSavedSubLevelPointer lastPointer, ChunkPos moveToChunk
+      @org.jetbrains.annotations.Nullable ServerSubLevel subLevel, SubLevelData data, GlobalSavedSubLevelPointer lastPointer, ChunkPos moveToChunk
    ) {
       ChunkPos oldChunkPos = lastPointer != null ? lastPointer.chunkPos() : null;
       if (Objects.equals(oldChunkPos, moveToChunk)) {
@@ -394,7 +394,7 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
    }
 
    @Contract("_, true -> !null")
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    private SubLevelHoldingChunk getOrLoadHoldingChunk(ChunkPos chunkPos, boolean create) {
       long longKey = chunkPos.pack();
       SubLevelHoldingChunk holdingChunk = (SubLevelHoldingChunk)this.loadedHoldingChunks.get(longKey);
@@ -511,7 +511,7 @@ public class SubLevelHoldingChunkMap implements AutoCloseable {
       this.allHoldingSubLevels.remove(holdingSubLevel.data().uuid());
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public HoldingSubLevel getHoldingSubLevel(UUID uuid) {
       return (HoldingSubLevel)this.allHoldingSubLevels.get(uuid);
    }

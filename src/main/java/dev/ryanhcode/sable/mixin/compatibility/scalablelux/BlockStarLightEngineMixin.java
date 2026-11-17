@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
    remap = false
 )
 public abstract class BlockStarLightEngineMixin {
-   @ModifyVariable(
-      method = {"checkBlock"},
+   @ModifyVariable(require = 0, method = {"checkBlock"},
       at = {@At("STORE")},
       index = 9,
       remap = false
@@ -23,8 +22,7 @@ public abstract class BlockStarLightEngineMixin {
       return Math.max(original, SubLevelDynamicLights.getLightEmission(BlockPos.asLong(worldX, worldY, worldZ)));
    }
 
-   @ModifyVariable(
-      method = {"calculateLightValue"},
+   @ModifyVariable(require = 0, method = {"calculateLightValue"},
       at = {@At("STORE")},
       index = 7,
       remap = false

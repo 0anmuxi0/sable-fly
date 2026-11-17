@@ -19,7 +19,7 @@ public class ItemOutlineMixin {
     @Shadow
     protected Vec3 pos;
 
-    @WrapMethod(method={"submit(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;F)V"})
+    @WrapMethod(require = 0, method={"submit(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;F)V"})
     private void sable$projectOutlineOntoSubLevel(Minecraft mc, PoseStack ms, SubmitNodeCollector queue, Vec3 camera, float pt, Operation<Void> original) {
         ClientSubLevel subLevel = SubLevelOutlinePose.find((Position)this.pos);
         if (subLevel == null) {

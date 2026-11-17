@@ -30,8 +30,7 @@ public class GameRendererMixin {
    @Unique
    private UUID sable$lastSubLevel = null;
 
-   @Inject(
-      method = {"renderLevel"},
+   @Inject(require = 0, method = {"renderLevel"},
       at = {@At("HEAD")}
    )
    public void renderLevel(CallbackInfo ci) {

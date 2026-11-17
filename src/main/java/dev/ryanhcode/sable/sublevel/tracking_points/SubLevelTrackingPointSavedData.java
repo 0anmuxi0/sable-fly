@@ -120,13 +120,13 @@ public class SubLevelTrackingPointSavedData extends SavedData implements SubLeve
       return compoundTag;
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public UUID generateTrackingPoint(ServerPlayer player) {
       ServerSubLevel subLevel = (ServerSubLevel)Sable.HELPER.getTrackingSubLevel(player);
       return this.generateTrackingPoint(player, subLevel);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public UUID generateTrackingPoint(ServerPlayer player, ServerSubLevel subLevel) {
       if (subLevel == null) {
          return null;
@@ -147,7 +147,7 @@ public class SubLevelTrackingPointSavedData extends SavedData implements SubLeve
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public UUID generateTrackingPoint(Vec3 pos, ServerSubLevel subLevel) {
       if (subLevel == null) {
          return null;
@@ -249,11 +249,11 @@ public class SubLevelTrackingPointSavedData extends SavedData implements SubLeve
       this.setDirty(true);
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public TrackingPoint getTrackingPoint(UUID uuid) {
       return this.trackingPoints.get(uuid);
    }
 
-   public record TakenLoginPoint(Vector3dc position, @Nullable UUID subLevelId, @Nullable Vector3d localAnchor) {
+   public record TakenLoginPoint(Vector3dc position, @org.jetbrains.annotations.Nullable UUID subLevelId, @org.jetbrains.annotations.Nullable Vector3d localAnchor) {
    }
 }

@@ -24,8 +24,7 @@ public abstract class BlockMixin {
    private static void popResource(Level arg, Supplier<ItemEntity> supplier, ItemStack arg2) {
    }
 
-   @Inject(
-      method = {"popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V"},
+   @Inject(require = 0, method = {"popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V"},
       at = {@At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/level/block/Block;popResource(Lnet/minecraft/world/level/Level;Ljava/util/function/Supplier;Lnet/minecraft/world/item/ItemStack;)V",

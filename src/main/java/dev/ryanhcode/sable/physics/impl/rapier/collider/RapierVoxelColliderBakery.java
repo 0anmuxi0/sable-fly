@@ -69,7 +69,7 @@ public class RapierVoxelColliderBakery {
       }
    }
 
-   @Nullable
+   @org.jetbrains.annotations.Nullable
    public RapierVoxelColliderData getPhysicsDataForBlock(BlockState state) {
       RapierVoxelColliderData data = this.blockPhysicsDataBuilder.apply(Objects.requireNonNull(state, "state"));
       return data == RapierVoxelColliderData.EMPTY ? null : data;

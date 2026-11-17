@@ -76,19 +76,19 @@ implements KinematicContraption {
     @Shadow(remap=false)
     public abstract Vec3 getAnchorVec();
 
-    @Redirect(method={"moveCollidedEntitiesOnDisassembly"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;toLocalVector(Lnet/minecraft/world/phys/Vec3;F)Lnet/minecraft/world/phys/Vec3;")})
+    @Redirect(require = 0, method={"moveCollidedEntitiesOnDisassembly"}, at={@At(value="INVOKE", target="Lcom/zurrtum/create/content/contraptions/AbstractContraptionEntity;toLocalVector(Lnet/minecraft/world/phys/Vec3;F)Lnet/minecraft/world/phys/Vec3;")})
     private Vec3 sable$applyTransform(AbstractContraptionEntity instance, Vec3 localVec, float partialTicks) {
         SubLevel subLevel = Sable.HELPER.getContaining((Entity)instance);
         return instance.toLocalVector(subLevel != null ? subLevel.logicalPose().transformPositionInverse(localVec) : localVec, partialTicks);
     }
 
-    @WrapOperation(method={"moveCollidedEntitiesOnDisassembly"}, at={@At(value="INVOKE", target="Lnet/minecraft/world/entity/Entity;setPos(DDD)V"), @At(value="INVOKE", target="Lnet/minecraft/world/entity/Entity;teleportTo(DDD)V")})
+    @WrapOperation(require = 0, method={"moveCollidedEntitiesOnDisassembly"}, at={@At(value="INVOKE", target="Lnet/minecraft/world/entity/Entity;setPos(DDD)V"), @At(value="INVOKE", target="Lnet/minecraft/world/entity/Entity;teleportTo(DDD)V")})
     private void sable$applyTransform(Entity instance, double x, double y, double z, Operation<Void> original) {
         Vector3d pos = Sable.HELPER.projectOutOfSubLevel(instance.level(), new Vector3d(x, y, z));
         original.call(instance, pos.x, pos.y, pos.z);
     }
 
-    @Inject(method={"tick"}, at={@At(value="INVOKE", target="Ljava/util/Map;entrySet()Ljava/util/Set;")}, remap=false)
+    @Inject(require = 0, method={"tick"}, at={@At(value="INVOKE", target="Ljava/util/Map;entrySet()Ljava/util/Set;")}, remap=false)
     private void sable$contraptionInitialize(CallbackInfo ci) {
         Level level;
         Level level2;
@@ -113,7 +113,7 @@ implements KinematicContraption {
         return this.sable$liftProviderContexts;
     }
 
-    @Inject(method={"remove(Lnet/minecraft/world/entity/Entity$RemovalReason;)V"}, at={@At(value="HEAD")})
+    @Inject(require = 0, method={"remove(Lnet/minecraft/world/entity/Entity$RemovalReason;)V"}, at={@At(value="HEAD")})
     private void sable$onRemove(Entity.RemovalReason removalReason, CallbackInfo ci) {
         Level level = this.level();
         if (level instanceof ServerLevel) {
