@@ -246,15 +246,25 @@ public class SubLevelAssemblyHelper {
       List<Entity> entities = level.getEntitiesOfClass(Entity.class, bounds.toAABB().inflate(2.0));
       boolean needsBitSet = needsBitSet(level, bounds, entities);
       if (needsBitSet) {
+         // fromBlocks returns null for an empty block set; the assert that used to sit here is
+         // stripped at runtime. Declaring the volume at method scope and avoiding a lambda capture
+         // also keeps javac from emitting the stackmap frame the verifier rejects for this method.
          BoundedBitVolume3i volume = BoundedBitVolume3i.fromBlocks(blocks);
-
-         assert volume != null;
+         if (volume == null) {
+            return;
+         }
 
          for (Entity entity : entities) {
+            if (!(entity instanceof HangingEntity hangingEntity)) {
+               continue;
+            }
+
             boolean moveEntity = false;
-            if (entity instanceof HangingEntity hangingEntity) {
-               moveEntity = BlockPos.betweenClosedStream(hangingEntity.calculateSupportBox())
-                  .anyMatch(blockPos -> volume.getOccupied(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
+            for (BlockPos blockPos : BlockPos.betweenClosed(hangingEntity.calculateSupportBox())) {
+               if (volume.getOccupied(blockPos.getX(), blockPos.getY(), blockPos.getZ())) {
+                  moveEntity = true;
+                  break;
+               }
             }
 
             if (moveEntity) {
