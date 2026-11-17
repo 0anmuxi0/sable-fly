@@ -8,29 +8,15 @@ import com.zurrtum.create.content.contraptions.behaviour.MovementContext;
 import dev.ryanhcode.sable.Sable;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 /**
- * 让子关卡上的机械（钻头 / 锯片 / 收割机 / 犁 / 方块破碎机…）能够作用到
- * <b>子关卡之外</b>的真实世界方块。
+ * 让子关卡上的机械（钻头/锯片/犁…）作用到子关卡之外的真实世界方块。
  *
- * <p><b>根因</b>：{@code AbstractContraptionEntity.tickActors()} 里，每个 actor 的作用位置
- * 按 contraption 自身位姿算出（{@code toGlobalVector(...)} → {@code BlockPos.containing(...)}）。
- * contraption 位于子关卡时，这条链得到的是<b>子关卡的 plot 虚拟坐标</b>（约 ±20.48M），
- * 而 {@code MovementContext.world} 是父世界、真实方块在主世界位置。
- * 于是 {@code visitNewPosition(context, plotPos)} 里的
- * {@code world.getBlockState(plotPos)} 永远拿到空气 —— 钻头转得再快也破坏不了东西。
- *
- * <p><b>修复</b>：在调用 {@code visitNewPosition} 前，把 plot 虚拟坐标经
- * {@code Sable.HELPER.projectOutOfSubLevel(...)} 投影到真实世界坐标。
- * 与官方 Offroad {@code RockCuttingWheelActor} 使用的坐标链一致。
- *
- * <p><b>注意</b>：{@code tickActors()} <b>没有参数</b>，因此不能用
- * {@code @Local(argsOnly = true)} 取 contraption（那样拿不到任何值，mixin 虽然注入成功
- * 但逻辑永远走"不变换"分支）。这里改用 {@code this} 转型取得目标实例。
+ * <p>诊断版：记录每次 visitNewPosition 的原始坐标、投影后坐标、
+ * 以及所属子关卡，用于确认变换是否真的发生。
  */
 @Mixin(value = AbstractContraptionEntity.class, remap = false)
 public abstract class ContraptionActorWorldPosMixin {
@@ -49,8 +35,10 @@ public abstract class ContraptionActorWorldPosMixin {
             return;
         }
         SubLevel subLevel = Sable.HELPER.getContaining(self);
+        String behaviourName = behaviour.getClass().getSimpleName();
         if (subLevel == null) {
-            // 主世界 contraption：坐标本来就是世界坐标，无需变换
+            Sable.LOGGER.info("[drill-diag] {} plotPos={} -> subLevel=NULL (no transform)",
+                    behaviourName, plotPos);
             original.call(behaviour, context, plotPos);
             return;
         }
@@ -58,6 +46,8 @@ public abstract class ContraptionActorWorldPosMixin {
         Vector3d projected = new Vector3d();
         Sable.HELPER.projectOutOfSubLevel(context.world, sample, projected);
         BlockPos worldPos = BlockPos.containing(projected.x, projected.y, projected.z);
+        Sable.LOGGER.info("[drill-diag] {} plotPos={} -> worldPos={} (subLevel={})",
+                behaviourName, plotPos, worldPos, subLevel.getUniqueId());
         original.call(behaviour, context, worldPos);
     }
 }
