@@ -5,7 +5,7 @@
     "minVersion": "0.8",
     "plugin": "dev.ryanhcode.sable.plugin.SableMixinPlugin",
     "client": [
-        "compatibility.create.ContraptionVisualLightMixin",
+        "compatibility.create.ContraptionColliderClientMixin",
         "compatibility.create.BlockEntityRenderDispatcherCreateMixin",
         "compatibility.create.FlwApiLinkImplMixin",
         "compatibility.create.VisualizationHelperMixin",
@@ -91,7 +91,6 @@
         "world_border.ClientLevelMixin"
     ],
     "mixins": [
-        "compatibility.create.ContraptionStandOnMixin",
         "compatibility.create.ContraptionActorWorldPosMixin",
         "compatibility.create.AbstractContraptionEntityMixin",
         "assembly.AbstractFurnaceBlockEntityMixin",

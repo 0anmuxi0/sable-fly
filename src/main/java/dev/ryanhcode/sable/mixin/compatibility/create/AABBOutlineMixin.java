@@ -12,21 +12,16 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 
 @Pseudo
-@Mixin(
-   targets = {"com.zurrtum.create.client.catnip.outliner.AABBOutline"}
-)
+@Mixin(targets={"com.zurrtum.create.client.catnip.outliner.AABBOutline"})
 public class AABBOutlineMixin {
-   @WrapMethod(
-      method = {"submitBox(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/AABB;IIZ)V"}
-   )
-   private void sable$projectOutlineOntoSubLevel(
-      PoseStack ms, SubmitNodeCollector queue, Vec3 camera, AABB box, int color, int lightmap, boolean disableLineNormals, Operation<Void> original
-   ) {
-      ClientSubLevel subLevel = SubLevelOutlinePose.find(box);
-      if (subLevel == null) {
-         original.call(ms, queue, camera, box, color, lightmap, disableLineNormals);
-      } else {
-         SubLevelOutlinePose.runProjected(ms, subLevel, camera, plotCamera -> original.call(ms, queue, plotCamera, box, color, lightmap, disableLineNormals));
-      }
-   }
+    @WrapMethod(method={"submitBox(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/AABB;IIZ)V"})
+    private void sable$projectOutlineOntoSubLevel(PoseStack ms, SubmitNodeCollector queue, Vec3 camera, AABB box, int color, int lightmap, boolean disableLineNormals, Operation<Void> original) {
+        ClientSubLevel subLevel = SubLevelOutlinePose.find(box);
+        if (subLevel == null) {
+            original.call(ms, queue, camera, box, color, lightmap, disableLineNormals);
+        } else {
+            SubLevelOutlinePose.runProjected(ms, subLevel, camera, plotCamera -> original.call(ms, queue, plotCamera, box, color, lightmap, disableLineNormals));
+        }
+    }
 }
+
