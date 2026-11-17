@@ -5,7 +5,6 @@
     "minVersion": "0.8",
     "plugin": "dev.ryanhcode.sable.plugin.SableMixinPlugin",
     "client": [
-        "compatibility.create.ContraptionVisualLightMixin",
         "compatibility.create.BlockEntityRenderDispatcherCreateMixin",
         "compatibility.create.FlwApiLinkImplMixin",
         "compatibility.create.VisualizationHelperMixin",
@@ -87,7 +86,6 @@
         "world_border.ClientLevelMixin"
     ],
     "mixins": [
-        "compatibility.create.ContraptionStandOnMixin",
         "compatibility.create.ContraptionActorWorldPosMixin",
         "compatibility.create.AbstractContraptionEntityMixin",
         "assembly.AbstractFurnaceBlockEntityMixin",
@@ -222,7 +220,8 @@
         "voxel_shape_iteration.DiscreteVoxelShapeAccessor",
         "voxel_shape_iteration.VoxelShapeMixin",
         "world_border.LevelMixin",
-        "world_border.WorldBorderMixin"
+        "world_border.WorldBorderMixin",
+        "compatibility.create.ContraptionColliderClientMixin"
     ],
     "injectors": {
         "defaultRequire": 1
