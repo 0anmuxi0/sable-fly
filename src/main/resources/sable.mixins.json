@@ -5,8 +5,6 @@
     "minVersion": "0.8",
     "plugin": "dev.ryanhcode.sable.plugin.SableMixinPlugin",
     "client": [
-        "compatibility.create.ContraptionVisualLifecycleDiagMixin",
-        "compatibility.create.ContraptionLightSamplingMixin",
         "compatibility.create.ContraptionColliderClientMixin",
         "block_decal_render.LevelExtractorMixin",
         "block_decal_render.LevelRendererMixin",
@@ -28,7 +26,6 @@
         "compatibility.create.GhostBlockRendererMixin",
         "compatibility.create.ItemOutlineMixin",
         "compatibility.create.LineOutlineMixin",
-        "compatibility.create.PlacementClientMixin",
         "compatibility.create.SuperGlueSelectionHandlerMixin",
         "dynamic_directional_shading.SectionCompilerMixin",
         "dynamic_directional_shading.ModelBlockRendererCacheMixin",
