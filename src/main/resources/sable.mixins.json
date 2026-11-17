@@ -18,6 +18,7 @@
         "clip_overwrite.GameRendererMixin",
         "clip_overwrite.LocalPlayerMixin",
         "compatibility.create.AABBOutlineMixin",
+    "compatibility.create.ContraptionLightSamplingMixin",
         "compatibility.create.BlockClusterOutlineMixin",
         "compatibility.create.BlockEntityRenderDispatcherCreateMixin",
         "compatibility.create.ChainConveyorRendererMixin",
